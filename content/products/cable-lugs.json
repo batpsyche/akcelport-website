@@ -35,10 +35,21 @@
     "Bell mouth entry available on request"
   ],
   "hero": {
-    "src": "/img/products/cable-lugs/cable-lung-2-jpg.webp",
-    "w": 870,
-    "h": 420,
-    "alt": "Cable lugs with colour-coded barrels"
+    "src": "/img/products/cable-lugs/cable-lung-2-jpg-ai.webp",
+    "w": 1600,
+    "h": 1394,
+    "alt": "Cable lugs with colour-coded barrels",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/cable-lugs/originals/cable-lung-2-jpg.webp",
+      "w": 870,
+      "h": 420
+    },
+    "thumb": {
+      "src": "/img/products/cable-lugs/cable-lung-2-jpg-ai-640.webp",
+      "w": 640,
+      "h": 557
+    }
   },
   "gallery": [
     {

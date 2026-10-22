@@ -146,3 +146,11 @@ dialog.lightbox::backdrop{background:rgba(8,10,12,.92)}
   .split-head .scroller-nav{display:none}
   .filter-count{margin-left:0;width:100%}
 }
+
+/* AI-enhanced imagery disclosure */
+.ai-note{grid-column:1/-1;margin-top:14px;font-size:.78rem;line-height:1.4;color:var(--muted);text-align:left}
+.ai-tag{display:inline-block;font:500 .66rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border:1px solid currentColor;margin-right:6px;color:var(--text)}
+.ai-note a{color:var(--text)}
+.ai-foot{flex-basis:100%;max-width:90ch;color:var(--muted-d)}
+.foot-base .ai-foot{opacity:.95}
+.pdp-media{margin:0}

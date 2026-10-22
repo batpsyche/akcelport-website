@@ -6,10 +6,21 @@
   "icon": "busbar",
   "summary": "Copper busbars, flexibars, grounding bars and neutral bars that carry and distribute current inside panels and switchgear.",
   "image": {
-    "src": "/img/products/copper-busbars/copper-busbars-jpg.webp",
-    "w": 870,
-    "h": 420,
-    "alt": "Copper busbars with punched holes"
+    "src": "/img/products/copper-busbars/copper-busbars-jpg-ai.webp",
+    "w": 1600,
+    "h": 774,
+    "alt": "Copper busbars with punched holes",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/copper-busbars/originals/copper-busbars-jpg.webp",
+      "w": 870,
+      "h": 420
+    },
+    "thumb": {
+      "src": "/img/products/copper-busbars/copper-busbars-jpg-ai-640.webp",
+      "w": 640,
+      "h": 310
+    }
   },
   "products": [
     "copper-busbars",

@@ -1,6 +1,6 @@
 import { html, raw } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
-import { picture, productCard, productUrl, categoryUrl, sectionHead, ctaBand } from './components.mjs';
+import { picture, thumbOf, productCard, productUrl, categoryUrl, sectionHead, ctaBand } from './components.mjs';
 
 function hero(data) {
   const { home } = data;
@@ -43,7 +43,7 @@ function families(data) {
           <span class="fam-list">${c.products.map((s) => html`<span>${bySlug.get(s).name}</span>`)}</span>
           <span class="card-link">${c.products.length} ranges ${icon('arrow')}</span>
         </span>
-        <span class="fam-media">${picture(c.image, { sizes: '(min-width: 900px) 30vw, 80vw' })}</span>
+        <span class="fam-media">${picture(thumbOf(c.image), { sizes: '(min-width: 900px) 30vw, 80vw' })}</span>
       </a>`)}</div>
   </div></section>`;
 }
@@ -92,7 +92,7 @@ function industries(data) {
       ${ind.items.map((t, i) => html`<div class="tabpanel" role="tabpanel" id="panel-${t.id}" aria-labelledby="tab-${t.id}" ${i ? raw('hidden') : ''}>
         <div class="tp-text"><p class="kicker">${t.name}</p><h3>${t.headline}</h3><p>${t.text}</p>
           <p class="tp-areas-h">Application areas</p><ul class="tp-areas">${t.areas.map((a) => html`<li>${a}</li>`)}</ul></div>
-        <div class="tp-products"><p class="tp-areas-h">Ranges for this industry</p><ul>${t.products.map((s) => html`<li><a href="${productUrl(s)}"><span class="tp-thumb">${picture(data.bySlug.get(s).hero)}</span><span>${data.bySlug.get(s).name}</span>${icon('arrow')}</a></li>`)}</ul></div>
+        <div class="tp-products"><p class="tp-areas-h">Ranges for this industry</p><ul>${t.products.map((s) => html`<li><a href="${productUrl(s)}"><span class="tp-thumb">${picture(thumbOf(data.bySlug.get(s).hero))}</span><span>${data.bySlug.get(s).name}</span>${icon('arrow')}</a></li>`)}</ul></div>
       </div>`)}
     </div>
   </div></section>`;

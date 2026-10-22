@@ -134,9 +134,9 @@
       "title": "Cable lugs (earlier edition)",
       "kind": "legacy",
       "file": "/downloads/legacy/cable-lugs.pdf",
-      "description": "Copper lugs, CSLA to CLWB series with dimension tables. Scanned catalogue, 17 pages.",
+      "description": "Copper lugs, CSLA to CLWB series with dimension tables. Scanned catalogue, 17 pages, recompressed from 20.7 MB to about 3 MB for faster download.",
       "pages": 17,
-      "sizeBytes": 21195102,
+      "sizeBytes": 3236294,
       "thumb": "/img/downloads/legacy-cable-lugs.webp",
       "products": [
         "cable-lugs"

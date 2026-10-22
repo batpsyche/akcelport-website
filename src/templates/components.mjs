@@ -10,6 +10,9 @@ export function picture(im, { cls = '', sizes = '', eager = false, alt } = {}) {
   return raw(`<img class="${esc(cls)}" src="${esc(im.src)}"${dims} alt="${esc(alt ?? im.alt ?? '')}"${sizes ? ` sizes="${esc(sizes)}"` : ''} ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`);
 }
 
+// Smaller rendition of a hero image for cards and thumbnails (falls back to the full image).
+export const thumbOf = (im) => (im?.thumb ? { ...im.thumb, alt: im.alt } : im);
+
 // An image that opens the lightbox on click. `full` defaults to the image itself.
 export function zoomable(im, { cls = '', full } = {}) {
   const f = full || im;
@@ -24,7 +27,7 @@ export function productCard(p, data, { compact = false } = {}) {
   const cat = data.catBySlug.get(p.family);
   const text = [p.name, p.summary, cat?.name, ...(p.facts || []).map((f) => f.value)].join(' ').toLowerCase();
   return html`<a class="card product-card chamfer" href="${productUrl(p.slug)}" data-family="${p.family}" data-search="${text}">
-    <span class="card-media">${picture(p.hero, { sizes: '(min-width: 900px) 25vw, 50vw' })}</span>
+    <span class="card-media">${picture(thumbOf(p.hero), { sizes: '(min-width: 900px) 25vw, 50vw' })}</span>
     <span class="card-body">
       <span class="eyebrow">${cat?.shortName}${p.source === 'new' ? raw(' <span class="pill pill-new">New datasheet</span>') : ''}</span>
       <span class="card-title">${p.name}</span>

@@ -56,7 +56,8 @@ Add a product by adding a JSON file, listing its slug in its family under `conte
 ## Assets
 
 - `public/downloads/catalogue/`: the 10 current datasheet PDFs supplied by the company. `public/downloads/legacy/`: the 13 PDFs from the old site (kept so every old download still works).
-- `public/img/`: product and company images (WebP). Sources are the company's own: old-site photos and tables, and images extracted from the 10 PDFs. Nothing is AI generated.
+- `public/img/`: product and company images (WebP). Sources are the company's own: old-site photos and tables, and images extracted from the 10 PDFs.
+- **AI-enhanced hero photos (8 products).** The main photo of the 8 products flagged below (and so their card and family thumbnails) was upscaled and cleaned with Higgsfield's Bytedance Image Upscale from the company's original image, with no change to the product. Those images are flagged `"aiEnhanced": true` in the product JSON, carry the untouched original in `public/img/products/<slug>/originals/` (linked from the product page as "View original"), and the footer discloses it (`aiNotice` in `content/site.json`). The 8 are Cable Lugs, Cable Ducts, Copper Busbars, Flexibars, Copper Grounding Bars, Neutral / Earth Bars, Test Terminal Blocks and Cable Glands; every other photo is the unmodified original (the client can supply HD photos later). Remove the flag and point `hero.src` at the original to revert one.
 - `public/fonts/`: self-hosted Archivo, IBM Plex Sans and IBM Plex Mono (latin subset).
 - Old URLs: the build writes `dist/.htaccess` (Apache) and `dist/_redirects` (Netlify style) from `content/redirects.json`, including the 13 old PDF paths.
 
@@ -72,4 +73,4 @@ The contact form posts to one configurable endpoint, `form.endpoint` in `content
 
 ## Data caveats
 
-Product tables were transcribed from the company PDFs (text extraction where the PDF has text, manual reading where it is a picture). The datasheet PDF is the reference. Two oddities are kept as printed in the source: `ERCS31500` appears twice in the copper bonded rod table (the 1800 mm row), and coupler `CP20` lists a 1/4" thread. The old-site PDFs are scans and the old product tables are pictures, so those pages show the original table images (click to enlarge) next to the structured data.
+Product tables were transcribed from the company PDFs (text extraction where the PDF has text, manual reading where it is a picture). The datasheet PDF is the reference. Two oddities are kept as printed in the source: `ERCS31500` appears twice in the copper bonded rod table (the 1800 mm row), and coupler `CP20` lists a 1/4" thread. The old-site PDFs are scans and the old product tables are pictures, so those pages show the original table images (click to enlarge) next to the structured data. The old cable lugs scan was recompressed from 20.7 MB to 3.2 MB (17 pages, 150 dpi); the original is not shipped.

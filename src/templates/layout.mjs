@@ -51,6 +51,7 @@ function header(data, path) {
 
 function footer(data) {
   const { site, categories } = data;
+  const aiProducts = data.products.filter((p) => p.hero.aiEnhanced);
   return html`<footer class="site-footer">
     <div class="container foot-grid">
       <div class="foot-brand">
@@ -65,7 +66,7 @@ function footer(data) {
         <p><a href="tel:${site.contact.phoneHref}">${site.contact.phone}</a><br><a href="mailto:${site.contact.email}">${site.contact.email}</a></p>
       </div>
     </div>
-    <div class="container foot-base"><p>&copy; ${new Date().getFullYear()} ${site.name}. All rights reserved.</p><p>Design preview. Product data is transcribed from company datasheets; check the PDF before ordering.</p></div>
+    <div class="container foot-base"><p>&copy; ${new Date().getFullYear()} ${site.name}. All rights reserved.</p><p>Product data is transcribed from company datasheets; check the PDF before ordering.</p>${aiProducts.length ? html`<p class="ai-foot">${site.aiNotice} ${aiProducts.map((p, i) => html`${i ? ', ' : ''}<a href="/products/${p.slug}/">${p.name}</a>`)}.</p>` : ''}</div>
   </footer>`;
 }
 

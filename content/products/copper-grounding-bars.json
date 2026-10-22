@@ -35,10 +35,21 @@
     "GB174: cost effective and easy to install, 174 connections possible, suitable for up to 600 volts"
   ],
   "hero": {
-    "src": "/img/products/copper-grounding-bars/coppergrounding-neutralbars-jpg.webp",
-    "w": 542,
-    "h": 319,
-    "alt": "Copper grounding bars"
+    "src": "/img/products/copper-grounding-bars/coppergrounding-neutralbars-jpg-ai.webp",
+    "w": 1600,
+    "h": 775,
+    "alt": "Copper grounding bars",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/copper-grounding-bars/originals/coppergrounding-neutralbars-jpg.webp",
+      "w": 542,
+      "h": 319
+    },
+    "thumb": {
+      "src": "/img/products/copper-grounding-bars/coppergrounding-neutralbars-jpg-ai-640.webp",
+      "w": 640,
+      "h": 310
+    }
   },
   "gallery": [
     {

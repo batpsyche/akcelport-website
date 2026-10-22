@@ -57,10 +57,21 @@
     "High ampere with small conductor size"
   ],
   "hero": {
-    "src": "/img/products/flexibars/hero.webp",
-    "w": 907,
-    "h": 454,
-    "alt": "Flexible copper busbars with black insulation and copper ends"
+    "src": "/img/products/flexibars/hero-ai.webp",
+    "w": 1600,
+    "h": 800,
+    "alt": "Flexible copper busbars with black insulation and copper ends",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/flexibars/originals/hero.webp",
+      "w": 907,
+      "h": 454
+    },
+    "thumb": {
+      "src": "/img/products/flexibars/hero-ai-640.webp",
+      "w": 640,
+      "h": 320
+    }
   },
   "gallery": [
     {

@@ -34,10 +34,21 @@
     "Brass, nickel or chrome finish, or as specified"
   ],
   "hero": {
-    "src": "/img/products/cable-glands/e1w-type-jpg.webp",
-    "w": 218,
-    "h": 340,
-    "alt": "E1W type brass cable gland"
+    "src": "/img/products/cable-glands/e1w-type-jpg-ai.webp",
+    "w": 1382,
+    "h": 2369,
+    "alt": "E1W type brass cable gland",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/cable-glands/originals/e1w-type-jpg.webp",
+      "w": 218,
+      "h": 340
+    },
+    "thumb": {
+      "src": "/img/products/cable-glands/e1w-type-jpg-ai-640.webp",
+      "w": 640,
+      "h": 1097
+    }
   },
   "variants": [
     {

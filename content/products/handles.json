@@ -26,9 +26,9 @@
     "Adjustable zinc alloy handles"
   ],
   "hero": {
-    "src": "/img/products/handles/polyamide-u-handles-type-a-jpg.webp",
-    "w": 529,
-    "h": 133,
+    "src": "/img/products/handles/handlestypea1-jpg.webp",
+    "w": 542,
+    "h": 319,
     "alt": "Polyamide U handle"
   },
   "variants": [
@@ -47,15 +47,16 @@
           "src": "/img/products/handles/handlestypea2-jpg.webp",
           "w": 542,
           "h": 319,
-          "alt": "Polyamide U handles, Type A, second view"
-        },
-        {
-          "src": "/img/products/handles/polyamide-u-handles-type-a-jpg.webp",
-          "w": 529,
-          "h": 133,
           "alt": "Polyamide U handles, Type A drawing"
         }
-      ]
+      ],
+      "specImage": {
+        "src": "/img/products/handles/polyamide-u-handles-type-a-jpg.webp",
+        "w": 529,
+        "h": 133,
+        "alt": "Polyamide U handles, Type A dimensions table"
+      },
+      "specLabel": "View dimensions table"
     },
     {
       "id": "b",
@@ -72,15 +73,16 @@
           "src": "/img/products/handles/handlestypeb2-jpg.webp",
           "w": 542,
           "h": 319,
-          "alt": "Polyamide U handles, Type B, second view"
-        },
-        {
-          "src": "/img/products/handles/polyamide-u-handles-type-b-jpg.webp",
-          "w": 789,
-          "h": 176,
           "alt": "Polyamide U handles, Type B drawing"
         }
-      ]
+      ],
+      "specImage": {
+        "src": "/img/products/handles/polyamide-u-handles-type-b-jpg.webp",
+        "w": 789,
+        "h": 176,
+        "alt": "Polyamide U handles, Type B dimensions table"
+      },
+      "specLabel": "View dimensions table"
     },
     {
       "id": "c",
@@ -97,15 +99,16 @@
           "src": "/img/products/handles/handlestypec2-jpg.webp",
           "w": 542,
           "h": 319,
-          "alt": "Polyamide U handles, Type C, second view"
-        },
-        {
-          "src": "/img/products/handles/polyamide-u-handles-type-c-jpg.webp",
-          "w": 786,
-          "h": 146,
           "alt": "Polyamide U handles, Type C drawing"
         }
-      ]
+      ],
+      "specImage": {
+        "src": "/img/products/handles/polyamide-u-handles-type-c-jpg.webp",
+        "w": 786,
+        "h": 146,
+        "alt": "Polyamide U handles, Type C dimensions table"
+      },
+      "specLabel": "View dimensions table"
     },
     {
       "id": "d",
@@ -122,15 +125,16 @@
           "src": "/img/products/handles/handlestyped2-jpg.webp",
           "w": 542,
           "h": 319,
-          "alt": "Polyamide handles with square aluminium rod, Type D, second view"
-        },
-        {
-          "src": "/img/products/handles/polyamide-handles-with-square-aluminium-rod-type-d-jpg.webp",
-          "w": 612,
-          "h": 189,
           "alt": "Polyamide handles with square aluminium rod, Type D drawing"
         }
-      ]
+      ],
+      "specImage": {
+        "src": "/img/products/handles/polyamide-handles-with-square-aluminium-rod-type-d-jpg.webp",
+        "w": 612,
+        "h": 189,
+        "alt": "Polyamide handles with square aluminium rod, Type D dimensions table"
+      },
+      "specLabel": "View dimensions table"
     },
     {
       "id": "pah",
@@ -147,15 +151,16 @@
           "src": "/img/products/handles/pahseries2-jpg.webp",
           "w": 542,
           "h": 319,
-          "alt": "Adjustable plastic handles, PAH series, second view"
-        },
-        {
-          "src": "/img/products/handles/adjustable-plastic-handles-pah-series-jpg.webp",
-          "w": 1291,
-          "h": 586,
           "alt": "Adjustable plastic handles, PAH series drawing"
         }
-      ]
+      ],
+      "specImage": {
+        "src": "/img/products/handles/adjustable-plastic-handles-pah-series-jpg.webp",
+        "w": 1291,
+        "h": 586,
+        "alt": "Adjustable plastic handles, PAH series dimensions table"
+      },
+      "specLabel": "View dimensions table"
     },
     {
       "id": "zinc",
@@ -172,15 +177,16 @@
           "src": "/img/products/handles/handleszincalloy2-jpg.webp",
           "w": 542,
           "h": 319,
-          "alt": "Adjustable handles, zinc alloy, second view"
-        },
-        {
-          "src": "/img/products/handles/adjustable-handles-zincalloy-jpg.webp",
-          "w": 998,
-          "h": 675,
           "alt": "Adjustable handles, zinc alloy drawing"
         }
-      ]
+      ],
+      "specImage": {
+        "src": "/img/products/handles/adjustable-handles-zincalloy-jpg.webp",
+        "w": 998,
+        "h": 675,
+        "alt": "Adjustable handles, zinc alloy dimensions table"
+      },
+      "specLabel": "View dimensions table"
     }
   ],
   "seo": {

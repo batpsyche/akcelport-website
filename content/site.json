@@ -4,9 +4,19 @@
   "tagline": "Quality, built in.",
   "description": "Akcelport Industries manufactures electrical components for control panels and switchgear in Mumbai, India: busbars, insulators, cable lugs, DIN rails, cable ducts, earthing and lightning products. ISO 9001 and ISO 45001 certified, exporting for more than 35 years.",
   "siteUrl": "https://www.akcelport.com",
-  "logo": { "src": "/img/company/logo-legacy.webp", "w": 432, "h": 88, "alt": "Akcelport Industries" },
+  "logo": {
+    "src": "/img/company/logo-legacy.webp",
+    "w": 432,
+    "h": 88,
+    "alt": "Akcelport Industries"
+  },
   "contact": {
-    "address": ["13, Shah Industrial Estate", "Deonar, Chembur", "Mumbai - 400088", "India"],
+    "address": [
+      "13, Shah Industrial Estate",
+      "Deonar, Chembur",
+      "Mumbai - 400088",
+      "India"
+    ],
     "phone": "+91 22 2555 5888",
     "phoneHref": "+912225555888",
     "email": "mail@akcelport.com",
@@ -14,18 +24,53 @@
     "mapLng": 72.91746
   },
   "nav": [
-    { "label": "Products", "href": "/products/", "mega": true },
-    { "label": "About", "href": "/about/" },
-    { "label": "Downloads", "href": "/downloads/" },
-    { "label": "Contact", "href": "/contact/" }
+    {
+      "label": "Products",
+      "href": "/products/",
+      "mega": true
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "Downloads",
+      "href": "/downloads/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
   ],
-  "cta": { "label": "Request a quote", "href": "/contact/" },
-  "qualityMarks": ["ISO 9001", "ISO 45001", "RoHS compliant", "CE", "UL compliant"],
+  "cta": {
+    "label": "Request a quote",
+    "href": "/contact/"
+  },
+  "aiNotice": "AI-enhanced photographs: the main photo of these products was upscaled and cleaned with Higgsfield from the company's own original image, without changing the product, and the untouched original is kept alongside. All other imagery is unmodified. Products:",
+  "qualityMarks": [
+    "ISO 9001",
+    "ISO 45001",
+    "RoHS compliant",
+    "CE",
+    "UL compliant"
+  ],
   "stats": [
-    { "value": "35+", "label": "Years supplying export markets" },
-    { "value": "{{markets}}", "label": "Major export markets" },
-    { "value": "{{products}}", "label": "Product ranges with datasheets" },
-    { "value": "ISO", "label": "9001 and 45001 certified" }
+    {
+      "value": "35+",
+      "label": "Years supplying export markets"
+    },
+    {
+      "value": "{{markets}}",
+      "label": "Major export markets"
+    },
+    {
+      "value": "{{products}}",
+      "label": "Product ranges with datasheets"
+    },
+    {
+      "value": "ISO",
+      "label": "9001 and 45001 certified"
+    }
   ],
   "form": {
     "endpoint": "",

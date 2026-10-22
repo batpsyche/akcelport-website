@@ -36,10 +36,21 @@
     "Front (FC) or back (BC) connection"
   ],
   "hero": {
-    "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-jpg.webp",
-    "w": 435,
-    "h": 340,
-    "alt": "13 way test terminal block, front connection"
+    "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-jpg-ai.webp",
+    "w": 1600,
+    "h": 1026,
+    "alt": "13 way test terminal block, front connection",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/test-terminal-blocks/originals/ttb-13-way-3ph-4-wire-fc-jpg.webp",
+      "w": 435,
+      "h": 340
+    },
+    "thumb": {
+      "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-jpg-ai-640.webp",
+      "w": 640,
+      "h": 410
+    }
   },
   "variants": [
     {

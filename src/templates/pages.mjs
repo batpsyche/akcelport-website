@@ -37,7 +37,7 @@ export function productPage(data, p) {
         <dl class="facts">${p.facts.map((f) => html`<div><dt>${f.label}</dt><dd>${f.value}</dd></div>`)}</dl>
         <div class="pdp-cta"><a class="btn btn-red" href="${primary.file}" download>${icon('download')} Download datasheet (PDF, ${bytes(primary.sizeBytes)})</a><a class="btn btn-ghost" href="/contact/?product=${encodeURIComponent(p.name)}">Request a quote</a></div>
       </div>
-      <div class="pdp-media chamfer">${zoomable(p.hero, { cls: 'pdp-hero' })}</div>
+      <figure class="pdp-media chamfer">${zoomable(p.hero, { cls: 'pdp-hero' })}${p.hero.aiEnhanced ? html`<figcaption class="ai-note"><span class="ai-tag">AI-enhanced photo</span> Upscaled and cleaned from the company's original image. <a href="${p.hero.original.src}" target="_blank" rel="noopener">View original</a></figcaption>` : ''}</figure>
     </div>
   </div></section>
   <nav class="subnav" aria-label="On this page" data-subnav><div class="container subnav-in">${nav.map(([id, l]) => html`<a href="#${id}">${l}</a>`)}<a class="subnav-quote" href="/contact/?product=${encodeURIComponent(p.name)}">Request a quote</a></div></nav>

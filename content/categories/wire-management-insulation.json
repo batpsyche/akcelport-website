@@ -6,10 +6,21 @@
   "icon": "duct",
   "summary": "PVC cable ducts, heat shrink busbar sleeves, ferruling and PVC tubes, and spiral wrapping bands.",
   "image": {
-    "src": "/img/products/cable-ducts/pdf-duct-range.webp",
-    "w": 663,
-    "h": 609,
-    "alt": "Grey slotted PVC cable ducts in three sizes"
+    "src": "/img/products/cable-ducts/pdf-duct-range-ai.webp",
+    "w": 1600,
+    "h": 1479,
+    "alt": "Grey slotted PVC cable ducts in three sizes",
+    "aiEnhanced": true,
+    "original": {
+      "src": "/img/products/cable-ducts/originals/pdf-duct-range.webp",
+      "w": 663,
+      "h": 609
+    },
+    "thumb": {
+      "src": "/img/products/cable-ducts/pdf-duct-range-ai-640.webp",
+      "w": 640,
+      "h": 592
+    }
   },
   "products": [
     "cable-ducts",
