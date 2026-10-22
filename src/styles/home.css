@@ -30,9 +30,9 @@
 /* the five static-hero gates: keep identical to GATES in hero.js */
 @media (max-width:720px),(orientation:portrait) and (max-width:1024px),(orientation:portrait) and (pointer:coarse),(orientation:landscape) and (pointer:coarse) and (max-height:560px),(prefers-reduced-motion:reduce){
   .hero{height:auto}
-  .hero-stage{position:relative;height:auto;min-height:min(100svh,860px)}
+  .hero-stage{position:relative;height:auto;min-height:min(calc(100svh - var(--header-h) - 36px),820px)}
   .bands,.scroll-cue{display:none}
-  .hero-static{display:flex;min-height:min(100svh,860px)}
+  .hero-static{display:flex;min-height:min(calc(100svh - var(--header-h) - 36px),820px);padding-top:32px}
   .hero-scrim{background:linear-gradient(0deg,rgba(10,12,15,.9) 0,rgba(10,12,15,.62) 48%,rgba(10,12,15,.12) 100%)}
 }
 @media (max-height:560px){.scroll-cue{display:none}}
@@ -168,3 +168,4 @@
   .circuit-result li{opacity:1;transform:none}
 }
 body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
+.hero-static .kicker{color:var(--red-d)}
