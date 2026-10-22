@@ -15,6 +15,8 @@ npm run check     # validate content only (missing files, unknown families, brok
 
 `PORT=8080 npm start` changes the port. `dist/` is generated and git-ignored; deploy its contents to any static host (Apache, Nginx, Netlify...). Deployment is not part of this phase.
 
+`SITE_BASE` (default `/`) builds the site for a sub-folder, e.g. `SITE_BASE=/akcelport-website/ npm run build`; `SITE_URL` optionally overrides the origin used for canonical, sitemap and OG URLs. `.github/workflows/pages.yml` uses both to publish a client preview to GitHub Pages.
+
 ## Content structure
 
 Everything the site says lives in `content/`. Templates never contain copy.
