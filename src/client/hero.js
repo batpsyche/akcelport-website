@@ -40,7 +40,7 @@
   const JZ = 10.3;                    // splice joint position along the run
   const BARS = [-1.12, 0, 1.12];      // three phases
   const BW = 0.46, BY0 = 0.02, BY1 = 0.1;
-  const FLOOR = -0.62, CH = 1.1, LIGHT = (() => { const l = [-0.5, 0.72, -0.48]; const n = Math.hypot(...l); return l.map((v) => v / n); })();
+  const FLOOR = -0.62, PLATE_TOP = FLOOR + 0.05, CH = 1.1, LIGHT = (() => { const l = [-0.5, 0.72, -0.48]; const n = Math.hypot(...l); return l.map((v) => v / n); })();
   const COPPER = { mid: [196, 112, 66], hi: [246, 184, 134], dark: [112, 58, 34], side: [120, 64, 38] };
   const RED = [214, 34, 28], STEEL = [150, 158, 170];
   const fog = (c, d) => { const t = Math.pow(smooth(4.2, 17.5, d), 1.1); return [mix(c[0], BG[0], t), mix(c[1], BG[1], t), mix(c[2], BG[2], t)]; };
@@ -138,7 +138,7 @@
       }
       for (let z = 1.5 + Math.floor((c.z - 2) / 2.2) * 2.2; z < zMax; z += 2.2) {
         if (Math.abs(z - JZ) < 0.9 || z < c.z + 1.0) continue;
-        items.push({ s: slice(z), y: 0, f: () => { prism(c, bx, z, FLOOR + 0.04, BY0 - 0.004, 0.17, 20, RED, { spec: 0.7, gloss: 18 }); prism(c, bx, z, FLOOR, FLOOR + 0.05, 0.27, 4, [58, 64, 72], { rot: Math.PI / 4, spec: 0.05 }); } });
+        items.push({ s: slice(z), y: 0, f: () => { prism(c, bx, z, FLOOR, PLATE_TOP, 0.27, 4, [58, 64, 72], { rot: Math.PI / 4, spec: 0.05 }); prism(c, bx, z, PLATE_TOP, BY0 - 0.004, 0.17, 20, RED, { spec: 0.7, gloss: 18 }); } });
         items.push({ s: slice(z), y: 2, f: () => { prism(c, bx, z, BY1, BY1 + 0.012, 0.085, 14, STEEL, { spec: 0.6 }); prism(c, bx, z, BY1 + 0.012, BY1 + 0.058, 0.062, 6, STEEL, { rot: 0.3, spec: 0.5 }); } });
       }
       // splice plate and bolts at the joint (kept inside one slice so painter ordering holds)
