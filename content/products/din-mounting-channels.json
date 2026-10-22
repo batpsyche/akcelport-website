@@ -1,0 +1,283 @@
+{
+  "slug": "din-mounting-channels",
+  "name": "DIN Rails, Clips and Brackets",
+  "family": "mounting-enclosure-hardware",
+  "order": 1,
+  "legacyUrl": "din-mounting-channels.php",
+  "source": "existing",
+  "summary": "Steel, stainless steel and aluminium DIN mounting channels in standard sizes, with DIN rail mounting clips, standoffs and brackets.",
+  "facts": [
+    {
+      "label": "Materials",
+      "value": "Steel, stainless steel, aluminium"
+    },
+    {
+      "label": "Sizes",
+      "value": "35x7.5, 35x15, 32x15 (G), 15x5 mm"
+    },
+    {
+      "label": "Lengths",
+      "value": "1 m or 2 m"
+    },
+    {
+      "label": "Compliance",
+      "value": "RoHS"
+    }
+  ],
+  "intro": [
+    "Mounting channels of various sizes in steel, stainless steel and aluminium, to suit all types of terminal stations, MCBs and other rail mounted devices. Our rails are RoHS compliant.",
+    "Standard lengths are 1 metre or 2 metres; please mention the length when ordering. All steel rails are zinc electroplated (white or yellow); stainless steel rails have a natural finish."
+  ],
+  "features": [
+    "Sizes 35 x 7.5 mm, 35 x 15 mm, 32 x 15 mm (G section), 15 x 5 mm",
+    "Standard lengths 1 m or 2 m",
+    "Steel rails zinc electroplated, white or yellow",
+    "Stainless steel rails with natural finish",
+    "Aluminium standard (35 x 10 mm) and high rise channel",
+    "DIN rail mounting clips and standoff brackets"
+  ],
+  "hero": {
+    "src": "/img/products/din-mounting-channels/pdf-rails.webp",
+    "w": 1045,
+    "h": 619,
+    "alt": "Steel and aluminium DIN rails"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/din-mounting-channels/clip-photo.webp",
+      "w": 645,
+      "h": 243,
+      "alt": "DIN rail mounting clip"
+    }
+  ],
+  "variants": [
+    {
+      "id": "steel",
+      "name": "Steel DIN rails",
+      "summary": "Steel DIN rails in sizes to suit all types of terminal stations, MCBs and rail mounted devices.",
+      "images": [
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "ADR3575U profile drawing",
+          "caption": "ADR3575U"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-2-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3575S1863 profile drawing",
+          "caption": "ADR3575S1863"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-3-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3575S2552 profile drawing",
+          "caption": "ADR3575S2552"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-4-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3515U profile drawing",
+          "caption": "ADR3515U"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-5-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3515S1863 profile drawing",
+          "caption": "ADR3515S1863"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-6-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3515S2552 profile drawing",
+          "caption": "ADR3515S2552"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-7-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR155S12242 profile drawing",
+          "caption": "ADR155S12242"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-8-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3215U profile drawing",
+          "caption": "ADR3215U"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-9-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "ADR3215S1863 profile drawing",
+          "caption": "ADR3215S1863"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/din-mounting-channels-10-jpg.webp",
+          "w": 290,
+          "h": 340,
+          "alt": "Steel DIN rail range"
+        }
+      ]
+    },
+    {
+      "id": "aluminium",
+      "name": "Aluminium DIN rails",
+      "summary": "Two types: the standard DIN type (35 mm x 10 mm, AAL3575) and the high rise channel (AHRAL35). Slotted at regular intervals for easy installation (and cable entry on the high rise channel), available in 1 m and 2 m lengths, RoHS compliant.",
+      "images": [
+        {
+          "src": "/img/products/din-mounting-channels/aluminum-din-rails-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "AAL3575 standard aluminium DIN rail",
+          "caption": "AAL3575, standard DIN type, 35 mm x 10 mm"
+        },
+        {
+          "src": "/img/products/din-mounting-channels/high-rise-channel-ahral35-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "AHRAL35 high rise channel",
+          "caption": "AHRAL35, high rise channel"
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Code",
+        "Size (mm)",
+        "Slotting"
+      ],
+      "rows": [
+        [
+          "ADR3575U",
+          "35 x 7.5 mm",
+          "Unslotted"
+        ],
+        [
+          "ADR3575S1863",
+          "35 x 7.5 mm",
+          "Slotted, 18 x 6.3 mm"
+        ],
+        [
+          "ADR3575S2552",
+          "35 x 7.5 mm",
+          "Slotted, 25 x 5.2 mm"
+        ],
+        [
+          "ADR3515U",
+          "35 x 15 mm",
+          "Unslotted"
+        ],
+        [
+          "ADR3515S1863",
+          "35 x 15 mm",
+          "Slotted, 18 x 6.3 mm"
+        ],
+        [
+          "ADR3515S2552",
+          "35 x 15 mm",
+          "Slotted, 25 x 5.2 mm"
+        ],
+        [
+          "ADR155S12242",
+          "15 x 5 mm",
+          "Slotted, 12.2 x 4.2 mm"
+        ],
+        [
+          "ADR3215U",
+          "32 x 15 mm (G section)",
+          "Unslotted"
+        ],
+        [
+          "ADR3215S1863",
+          "32 x 15 mm (G section)",
+          "Slotted, 18 x 6.3 mm"
+        ]
+      ],
+      "title": "Steel DIN rails",
+      "id": "steel"
+    },
+    {
+      "columns": [
+        "DIN",
+        "Code",
+        "Screw"
+      ],
+      "rows": [
+        [
+          "DIN 1110",
+          "BMC-M4",
+          "M4"
+        ],
+        [
+          "DIN 1115",
+          "BMC-M5",
+          "M5"
+        ]
+      ],
+      "title": "DIN rail mounting clips",
+      "id": "clips"
+    },
+    {
+      "columns": [
+        "Code",
+        "Height (inches)"
+      ],
+      "rows": [
+        [
+          "SO-1",
+          "1"
+        ],
+        [
+          "SO-2",
+          "2"
+        ],
+        [
+          "SO-3",
+          "3"
+        ]
+      ],
+      "title": "DIN rail standoffs / brackets, type 1",
+      "id": "standoff-1"
+    },
+    {
+      "columns": [
+        "Code",
+        "Height (inches)"
+      ],
+      "rows": [
+        [
+          "SO-190",
+          "1"
+        ],
+        [
+          "SO-290",
+          "2"
+        ],
+        [
+          "SO-390",
+          "3"
+        ]
+      ],
+      "title": "DIN rail standoffs / brackets, 90 degree type",
+      "id": "standoff-2"
+    }
+  ],
+  "seo": {
+    "description": "Steel, stainless steel and aluminium DIN rails with mounting clips, standoffs and brackets. Sizes 35x7.5, 35x15, 32x15 and 15x5 mm.",
+    "title": "DIN Rails, Clips and Brackets | Akcelport Industries"
+  },
+  "downloads": [
+    "din-rails-clips-brackets-catalogue",
+    "din-mounting-channels-legacy"
+  ]
+}

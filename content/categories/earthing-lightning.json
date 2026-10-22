@@ -1,0 +1,18 @@
+{
+  "slug": "earthing-lightning",
+  "name": "Earthing and Lightning",
+  "shortName": "Earthing",
+  "order": 6,
+  "icon": "earth",
+  "summary": "Copper bonded, solid copper and galvanized earth rods with the clamps, couplers and air terminals to complete an earthing or lightning system.",
+  "image": {
+    "src": "/img/products/earth-rods/earth-rods-jpg.webp",
+    "w": 870,
+    "h": 340,
+    "alt": "Earth rods"
+  },
+  "products": [
+    "earth-rods",
+    "earthing-lightning-accessories"
+  ]
+}

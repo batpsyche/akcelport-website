@@ -1,0 +1,339 @@
+{
+  "slug": "pvc-ferruling-tubes",
+  "name": "PVC Tubes / Ferruling Tubes",
+  "family": "wire-management-insulation",
+  "order": 3,
+  "legacyUrl": null,
+  "source": "new",
+  "summary": "Printing ferruling tubes FT22 to FT80 and general purpose PVC tubes PT25 to PT250 for wiring, harnesses and assembly.",
+  "facts": [
+    {
+      "label": "Ferruling tubes",
+      "value": "FT22 to FT80, 2.2 to 8 mm ID"
+    },
+    {
+      "label": "PVC tubes",
+      "value": "PT25 to PT250, 2.5 to 25 mm ID"
+    },
+    {
+      "label": "Ferruling colours",
+      "value": "White and yellow"
+    },
+    {
+      "label": "PVC tube temperature",
+      "value": "Up to 70 deg C"
+    }
+  ],
+  "intro": [
+    "Printing ferruling tubes for wire identification are available in white and yellow, in sizes to suit wires from 0.5 to 16 sq mm.",
+    "General purpose PVC tubes are made for electrical and automobile harness, assembly and wiring. Up to 12 mm ID they come in red, yellow, blue, black, green, grey and white; from 14 mm ID and above, black only."
+  ],
+  "features": [
+    "Ferruling tubes in white and yellow",
+    "PVC tubes in seven colours up to 12 mm ID",
+    "Virgin grade polyvinyl chloride for general purpose use up to 70 deg C",
+    "All chemicals blended for optimum result",
+    "Care taken for colour fastness to give prolonged weather resistance"
+  ],
+  "applications": [
+    "Industrial wiring",
+    "OEM automobile harness",
+    "Wiring applied as insulation",
+    "General application in industry"
+  ],
+  "hero": {
+    "src": "/img/products/pvc-ferruling-tubes/pvc-tubes.webp",
+    "w": 1400,
+    "h": 398,
+    "alt": "Coloured PVC tube coils"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/pvc-ferruling-tubes/ferruling-tubes.webp",
+      "w": 1345,
+      "h": 446,
+      "alt": "White and yellow printing ferruling tubes"
+    },
+    {
+      "src": "/img/products/pvc-ferruling-tubes/applications.webp",
+      "w": 1400,
+      "h": 604,
+      "alt": "PVC tube applications"
+    },
+    {
+      "src": "/img/products/pvc-ferruling-tubes/roll-white-yellow.webp",
+      "w": 241,
+      "h": 444,
+      "alt": "White and yellow ferruling tube rolls"
+    },
+    {
+      "src": "/img/products/pvc-ferruling-tubes/roll-colours.webp",
+      "w": 196,
+      "h": 592,
+      "alt": "PVC tube rolls in several colours"
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Item code",
+        "ID (mm)",
+        "Thickness (+/-0.10 mm)",
+        "Length (m)",
+        "Suitable for wire size"
+      ],
+      "rows": [
+        [
+          "FT22",
+          "2.2",
+          "0.4",
+          "100",
+          "0.5 sq. mm"
+        ],
+        [
+          "FT25",
+          "2.5",
+          "0.4",
+          "100",
+          "0.5 - 0.75 sq. mm"
+        ],
+        [
+          "FT28",
+          "2.8",
+          "0.4",
+          "100",
+          "0.5 - 0.75 sq. mm"
+        ],
+        [
+          "FT30",
+          "3.0",
+          "0.4",
+          "100",
+          "1.0 - 1.5 sq. mm"
+        ],
+        [
+          "FT32",
+          "3.2",
+          "0.4",
+          "100",
+          "1.0 - 1.5 sq. mm"
+        ],
+        [
+          "FT35",
+          "3.5",
+          "0.4",
+          "100",
+          "2.5 sq. mm"
+        ],
+        [
+          "FT37",
+          "3.7",
+          "0.4",
+          "100",
+          "2.5 sq. mm"
+        ],
+        [
+          "FT40",
+          "4.0",
+          "0.4",
+          "100",
+          "2.5 - 4.0 sq. mm"
+        ],
+        [
+          "FT42",
+          "4.2",
+          "0.5",
+          "100",
+          "4.0 sq. mm"
+        ],
+        [
+          "FT45",
+          "4.5",
+          "0.5",
+          "100",
+          "4.0 sq. mm"
+        ],
+        [
+          "FT50",
+          "5.0",
+          "0.5",
+          "100",
+          "4.0 - 6.0 sq. mm"
+        ],
+        [
+          "FT52",
+          "5.2",
+          "0.5",
+          "100",
+          "4.0 - 6.0 sq. mm"
+        ],
+        [
+          "FT55",
+          "5.5",
+          "0.5",
+          "100",
+          "6.0 sq. mm"
+        ],
+        [
+          "FT60",
+          "6.0",
+          "0.5",
+          "100",
+          "6.0 - 10.0 sq. mm"
+        ],
+        [
+          "FT62",
+          "6.2",
+          "0.5",
+          "100",
+          "6.0 - 10.0 sq. mm"
+        ],
+        [
+          "FT70",
+          "7.0",
+          "0.5",
+          "100",
+          "10.0 sq. mm"
+        ],
+        [
+          "FT80",
+          "8.0",
+          "0.5",
+          "100",
+          "16.0 sq. mm"
+        ]
+      ],
+      "title": "Printing ferruling tubes",
+      "id": "ferruling",
+      "caption": "Available in white and yellow."
+    },
+    {
+      "columns": [
+        "Item code",
+        "ID (mm)",
+        "Thickness (+/-0.10 mm)",
+        "Length (m)"
+      ],
+      "rows": [
+        [
+          "PT25",
+          "2.5",
+          "0.35",
+          "100"
+        ],
+        [
+          "PT30",
+          "3.0",
+          "0.35",
+          "100"
+        ],
+        [
+          "PT35",
+          "3.5",
+          "0.35",
+          "100"
+        ],
+        [
+          "PT40",
+          "4.0",
+          "0.40",
+          "100"
+        ],
+        [
+          "PT50",
+          "5.0",
+          "0.40",
+          "30"
+        ],
+        [
+          "PT60",
+          "6.0",
+          "0.40",
+          "30"
+        ],
+        [
+          "PT70",
+          "7.0",
+          "0.40",
+          "30"
+        ],
+        [
+          "PT80",
+          "8.0",
+          "0.40",
+          "30"
+        ],
+        [
+          "PT90",
+          "9.0",
+          "0.40",
+          "30"
+        ],
+        [
+          "PT100",
+          "10.0",
+          "0.45",
+          "30"
+        ],
+        [
+          "PT120",
+          "12.0",
+          "0.45",
+          "30"
+        ],
+        [
+          "PT140",
+          "14.0",
+          "0.50",
+          "30"
+        ],
+        [
+          "PT150",
+          "15.0",
+          "0.50",
+          "30"
+        ],
+        [
+          "PT160",
+          "16.0",
+          "0.50",
+          "30"
+        ],
+        [
+          "PT180",
+          "18.0",
+          "0.50",
+          "30"
+        ],
+        [
+          "PT200",
+          "20.0",
+          "0.60",
+          "30"
+        ],
+        [
+          "PT220",
+          "22.0",
+          "0.60",
+          "30"
+        ],
+        [
+          "PT250",
+          "25.0",
+          "0.60",
+          "30"
+        ]
+      ],
+      "title": "General purpose PVC tubes",
+      "id": "pvc-tubes",
+      "caption": "Up to 12 mm ID: red, yellow, blue, black, green, grey, white. From 14 mm ID: black only."
+    }
+  ],
+  "seo": {
+    "description": "Printing ferruling tubes FT22 to FT80 and general purpose PVC tubes PT25 to PT250 for wiring and harness. Sizes, colours and datasheet.",
+    "title": "PVC Tubes / Ferruling Tubes | Akcelport Industries"
+  },
+  "downloads": [
+    "pvc-ferruling-tubes-catalogue"
+  ]
+}

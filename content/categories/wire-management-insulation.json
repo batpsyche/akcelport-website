@@ -1,0 +1,20 @@
+{
+  "slug": "wire-management-insulation",
+  "name": "Wire Management and Insulation",
+  "shortName": "Wire management",
+  "order": 5,
+  "icon": "duct",
+  "summary": "PVC cable ducts, heat shrink busbar sleeves, ferruling and PVC tubes, and spiral wrapping bands.",
+  "image": {
+    "src": "/img/products/cable-ducts/pdf-duct-range.webp",
+    "w": 663,
+    "h": 609,
+    "alt": "Grey slotted PVC cable ducts in three sizes"
+  },
+  "products": [
+    "cable-ducts",
+    "pvc-heat-shrink-tubes",
+    "pvc-ferruling-tubes",
+    "spiral-wrapping-bands"
+  ]
+}

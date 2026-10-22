@@ -1,0 +1,187 @@
+{
+  "slug": "copper-grounding-bars",
+  "name": "Copper Grounding / Neutral Bars",
+  "family": "busbars-power-distribution",
+  "order": 3,
+  "legacyUrl": "coppergrounding_neutralbars.php",
+  "source": "existing",
+  "summary": "Screw-fitted copper grounding and neutral bars for instant connections, suitable for copper conductors up to 2000 volts.",
+  "facts": [
+    {
+      "label": "Conductors",
+      "value": "Copper"
+    },
+    {
+      "label": "Rating",
+      "value": "Up to 2000 V (GB174: 600 V)"
+    },
+    {
+      "label": "Fitting",
+      "value": "1/4-28 UNF screws"
+    },
+    {
+      "label": "Connections",
+      "value": "Up to 174 (GB174)"
+    }
+  ],
+  "intro": [
+    "Copper grounding and neutral bars with screws fitted at the factory, so conductors can be connected instantly. The GB series covers 4 to 14 way bars; the GB174 gives 174 connections on a single bar at a low cost per connection."
+  ],
+  "features": [
+    "Easy installing",
+    "Screw fitted to make instant connections",
+    "Suitable for copper conductors",
+    "Suitable for up to 2000 volts",
+    "GB174: cost effective and easy to install, 174 connections possible, suitable for up to 600 volts"
+  ],
+  "hero": {
+    "src": "/img/products/copper-grounding-bars/coppergrounding-neutralbars-jpg.webp",
+    "w": 542,
+    "h": 319,
+    "alt": "Copper grounding bars"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/copper-grounding-bars/coppergrounding-neutralbars2-jpg.webp",
+      "w": 542,
+      "h": 319,
+      "alt": "Copper grounding bar detail"
+    },
+    {
+      "src": "/img/products/copper-grounding-bars/coppergrounding-neutralbars3-jpg.webp",
+      "w": 542,
+      "h": 319,
+      "alt": "Copper grounding bars"
+    },
+    {
+      "src": "/img/products/copper-grounding-bars/copper-grounding-jpg.webp",
+      "w": 889,
+      "h": 390,
+      "alt": "Copper grounding bar"
+    },
+    {
+      "src": "/img/products/copper-grounding-bars/gb174.webp",
+      "w": 511,
+      "h": 210,
+      "alt": "GB174 bar with 174 connections"
+    },
+    {
+      "src": "/img/products/copper-grounding-bars/cross-section.webp",
+      "w": 853,
+      "h": 310,
+      "alt": "Standard cross section for the bars"
+    },
+    {
+      "src": "/img/products/copper-grounding-bars/top-view.webp",
+      "w": 972,
+      "h": 382,
+      "alt": "Top view of the bars"
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Part no.",
+        "Conductor size",
+        "Mains conductor size",
+        "Length L (in)",
+        "Width W (in)",
+        "1/4-28 UNF screws at positions",
+        "Mounting hole positions",
+        "Mounting hole dia (in)"
+      ],
+      "rows": [
+        [
+          "GB4",
+          "6-14 AWG",
+          "4-14 AWG",
+          "2.75",
+          "0.345",
+          "2, 3, 4, 5, 7",
+          "1, 6",
+          "0.203"
+        ],
+        [
+          "GB6",
+          "6-14 AWG",
+          "4-14 AWG",
+          "3.5",
+          "0.345",
+          "1, 3, 4, 5, 6, 8, 9",
+          "2, 7",
+          "0.203"
+        ],
+        [
+          "GB8",
+          "6-14 AWG",
+          "4-14 AWG",
+          "4.44",
+          "0.345",
+          "1, 2, 3, 5, 6, 7, 8, 10, 11",
+          "4, 9",
+          "0.203"
+        ],
+        [
+          "GB10",
+          "6-14 AWG",
+          "4-14 AWG",
+          "5.13",
+          "0.345",
+          "1, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13",
+          "4, 9",
+          "0.203"
+        ],
+        [
+          "GB12",
+          "6-14 AWG",
+          "4-14 AWG",
+          "5.95",
+          "0.345",
+          "1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15",
+          "5, 10",
+          "0.203"
+        ],
+        [
+          "GB14",
+          "6-14 AWG",
+          "4-14 AWG",
+          "6.72",
+          "0.345",
+          "1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14, 15, 16, 17",
+          "7, 11",
+          "0.203"
+        ]
+      ],
+      "title": "GB series, up to 2000 V",
+      "id": "gb"
+    },
+    {
+      "columns": [
+        "Part no.",
+        "Conductor size",
+        "Length L (in)",
+        "Width W (in)",
+        "1/4-28 UNF screws at positions"
+      ],
+      "rows": [
+        [
+          "GB174",
+          "6-14 AWG",
+          "69",
+          "0.345",
+          "1, 2, 3, ... 174"
+        ]
+      ],
+      "title": "GB174, up to 600 V",
+      "id": "gb174"
+    }
+  ],
+  "seo": {
+    "description": "Copper grounding and neutral bars: GB4 to GB14 and the 174-connection GB174, screw fitted, up to 2000 V. Datasheet download.",
+    "title": "Copper Grounding / Neutral Bars | Akcelport Industries"
+  },
+  "downloads": [
+    "copper-grounding-bars-catalogue",
+    "copper-grounding-neutral-bars-legacy"
+  ]
+}

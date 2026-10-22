@@ -1,0 +1,535 @@
+{
+  "slug": "cable-ducts",
+  "name": "Cable Ducts",
+  "family": "wire-management-insulation",
+  "order": 1,
+  "legacyUrl": "cable-ducts.php",
+  "source": "existing",
+  "summary": "High impact rigid PVC wiring ducts in thin, standard and close top slot styles, 19 profile sizes, with FRLS and halogen-free grades.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "High impact rigid PVC"
+    },
+    {
+      "label": "Flammability",
+      "value": "UL-94 V-0"
+    },
+    {
+      "label": "Colour",
+      "value": "Grey (standard)"
+    },
+    {
+      "label": "Lengths",
+      "value": "1 m or 2 m"
+    }
+  ],
+  "intro": [
+    "Wiring ducts manufactured from high impact rigid polyvinyl chloride. Standard colour is grey; black, white, ivory, green and blue are available for bulk quantities. Standard lengths are 1 metre and 2 metres. Special halogen-free ducts are also available."
+  ],
+  "features": [
+    "Manufactured from high impact rigid PVC",
+    "Non-flammable, non-corrosive and rust proof",
+    "Will not peel, chip or crack",
+    "High dielectric strength, high temperature withstanding capacity",
+    "Side slots designed to prevent wires popping up",
+    "Heavy-duty duct and cover design for efficient, fast locking"
+  ],
+  "hero": {
+    "src": "/img/products/cable-ducts/pdf-duct-range.webp",
+    "w": 663,
+    "h": 609,
+    "alt": "Grey slotted PVC cable ducts in three sizes"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/cable-ducts/cable-ducts-jpg.webp",
+      "w": 290,
+      "h": 340,
+      "alt": "Cable ducts"
+    },
+    {
+      "src": "/img/products/cable-ducts/cable-ducts-1-jpg.webp",
+      "w": 218,
+      "h": 340,
+      "alt": "Cable duct, unslotted"
+    },
+    {
+      "src": "/img/products/cable-ducts/pdf-duct-installed.webp",
+      "w": 299,
+      "h": 599,
+      "alt": "Cable ducts installed with wiring"
+    },
+    {
+      "src": "/img/products/cable-ducts/fill-formula.webp",
+      "w": 987,
+      "h": 245,
+      "alt": "Formula to select wire duct for wire"
+    }
+  ],
+  "variants": [
+    {
+      "id": "unslotted",
+      "name": "Unslotted",
+      "summary": "Plain duct with no side slots.",
+      "images": [
+        {
+          "src": "/img/products/cable-ducts/cable-ducts-2-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "Unslotted duct"
+        }
+      ]
+    },
+    {
+      "id": "standard",
+      "name": "Standard slotted (S)",
+      "summary": "Slot distance 8 mm, distance between slots 12 mm.",
+      "images": [
+        {
+          "src": "/img/products/cable-ducts/cable-ducts-3-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "Standard slotted duct"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-ducts/pvc-cable-ducts-with-standard-slots-png.webp",
+        "w": 870,
+        "h": 453,
+        "alt": "PVC cable ducts with standard slots table"
+      }
+    },
+    {
+      "id": "thin",
+      "name": "Thin slotted (T)",
+      "summary": "Slot distance 5 mm, distance between slots 8 mm. Includes wire retaining grooves above size 60 mm.",
+      "images": [
+        {
+          "src": "/img/products/cable-ducts/cable-ducts-4-jpg.webp",
+          "w": 218,
+          "h": 188,
+          "alt": "Thin slotted duct"
+        },
+        {
+          "src": "/img/products/cable-ducts/cable-ducts-5-jpg.webp",
+          "w": 218,
+          "h": 108,
+          "alt": "Thin slotted duct, second view"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-ducts/pvc-cable-ducts-with-thin-slots-png.webp",
+        "w": 870,
+        "h": 435,
+        "alt": "PVC cable ducts with thin slots table"
+      }
+    },
+    {
+      "id": "close-top",
+      "name": "Close top slot (U)",
+      "summary": "Slot distance 8 mm, distance between slots 8 mm.",
+      "images": []
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Profile (W x H mm)",
+        "Width (mm)",
+        "Height (mm)",
+        "Available slotting styles"
+      ],
+      "rows": [
+        [
+          "25 x 25",
+          "25",
+          "25",
+          "T, U"
+        ],
+        [
+          "25 x 30",
+          "25",
+          "30",
+          "T, U"
+        ],
+        [
+          "25 x 40",
+          "25",
+          "40",
+          "T, S, U"
+        ],
+        [
+          "25 x 45",
+          "25",
+          "45",
+          "T, S, U"
+        ],
+        [
+          "25 x 60",
+          "25",
+          "60",
+          "T, S, U"
+        ],
+        [
+          "25 x 80",
+          "25",
+          "80",
+          "T, S, U"
+        ],
+        [
+          "40 x 40",
+          "40",
+          "40",
+          "T, S, U"
+        ],
+        [
+          "40 x 60",
+          "40",
+          "60",
+          "T, S, U"
+        ],
+        [
+          "40 x 80",
+          "40",
+          "80",
+          "T, S, U"
+        ],
+        [
+          "45 x 45",
+          "45",
+          "45",
+          "T, S, U"
+        ],
+        [
+          "45 x 60",
+          "45",
+          "60",
+          "T, S, U"
+        ],
+        [
+          "45 x 80",
+          "45",
+          "80",
+          "T, S, U"
+        ],
+        [
+          "60 x 40",
+          "60",
+          "40",
+          "T, S, U"
+        ],
+        [
+          "60 x 45",
+          "60",
+          "45",
+          "T, S, U"
+        ],
+        [
+          "60 x 60",
+          "60",
+          "60",
+          "T, S, U"
+        ],
+        [
+          "60 x 80",
+          "60",
+          "80",
+          "T, S, U"
+        ],
+        [
+          "80 x 80",
+          "80",
+          "80",
+          "T, S, U"
+        ],
+        [
+          "100 x 100",
+          "100",
+          "100",
+          "T, S"
+        ],
+        [
+          "150 x 100",
+          "150",
+          "100",
+          "T, S"
+        ]
+      ],
+      "title": "Duct profiles and slotting styles",
+      "id": "profiles",
+      "caption": "T: thin slot, S: standard slot, U: close top slot."
+    },
+    {
+      "columns": [
+        "Test",
+        "Test purpose",
+        "Test standard",
+        "Criteria",
+        "Typical values"
+      ],
+      "rows": [
+        [
+          "Limiting oxygen index (LOI)",
+          "Minimum oxygen concentration for supporting combustion of the duct at normal temperature",
+          "ASTM D 2863",
+          "Min. 29",
+          "Min. 40"
+        ],
+        [
+          "Temperature index",
+          "Temperature at which normal oxygen content (21%) of air supports combustion of the duct material",
+          "ASTM D 2863",
+          ">200 deg C",
+          ">200 deg C"
+        ],
+        [
+          "Maximum smoke density rating (SDR)",
+          "Visibility under fire",
+          "ASTM D 2863",
+          "<60%",
+          "<45%"
+        ],
+        [
+          "Flammability class",
+          "Should be highly flame retardant",
+          "UL-94",
+          "V-0",
+          "Passed"
+        ]
+      ],
+      "title": "PVC FRLS cable ducts: tests",
+      "id": "frls-tests"
+    },
+    {
+      "columns": [
+        "Property",
+        "Units",
+        "Test standard",
+        "Typical values"
+      ],
+      "rows": [
+        [
+          "Specific gravity",
+          "g/cc",
+          "ASTM D 792",
+          "<1.48"
+        ],
+        [
+          "Heat deflection temperature (HDT) at 18.2 MPa",
+          "deg F",
+          "ASTM D 648",
+          "Up to 160"
+        ],
+        [
+          "Vicat softening point (VSP) at 5 kg load",
+          "deg F",
+          "ASTM D 1525",
+          "Up to 185"
+        ],
+        [
+          "Water absorption",
+          "%",
+          "ASTM D 570",
+          "0.045"
+        ],
+        [
+          "Hardness, Shore D",
+          "D",
+          "ASTM D 2240",
+          "Max. 78"
+        ],
+        [
+          "Flammability class",
+          "-",
+          "UL-94",
+          "V-0"
+        ],
+        [
+          "Oxygen index (LOI)",
+          "%",
+          "ASTM D 2863",
+          "Min. 40"
+        ],
+        [
+          "Maximum smoke density rating (SDR)",
+          "%",
+          "ASTM D 2843",
+          "<50"
+        ],
+        [
+          "Tensile modulus",
+          "kg/cm2",
+          "ASTM D 638",
+          ">12000"
+        ],
+        [
+          "Tensile strength at break",
+          "kg/cm2",
+          "ASTM D 638",
+          ">390"
+        ],
+        [
+          "Izod impact strength (notched)",
+          "kg.cm/cm",
+          "ASTM D 256",
+          ">7.0"
+        ],
+        [
+          "Compressive strength",
+          "kg/cm2",
+          "ASTM D 695",
+          ">1100"
+        ],
+        [
+          "Power factor",
+          "-",
+          "ASTM D 150",
+          "0.018"
+        ],
+        [
+          "Dielectric constant",
+          "-",
+          "ASTM D 150",
+          "<3"
+        ],
+        [
+          "Dielectric strength",
+          "kV/mm",
+          "ASTM D 149",
+          ">12"
+        ],
+        [
+          "Surface resistivity",
+          "Ohm",
+          "ASTM D 257",
+          ">1x10^15"
+        ],
+        [
+          "Volume resistivity",
+          "Ohm-cm",
+          "ASTM D 257",
+          ">3x10^16"
+        ]
+      ],
+      "title": "PVC FRLS wiring duct: raw material specification",
+      "id": "frls-spec"
+    },
+    {
+      "columns": [
+        "Property",
+        "Units",
+        "Test standard",
+        "Typical values"
+      ],
+      "rows": [
+        [
+          "Specific gravity",
+          "g/cc",
+          "ASTM D 792",
+          "<1.2"
+        ],
+        [
+          "Heat deflection temperature (HDT) at 4.6 kg/cm2",
+          "deg F",
+          "ASTM D 648",
+          "Up to 220"
+        ],
+        [
+          "Vicat softening point (VSP) at 5 kg load",
+          "deg F",
+          "ASTM D 1525",
+          "Up to 240"
+        ],
+        [
+          "Coefficient of linear thermal expansion",
+          "deg C",
+          "ASTM D 696",
+          "7.2 x 10^-5"
+        ],
+        [
+          "Water absorption",
+          "%",
+          "ASTM D 570",
+          "0.6"
+        ],
+        [
+          "Hardness, Rockwell R",
+          "R",
+          "ISO 2039-2",
+          "124"
+        ],
+        [
+          "Flammability class",
+          "-",
+          "UL-94",
+          "V-0"
+        ],
+        [
+          "Limiting oxygen index (LOI)",
+          "%",
+          "ASTM D 2863",
+          "Min. 35"
+        ],
+        [
+          "Maximum smoke density rating (SDR)",
+          "%",
+          "ASTM D 2843",
+          "Max. 25"
+        ],
+        [
+          "Tensile modulus",
+          "kg/cm2",
+          "ASTM D 638",
+          ">2500"
+        ],
+        [
+          "Tensile strength at break",
+          "kg/cm2",
+          "ASTM D 638",
+          ">525"
+        ],
+        [
+          "Izod impact strength (notched)",
+          "cm-kgf/cm",
+          "ASTM D 256",
+          "Min. 65"
+        ],
+        [
+          "Flexural modulus",
+          "kgf/cm2",
+          "ASTM D 695",
+          "Min. 25000"
+        ],
+        [
+          "Dielectric strength",
+          "kV/mm",
+          "ASTM D 149",
+          ">12"
+        ],
+        [
+          "Surface resistivity",
+          "Ohm",
+          "ASTM D 257",
+          ">1x10^15"
+        ],
+        [
+          "Volume resistivity",
+          "Ohm-cm",
+          "ASTM D 257",
+          ">3x10^16"
+        ]
+      ],
+      "title": "Halogen free FR ducts: raw material specification",
+      "id": "hf-spec"
+    }
+  ],
+  "seo": {
+    "description": "High impact rigid PVC cable ducts: thin, standard and close top slots, 19 profile sizes, FRLS and halogen-free grades. Datasheet with test data.",
+    "title": "Cable Ducts | Akcelport Industries"
+  },
+  "downloads": [
+    "cable-ducts-catalogue",
+    "cable-ducts-legacy"
+  ]
+}

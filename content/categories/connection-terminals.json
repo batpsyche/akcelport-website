@@ -1,0 +1,19 @@
+{
+  "slug": "connection-terminals",
+  "name": "Connection and Terminals",
+  "shortName": "Connections",
+  "order": 3,
+  "icon": "lug",
+  "summary": "Cable lugs, test terminal blocks and cable glands for terminating and testing power and metering circuits.",
+  "image": {
+    "src": "/img/products/cable-lugs/cable-lung-2-jpg.webp",
+    "w": 870,
+    "h": 420,
+    "alt": "Cable lugs with colour-coded barrels"
+  },
+  "products": [
+    "cable-lugs",
+    "test-terminal-blocks",
+    "cable-glands"
+  ]
+}

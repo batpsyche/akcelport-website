@@ -1,0 +1,302 @@
+{
+  "documents": [
+    {
+      "id": "company-introduction",
+      "title": "Company introduction and product range",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/company-introduction.pdf",
+      "description": "Who we are, manufacturing expertise, materials, quality marks, export markets and the full product list.",
+      "pages": 5,
+      "sizeBytes": 889353,
+      "thumb": "/img/downloads/catalogue-company-introduction.webp",
+      "products": []
+    },
+    {
+      "id": "flexibars-catalogue",
+      "title": "Flexibars datasheet",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/flexibars.pdf",
+      "description": "Laminated copper flexible busbars with the 125 A to 1250 A temperature-rise table, conductor and insulation specifications.",
+      "pages": 5,
+      "sizeBytes": 397861,
+      "thumb": "/img/downloads/catalogue-flexibars.webp",
+      "products": [
+        "flexibars"
+      ]
+    },
+    {
+      "id": "insulators-catalogue",
+      "title": "Insulators and busbar supports catalogue",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/insulators.pdf",
+      "description": "Standoff insulators, single, three and four pole busbar supports, step, grip and vertical bar insulators, connectors and material data. 42 pages.",
+      "pages": 42,
+      "sizeBytes": 4698960,
+      "thumb": "/img/downloads/catalogue-insulators.webp",
+      "products": [
+        "busbar-supports-standoff-insulators"
+      ]
+    },
+    {
+      "id": "cable-ducts-catalogue",
+      "title": "Cable ducts datasheet",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/cable-ducts.pdf",
+      "description": "PVC FRLS and halogen-free wiring ducts: profile sizes, slotting styles and raw-material test data.",
+      "pages": 4,
+      "sizeBytes": 587610,
+      "thumb": "/img/downloads/catalogue-cable-ducts.webp",
+      "products": [
+        "cable-ducts"
+      ]
+    },
+    {
+      "id": "copper-grounding-bars-catalogue",
+      "title": "Copper grounding bars datasheet",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/copper-grounding-bars.pdf",
+      "description": "GB4 to GB14 and GB174 copper grounding and neutral bars with dimensions and screw positions.",
+      "pages": 2,
+      "sizeBytes": 278269,
+      "thumb": "/img/downloads/catalogue-copper-grounding-bars.webp",
+      "products": [
+        "copper-grounding-bars"
+      ]
+    },
+    {
+      "id": "din-rails-clips-brackets-catalogue",
+      "title": "DIN rails, mounting clips and brackets",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/din-rails-clips-brackets.pdf",
+      "description": "Steel, stainless steel and aluminium DIN rails with mounting clips and DIN rail standoffs and brackets.",
+      "pages": 3,
+      "sizeBytes": 625579,
+      "thumb": "/img/downloads/catalogue-din-rails-clips-brackets.webp",
+      "products": [
+        "din-mounting-channels"
+      ]
+    },
+    {
+      "id": "earthing-lightning-catalogue",
+      "title": "Earthing and lightning catalogue",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/earthing-and-lightning.pdf",
+      "description": "Earth rods, driving accessories, couplers, air terminals, saddles, tape clips and earthing clamps with item codes.",
+      "pages": 5,
+      "sizeBytes": 3623601,
+      "thumb": "/img/downloads/catalogue-earthing-and-lightning.webp",
+      "products": [
+        "earth-rods",
+        "earthing-lightning-accessories"
+      ]
+    },
+    {
+      "id": "pvc-heat-shrink-catalogue",
+      "title": "PVC heat shrink tubes and busbar insulation",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/pvc-heat-shrink-tubes-busbar-insulation.pdf",
+      "description": "Lay-flat PVC heat shrink sleeves for busbar insulation: sizes, colours, properties and ordering details.",
+      "pages": 2,
+      "sizeBytes": 451020,
+      "thumb": "/img/downloads/catalogue-pvc-heat-shrink-tubes-busbar-insulation.webp",
+      "products": [
+        "pvc-heat-shrink-tubes"
+      ]
+    },
+    {
+      "id": "pvc-ferruling-tubes-catalogue",
+      "title": "PVC tubes and ferruling tubes",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/pvc-tubes-ferruling-tubes.pdf",
+      "description": "Printing ferruling tubes FT22 to FT80 and general purpose PVC tubes PT25 to PT250.",
+      "pages": 2,
+      "sizeBytes": 547355,
+      "thumb": "/img/downloads/catalogue-pvc-tubes-ferruling-tubes.webp",
+      "products": [
+        "pvc-ferruling-tubes"
+      ]
+    },
+    {
+      "id": "spiral-wrapping-bands-catalogue",
+      "title": "Spiral wrapping bands datasheet",
+      "kind": "catalogue",
+      "file": "/downloads/catalogue/spiral-wrapping-bands.pdf",
+      "description": "PE spiral wrapping bands SW6 to SW25 with packing lengths.",
+      "pages": 1,
+      "sizeBytes": 175112,
+      "thumb": "/img/downloads/catalogue-spiral-wrapping-bands.webp",
+      "products": [
+        "spiral-wrapping-bands"
+      ]
+    },
+    {
+      "id": "cable-lugs-legacy",
+      "title": "Cable lugs (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/cable-lugs.pdf",
+      "description": "Copper lugs, CSLA to CLWB series with dimension tables. Scanned catalogue, 17 pages.",
+      "pages": 17,
+      "sizeBytes": 21195102,
+      "thumb": "/img/downloads/legacy-cable-lugs.webp",
+      "products": [
+        "cable-lugs"
+      ]
+    },
+    {
+      "id": "copper-busbars-legacy",
+      "title": "Copper busbars (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/copper-busbars.pdf",
+      "description": "Solid and punched copper busbars with codes and sizes.",
+      "pages": 3,
+      "sizeBytes": 2799779,
+      "thumb": "/img/downloads/legacy-copper-busbars.webp",
+      "products": [
+        "copper-busbars"
+      ]
+    },
+    {
+      "id": "copper-grounding-neutral-bars-legacy",
+      "title": "Copper grounding and neutral bars (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/copper-grounding-neutral-bars.pdf",
+      "description": "GB series copper grounding and neutral bars.",
+      "pages": 2,
+      "sizeBytes": 1734582,
+      "thumb": "/img/downloads/legacy-copper-grounding-neutral-bars.webp",
+      "products": [
+        "copper-grounding-bars"
+      ]
+    },
+    {
+      "id": "neutral-earth-bars-legacy",
+      "title": "Neutral and earth bars (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/neutral-earth-bars.pdf",
+      "description": "Brass neutral and earth bars, types A to G.",
+      "pages": 4,
+      "sizeBytes": 4128559,
+      "thumb": "/img/downloads/legacy-neutral-earth-bars.webp",
+      "products": [
+        "neutral-earth-bars"
+      ]
+    },
+    {
+      "id": "test-terminal-blocks-legacy",
+      "title": "Test terminal blocks (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/test-terminal-blocks.pdf",
+      "description": "13-way, 10-way, 6-way and TTB4W 4-way test blocks.",
+      "pages": 5,
+      "sizeBytes": 5250406,
+      "thumb": "/img/downloads/legacy-test-terminal-blocks.webp",
+      "products": [
+        "test-terminal-blocks"
+      ]
+    },
+    {
+      "id": "busbar-supports-standoff-insulators-legacy",
+      "title": "Busbar supports and standoff insulators (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/busbar-supports-standoff-insulators.pdf",
+      "description": "Standoff, step, grip and vertical busbar insulators.",
+      "pages": 8,
+      "sizeBytes": 8347381,
+      "thumb": "/img/downloads/legacy-busbar-supports-standoff-insulators.webp",
+      "products": [
+        "busbar-supports-standoff-insulators"
+      ]
+    },
+    {
+      "id": "epoxy-insulators-legacy",
+      "title": "Epoxy insulators (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/epoxy-insulators.pdf",
+      "description": "HT and LT type epoxy insulators.",
+      "pages": 2,
+      "sizeBytes": 2023164,
+      "thumb": "/img/downloads/legacy-epoxy-insulators.webp",
+      "products": [
+        "epoxy-insulators"
+      ]
+    },
+    {
+      "id": "panel-hinges-legacy",
+      "title": "Panel hinges (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/panel-hinges.pdf",
+      "description": "APH 440 to APH 900 lift-off panel hinges.",
+      "pages": 3,
+      "sizeBytes": 2379016,
+      "thumb": "/img/downloads/legacy-panel-hinges.webp",
+      "products": [
+        "panel-hinges"
+      ]
+    },
+    {
+      "id": "din-mounting-channels-legacy",
+      "title": "DIN mounting channels (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/din-mounting-channels.pdf",
+      "description": "Steel and aluminium DIN rails.",
+      "pages": 3,
+      "sizeBytes": 2364737,
+      "thumb": "/img/downloads/legacy-din-mounting-channels.webp",
+      "products": [
+        "din-mounting-channels"
+      ]
+    },
+    {
+      "id": "cable-ducts-legacy",
+      "title": "Cable ducts (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/cable-ducts.pdf",
+      "description": "PVC cable ducts with thin and standard slots.",
+      "pages": 2,
+      "sizeBytes": 1932546,
+      "thumb": "/img/downloads/legacy-cable-ducts.webp",
+      "products": [
+        "cable-ducts"
+      ]
+    },
+    {
+      "id": "earth-rods-legacy",
+      "title": "Earth rods (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/earth-rods.pdf",
+      "description": "Copper bonded and solid copper earth rods.",
+      "pages": 2,
+      "sizeBytes": 1967495,
+      "thumb": "/img/downloads/legacy-earth-rods.webp",
+      "products": [
+        "earth-rods"
+      ]
+    },
+    {
+      "id": "cable-glands-legacy",
+      "title": "Cable glands (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/cable-glands.pdf",
+      "description": "Brass cable glands: BW, CW, E1W, A1/A2 and marine types.",
+      "pages": 2,
+      "sizeBytes": 1579563,
+      "thumb": "/img/downloads/legacy-cable-glands.webp",
+      "products": [
+        "cable-glands"
+      ]
+    },
+    {
+      "id": "handles-legacy",
+      "title": "Handles (earlier edition)",
+      "kind": "legacy",
+      "file": "/downloads/legacy/handles.pdf",
+      "description": "Polyamide, adjustable plastic and zinc alloy handles.",
+      "pages": 4,
+      "sizeBytes": 3170984,
+      "thumb": "/img/downloads/legacy-handles.webp",
+      "products": [
+        "handles"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Akcelport Industries",
+  "shortName": "Akcelport",
+  "tagline": "Quality, built in.",
+  "description": "Akcelport Industries manufactures electrical components for control panels and switchgear in Mumbai, India: busbars, insulators, cable lugs, DIN rails, cable ducts, earthing and lightning products. ISO 9001 and ISO 45001 certified, exporting for more than 35 years.",
+  "siteUrl": "https://www.akcelport.com",
+  "logo": { "src": "/img/company/logo-legacy.webp", "w": 432, "h": 88, "alt": "Akcelport Industries" },
+  "contact": {
+    "address": ["13, Shah Industrial Estate", "Deonar, Chembur", "Mumbai - 400088", "India"],
+    "phone": "+91 22 2555 5888",
+    "phoneHref": "+912225555888",
+    "email": "mail@akcelport.com",
+    "mapLat": 19.051219,
+    "mapLng": 72.91746
+  },
+  "nav": [
+    { "label": "Products", "href": "/products/", "mega": true },
+    { "label": "About", "href": "/about/" },
+    { "label": "Downloads", "href": "/downloads/" },
+    { "label": "Contact", "href": "/contact/" }
+  ],
+  "cta": { "label": "Request a quote", "href": "/contact/" },
+  "qualityMarks": ["ISO 9001", "ISO 45001", "RoHS compliant", "CE", "UL compliant"],
+  "stats": [
+    { "value": "35+", "label": "Years supplying export markets" },
+    { "value": "{{markets}}", "label": "Major export markets" },
+    { "value": "{{products}}", "label": "Product ranges with datasheets" },
+    { "value": "ISO", "label": "9001 and 45001 certified" }
+  ],
+  "form": {
+    "endpoint": "",
+    "subject": "Website enquiry from akcelport.com",
+    "notConfigured": "The enquiry form is not connected yet. Set form.endpoint in content/site.json to a Formspree-style URL. Until then, please email or call us.",
+    "success": "Thank you. Your enquiry has been sent and we will reply by email.",
+    "error": "Sorry, the enquiry could not be sent. Please try again, or email us directly."
+  }
+}

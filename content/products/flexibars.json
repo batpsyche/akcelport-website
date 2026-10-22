@@ -1,0 +1,545 @@
+{
+  "slug": "flexibars",
+  "name": "Flexibars",
+  "family": "busbars-power-distribution",
+  "order": 2,
+  "legacyUrl": null,
+  "source": "new",
+  "summary": "Laminated flexible copper busbars in a self-extinguishing PVC compound, punched directly through the laminates, from 125 A to 1250 A.",
+  "facts": [
+    {
+      "label": "Conductor",
+      "value": "Electrolytic copper, >99.9% Cu"
+    },
+    {
+      "label": "Operating voltage",
+      "value": "1100 V AC, 1500 V DC"
+    },
+    {
+      "label": "Temperature",
+      "value": "-20 to +105 deg C"
+    },
+    {
+      "label": "Insulation",
+      "value": "UL 94 V0, RoHS"
+    }
+  ],
+  "intro": [
+    "Flexibars are formed from multiple layers of thin copper strips, insulated with a high resistance, self-extinguishing PVC compound. Holes are punched directly through the laminates and connected, so lugs are not needed. That cuts labour and process cost and makes installation easier.",
+    "They replace large cables with lugs and solid rigid busbars in a panel, need less space for a given current, and bend and twist easily."
+  ],
+  "features": [
+    "Copper lamination with durable polymer insulation",
+    "Internal laminates are insulated to allow bending and twisting",
+    "Terminals are made by punching directly through the copper lamination",
+    "Removes the cost of lugs and reduces labour cost",
+    "Alternative to large cables with lugs and to solid rigid busbars",
+    "Needs less space for high current; cross section about 40% lower than a cable",
+    "Aesthetically improves the panel and reduces the number of connections",
+    "Guaranteed insulation thickness, including at the corner",
+    "Available to your drawing"
+  ],
+  "applications": [
+    "Switchboard and panel",
+    "Motor control centre",
+    "Power supply",
+    "Battery storage and supply",
+    "DG set for power generation",
+    "Control AC/DC driven unit",
+    "Transformer",
+    "Electrical machinery",
+    "Power converter",
+    "Busbar system and link",
+    "UPS system",
+    "Wind power generation unit",
+    "Combination motor starter, controller",
+    "Railways, coach and power supply system",
+    "High ampere with small conductor size"
+  ],
+  "hero": {
+    "src": "/img/products/flexibars/hero.webp",
+    "w": 907,
+    "h": 454,
+    "alt": "Flexible copper busbars with black insulation and copper ends"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/flexibars/custom-shapes.webp",
+      "w": 457,
+      "h": 313,
+      "alt": "Custom-made flexible busbars in several shapes"
+    },
+    {
+      "src": "/img/products/flexibars/cable-vs-flexibar.webp",
+      "w": 630,
+      "h": 357,
+      "alt": "Comparison of copper cable and flexibar for 250 A and 630 A"
+    },
+    {
+      "src": "/img/products/flexibars/temperature-rise.webp",
+      "w": 709,
+      "h": 252,
+      "alt": "Temperature rise notes"
+    },
+    {
+      "src": "/img/products/flexibars/construction.webp",
+      "w": 742,
+      "h": 207,
+      "alt": "Flexibar construction"
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Rating",
+        "Part code",
+        "Config (N x A x B mm)",
+        "Cross section (sq mm)",
+        "70 K",
+        "60 K",
+        "50 K",
+        "40 K",
+        "30 K",
+        "Pack qty (2 m)"
+      ],
+      "rows": [
+        [
+          "125 A",
+          "1258605",
+          "8 x 6 x 0.5",
+          "24",
+          "196",
+          "182",
+          "166",
+          "143",
+          "128",
+          "10"
+        ],
+        [
+          "125 A",
+          "1253908",
+          "3 x 9 x 0.8",
+          "21.60",
+          "158",
+          "147",
+          "134",
+          "120",
+          "104",
+          "10"
+        ],
+        [
+          "125 A",
+          "1253135",
+          "3 x 13 x 0.5",
+          "19.50",
+          "198",
+          "184",
+          "167",
+          "150",
+          "130",
+          "10"
+        ],
+        [
+          "125 A",
+          "1252158",
+          "2 x 15.5 x 0.8",
+          "25.80",
+          "252",
+          "234",
+          "212",
+          "191",
+          "165",
+          "10"
+        ],
+        [
+          "250 A",
+          "2504158",
+          "4 x 15.5 x 0.8",
+          "49.60",
+          "380",
+          "350",
+          "320",
+          "286",
+          "248",
+          "10"
+        ],
+        [
+          "250 A",
+          "2502201",
+          "2 x 20 x 1",
+          "40",
+          "326",
+          "300",
+          "275",
+          "246",
+          "214",
+          "5"
+        ],
+        [
+          "250 A",
+          "2503201",
+          "3 x 20 x 1",
+          "60",
+          "428",
+          "395",
+          "360",
+          "323",
+          "280",
+          "5"
+        ],
+        [
+          "250 A",
+          "2502241",
+          "2 x 24 x 1",
+          "48",
+          "450",
+          "416",
+          "380",
+          "340",
+          "295",
+          "5"
+        ],
+        [
+          "250 A",
+          "2506135",
+          "6 x 13 x 0.5",
+          "39",
+          "300",
+          "277",
+          "253",
+          "226",
+          "196",
+          "5"
+        ],
+        [
+          "400 A",
+          "4005201",
+          "5 x 20 x 1",
+          "100",
+          "498",
+          "460",
+          "420",
+          "376",
+          "326",
+          "5"
+        ],
+        [
+          "400 A",
+          "4003241",
+          "3 x 24 x 1",
+          "72",
+          "490",
+          "453",
+          "413",
+          "370",
+          "320",
+          "5"
+        ],
+        [
+          "400 A",
+          "4004241",
+          "4 x 24 x 1",
+          "96",
+          "550",
+          "510",
+          "465",
+          "416",
+          "360",
+          "5"
+        ],
+        [
+          "400 A",
+          "4002321",
+          "2 x 32 x 1",
+          "64",
+          "480",
+          "445",
+          "406",
+          "363",
+          "315",
+          "5"
+        ],
+        [
+          "400 A",
+          "4002401",
+          "2 x 40 x 1",
+          "80",
+          "538",
+          "500",
+          "455",
+          "406",
+          "352",
+          "5"
+        ],
+        [
+          "400 A",
+          "4006158",
+          "6 x 15.5 x 0.8",
+          "74.4",
+          "476",
+          "440",
+          "402",
+          "360",
+          "318",
+          "5"
+        ],
+        [
+          "500 A",
+          "5005241",
+          "5 x 24 x 1",
+          "120",
+          "608",
+          "563",
+          "514",
+          "460",
+          "398",
+          "5"
+        ],
+        [
+          "500 A",
+          "5004321",
+          "4 x 32 x 1",
+          "128",
+          "648",
+          "600",
+          "548",
+          "490",
+          "425",
+          "5"
+        ],
+        [
+          "630 A",
+          "6308241",
+          "8 x 24 x 1",
+          "192",
+          "802",
+          "743",
+          "678",
+          "606",
+          "525",
+          "5"
+        ],
+        [
+          "630 A",
+          "6305321",
+          "5 x 32 x 1",
+          "160",
+          "758",
+          "702",
+          "640",
+          "573",
+          "496",
+          "5"
+        ],
+        [
+          "630 A",
+          "6306321",
+          "6 x 32 x 1",
+          "192",
+          "846",
+          "783",
+          "715",
+          "640",
+          "555",
+          "5"
+        ],
+        [
+          "630 A",
+          "6305401",
+          "5 x 40 x 1",
+          "200",
+          "900",
+          "832",
+          "760",
+          "680",
+          "590",
+          "5"
+        ],
+        [
+          "630 A",
+          "6301201",
+          "10 x 20 x 1",
+          "200",
+          "762",
+          "706",
+          "645",
+          "576",
+          "500",
+          "5"
+        ],
+        [
+          "800 A",
+          "8000241",
+          "10 x 24 x 1",
+          "240",
+          "948",
+          "877",
+          "800",
+          "716",
+          "592",
+          "5"
+        ],
+        [
+          "800 A",
+          "8008321",
+          "8 x 32 x 1",
+          "256",
+          "1018",
+          "943",
+          "860",
+          "770",
+          "667",
+          "5"
+        ],
+        [
+          "800 A",
+          "8006401",
+          "6 x 40 x 1",
+          "240",
+          "1018",
+          "943",
+          "860",
+          "770",
+          "667",
+          "5"
+        ],
+        [
+          "800 A",
+          "8005501",
+          "5 x 50 x 1",
+          "250",
+          "1100",
+          "1016",
+          "930",
+          "830",
+          "718",
+          "5"
+        ],
+        [
+          "1000 A",
+          "1008401",
+          "8 x 40 x 1",
+          "320",
+          "1230",
+          "1140",
+          "1040",
+          "930",
+          "805",
+          "3"
+        ],
+        [
+          "1000 A",
+          "1008501",
+          "8 x 50 x 1",
+          "400",
+          "1393",
+          "1290",
+          "1175",
+          "1050",
+          "912",
+          "3"
+        ],
+        [
+          "1250 A",
+          "1251501",
+          "10 x 50 x 1",
+          "500",
+          "1650",
+          "1525",
+          "1395",
+          "1245",
+          "1080",
+          "2"
+        ]
+      ],
+      "title": "Sizes and ampacity table",
+      "id": "ampacity",
+      "caption": "Current (A) for the temperature rise (delta T, kelvin) produced by the chosen current in the given section. Available in 2 and 3 metre lengths in red copper.",
+      "note": "This table does not account for heat dissipation from the switchgear. When using 2 or 3 flexibars in parallel, apply the current coefficient at 50 K: 1.72 for two bars, 2.25 for three. Example: 640 A x 1.72 = 1100 A for two in parallel; 640 A x 2.25 = 1440 A for three. Any other size on request with minimum order quantity."
+    },
+    {
+      "columns": [
+        "Property",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Conductor",
+          "Copper strip, electrolytic grade (>99.9% Cu)"
+        ],
+        [
+          "Surface",
+          "Uncoated bare"
+        ],
+        [
+          "Tensile",
+          "> 200 N/mm"
+        ],
+        [
+          "Extensibility",
+          "> 20% (minimum)"
+        ],
+        [
+          "Lamination thickness",
+          "0.5 mm to 1 mm"
+        ],
+        [
+          "Insulation",
+          "High grade polymer, black"
+        ],
+        [
+          "Insulation thickness",
+          "2 mm +/- 0.2 mm"
+        ],
+        [
+          "Electrical strength",
+          "> 20 kV/mm"
+        ],
+        [
+          "Flammability",
+          "UL 94 V0"
+        ],
+        [
+          "Tensile strength",
+          "> 9 N/mm"
+        ],
+        [
+          "Shore hardness",
+          "A 85 (I3)"
+        ],
+        [
+          "Elongation",
+          "> 250%"
+        ],
+        [
+          "Dielectric rigidity",
+          "20 kV/mm"
+        ],
+        [
+          "Operating temperature",
+          "-20 to +105 deg C"
+        ],
+        [
+          "Operating voltage",
+          "1100 V AC and 1500 V DC"
+        ],
+        [
+          "Test voltage",
+          "3000 V / 5 minutes"
+        ]
+      ],
+      "title": "Technical characteristics",
+      "id": "technical"
+    }
+  ],
+  "notes": [
+    "Custom made flexible busbars: cutting, bending, twisting, hole pattern and oblong holes available to drawing."
+  ],
+  "seo": {
+    "description": "Flexibars: laminated flexible copper busbars from 125 A to 1250 A, punched directly through the laminates. Ampacity table and datasheet.",
+    "title": "Flexibars | Akcelport Industries"
+  },
+  "downloads": [
+    "flexibars-catalogue"
+  ]
+}

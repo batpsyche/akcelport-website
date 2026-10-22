@@ -1,0 +1,95 @@
+{
+  "slug": "epoxy-insulators",
+  "name": "Epoxy Insulators",
+  "family": "insulators-supports",
+  "order": 2,
+  "legacyUrl": "epoxy-insulators.php",
+  "source": "existing",
+  "summary": "Epoxy insulators in HT and LT types for busbar systems.",
+  "facts": [
+    {
+      "label": "Types",
+      "value": "HT and LT"
+    },
+    {
+      "label": "Material",
+      "value": "Epoxy"
+    },
+    {
+      "label": "Dielectric strength",
+      "value": "18 kV/mm"
+    },
+    {
+      "label": "Working temperature",
+      "value": "-40 to +135 deg C"
+    }
+  ],
+  "intro": [
+    "Epoxy insulators for busbar systems in HT and LT types. Dimensions are in the datasheet. Compared with SMC and DMC, the epoxy grade has a dielectric strength of 18 kV/mm and a water absorption of 0.04 to 0.1% (24 hours)."
+  ],
+  "features": [
+    "HT type and LT type",
+    "Epoxy material, dielectric strength 18 kV/mm",
+    "Working temperature -40 to +135 deg C",
+    "Arc resistance over 180 seconds"
+  ],
+  "hero": {
+    "src": "/img/products/epoxy-insulators/ht-type-1-jpg.webp",
+    "w": 435,
+    "h": 340,
+    "alt": "HT type epoxy insulators"
+  },
+  "variants": [
+    {
+      "id": "ht",
+      "name": "HT type",
+      "summary": "High tension epoxy insulator.",
+      "images": [
+        {
+          "src": "/img/products/epoxy-insulators/ht-type-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "HT type epoxy insulator"
+        },
+        {
+          "src": "/img/products/epoxy-insulators/ht-type-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "HT type epoxy insulator, second view"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/epoxy-insulators/ht-type-png.webp",
+        "w": 870,
+        "h": 705,
+        "alt": "HT type dimensions table"
+      }
+    },
+    {
+      "id": "lt",
+      "name": "LT type",
+      "summary": "Low tension epoxy insulator.",
+      "images": [
+        {
+          "src": "/img/products/epoxy-insulators/lt-type-jpg.webp",
+          "w": 420,
+          "h": 340,
+          "alt": "LT type epoxy insulator"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/epoxy-insulators/lt-type-png.webp",
+        "w": 399,
+        "h": 303,
+        "alt": "LT type dimensions table"
+      }
+    }
+  ],
+  "seo": {
+    "description": "HT and LT type epoxy insulators for busbar systems. Dimensions and datasheet download.",
+    "title": "Epoxy Insulators | Akcelport Industries"
+  },
+  "downloads": [
+    "epoxy-insulators-legacy"
+  ]
+}

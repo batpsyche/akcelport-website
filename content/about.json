@@ -1,0 +1,173 @@
+{
+  "title": "About Akcelport",
+  "lede": "One of India's leading makers of electrical components and assemblies, exporting for more than 35 years.",
+  "story": [
+    "Akcelport Industries is a manufacturer of electrical components and assemblies with expertise in control panel components, switchboard components, wires, cables and wire management, connection and grounding products, and industrial hardware.",
+    "Our roots are in non-ferrous casting, extrusion and machining of ferrous and non-ferrous metals. That experience lets us design, develop and make components to customer requirements, from production planning right through to delivery.",
+    "We are an export based company. For more than 35 years we have supplied mature markets in the Americas, Europe, the Gulf, the Far East and Australasia, and we keep adding products and markets by listening to what the industry asks for."
+  ],
+  "quality": {
+    "kicker": "Quality policy",
+    "quote": "Quality is not just controlled. It is built in.",
+    "body": [
+      "Akcelport has a well-documented quality policy that starts and ends with the customer. We take a stringent, quality conscious approach to developing and delivering our products, so that we can:",
+      "It is our endeavour to build a culture of Total Quality, where continuous improvement of the 3Ps (People, Processes and Product) becomes a way of life."
+    ],
+    "commitments": [
+      "Ensure maximum customer satisfaction",
+      "Ensure maximum professional and self satisfaction"
+    ],
+    "process": "Our products are made of high quality raw material by skilled labour under the strict supervision of qualified staff. We keep improving design and production so that every product is elegant, aesthetic and, above all, functionally satisfying.",
+    "diagram": {
+      "src": "/img/company/about-quality-diagram.webp",
+      "w": 624,
+      "h": 569,
+      "alt": "Diagram of the Akcelport house of quality"
+    }
+  },
+  "usp": [
+    {
+      "title": "Quality product",
+      "text": "High grade raw material, skilled labour and qualified supervision."
+    },
+    {
+      "title": "Competitive pricing",
+      "text": "One of the three areas we focus on, alongside quality and delivery."
+    },
+    {
+      "title": "Timely delivery",
+      "text": "Planned from production through to delivery."
+    }
+  ],
+  "manufacturing": {
+    "kicker": "Manufacturing expertise",
+    "title": "Metals and plastics, processed to precision",
+    "lede": "We process metals and industrial plastics in house, so a product can go from raw material to finished assembly under one roof.",
+    "capabilities": [
+      "CNC machining: milling and drilling",
+      "CNC turning",
+      "Power presses",
+      "Busbar manufacturing",
+      "Rolling machines",
+      "Shearing machines",
+      "Compression moulding",
+      "Injection moulding",
+      "PVC extrusion lines",
+      "Conventional machines",
+      "Assemblies of metals and industrial plastics",
+      "Grounding, earthing and lightning components"
+    ],
+    "metals": [
+      "Brass",
+      "Copper",
+      "Steel",
+      "SS304",
+      "SS316",
+      "Aluminium",
+      "Beryllium copper",
+      "Spring steel"
+    ],
+    "plastics": [
+      "Polyamide 66",
+      "Polycarbonate (PC)",
+      "PVC",
+      "PE",
+      "DMC",
+      "SMC",
+      "Epoxy"
+    ]
+  },
+  "global": {
+    "kicker": "Global presence",
+    "title": "Get ahead, stay ahead",
+    "body": [
+      "Our experience is forged by more than 35 years of service to customers in several parts of the world, including the USA, Australia, New Zealand and European countries.",
+      "We are expanding both our industry-specific range of products and our global presence, by understanding what the industry demands and delivering first-time quality and customer satisfaction. We keep working to meet the local needs of markets across the globe."
+    ],
+    "map": {
+      "src": "/img/company/global-presence-map.webp",
+      "w": 1000,
+      "h": 532,
+      "alt": "World map of Akcelport export markets"
+    }
+  },
+  "certificates": {
+    "kicker": "Certification",
+    "title": "Certificates and product certification",
+    "company": [
+      {
+        "src": "/img/company/certificate-1.webp",
+        "w": 532,
+        "h": 768,
+        "alt": "Akcelport Industries company certificate 1"
+      },
+      {
+        "src": "/img/company/certificate-2.webp",
+        "w": 532,
+        "h": 768,
+        "alt": "Akcelport Industries company certificate 2"
+      },
+      {
+        "src": "/img/company/certificate-3.webp",
+        "w": 532,
+        "h": 768,
+        "alt": "Akcelport Industries company certificate 3"
+      }
+    ],
+    "products": [
+      {
+        "src": "/img/company/product-certification-1.webp",
+        "alt": "Product certification mark 1",
+        "w": 139,
+        "h": 110
+      },
+      {
+        "src": "/img/company/product-certification-2.webp",
+        "alt": "Product certification mark 2",
+        "w": 160,
+        "h": 148
+      },
+      {
+        "src": "/img/company/product-certification-3.webp",
+        "alt": "Product certification mark 3",
+        "w": 151,
+        "h": 110
+      },
+      {
+        "src": "/img/company/product-certification-4.webp",
+        "alt": "Product certification mark 4",
+        "w": 132,
+        "h": 110
+      },
+      {
+        "src": "/img/company/product-certification-5.webp",
+        "alt": "Product certification mark 5",
+        "w": 150,
+        "h": 147
+      }
+    ]
+  },
+  "alsoAvailable": {
+    "title": "Also in our range",
+    "lede": "The company brochure lists more products than have datasheets online yet. Ask us for any of these.",
+    "items": [
+      "Copper wire braids",
+      "Braided busbars",
+      "Connection terminals",
+      "Terminals and terminal blocks",
+      "Split bolts and line taps",
+      "Copper C type connectors",
+      "Copper 8 type connectors",
+      "Copper tapes",
+      "Hex spacer bolts",
+      "Copper bushes",
+      "Aluminium grounding bars",
+      "Cord end sleeves",
+      "Expandable braided sleeves",
+      "Enamelled wires and cables",
+      "Locks",
+      "Document holders",
+      "Fans"
+    ]
+  }
+}

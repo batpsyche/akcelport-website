@@ -1,0 +1,286 @@
+{
+  "slug": "neutral-earth-bars",
+  "name": "Neutral / Earth Bars",
+  "family": "busbars-power-distribution",
+  "order": 4,
+  "legacyUrl": "neutral-earth-bars.php",
+  "source": "existing",
+  "summary": "Brass neutral and earth bars in standard sections from 6 up to 84 ways, single or double screw per tunnel, made to your drawing.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "Brass"
+    },
+    {
+      "label": "Sections",
+      "value": "7x9, 8x12, 12.7x9.5, 19x9.5 mm"
+    },
+    {
+      "label": "Ways",
+      "value": "6 up to 72 (to 84 on type F)"
+    },
+    {
+      "label": "Screws",
+      "value": "MS, zinc plated"
+    }
+  ],
+  "intro": [
+    "We offer standard brass neutral bars in sections of 7 mm x 9 mm, 8 mm x 12 mm, 19 mm x 9.5 mm and 12.7 mm x 9.5 mm for distribution boards and panel boards. Both single screw per tunnel and double screws per tunnel are available, from 6 ways, 12, 18, 24, 30, 36, 42, 48 and 60 ways up to 72 ways.",
+    "The designs below are the ones we make regularly. We can also make to your own design for bolt holes, terminal holes, length and cross section.",
+    "Bars have a fine surface finish and standard MS screws, zinc plated. Cheese head or Philips head screws are available."
+  ],
+  "features": [
+    "Brass bars in 7x9, 8x12, 19x9.5 and 12.7x9.5 mm sections",
+    "Single or double screws per tunnel",
+    "6 to 72 ways, to your requirement",
+    "Fine surface finish; zinc plated MS screws",
+    "Cheese head or Philips head screws available",
+    "Custom bolt holes, terminal holes, length and cross section"
+  ],
+  "hero": {
+    "src": "/img/products/neutral-earth-bars/neutral-earth-bars-1-jpg.webp",
+    "w": 870,
+    "h": 340,
+    "alt": "Brass neutral and earth bars"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/neutral-earth-bars/neutral-earth-bars-2-jpg.webp",
+      "w": 870,
+      "h": 340,
+      "alt": "Brass neutral and earth bar"
+    },
+    {
+      "src": "/img/products/neutral-earth-bars/neutral-earth-bars-3-jpg.webp",
+      "w": 870,
+      "h": 340,
+      "alt": "Brass neutral and earth bar"
+    },
+    {
+      "src": "/img/products/neutral-earth-bars/neutral-earth-bars-4-jpg.webp",
+      "w": 870,
+      "h": 340,
+      "alt": "Brass neutral and earth bar"
+    },
+    {
+      "src": "/img/products/neutral-earth-bars/neutral-earth-bars-5-jpg.webp",
+      "w": 870,
+      "h": 340,
+      "alt": "Brass neutral and earth bar"
+    },
+    {
+      "src": "/img/products/neutral-earth-bars/neutral-earth-bars-6-jpg.webp",
+      "w": 870,
+      "h": 340,
+      "alt": "Brass neutral and earth bar"
+    },
+    {
+      "src": "/img/products/neutral-earth-bars/neutral-earth-bars-7-jpg.webp",
+      "w": 870,
+      "h": 340,
+      "alt": "Brass neutral and earth bar"
+    }
+  ],
+  "variants": [
+    {
+      "id": "type-a",
+      "name": "Type A",
+      "summary": "12.7 mm x 12.7 mm section, 7 way to 36 way.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-a-12-7mmx12-7mm-7-way-to-36-way-png.webp",
+          "w": 870,
+          "h": 400,
+          "alt": "Type A neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-a-12-7mmx12-7mm-7-way-to-36-way-1-png.webp",
+          "w": 870,
+          "h": 293,
+          "alt": "Type A neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-a-12-7mmx12-7mm-7-way-to-36-way-2-png.webp",
+          "w": 870,
+          "h": 265,
+          "alt": "Type A neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-a-12-7mmx12-7mm-7-way-to-36-way-3-png.webp",
+          "w": 870,
+          "h": 240,
+          "alt": "Type A neutral bar"
+        }
+      ]
+    },
+    {
+      "id": "type-b",
+      "name": "Type B",
+      "summary": "12.7 mm x 12.7 mm section.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-b-12-7mmx12-7mm-png.webp",
+          "w": 870,
+          "h": 479,
+          "alt": "Type B neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-b-12-7mmx12-7mm-1-png.webp",
+          "w": 870,
+          "h": 137,
+          "alt": "Type B neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-b-12-7mmx12-7mm-2-png.webp",
+          "w": 870,
+          "h": 166,
+          "alt": "Type B neutral bar"
+        }
+      ]
+    },
+    {
+      "id": "type-c",
+      "name": "Type C",
+      "summary": "7 mm x 9 mm section.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-c-7mmx9mm-png.webp",
+          "w": 870,
+          "h": 509,
+          "alt": "Type C neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-c-7mmx9mm-1-png.webp",
+          "w": 541,
+          "h": 129,
+          "alt": "Type C neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-c-7mmx9mm-2-png.webp",
+          "w": 467,
+          "h": 129,
+          "alt": "Type C neutral bar"
+        }
+      ]
+    },
+    {
+      "id": "type-d",
+      "name": "Type D",
+      "summary": "8 mm x 12 mm section.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-d-8mmx12mm-png.webp",
+          "w": 870,
+          "h": 475,
+          "alt": "Type D neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-d-8mmx12mm-1-png.webp",
+          "w": 870,
+          "h": 99,
+          "alt": "Type D neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-d-8mmx12mm-2-png.webp",
+          "w": 870,
+          "h": 209,
+          "alt": "Type D neutral bar"
+        }
+      ]
+    },
+    {
+      "id": "type-e",
+      "name": "Type E",
+      "summary": "6 way to 8 way.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-e-6-way-to-8-way-png.webp",
+          "w": 870,
+          "h": 214,
+          "alt": "Type E neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-e-6-way-to-8-way-1-png.webp",
+          "w": 582,
+          "h": 282,
+          "alt": "Type E neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-e-6-way-to-8-way-2-png.webp",
+          "w": 599,
+          "h": 389,
+          "alt": "Type E neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-e-6-way-to-8-way-3-png.webp",
+          "w": 537,
+          "h": 346,
+          "alt": "Type E neutral bar"
+        }
+      ]
+    },
+    {
+      "id": "type-f",
+      "name": "Type F",
+      "summary": "24 way to 84 way.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-f-24-way-to-84-way-png.webp",
+          "w": 870,
+          "h": 430,
+          "alt": "Type F neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-f-24-way-to-84-way-1-png.webp",
+          "w": 870,
+          "h": 260,
+          "alt": "Type F neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-f-24-way-to-84-way-2-png.webp",
+          "w": 870,
+          "h": 380,
+          "alt": "Type F neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-f-24-way-to-84-way-3-png.webp",
+          "w": 870,
+          "h": 342,
+          "alt": "Type F neutral bar"
+        }
+      ]
+    },
+    {
+      "id": "type-g",
+      "name": "Type G",
+      "summary": "12 way to 36 way.",
+      "images": [
+        {
+          "src": "/img/products/neutral-earth-bars/type-g-12way-to-36-way-png.webp",
+          "w": 870,
+          "h": 332,
+          "alt": "Type G neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-g-12way-to-36-way-1-png.webp",
+          "w": 870,
+          "h": 357,
+          "alt": "Type G neutral bar"
+        },
+        {
+          "src": "/img/products/neutral-earth-bars/type-g-12way-to-36-way-2-png.webp",
+          "w": 870,
+          "h": 445,
+          "alt": "Type G neutral bar"
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "Brass neutral and earth bars, types A to G, 6 to 84 ways, single or double screw per tunnel. Made to drawing. Datasheet download.",
+    "title": "Neutral / Earth Bars | Akcelport Industries"
+  },
+  "downloads": [
+    "neutral-earth-bars-legacy"
+  ]
+}

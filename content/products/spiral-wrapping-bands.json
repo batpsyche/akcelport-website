@@ -1,0 +1,96 @@
+{
+  "slug": "spiral-wrapping-bands",
+  "name": "Spiral Wrapping Bands",
+  "family": "wire-management-insulation",
+  "order": 4,
+  "legacyUrl": null,
+  "source": "new",
+  "summary": "PE spiral wrapping bands and tubes, 6 to 25 mm OD, for abrasion protection of wire and cable insulation and hydraulic or pneumatic tubing.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "PE"
+    },
+    {
+      "label": "Colour",
+      "value": "Natural, grey; others on request"
+    },
+    {
+      "label": "Operating temperature",
+      "value": "Up to 85 deg C"
+    },
+    {
+      "label": "OD",
+      "value": "6 to 25 mm"
+    }
+  ],
+  "intro": [
+    "Spiral wrapping bands protect wire and cable insulation, and hydraulic or pneumatic tubing, from abrasion. They can be used in a gapped manner where flexibility and economy of breakouts are needed."
+  ],
+  "features": [
+    "Material: PE",
+    "Colour: natural and grey; other colours on request",
+    "Operating temperature up to 85 deg C",
+    "Can be used in a gapped manner where flexibility and economical breakouts are required"
+  ],
+  "applications": [
+    "Abrasion protection of wire and cable insulation",
+    "Hydraulic and pneumatic tubing"
+  ],
+  "hero": {
+    "src": "/img/products/spiral-wrapping-bands/hero.webp",
+    "w": 1400,
+    "h": 544,
+    "alt": "Spiral wrapping bands in grey, black and natural"
+  },
+  "tables": [
+    {
+      "columns": [
+        "Item code",
+        "OD (mm)",
+        "Standard packing length (m)"
+      ],
+      "rows": [
+        [
+          "SW6",
+          "6.0",
+          "50"
+        ],
+        [
+          "SW9",
+          "9.0",
+          "25"
+        ],
+        [
+          "SW12",
+          "12.0",
+          "25"
+        ],
+        [
+          "SW15",
+          "15.0",
+          "25"
+        ],
+        [
+          "SW19",
+          "19.0",
+          "25"
+        ],
+        [
+          "SW25",
+          "25.0",
+          "25"
+        ]
+      ],
+      "title": "Sizes",
+      "id": "sizes"
+    }
+  ],
+  "seo": {
+    "description": "PE spiral wrapping bands SW6 to SW25 for abrasion protection of wire, cable and tubing. Up to 85 deg C. Datasheet.",
+    "title": "Spiral Wrapping Bands | Akcelport Industries"
+  },
+  "downloads": [
+    "spiral-wrapping-bands-catalogue"
+  ]
+}

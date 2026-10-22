@@ -1,0 +1,223 @@
+{
+  "slug": "cable-lugs",
+  "name": "Cable Lugs",
+  "family": "connection-terminals",
+  "order": 1,
+  "legacyUrl": "cable-lugs.php",
+  "source": "existing",
+  "summary": "Tin electroplated ETP copper cable lugs in eight series: standard and long barrel, one and two hole.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "ETP copper"
+    },
+    {
+      "label": "Finish",
+      "value": "Tin electroplated"
+    },
+    {
+      "label": "Options",
+      "value": "Inspection hole (I), bell mouth entry (B)"
+    },
+    {
+      "label": "Series",
+      "value": "CSLA to CLWB (8)"
+    }
+  ],
+  "intro": [
+    "Copper lugs manufactured from ETP copper with a tin electroplated finish. An inspection hole and a bell mouth (flared) entry are available on request.",
+    "The default configuration of any lug is without inspection window and without flared or bell mouth entry. Add \"I\" after the product code for an inspection hole and \"B\" for a bell mouth or flared entry."
+  ],
+  "features": [
+    "Manufactured from ETP copper",
+    "Finish: tin electroplated",
+    "Inspection hole available on request",
+    "Bell mouth entry available on request"
+  ],
+  "hero": {
+    "src": "/img/products/cable-lugs/cable-lung-2-jpg.webp",
+    "w": 870,
+    "h": 420,
+    "alt": "Cable lugs with colour-coded barrels"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/cable-lugs/cable-lung-1-jpg.webp",
+      "w": 870,
+      "h": 420,
+      "alt": "Lug ordering information: product code, bell mouth and inspection window options"
+    }
+  ],
+  "variants": [
+    {
+      "id": "csla",
+      "name": "Copper lugs with standard barrel, CSLA series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-standard-barrel-csla-series-jpg.webp",
+          "w": 461,
+          "h": 332,
+          "alt": "Copper lugs with standard barrel, CSLA series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-standard-barrel-csla-series-png.webp",
+        "w": 870,
+        "h": 3056,
+        "alt": "Copper lugs with standard barrel, CSLA series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "cswa",
+      "name": "Copper lugs with standard barrel, CSWA series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-standard-barrel-cswa-series-jpg.webp",
+          "w": 459,
+          "h": 328,
+          "alt": "Copper lugs with standard barrel, CSWA series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-standard-barrel-cswa-series-png.webp",
+        "w": 870,
+        "h": 2254,
+        "alt": "Copper lugs with standard barrel, CSWA series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "clla",
+      "name": "Copper lugs with long barrel, CLLA series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-long-barrel-clla-series-jpg.webp",
+          "w": 481,
+          "h": 340,
+          "alt": "Copper lugs with long barrel, CLLA series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-long-barrel-clla-series-png.webp",
+        "w": 870,
+        "h": 3237,
+        "alt": "Copper lugs with long barrel, CLLA series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "clwa",
+      "name": "Copper lugs with long barrel, CLWA series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-long-barrel-clwa-series-jpg.webp",
+          "w": 454,
+          "h": 326,
+          "alt": "Copper lugs with long barrel, CLWA series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-long-barrel-clwa-series-png.webp",
+        "w": 870,
+        "h": 3237,
+        "alt": "Copper lugs with long barrel, CLWA series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "cslb",
+      "name": "Copper lugs with 2 hole and standard barrel, CSLB series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-standard-barrel-cslb-series-jpg.webp",
+          "w": 457,
+          "h": 281,
+          "alt": "Copper lugs with 2 hole and standard barrel, CSLB series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-standard-barrel-cslb-series-png.webp",
+        "w": 870,
+        "h": 2912,
+        "alt": "Copper lugs with 2 hole and standard barrel, CSLB series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "cswb",
+      "name": "Copper lugs with 2 hole and standard barrel, CSWB series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-standard-barrel-cswb-series-jpg.webp",
+          "w": 468,
+          "h": 284,
+          "alt": "Copper lugs with 2 hole and standard barrel, CSWB series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-standard-barrel-cswb-series-png.webp",
+        "w": 870,
+        "h": 2909,
+        "alt": "Copper lugs with 2 hole and standard barrel, CSWB series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "cllb",
+      "name": "Copper lugs with 2 hole and long barrel, CLLB series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-long-barrel-cllb-series-jpg.webp",
+          "w": 438,
+          "h": 270,
+          "alt": "Copper lugs with 2 hole and long barrel, CLLB series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-long-barrel-cllb-series-png.webp",
+        "w": 870,
+        "h": 2917,
+        "alt": "Copper lugs with 2 hole and long barrel, CLLB series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    },
+    {
+      "id": "clwb",
+      "name": "Copper lugs with 2 hole and long barrel, CLWB series",
+      "summary": "Dimensions and ordering codes in the table; see the datasheet for the full range.",
+      "images": [
+        {
+          "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-long-barrel-clwb-series-jpg.webp",
+          "w": 454,
+          "h": 276,
+          "alt": "Copper lugs with 2 hole and long barrel, CLWB series drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/cable-lugs/copper-lugs-with-2-hole-and-long-barrel-clwb-series-png.webp",
+        "w": 870,
+        "h": 2918,
+        "alt": "Copper lugs with 2 hole and long barrel, CLWB series dimensions table"
+      },
+      "specLabel": "Dimensions and ordering table"
+    }
+  ],
+  "notes": [
+    "Ordering example: CSLA-6-S16 with I for an inspection window and B for a bell mouth entry (see the ordering information image above)."
+  ],
+  "seo": {
+    "description": "Tin electroplated ETP copper cable lugs: CSLA, CSWA, CLLA, CLWA, CSLB, CSWB, CLLB and CLWB series. Dimension tables and datasheet.",
+    "title": "Cable Lugs | Akcelport Industries"
+  },
+  "downloads": [
+    "cable-lugs-legacy"
+  ]
+}

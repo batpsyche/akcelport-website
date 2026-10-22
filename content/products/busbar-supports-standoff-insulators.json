@@ -1,0 +1,2294 @@
+{
+  "slug": "busbar-supports-standoff-insulators",
+  "name": "Busbar Supports / Standoff Insulators",
+  "family": "insulators-supports",
+  "order": 1,
+  "legacyUrl": "busbar-supports-standoff-insulators.php",
+  "source": "existing",
+  "summary": "Standoff insulators and busbar supports moulded from polyester resin (DMC and SMC): conical, octagonal, cylindrical, round hex, drum, step, grip and vertical bar types.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "DMC and SMC polyester resin"
+    },
+    {
+      "label": "Working temperature",
+      "value": "-40 to +135 deg C"
+    },
+    {
+      "label": "Dielectric strength",
+      "value": "12 kV/mm"
+    },
+    {
+      "label": "Flammability",
+      "value": "Self extinguishing"
+    }
+  ],
+  "intro": [
+    "We offer a complete range of insulators moulded from high grade polyester reinforced resins (DMC and SMC). Standoff insulators are made from DMC material in conical, octagonal, full cylindrical, cylindrical, full hex, round-hex and drum (Taiwan model) variants. Finger type and grip type insulators are also offered, made from standard SMC material.",
+    "The 42 page catalogue adds single, three and four pole busbar supports, step insulators, supports for vertical bars, L supports, an adjustable busbar support, neutral base, insulators for horizontal bars, three phase connectors and DC clips."
+  ],
+  "features": [
+    "DMC standoff insulators in seven variants",
+    "SMC finger and grip type insulators",
+    "Item code tables with insert thread and depth",
+    "Tolerance chart by dimension",
+    "Single, three and four pole busbar supports",
+    "Step, grip, vertical bar and L supports; adjustable support; neutral base",
+    "Three phase connectors and DC clip"
+  ],
+  "hero": {
+    "src": "/img/products/busbar-supports-standoff-insulators/busbar-supports-standoff-insulators-jpg.webp",
+    "w": 870,
+    "h": 340,
+    "alt": "Standoff insulators and busbar supports"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/pdf-standoff-range.webp",
+      "w": 285,
+      "h": 187,
+      "alt": "Red standoff insulators"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-photo.webp",
+      "w": 343,
+      "h": 180,
+      "alt": "Step insulators, AT series"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-bt-photo.webp",
+      "w": 350,
+      "h": 162,
+      "alt": "Step insulators, BT series"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-5at.webp",
+      "w": 300,
+      "h": 254,
+      "alt": "Step insulator, 5 AT 25"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/three-phase-connector-photo.webp",
+      "w": 273,
+      "h": 167,
+      "alt": "Three phase connector"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/three-phase-connector-cap-photo.webp",
+      "w": 267,
+      "h": 183,
+      "alt": "Three phase connector with cap"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/connector-4-way-photo.webp",
+      "w": 309,
+      "h": 172,
+      "alt": "4 way connector"
+    }
+  ],
+  "variants": [
+    {
+      "id": "drum",
+      "name": "Drum type",
+      "summary": "Drum type standoff (Taiwan model), D25M6A to D76M12.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/drum-type-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Drum type insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/drum-type-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Drum type insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/drum-type-png.webp",
+        "w": 870,
+        "h": 566,
+        "alt": "Drum type table from the old catalogue"
+      }
+    },
+    {
+      "id": "octagonal",
+      "name": "Octagonal type",
+      "summary": "Octagonal standoff, OCT20M4 to OCT100M12.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/octagonal-type-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Octagonal insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/octagonal-type-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Octagonal insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/octagonal-type-png.webp",
+        "w": 870,
+        "h": 1263,
+        "alt": "Octagonal type table from the old catalogue"
+      }
+    },
+    {
+      "id": "full-round",
+      "name": "Full round / full cylindrical type",
+      "summary": "Full cylindrical standoff, ROU2522M6 to ROU6060M12.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/full-round-full-cylindrical-type-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Full round insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/full-round-full-cylindrical-type-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Full round insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/full-round-full-cylindrical-type-png.webp",
+        "w": 870,
+        "h": 550,
+        "alt": "Full round type table from the old catalogue"
+      }
+    },
+    {
+      "id": "cylc",
+      "name": "Cylindrical type with chamfered ends, CYLC series",
+      "summary": "CYLC25M6 to CYLC80M12.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/cylindrical-type-with-chamfored-ends-cylc-series-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "CYLC insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/cylindrical-type-with-chamfored-ends-cylc-series-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "CYLC insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/cylindrical-type-with-chamfored-ends-cylc-series-png.webp",
+        "w": 870,
+        "h": 491,
+        "alt": "CYLC series table from the old catalogue"
+      }
+    },
+    {
+      "id": "conical",
+      "name": "Conical type",
+      "summary": "Conical standoff, CONC25M6 to CONC80M12.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/conical-type-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Conical insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/conical-type-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Conical insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/conical-type-png.webp",
+        "w": 870,
+        "h": 528,
+        "alt": "Conical type table from the old catalogue"
+      }
+    },
+    {
+      "id": "cylr",
+      "name": "Cylindrical type with round centerband, CYLR series",
+      "summary": "CYLR30M10A to CYLR50M12.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/cylindrical-type-with-round-centerband-cylr-series-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "CYLR insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/cylindrical-type-with-round-centerband-cylr-series-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "CYLR insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/cylindrical-type-with-round-centerband-png.webp",
+        "w": 870,
+        "h": 514,
+        "alt": "CYLR series table from the old catalogue"
+      }
+    },
+    {
+      "id": "round-hex",
+      "name": "Round hex type",
+      "summary": "Round hex standoff, 20RH20M6 to 60RH80M16.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/round-hex-type-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Round hex insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/round-hex-type-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Round hex insulator drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/round-hex-type-png.webp",
+        "w": 870,
+        "h": 259,
+        "alt": "Round hex type table from the old catalogue"
+      }
+    },
+    {
+      "id": "step",
+      "name": "Step insulators",
+      "summary": "AT series and BT series step insulators for stepped busbar arrangements.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-at-series-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "AT series step insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-bt-series-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "BT series step insulator"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-at-series-png.webp",
+        "w": 870,
+        "h": 496,
+        "alt": "AT series drawing"
+      },
+      "specImage2": {
+        "src": "/img/products/busbar-supports-standoff-insulators/step-insulators-bt-series-png.webp",
+        "w": 870,
+        "h": 340,
+        "alt": "BT series drawing"
+      }
+    },
+    {
+      "id": "grip",
+      "name": "Grip type insulator for vertical busbars",
+      "summary": "SMC grip type insulator for vertical busbars.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/grip-type-insulator-for-vertical-busbars-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "Grip type insulator"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/grip-type-insulator-for-vertical-busbars-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "Grip type insulator, second view"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/busbar-supports-standoff-insulators/grip-type-insulator-for-vertical-busbars-png.webp",
+        "w": 652,
+        "h": 528,
+        "alt": "Grip type drawing"
+      }
+    },
+    {
+      "id": "finger",
+      "name": "Insulators for vertical busbars, finger type busbar support",
+      "summary": "Finger type busbar supports for vertical busbars, in two ranges.",
+      "images": [
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars1-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Finger type busbar support"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars1-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Finger type busbar support, second view"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars-2-1-png.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Finger type busbar support, range 2"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars-2-2-png.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Finger type, range 2 drawing 2"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars-2-3-png.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Finger type, range 2 drawing 3"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars-2-4-png.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "Finger type, range 2 drawing 4"
+        },
+        {
+          "src": "/img/products/busbar-supports-standoff-insulators/insulators-for-vertical-busbars-2-5-png.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "Finger type, range 2 drawing 5"
+        }
+      ]
+    }
+  ],
+  "busbarSupports": [
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/single-pole-supports-1.webp",
+      "w": 813,
+      "h": 980,
+      "alt": "Single pole busbar insulators, page 1"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/single-pole-supports-2.webp",
+      "w": 727,
+      "h": 826,
+      "alt": "Single pole busbar insulators, page 2"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/three-pole-supports-1.webp",
+      "w": 733,
+      "h": 955,
+      "alt": "Three pole busbar supports"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/three-pole-supports-2.webp",
+      "w": 731,
+      "h": 921,
+      "alt": "Three pole busbar supports, page 2"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/three-pole-supports-5.webp",
+      "w": 732,
+      "h": 856,
+      "alt": "Three pole busbar supports, page 5"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/four-pole-supports-1.webp",
+      "w": 702,
+      "h": 959,
+      "alt": "Four pole busbar supports"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/four-pole-supports-6.webp",
+      "w": 718,
+      "h": 977,
+      "alt": "Four pole busbar supports, page 6"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/grip-type.webp",
+      "w": 707,
+      "h": 880,
+      "alt": "Grip type insulators"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/vertical-bar-supports.webp",
+      "w": 691,
+      "h": 870,
+      "alt": "Supports for vertical bars"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/l-supports.webp",
+      "w": 702,
+      "h": 647,
+      "alt": "L supports"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/neutral-base-etc.webp",
+      "w": 702,
+      "h": 897,
+      "alt": "Neutral base and horizontal bar insulators"
+    },
+    {
+      "src": "/img/products/busbar-supports-standoff-insulators/adjustable-support.webp",
+      "w": 1168,
+      "h": 560,
+      "alt": "Adjustable busbar support"
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Property",
+        "Unit",
+        "Test method",
+        "SMC",
+        "DMC",
+        "Epoxy"
+      ],
+      "rows": [
+        [
+          "Specific gravity",
+          "-",
+          "ASTM D-792",
+          "1.7",
+          "1.9",
+          "1.6 - 2.0"
+        ],
+        [
+          "Glass content",
+          "%",
+          "N.A.",
+          "25",
+          "15",
+          "-"
+        ],
+        [
+          "Water absorption (24 hrs)",
+          "%",
+          "ASTM D-570",
+          "0.2",
+          "0.15",
+          "0.04 - 0.1"
+        ],
+        [
+          "Tensile strength",
+          "kg/sq cm",
+          "ASTM D-638",
+          "700",
+          "400",
+          "750 - 400"
+        ],
+        [
+          "Flexural strength",
+          "kg/sq cm",
+          "ASTM D-790",
+          "1550",
+          "700",
+          "800"
+        ],
+        [
+          "Compressive strength",
+          "kg/sq cm",
+          "ASTM D-695",
+          "1800",
+          "1500",
+          "1600"
+        ],
+        [
+          "Impact strength Izod",
+          "J/m",
+          "ASTM D-265",
+          "600",
+          "250",
+          "10"
+        ],
+        [
+          "Tracking index",
+          "volts",
+          "IEC 60112",
+          "1000",
+          "1000",
+          "+600"
+        ],
+        [
+          "Dielectric strength",
+          "kV/mm",
+          "ASTM D-149",
+          "12",
+          "12",
+          "18"
+        ],
+        [
+          "Arc resistance",
+          "secs",
+          "ASTM D-495",
+          "+180",
+          "+180",
+          "+180"
+        ],
+        [
+          "Flammability",
+          "",
+          "",
+          "Self extinguishing",
+          "Self extinguishing",
+          "Self extinguishing"
+        ],
+        [
+          "Glow wire ignition test (over 3 mm specimen)",
+          "deg C",
+          "IEC 60695-2-13",
+          "960",
+          "960",
+          "746 / 930"
+        ],
+        [
+          "Hot wire ignition test",
+          "deg C",
+          "ASTM D-3874",
+          ">120",
+          ">120",
+          "7 - 15"
+        ],
+        [
+          "Working temperature",
+          "deg C",
+          "-",
+          "-40 to +135",
+          "-40 to +135",
+          "-40 to +135"
+        ]
+      ],
+      "title": "Technical specifications for DMC and SMC material",
+      "id": "materials"
+    },
+    {
+      "columns": [
+        "DM (mm)",
+        "Tolerance"
+      ],
+      "rows": [
+        [
+          "1 - 15",
+          "0.25 mm"
+        ],
+        [
+          "16 - 50",
+          "0.5 mm"
+        ],
+        [
+          "51 - 100",
+          "1.0 mm"
+        ],
+        [
+          "101 - 250",
+          "1.5 mm"
+        ],
+        [
+          "250 and above",
+          "2.0 mm"
+        ]
+      ],
+      "title": "Tolerance chart",
+      "id": "tolerance"
+    },
+    {
+      "columns": [
+        "Item code",
+        "D1 (mm)",
+        "D2 (mm)",
+        "H (mm)",
+        "Insert thread",
+        "Depth (mm)"
+      ],
+      "rows": [
+        [
+          "OCT20M4",
+          "15",
+          "18",
+          "20",
+          "M4",
+          "5"
+        ],
+        [
+          "OCT25M6",
+          "18",
+          "21",
+          "25",
+          "M6",
+          "7"
+        ],
+        [
+          "OCT30M6",
+          "22",
+          "28",
+          "30",
+          "M6",
+          "9"
+        ],
+        [
+          "OCT30M8",
+          "22",
+          "28",
+          "30",
+          "M8",
+          "7"
+        ],
+        [
+          "OCT30M10A",
+          "26",
+          "30",
+          "30",
+          "M10",
+          "9"
+        ],
+        [
+          "OCT35M6",
+          "25",
+          "30",
+          "35",
+          "M6",
+          "9"
+        ],
+        [
+          "OCT35M8",
+          "25",
+          "30",
+          "35",
+          "M8",
+          "9"
+        ],
+        [
+          "OCT35M8A",
+          "34",
+          "38",
+          "35",
+          "M8",
+          "11"
+        ],
+        [
+          "OCT35M10A",
+          "34",
+          "38",
+          "35",
+          "M10",
+          "11"
+        ],
+        [
+          "OCT35M8B",
+          "29",
+          "30",
+          "35",
+          "M8",
+          "11"
+        ],
+        [
+          "OCT35M10B",
+          "29",
+          "30",
+          "35",
+          "M10",
+          "11"
+        ],
+        [
+          "OCT40M6A",
+          "25",
+          "30",
+          "40",
+          "M6",
+          "12"
+        ],
+        [
+          "OCT40M8A",
+          "25",
+          "30",
+          "40",
+          "M8",
+          "12"
+        ],
+        [
+          "OCT40M8B",
+          "30",
+          "34",
+          "40",
+          "M8",
+          "14"
+        ],
+        [
+          "OCT40M8",
+          "35",
+          "39",
+          "40",
+          "M8",
+          "12"
+        ],
+        [
+          "OCT40M10",
+          "35",
+          "39",
+          "40",
+          "M10",
+          "11"
+        ],
+        [
+          "OCT45M8",
+          "33",
+          "38",
+          "45",
+          "M8",
+          "14"
+        ],
+        [
+          "OCT45M10",
+          "33",
+          "38",
+          "45",
+          "M10",
+          "14"
+        ],
+        [
+          "OCT45M8A",
+          "42",
+          "47",
+          "45",
+          "M8",
+          "14"
+        ],
+        [
+          "OCT45M10A",
+          "42",
+          "47",
+          "45",
+          "M10",
+          "14"
+        ],
+        [
+          "OCT50M10",
+          "33",
+          "40",
+          "50",
+          "M10",
+          "15"
+        ],
+        [
+          "OCT50M12",
+          "33",
+          "40",
+          "50",
+          "M12",
+          "15"
+        ],
+        [
+          "OCT55M10",
+          "44",
+          "52",
+          "55",
+          "M10",
+          "17"
+        ],
+        [
+          "OCT55M12",
+          "44",
+          "52",
+          "55",
+          "M12",
+          "17"
+        ],
+        [
+          "OCT60M10",
+          "42",
+          "50",
+          "60",
+          "M10",
+          "20"
+        ],
+        [
+          "OCT60M12",
+          "42",
+          "50",
+          "60",
+          "M12",
+          "20"
+        ],
+        [
+          "OCT65M10",
+          "34",
+          "40",
+          "65",
+          "M10",
+          "20"
+        ],
+        [
+          "OCT65M12",
+          "34",
+          "40",
+          "65",
+          "M12",
+          "20"
+        ],
+        [
+          "OCT70M10",
+          "39",
+          "47",
+          "70",
+          "M10",
+          "22"
+        ],
+        [
+          "OCT70M12",
+          "39",
+          "47",
+          "70",
+          "M12",
+          "22"
+        ],
+        [
+          "OCT75M10A",
+          "42",
+          "50",
+          "75",
+          "M10",
+          "22"
+        ],
+        [
+          "OCT75M12A",
+          "42",
+          "50",
+          "75",
+          "M12",
+          "22"
+        ],
+        [
+          "OCT75M10",
+          "52",
+          "62",
+          "75",
+          "M10",
+          "22"
+        ],
+        [
+          "OCT75M12",
+          "52",
+          "62",
+          "75",
+          "M12",
+          "22"
+        ],
+        [
+          "OCT80M10",
+          "30",
+          "41",
+          "80",
+          "M10",
+          "22"
+        ],
+        [
+          "OCT100M12",
+          "46",
+          "61",
+          "100",
+          "M12",
+          "38"
+        ]
+      ],
+      "title": "Octagonal type",
+      "id": "octagonal"
+    },
+    {
+      "columns": [
+        "Item code",
+        "D1 (mm)",
+        "D2 (mm)",
+        "H (mm)",
+        "Insert thread",
+        "Depth (mm)"
+      ],
+      "rows": [
+        [
+          "D25M6A",
+          "17",
+          "21",
+          "25",
+          "M6",
+          "8"
+        ],
+        [
+          "D25M8B",
+          "21",
+          "25",
+          "25",
+          "M8",
+          "8"
+        ],
+        [
+          "D25M8",
+          "25",
+          "31",
+          "25",
+          "M8",
+          "8"
+        ],
+        [
+          "D30M6",
+          "25",
+          "33",
+          "30",
+          "M6",
+          "9"
+        ],
+        [
+          "D30M8",
+          "25",
+          "33",
+          "30",
+          "M8",
+          "8"
+        ],
+        [
+          "D35M6",
+          "27",
+          "32",
+          "35",
+          "M6",
+          "9"
+        ],
+        [
+          "D35M8",
+          "27",
+          "32",
+          "35",
+          "M8",
+          "9"
+        ],
+        [
+          "D40M8",
+          "29",
+          "34",
+          "40",
+          "M8",
+          "12"
+        ],
+        [
+          "D45M8",
+          "29",
+          "34",
+          "45",
+          "M8",
+          "14"
+        ],
+        [
+          "D45M8A",
+          "32",
+          "38",
+          "45",
+          "M8",
+          "14"
+        ],
+        [
+          "D50M10",
+          "35",
+          "39",
+          "50",
+          "M10",
+          "15"
+        ],
+        [
+          "D50M12",
+          "35",
+          "39",
+          "50",
+          "M12",
+          "15"
+        ],
+        [
+          "D51M8",
+          "29",
+          "32",
+          "51",
+          "M8",
+          "14"
+        ],
+        [
+          "D55M10",
+          "35",
+          "42",
+          "55",
+          "M10",
+          "14"
+        ],
+        [
+          "D60M10",
+          "38",
+          "45",
+          "60",
+          "M10",
+          "17"
+        ],
+        [
+          "D60M12",
+          "38",
+          "45",
+          "60",
+          "M12",
+          "17"
+        ],
+        [
+          "D64M10",
+          "34",
+          "40",
+          "64",
+          "M10",
+          "17"
+        ],
+        [
+          "D64M12",
+          "34",
+          "40",
+          "64",
+          "M12",
+          "17"
+        ],
+        [
+          "D65M10",
+          "35",
+          "39",
+          "65",
+          "M10",
+          "17"
+        ],
+        [
+          "D65M12",
+          "35",
+          "39",
+          "65",
+          "M12",
+          "17"
+        ],
+        [
+          "D76M10",
+          "39",
+          "47",
+          "76",
+          "M10",
+          "22"
+        ],
+        [
+          "D76M12",
+          "39",
+          "47",
+          "76",
+          "M12",
+          "22"
+        ]
+      ],
+      "title": "Drum type",
+      "id": "drum"
+    },
+    {
+      "columns": [
+        "Item code",
+        "D1 (mm)",
+        "D2 (mm)",
+        "H (mm)",
+        "Insert thread",
+        "Depth (mm)"
+      ],
+      "rows": [
+        [
+          "CONC25M6",
+          "25",
+          "21",
+          "25",
+          "M6",
+          "7"
+        ],
+        [
+          "CONC30M6",
+          "30",
+          "21",
+          "20",
+          "M6",
+          "9"
+        ],
+        [
+          "CONC30M8",
+          "33",
+          "26",
+          "30",
+          "M8",
+          "7"
+        ],
+        [
+          "CONC35M6",
+          "30",
+          "22",
+          "35",
+          "M6",
+          "9"
+        ],
+        [
+          "CONC35M8",
+          "30",
+          "22",
+          "35",
+          "M8",
+          "9"
+        ],
+        [
+          "CONC40M8",
+          "40",
+          "33",
+          "40",
+          "M8",
+          "12"
+        ],
+        [
+          "CONC40M10",
+          "40",
+          "33",
+          "40",
+          "M10",
+          "11"
+        ],
+        [
+          "CONC50M10",
+          "50",
+          "41",
+          "50",
+          "M10",
+          "14"
+        ],
+        [
+          "CONC50M12",
+          "50",
+          "41",
+          "50",
+          "M12",
+          "14"
+        ],
+        [
+          "CONC60M10",
+          "50",
+          "40",
+          "60",
+          "M10",
+          "17"
+        ],
+        [
+          "CONC60M12",
+          "50",
+          "40",
+          "60",
+          "M12",
+          "17"
+        ],
+        [
+          "CONC60M10A",
+          "60",
+          "44",
+          "60",
+          "M10",
+          "17"
+        ],
+        [
+          "CONC60M12A",
+          "60",
+          "44",
+          "60",
+          "M12",
+          "17"
+        ],
+        [
+          "CONC80M10",
+          "55",
+          "46",
+          "80",
+          "M10",
+          "22"
+        ],
+        [
+          "CONC80M12",
+          "55",
+          "46",
+          "80",
+          "M12",
+          "22"
+        ]
+      ],
+      "title": "Conical type",
+      "id": "conical"
+    },
+    {
+      "columns": [
+        "Code",
+        "L (mm)",
+        "D1 (mm)",
+        "D2 (mm)",
+        "D (mm)",
+        "A (mm)",
+        "B (mm)",
+        "S (mm)",
+        "Insert thread"
+      ],
+      "rows": [
+        [
+          "CYLR30M10A",
+          "30",
+          "34",
+          "37.5",
+          "46",
+          "11",
+          "8",
+          "9",
+          "M10"
+        ],
+        [
+          "CYLR35M8",
+          "35",
+          "35",
+          "44",
+          "48",
+          "13",
+          "10",
+          "11",
+          "M8"
+        ],
+        [
+          "CYLR35M10",
+          "35",
+          "35",
+          "44",
+          "48",
+          "13",
+          "10",
+          "11",
+          "M10"
+        ],
+        [
+          "CYLR35M10A",
+          "35",
+          "34",
+          "37.5",
+          "46",
+          "11",
+          "13",
+          "11",
+          "M10"
+        ],
+        [
+          "CYLR40M8",
+          "40",
+          "35",
+          "41",
+          "46",
+          "13",
+          "15",
+          "12",
+          "M8"
+        ],
+        [
+          "CYLR40M10",
+          "40",
+          "35",
+          "41",
+          "46",
+          "13",
+          "15",
+          "12",
+          "M10"
+        ],
+        [
+          "CYLR40M10A",
+          "40",
+          "34",
+          "37.5",
+          "46",
+          "11",
+          "18",
+          "12",
+          "M10"
+        ],
+        [
+          "CYLR45M10A",
+          "45",
+          "34",
+          "37.5",
+          "46",
+          "11",
+          "23",
+          "14",
+          "M10"
+        ],
+        [
+          "CYLR50M10",
+          "50",
+          "34",
+          "42",
+          "48",
+          "13",
+          "25",
+          "15",
+          "M10"
+        ],
+        [
+          "CYLR50M10A",
+          "50",
+          "34",
+          "37.5",
+          "46",
+          "11",
+          "28",
+          "15",
+          "M10"
+        ],
+        [
+          "CYLR50M12",
+          "50",
+          "34",
+          "42",
+          "48",
+          "13",
+          "25",
+          "15",
+          "M12"
+        ]
+      ],
+      "title": "Cylindrical type with round centerband (CYLR series)",
+      "id": "cylr"
+    },
+    {
+      "columns": [
+        "Item code",
+        "D1 (mm)",
+        "D2 (mm)",
+        "H (mm)",
+        "Insert thread",
+        "Depth (mm)"
+      ],
+      "rows": [
+        [
+          "CYLC25M6",
+          "22",
+          "25",
+          "25",
+          "M6",
+          "7"
+        ],
+        [
+          "CYLC30M6",
+          "23",
+          "30",
+          "30",
+          "M6",
+          "9"
+        ],
+        [
+          "CYLC30M8",
+          "23",
+          "30",
+          "30",
+          "M8",
+          "7"
+        ],
+        [
+          "CYLC40M6",
+          "30",
+          "40",
+          "40",
+          "M6",
+          "12"
+        ],
+        [
+          "CYLC40M8",
+          "30",
+          "40",
+          "40",
+          "M8",
+          "12"
+        ],
+        [
+          "CYLC40M10",
+          "30",
+          "40",
+          "40",
+          "M10",
+          "11"
+        ],
+        [
+          "CYLC50M10",
+          "40",
+          "50",
+          "50",
+          "M10",
+          "15"
+        ],
+        [
+          "CYLC50M12",
+          "40",
+          "50",
+          "50",
+          "M12",
+          "15"
+        ],
+        [
+          "CYLC60M10",
+          "40",
+          "50",
+          "60",
+          "M10",
+          "22"
+        ],
+        [
+          "CYLC60M12",
+          "40",
+          "50",
+          "60",
+          "M12",
+          "22"
+        ],
+        [
+          "CYLC60M10A",
+          "50",
+          "60",
+          "60",
+          "M10",
+          "22"
+        ],
+        [
+          "CYLC60M12A",
+          "50",
+          "60",
+          "60",
+          "M12",
+          "22"
+        ],
+        [
+          "CYLC80M10",
+          "50",
+          "60",
+          "80",
+          "M10",
+          "22"
+        ],
+        [
+          "CYLC80M12",
+          "50",
+          "60",
+          "80",
+          "M12",
+          "22"
+        ]
+      ],
+      "title": "Cylindrical type with chamfered ends (CYLC series)",
+      "id": "cylc"
+    },
+    {
+      "columns": [
+        "Item code",
+        "H (mm)",
+        "R (mm)",
+        "Insert thread",
+        "HB (mm)"
+      ],
+      "rows": [
+        [
+          "ROU2522M6",
+          "25",
+          "22",
+          "M6",
+          "10"
+        ],
+        [
+          "ROU2522M8",
+          "25",
+          "22",
+          "M8",
+          "10"
+        ],
+        [
+          "ROU3026M6",
+          "30",
+          "26",
+          "M6",
+          "10"
+        ],
+        [
+          "ROU3026M8",
+          "30",
+          "26",
+          "M8",
+          "10"
+        ],
+        [
+          "ROU3030M6",
+          "30",
+          "30",
+          "M6",
+          "10"
+        ],
+        [
+          "ROU3030M8",
+          "30",
+          "30",
+          "M8",
+          "12"
+        ],
+        [
+          "ROU3030M10",
+          "30",
+          "30",
+          "M10",
+          "12"
+        ],
+        [
+          "ROU4030M6",
+          "40",
+          "30",
+          "M6",
+          "15"
+        ],
+        [
+          "ROU4030M8",
+          "40",
+          "30",
+          "M8",
+          "15"
+        ],
+        [
+          "ROU4030M10",
+          "40",
+          "30",
+          "M10",
+          "15"
+        ],
+        [
+          "ROU4040M8",
+          "40",
+          "40",
+          "M8",
+          "15"
+        ],
+        [
+          "ROU4040M10",
+          "40",
+          "40",
+          "M10",
+          "15"
+        ],
+        [
+          "ROU5030M6",
+          "50",
+          "30",
+          "M6",
+          "20"
+        ],
+        [
+          "ROU5030M8",
+          "50",
+          "30",
+          "M8",
+          "20"
+        ],
+        [
+          "ROU5030M10",
+          "50",
+          "30",
+          "M10",
+          "20"
+        ],
+        [
+          "ROU5040M8",
+          "50",
+          "40",
+          "M8",
+          "20"
+        ],
+        [
+          "ROU5040M10",
+          "50",
+          "40",
+          "M10",
+          "20"
+        ],
+        [
+          "ROU5050M10",
+          "50",
+          "50",
+          "M10",
+          "20"
+        ],
+        [
+          "ROU5050M12",
+          "50",
+          "50",
+          "M12",
+          "20"
+        ],
+        [
+          "ROU6030M6",
+          "60",
+          "30",
+          "M6",
+          "20"
+        ],
+        [
+          "ROU6030M8",
+          "60",
+          "30",
+          "M8",
+          "20"
+        ],
+        [
+          "ROU6030M10",
+          "60",
+          "30",
+          "M10",
+          "20"
+        ],
+        [
+          "ROU6050M10",
+          "60",
+          "50",
+          "M10",
+          "20"
+        ],
+        [
+          "ROU6050M12",
+          "60",
+          "50",
+          "M12",
+          "20"
+        ],
+        [
+          "ROU6060M10",
+          "60",
+          "60",
+          "M10",
+          "20"
+        ],
+        [
+          "ROU6060M12",
+          "60",
+          "60",
+          "M12",
+          "20"
+        ]
+      ],
+      "title": "Full round / full cylindrical type",
+      "id": "full-round"
+    },
+    {
+      "columns": [
+        "Item code",
+        "A/F (mm)",
+        "H (mm)",
+        "Insert"
+      ],
+      "rows": [
+        [
+          "20RH20M6",
+          "20",
+          "20",
+          "M6"
+        ],
+        [
+          "20RH25M6",
+          "20",
+          "25",
+          "M6"
+        ],
+        [
+          "30RH30M6",
+          "30",
+          "30",
+          "M6"
+        ],
+        [
+          "30RH30M8",
+          "30",
+          "30",
+          "M8"
+        ],
+        [
+          "30RH30M10",
+          "30",
+          "30",
+          "M10"
+        ],
+        [
+          "30RH35M6",
+          "30",
+          "35",
+          "M6"
+        ],
+        [
+          "30RH35M8",
+          "30",
+          "35",
+          "M8"
+        ],
+        [
+          "30RH35M10",
+          "30",
+          "35",
+          "M10"
+        ],
+        [
+          "30RH40M6",
+          "30",
+          "40",
+          "M6"
+        ],
+        [
+          "30RH40M8",
+          "30",
+          "40",
+          "M8"
+        ],
+        [
+          "30RH40M10",
+          "30",
+          "40",
+          "M10"
+        ],
+        [
+          "40RH30M10",
+          "40",
+          "30",
+          "M10"
+        ],
+        [
+          "40RH35M10",
+          "40",
+          "35",
+          "M10"
+        ],
+        [
+          "40RH40M10",
+          "40",
+          "40",
+          "M10"
+        ],
+        [
+          "40RH40M12",
+          "40",
+          "40",
+          "M12"
+        ],
+        [
+          "40RH45M10",
+          "40",
+          "45",
+          "M10"
+        ],
+        [
+          "40RH45M12",
+          "40",
+          "45",
+          "M12"
+        ],
+        [
+          "40RH50M10",
+          "40",
+          "50",
+          "M10"
+        ],
+        [
+          "40RH50M12",
+          "40",
+          "50",
+          "M12"
+        ],
+        [
+          "40RH55M10",
+          "40",
+          "55",
+          "M10"
+        ],
+        [
+          "40RH55M12",
+          "40",
+          "55",
+          "M12"
+        ],
+        [
+          "40RH60M10",
+          "40",
+          "60",
+          "M10"
+        ],
+        [
+          "40RH60M12",
+          "40",
+          "60",
+          "M12"
+        ],
+        [
+          "40RH65M10",
+          "40",
+          "65",
+          "M10"
+        ],
+        [
+          "40RH65M12",
+          "40",
+          "65",
+          "M12"
+        ],
+        [
+          "40RH70M10",
+          "40",
+          "70",
+          "M10"
+        ],
+        [
+          "40RH70M12",
+          "40",
+          "70",
+          "M12"
+        ],
+        [
+          "60RH40M12",
+          "60",
+          "40",
+          "M12"
+        ],
+        [
+          "60RH50M12",
+          "60",
+          "50",
+          "M12"
+        ],
+        [
+          "60RH50M16",
+          "60",
+          "50",
+          "M16"
+        ],
+        [
+          "60RH60M12",
+          "60",
+          "60",
+          "M12"
+        ],
+        [
+          "60RH60M16",
+          "60",
+          "60",
+          "M16"
+        ],
+        [
+          "60RH70M12",
+          "60",
+          "70",
+          "M12"
+        ],
+        [
+          "60RH70M16",
+          "60",
+          "70",
+          "M16"
+        ],
+        [
+          "60RH80M12",
+          "60",
+          "80",
+          "M12"
+        ],
+        [
+          "60RH80M16",
+          "60",
+          "80",
+          "M16"
+        ]
+      ],
+      "title": "Round hex type",
+      "id": "round-hex"
+    },
+    {
+      "columns": [
+        "Item code",
+        "A/F (mm)",
+        "H (mm)",
+        "Insert"
+      ],
+      "rows": [
+        [
+          "20HH20M5",
+          "20",
+          "20",
+          "M5"
+        ],
+        [
+          "20HH20M6",
+          "20",
+          "20",
+          "M6"
+        ],
+        [
+          "20HH25M5",
+          "20",
+          "25",
+          "M5"
+        ],
+        [
+          "20HH25M6",
+          "20",
+          "25",
+          "M6"
+        ],
+        [
+          "20HH30M6",
+          "20",
+          "30",
+          "M6"
+        ],
+        [
+          "20HH35M6",
+          "20",
+          "35",
+          "M6"
+        ],
+        [
+          "20HH40M6",
+          "20",
+          "40",
+          "M6"
+        ],
+        [
+          "20HH45M6",
+          "20",
+          "45",
+          "M6"
+        ],
+        [
+          "20HH50M6",
+          "20",
+          "50",
+          "M6"
+        ],
+        [
+          "25HH25M6",
+          "25",
+          "25",
+          "M6"
+        ],
+        [
+          "25HH25M8",
+          "25",
+          "25",
+          "M8"
+        ],
+        [
+          "25HH30M6",
+          "25",
+          "30",
+          "M6"
+        ],
+        [
+          "25HH30M8",
+          "25",
+          "30",
+          "M8"
+        ],
+        [
+          "25HH35M6",
+          "25",
+          "35",
+          "M6"
+        ],
+        [
+          "25HH35M8",
+          "25",
+          "35",
+          "M8"
+        ],
+        [
+          "25HH40M6",
+          "25",
+          "40",
+          "M6"
+        ],
+        [
+          "25HH40M8",
+          "25",
+          "40",
+          "M8"
+        ],
+        [
+          "25HH45M6",
+          "25",
+          "45",
+          "M6"
+        ],
+        [
+          "25HH45M8",
+          "25",
+          "45",
+          "M8"
+        ],
+        [
+          "25HH50M6",
+          "25",
+          "50",
+          "M6"
+        ],
+        [
+          "25HH50M8",
+          "25",
+          "50",
+          "M8"
+        ],
+        [
+          "35HH30M8",
+          "35",
+          "30",
+          "M8"
+        ],
+        [
+          "35HH30M10",
+          "35",
+          "30",
+          "M10"
+        ],
+        [
+          "35HH35M8",
+          "35",
+          "35",
+          "M8"
+        ],
+        [
+          "35HH35M10",
+          "35",
+          "35",
+          "M10"
+        ],
+        [
+          "35HH40M8",
+          "35",
+          "40",
+          "M8"
+        ],
+        [
+          "35HH40M10",
+          "35",
+          "40",
+          "M10"
+        ],
+        [
+          "35HH45M8",
+          "35",
+          "45",
+          "M8"
+        ],
+        [
+          "35HH45M10",
+          "35",
+          "45",
+          "M10"
+        ],
+        [
+          "35HH50M8",
+          "35",
+          "50",
+          "M8"
+        ],
+        [
+          "35HH50M10",
+          "35",
+          "50",
+          "M10"
+        ],
+        [
+          "35HH55M8",
+          "35",
+          "55",
+          "M8"
+        ],
+        [
+          "35HH55M10",
+          "35",
+          "55",
+          "M10"
+        ],
+        [
+          "35HH60M8",
+          "35",
+          "60",
+          "M8"
+        ],
+        [
+          "35HH60M10",
+          "35",
+          "60",
+          "M10"
+        ],
+        [
+          "45HH40M10",
+          "45",
+          "40",
+          "M10"
+        ],
+        [
+          "45HH40M12",
+          "45",
+          "40",
+          "M12"
+        ],
+        [
+          "45HH45M10",
+          "45",
+          "45",
+          "M10"
+        ],
+        [
+          "45HH45M12",
+          "45",
+          "45",
+          "M12"
+        ],
+        [
+          "45HH50M10",
+          "45",
+          "50",
+          "M10"
+        ],
+        [
+          "45HH50M12",
+          "45",
+          "50",
+          "M12"
+        ],
+        [
+          "45HH55M10",
+          "45",
+          "55",
+          "M10"
+        ],
+        [
+          "45HH55M12",
+          "45",
+          "55",
+          "M12"
+        ],
+        [
+          "45HH60M10",
+          "45",
+          "60",
+          "M10"
+        ],
+        [
+          "45HH60M12",
+          "45",
+          "60",
+          "M12"
+        ],
+        [
+          "45HH70M10",
+          "45",
+          "70",
+          "M10"
+        ],
+        [
+          "45HH70M12",
+          "45",
+          "70",
+          "M12"
+        ],
+        [
+          "45HH80M10",
+          "45",
+          "80",
+          "M10"
+        ],
+        [
+          "45HH80M12",
+          "45",
+          "80",
+          "M12"
+        ],
+        [
+          "45HH90M10",
+          "45",
+          "90",
+          "M10"
+        ],
+        [
+          "45HH90M12",
+          "45",
+          "90",
+          "M12"
+        ]
+      ],
+      "title": "Full hexagonal type",
+      "id": "full-hex"
+    },
+    {
+      "columns": [
+        "Code",
+        "Overall length L (mm)",
+        "Distance between holes Cd (mm)",
+        "No. of connectors",
+        "Bolt size"
+      ],
+      "rows": [
+        [
+          "TB2106",
+          "95",
+          "82",
+          "2",
+          "M6 x 22 mm"
+        ],
+        [
+          "TB3106",
+          "125",
+          "111",
+          "3",
+          "M6 x 22 mm"
+        ],
+        [
+          "TB4106",
+          "165",
+          "150",
+          "4",
+          "M6 x 22 mm"
+        ],
+        [
+          "TB4108",
+          "165",
+          "150",
+          "4",
+          "M8 x 22 mm"
+        ],
+        [
+          "TB4210",
+          "225",
+          "195",
+          "4",
+          "M10 x 22 mm"
+        ]
+      ],
+      "title": "Three phase connectors, 2, 3 and 4 way",
+      "id": "connectors"
+    }
+  ],
+  "notes": [
+    "Dimensions D1, D2, H and insert details refer to the drawings in the datasheet. Item codes beginning OCT, D, CONC, CYLR, CYLC, ROU and RH or HH tell you the shape, height and insert thread."
+  ],
+  "seo": {
+    "description": "Standoff insulators and busbar supports in SMC and DMC: octagonal, drum, conical, cylindrical, round hex, step, grip and vertical bar types with item code tables.",
+    "title": "Busbar Supports / Standoff Insulators | Akcelport Industries"
+  },
+  "downloads": [
+    "insulators-catalogue",
+    "busbar-supports-standoff-insulators-legacy"
+  ]
+}

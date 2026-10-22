@@ -1,0 +1,151 @@
+{
+  "slug": "test-terminal-blocks",
+  "name": "Test Terminal Blocks",
+  "family": "connection-terminals",
+  "order": 2,
+  "legacyUrl": "test-terminal-blocks.php",
+  "source": "existing",
+  "summary": "13-way, 10-way, 6-way and 4-way test blocks for on-site testing of meters, relays and instrument transformers without disconnecting the load.",
+  "facts": [
+    {
+      "label": "Standard",
+      "value": "IEC 60947-7-1"
+    },
+    {
+      "label": "Rating",
+      "value": "Up to 50 A at 600 V"
+    },
+    {
+      "label": "Base",
+      "value": "Black bakelite moulding"
+    },
+    {
+      "label": "Cover",
+      "value": "UL94V0 polycarbonate"
+    }
+  ],
+  "intro": [
+    "Test terminal blocks give easy access for on-site testing of ammeters, kWh meters, maximum demand indicators, trivector meters, relays and instrument transformers without disconnecting from the load, and avoid CT open circuit problems. Connections for testing are easy to make, which makes the block an important element of any metering installation.",
+    "They are designed for projection mounting with front or back connection, designated FC or BC, for 3 phase 3 wire or 3 phase 4 wire applications up to 50 A continuous at 600 V."
+  ],
+  "features": [
+    "Developed as per IEC 60947-7-1",
+    "Connections for testing are easily made",
+    "Important element of the metering installation",
+    "For 3 phase 3 wire or 3 phase 4 wire",
+    "Front (FC) or back (BC) connection"
+  ],
+  "hero": {
+    "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-jpg.webp",
+    "w": 435,
+    "h": 340,
+    "alt": "13 way test terminal block, front connection"
+  },
+  "variants": [
+    {
+      "id": "ttb-13",
+      "name": "Test terminal block, 13 way, 3 phase 4 wire",
+      "summary": "The most popular 13 way block has 13 terminals: 9 current and 4 voltage. Current terminals are grouped in threes with shorting links for short-circuiting CT terminals and testing. The base is electrical grade black bakelite with moulded barriers between terminals and a bakelite shield at cable entries. A transparent, flame retardant (UL94V0) polycarbonate top cover lets operators see the connections; a bakelite cover is optional. All terminals, links, screws and nuts are bright nickel plated brass; each terminal has a 6 mm cable entry with two M5 screws. Back connected blocks have red, yellow and blue colour coded sleeves. Special designs, 9 way blocks and voltage disconnect types are available on request.",
+      "images": [
+        {
+          "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-bc-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "TTB 13 way 3Ph 4 wire FC (standard)",
+          "caption": "TTB 13 Way 3Ph 4 Wire FC (Standard)"
+        },
+        {
+          "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "TTB 13 way 3Ph 4 wire BC (standard)",
+          "caption": "TTB 13 Way 3Ph 4 Wire BC (Standard)"
+        },
+        {
+          "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-bc-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "TTB 13 way 3Ph 4 wire FC, extended cover",
+          "caption": "TTB 13 Way 3Ph 4 Wire FC (Extended cover)"
+        },
+        {
+          "src": "/img/products/test-terminal-blocks/ttb-13-way-3ph-4-wire-fc-ex-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "TTB 13 way 3Ph 4 wire FC and BC, disconnection type",
+          "caption": "TTB 13 Way 3Ph 4 Wire FC and BC (Disconnection type)"
+        }
+      ]
+    },
+    {
+      "id": "ttb4w",
+      "name": "Test blocks, 4 way, TTB4W",
+      "summary": "4 pole test blocks for mounting on switchboard panels with proper test equipment, for testing AC instruments, meters and relays. Moulded bakelite base and covers carry internal plug contacts that make a positive connection when the cover is in place. For all current circuits, auxiliary contacts short circuit the current transformer when the cover is removed. Routine testing is done by removing the cover and substituting the connected test plug. Contact rating is 250 volts, 10 amperes continuous. Each block includes the test block, cover, a set of auxiliary contacts, jumpers and screws. Standard auxiliary contacts: C1 x 1, C2 x 2, C3 x 4, C4 x 1.",
+      "images": [
+        {
+          "src": "/img/products/test-terminal-blocks/test-blocks-4-way-ttb4w-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "TTB4W auxiliary contact diagram"
+        },
+        {
+          "src": "/img/products/test-terminal-blocks/ttb4w-4-way-test-blocks-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "TTB4W 4 way test block"
+        },
+        {
+          "src": "/img/products/test-terminal-blocks/ttb4w-4-way-test-blocks-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "TTB4W 4 way test block with cover removed"
+        }
+      ],
+      "bullets": [
+        "C1: one pole of contact no. 1, used with the jumper shown in the figure.",
+        "C2: short circuits the current transformer when the cover or plug is not in place.",
+        "C3: bridge that keeps the circuit during the period the cover or plug is not in place; without it, loss of revenue is possible if replacing the cover is delayed.",
+        "C4: jumpers used with C2 or C4, to short circuit a current transformer or interconnect phases when the cover fastening stud is bypassed."
+      ]
+    },
+    {
+      "id": "ttb-6",
+      "name": "Test blocks, 6 way",
+      "summary": "6 way test blocks made from premium raw material, with a smooth surface finish and long service life, used in test equipment such as transformer ratio meters and instrument transformers.",
+      "images": [
+        {
+          "src": "/img/products/test-terminal-blocks/test-blocks-6-way-1-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "6 way test block"
+        },
+        {
+          "src": "/img/products/test-terminal-blocks/test-blocks-6-way-2-jpg.webp",
+          "w": 435,
+          "h": 340,
+          "alt": "6 way test block with cover"
+        }
+      ]
+    },
+    {
+      "id": "ttb-10",
+      "name": "Test blocks, 10 way",
+      "summary": "For on-site testing of ammeters, kWh meters, MD indicators, trivector meters, relays and instrument transformers without disconnecting the load. Projection mounting, front connection (FC), for 3 phase 3 wire with neutral up to 50 A continuous at 600 V, generally conforming to IEC 60947-7-1. The 10 way block has 10 terminals: 6 current, 3 voltage and 1 neutral. Current terminals are grouped in twos with shorting links. Black bakelite base with moulded barriers and a bakelite front shield; moulded shroud over the voltage terminals.",
+      "images": [
+        {
+          "src": "/img/products/test-terminal-blocks/test-block-10-way-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "10 way test block"
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "Test terminal blocks to IEC 60947-7-1: 13 way, 10 way, 6 way and TTB4W 4 way test blocks, up to 50 A at 600 V. Datasheet download.",
+    "title": "Test Terminal Blocks | Akcelport Industries"
+  },
+  "downloads": [
+    "test-terminal-blocks-legacy"
+  ]
+}

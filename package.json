@@ -1,0 +1,14 @@
+{
+  "name": "akcelport-website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Akcelport Industries public website: a zero-dependency static site generator driven by JSON content.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs --watch",
+    "check": "node scripts/build.mjs --check"
+  }
+}

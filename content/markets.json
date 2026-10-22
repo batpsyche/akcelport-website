@@ -1,0 +1,10 @@
+{
+  "intro": "We have supplied mature markets around the world for more than 35 years. These are our major countries of export.",
+  "regions": [
+    { "name": "USA and South America", "countries": ["USA", "Chile", "Mexico", "Ecuador", "Peru", "Colombia", "Brazil", "Argentina"] },
+    { "name": "Europe", "countries": ["Croatia", "Austria", "Germany", "Denmark", "UK"] },
+    { "name": "Gulf countries", "countries": ["UAE", "Saudi Arabia", "Qatar", "Kuwait", "Oman"] },
+    { "name": "Far East", "countries": ["Singapore", "Indonesia", "Malaysia", "Thailand"] },
+    { "name": "Australia and New Zealand", "countries": ["Australia", "New Zealand"] }
+  ]
+}

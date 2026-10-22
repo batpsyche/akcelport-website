@@ -1,0 +1,118 @@
+{
+  "slug": "copper-busbars",
+  "name": "Copper Busbars",
+  "family": "busbars-power-distribution",
+  "order": 1,
+  "legacyUrl": "copper-busbars.php",
+  "source": "existing",
+  "summary": "Solid and punched electrolytic copper busbars for switchgears, panels, switchboards and transformers.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "Electrolytic copper"
+    },
+    {
+      "label": "Finish",
+      "value": "Natural or tin electroplated"
+    },
+    {
+      "label": "Thickness",
+      "value": "1 to 10 mm"
+    },
+    {
+      "label": "Width",
+      "value": "10 to 200 mm"
+    }
+  ],
+  "intro": [
+    "An easy and economical way to carry current inside switchgears, panels, switchboards and transformers. Busbars are cut from electrolytic copper and supplied plain or tin electroplated, in lengths up to 2 metres.",
+    "Solid, punched and threaded busbars are offered. The tables below list the standard metric sizes and codes; any other size can be made to your drawing."
+  ],
+  "features": [
+    "Material: electrolytic copper",
+    "Finish: natural or tin electroplated",
+    "Length: up to 2 metres",
+    "Thickness: 1 mm to 10 mm",
+    "Width: 10 mm up to 200 mm",
+    "Variants: solid busbars, punched busbars, threaded busbars"
+  ],
+  "hero": {
+    "src": "/img/products/copper-busbars/copper-busbars-jpg.webp",
+    "w": 870,
+    "h": 420,
+    "alt": "Copper busbars with punched holes"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/copper-busbars/copper-busbars-1-jpg.webp",
+      "w": 870,
+      "h": 420,
+      "alt": "Punched copper busbars"
+    },
+    {
+      "src": "/img/products/copper-busbars/copper-busbars-2-jpg.webp",
+      "w": 870,
+      "h": 420,
+      "alt": "Copper busbars in several widths"
+    }
+  ],
+  "variants": [
+    {
+      "id": "solid",
+      "name": "Solid copper busbars",
+      "summary": "Plain copper bars in standard thicknesses, widths and lengths.",
+      "images": [
+        {
+          "src": "/img/products/copper-busbars/solid-copper-busbars-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "Solid copper busbar drawing"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/copper-busbars/solid-copper-busbars-png.webp",
+        "w": 870,
+        "h": 952,
+        "alt": "Solid copper busbar codes and sizes table"
+      },
+      "specLabel": "Solid busbar codes and sizes"
+    },
+    {
+      "id": "punched",
+      "name": "Punched copper busbars",
+      "summary": "Busbars with a standard hole pattern punched for bolted connections.",
+      "images": [
+        {
+          "src": "/img/products/copper-busbars/punched-copper-busbars-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "Punched busbar drawing"
+        },
+        {
+          "src": "/img/products/copper-busbars/punched-copper-busbars-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "Punched busbar hole detail"
+        }
+      ],
+      "specImage": {
+        "src": "/img/products/copper-busbars/punched-copper-busbars-png.webp",
+        "w": 870,
+        "h": 962,
+        "alt": "Punched copper busbar codes and sizes table"
+      },
+      "specLabel": "Punched busbar codes and sizes"
+    }
+  ],
+  "notes": [
+    "Please ask us for any customisation in busbar sizes.",
+    "Related ranges: flexibars, copper braids and braided busbars, copper tapes (see the product list in the company brochure)."
+  ],
+  "seo": {
+    "description": "Solid and punched electrolytic copper busbars, 1 to 10 mm thick and up to 200 mm wide, natural or tin electroplated. Datasheet download.",
+    "title": "Copper Busbars | Akcelport Industries"
+  },
+  "downloads": [
+    "copper-busbars-legacy"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "mounting-enclosure-hardware",
+  "name": "Mounting and Enclosure Hardware",
+  "shortName": "Mounting",
+  "order": 4,
+  "icon": "rail",
+  "summary": "DIN rails, clips and brackets, panel hinges and handles for building and fitting out panels and enclosures.",
+  "image": {
+    "src": "/img/products/din-mounting-channels/pdf-rails.webp",
+    "w": 1045,
+    "h": 619,
+    "alt": "Steel and aluminium DIN rails"
+  },
+  "products": [
+    "din-mounting-channels",
+    "panel-hinges",
+    "handles"
+  ]
+}

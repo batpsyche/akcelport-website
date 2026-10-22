@@ -1,0 +1,62 @@
+{
+  "copper-braids": {
+    "src": "/img/company/copper-braids.webp",
+    "w": 576,
+    "h": 341
+  },
+  "braided-busbars": {
+    "src": "/img/company/braided-busbars.webp",
+    "w": 531,
+    "h": 200
+  },
+  "busbar-sleeves": {
+    "src": "/img/company/busbar-sleeves.webp",
+    "w": 214,
+    "h": 153
+  },
+  "expandable-sleeves": {
+    "src": "/img/company/expandable-sleeves.webp",
+    "w": 527,
+    "h": 263
+  },
+  "enamelled-wire": {
+    "src": "/img/company/enamelled-wire.webp",
+    "w": 189,
+    "h": 192
+  },
+  "split-bolt": {
+    "src": "/img/company/split-bolt.webp",
+    "w": 143,
+    "h": 256
+  },
+  "c-connector": {
+    "src": "/img/company/c-connector.webp",
+    "w": 211,
+    "h": 238
+  },
+  "lugs-terminals": {
+    "src": "/img/company/lugs-terminals.webp",
+    "w": 303,
+    "h": 202
+  },
+  "terminal-blocks": {
+    "src": "/img/company/terminal-blocks.webp",
+    "w": 255,
+    "h": 218
+  },
+  "hardware": {
+    "src": "/img/company/hardware.webp",
+    "w": 505,
+    "h": 350
+  },
+  "copper-busbars": {
+    "src": "/img/company/copper-busbars.webp",
+    "w": 407,
+    "h": 309
+  },
+  "cables": {
+    "src": "/img/company/cables.webp",
+    "w": 411,
+    "h": 273
+  }
+}

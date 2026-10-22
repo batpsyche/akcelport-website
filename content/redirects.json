@@ -1,0 +1,127 @@
+{
+  "note": "Old akcelport.com URLs mapped to their new locations. Emitted at build time as dist/.htaccess (Apache) and dist/_redirects (Netlify style).",
+  "pages": [
+    {
+      "from": "/index.php",
+      "to": "/"
+    },
+    {
+      "from": "/aboutus.php",
+      "to": "/about/"
+    },
+    {
+      "from": "/sitemap.php",
+      "to": "/sitemap/"
+    },
+    {
+      "from": "/contactus.php",
+      "to": "/contact/"
+    },
+    {
+      "from": "/cable-lugs.php",
+      "to": "/products/cable-lugs/"
+    },
+    {
+      "from": "/copper-busbars.php",
+      "to": "/products/copper-busbars/"
+    },
+    {
+      "from": "/coppergrounding_neutralbars.php",
+      "to": "/products/copper-grounding-bars/"
+    },
+    {
+      "from": "/neutral-earth-bars.php",
+      "to": "/products/neutral-earth-bars/"
+    },
+    {
+      "from": "/test-terminal-blocks.php",
+      "to": "/products/test-terminal-blocks/"
+    },
+    {
+      "from": "/busbar-supports-standoff-insulators.php",
+      "to": "/products/busbar-supports-standoff-insulators/"
+    },
+    {
+      "from": "/epoxy-insulators.php",
+      "to": "/products/epoxy-insulators/"
+    },
+    {
+      "from": "/panel-hinges.php",
+      "to": "/products/panel-hinges/"
+    },
+    {
+      "from": "/din-mounting-channels.php",
+      "to": "/products/din-mounting-channels/"
+    },
+    {
+      "from": "/cable-ducts.php",
+      "to": "/products/cable-ducts/"
+    },
+    {
+      "from": "/earth-rods.php",
+      "to": "/products/earth-rods/"
+    },
+    {
+      "from": "/cable-glands.php",
+      "to": "/products/cable-glands/"
+    },
+    {
+      "from": "/handles.php",
+      "to": "/products/handles/"
+    }
+  ],
+  "downloads": [
+    {
+      "from": "/assets/cable-lugs/cable-lugs.pdf",
+      "to": "/downloads/legacy/cable-lugs.pdf"
+    },
+    {
+      "from": "/assets/copper-busbars/copper-busbars.pdf",
+      "to": "/downloads/legacy/copper-busbars.pdf"
+    },
+    {
+      "from": "/assets/copper-grounding-neutral-bars/coppergrounding-neutralbars.pdf",
+      "to": "/downloads/legacy/copper-grounding-neutral-bars.pdf"
+    },
+    {
+      "from": "/assets/neutral-earth-bars/neutral-earth-bars.pdf",
+      "to": "/downloads/legacy/neutral-earth-bars.pdf"
+    },
+    {
+      "from": "/assets/test-terminal-blocks/test-terminal-blocks.pdf",
+      "to": "/downloads/legacy/test-terminal-blocks.pdf"
+    },
+    {
+      "from": "/assets/busbar-supports-standoff-insulators/busbar-supports-standoff-insulators.pdf",
+      "to": "/downloads/legacy/busbar-supports-standoff-insulators.pdf"
+    },
+    {
+      "from": "/assets/epoxy-insulators/epoxy-insulators.pdf",
+      "to": "/downloads/legacy/epoxy-insulators.pdf"
+    },
+    {
+      "from": "/assets/panel-hinges/panel-hinges.pdf",
+      "to": "/downloads/legacy/panel-hinges.pdf"
+    },
+    {
+      "from": "/assets/din-mounting-channels/din-mounting-channels.pdf",
+      "to": "/downloads/legacy/din-mounting-channels.pdf"
+    },
+    {
+      "from": "/assets/cable-ducts/cable-ducts.pdf",
+      "to": "/downloads/legacy/cable-ducts.pdf"
+    },
+    {
+      "from": "/assets/earth-rods/earth-rods.pdf",
+      "to": "/downloads/legacy/earth-rods.pdf"
+    },
+    {
+      "from": "/assets/cable_glands/cable-glands.pdf",
+      "to": "/downloads/legacy/cable-glands.pdf"
+    },
+    {
+      "from": "/assets/handles/handles.pdf",
+      "to": "/downloads/legacy/handles.pdf"
+    }
+  ]
+}

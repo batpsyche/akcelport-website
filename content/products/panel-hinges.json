@@ -1,0 +1,187 @@
+{
+  "slug": "panel-hinges",
+  "name": "Panel Hinges / Pintle Hinges",
+  "family": "mounting-enclosure-hardware",
+  "order": 2,
+  "legacyUrl": "panel-hinges.php",
+  "source": "existing",
+  "summary": "Lift-off panel hinges in extruded nickel chrome plated brass with stainless steel inserts, standard sizes APH 440 to APH 900. RoHS compliant.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "Extruded brass, nickel chrome plated"
+    },
+    {
+      "label": "Insert",
+      "value": "Stainless steel"
+    },
+    {
+      "label": "Screws",
+      "value": "Zinc passivated"
+    },
+    {
+      "label": "Compliance",
+      "value": "RoHS"
+    }
+  ],
+  "intro": [
+    "Panel hinges (lift-off type) are made from extruded brass rod, polished and nickel chrome plated, with stainless steel inserts and Phillips-recessed hexagonal head screws, zinc plated.",
+    "We cover all the standard dimensions used by panel board manufacturers worldwide and can offer variations to your requirement. All products in this category are RoHS compliant."
+  ],
+  "features": [
+    "Extruded brass, polished and nickel chrome plated",
+    "Stainless steel inserts",
+    "Phillips-recessed hexagonal head zinc plated screws",
+    "All standard range dimensions covered",
+    "Custom variations on request",
+    "RoHS compliant"
+  ],
+  "hero": {
+    "src": "/img/products/panel-hinges/panel-hinges-jpg.webp",
+    "w": 870,
+    "h": 420,
+    "alt": "Panel hinges"
+  },
+  "variants": [
+    {
+      "id": "aph-440",
+      "name": "APH 440",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-440-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 440 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-440-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 440 hinge, second view"
+        }
+      ]
+    },
+    {
+      "id": "aph-500",
+      "name": "APH 500",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-500-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 500 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-500-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 500 hinge, second view"
+        }
+      ]
+    },
+    {
+      "id": "aph-520",
+      "name": "APH 520",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-520-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 520 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-520-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 520 hinge, second view"
+        }
+      ]
+    },
+    {
+      "id": "aph-650",
+      "name": "APH 650",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-650-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 650 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-650-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 650 hinge, second view"
+        }
+      ]
+    },
+    {
+      "id": "aph-820",
+      "name": "APH 820",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-820-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 820 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-820-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 820 hinge, second view"
+        }
+      ]
+    },
+    {
+      "id": "aph-880",
+      "name": "APH 880",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-880-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 880 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-880-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 880 hinge, second view"
+        }
+      ]
+    },
+    {
+      "id": "aph-900",
+      "name": "APH 900",
+      "summary": "Nickel plated brass hinge with stainless steel insert and zinc passivated screws.",
+      "images": [
+        {
+          "src": "/img/products/panel-hinges/aph-900-1-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 900 hinge"
+        },
+        {
+          "src": "/img/products/panel-hinges/aph-900-2-jpg.webp",
+          "w": 870,
+          "h": 340,
+          "alt": "APH 900 hinge, second view"
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "Lift-off panel hinges APH 440 to APH 900 in nickel plated brass with stainless steel inserts. RoHS compliant. Datasheet download.",
+    "title": "Panel Hinges / Pintle Hinges | Akcelport Industries"
+  },
+  "downloads": [
+    "panel-hinges-legacy"
+  ]
+}

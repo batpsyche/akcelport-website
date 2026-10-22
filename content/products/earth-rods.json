@@ -1,0 +1,525 @@
+{
+  "slug": "earth-rods",
+  "name": "Earth Rods",
+  "family": "earthing-lightning",
+  "order": 1,
+  "legacyUrl": "earth-rods.php",
+  "source": "existing",
+  "summary": "Copper bonded, solid copper and hot dip galvanized steel earth rods, from 9.5 to 25 mm diameter and 1.2 to 3 m long.",
+  "facts": [
+    {
+      "label": "Copper bonded",
+      "value": "BS 4360 grade 43A, up to 250 micron copper"
+    },
+    {
+      "label": "Solid copper",
+      "value": "High conductivity, external or internal thread"
+    },
+    {
+      "label": "Galvanized",
+      "value": "Hot dip to BS 729"
+    },
+    {
+      "label": "Lengths",
+      "value": "1200 to 3000 mm"
+    }
+  ],
+  "intro": [
+    "Copper bonded earth rods conform to BS 4360 grade 43A. They are made from drawn high tensile, low carbon steel with a deposition of 99.9% pure electrolytic copper. Electrolytic deposition gives a molecular bond between the two metals; the copper layer is generally up to 250 microns. Threads are formed by roll threading, which keeps strength and maintains the bonded copper along the full length of the threads.",
+    "Solid copper earth rods are drawn from high conductivity copper and suit extreme soil conditions, where salt or moisture content is high. They are highly resistant to corrosion, which gives a longer life. External threads are roll formed; internally threaded rods are also available.",
+    "Hot dip galvanized steel earth rods, made of high strength low carbon steel and galvanized to BS 729, are a cost effective option for earthing."
+  ],
+  "features": [
+    "Copper bonded rods to BS 4360 grade 43A",
+    "99.9% pure electrolytic copper, up to 250 microns",
+    "Roll threaded, with copper bonded along the threads",
+    "Solid copper rods for high salt or moisture soils",
+    "Externally and internally threaded solid copper rods",
+    "Hot dip galvanized steel rods to BS 729"
+  ],
+  "hero": {
+    "src": "/img/products/earth-rods/earth-rods-jpg.webp",
+    "w": 870,
+    "h": 340,
+    "alt": "Earth rods"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/earth-rods/copper-bonded-rod.webp",
+      "w": 113,
+      "h": 771,
+      "alt": "Copper bonded earth rod"
+    },
+    {
+      "src": "/img/products/earth-rods/solid-copper-rod.webp",
+      "w": 113,
+      "h": 734,
+      "alt": "Solid copper earth rod, pointed tip"
+    },
+    {
+      "src": "/img/products/earth-rods/accessories-jpg.webp",
+      "w": 870,
+      "h": 190,
+      "alt": "Earth rod accessories"
+    }
+  ],
+  "variants": [
+    {
+      "id": "copper-bonded",
+      "name": "Copper bonded earth rods",
+      "summary": "Steel core with bonded 99.9% copper.",
+      "images": [
+        {
+          "src": "/img/products/earth-rods/copper-bonded-earth-rods-png.webp",
+          "w": 354,
+          "h": 390,
+          "alt": "Copper bonded earth rods codes"
+        }
+      ]
+    },
+    {
+      "id": "solid-copper",
+      "name": "Solid copper earth rods",
+      "summary": "Externally threaded (ERCE) and internally threaded (ERCI) rods in high conductivity solid copper.",
+      "images": [
+        {
+          "src": "/img/products/earth-rods/solid-copper-earth-rods-png.webp",
+          "w": 357,
+          "h": 558,
+          "alt": "Solid copper earth rods codes"
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Code no.",
+        "Rod dia (mm)",
+        "Total length (mm)",
+        "Thread dia"
+      ],
+      "rows": [
+        [
+          "ERCS11200U",
+          "9.5",
+          "1200",
+          "Unthreaded"
+        ],
+        [
+          "ERCS21200",
+          "12.7",
+          "1200",
+          "9/16\""
+        ],
+        [
+          "ERCS21500",
+          "12.7",
+          "1500",
+          "9/16\""
+        ],
+        [
+          "ERCS21800",
+          "12.7",
+          "1800",
+          "9/16\""
+        ],
+        [
+          "ERCS22400",
+          "12.7",
+          "2400",
+          "9/16\""
+        ],
+        [
+          "ERCS23000",
+          "12.7",
+          "3000",
+          "9/16\""
+        ],
+        [
+          "ERCS31200",
+          "14.2",
+          "1200",
+          "5/8\""
+        ],
+        [
+          "ERCS31500",
+          "14.2",
+          "1500",
+          "5/8\""
+        ],
+        [
+          "ERCS31500",
+          "14.2",
+          "1800",
+          "5/8\""
+        ],
+        [
+          "ERCS32400",
+          "14.2",
+          "2400",
+          "5/8\""
+        ],
+        [
+          "ERCS33000",
+          "14.2",
+          "3000",
+          "5/8\""
+        ],
+        [
+          "ERCS41200",
+          "17.2",
+          "1200",
+          "3/4\""
+        ],
+        [
+          "ERCS41500",
+          "17.2",
+          "1500",
+          "3/4\""
+        ],
+        [
+          "ERCS41800",
+          "17.2",
+          "1800",
+          "3/4\""
+        ],
+        [
+          "ERCS42400",
+          "17.2",
+          "2400",
+          "3/4\""
+        ],
+        [
+          "ERCS43000",
+          "17.2",
+          "3000",
+          "3/4\""
+        ],
+        [
+          "ERCS52400U",
+          "25",
+          "2400",
+          "Unthreaded"
+        ],
+        [
+          "ERCS53000U",
+          "25",
+          "3000",
+          "Unthreaded"
+        ]
+      ],
+      "title": "Copper bonded earth rods (ERCS)",
+      "id": "ercs",
+      "note": "Item codes are shown as printed in the catalogue."
+    },
+    {
+      "columns": [
+        "Code no.",
+        "Rod dia (mm)",
+        "Total length (mm)",
+        "Thread dia"
+      ],
+      "rows": [
+        [
+          "ERCE11200U",
+          "9.5",
+          "1200",
+          "Unthreaded"
+        ],
+        [
+          "ERCE21200",
+          "12.7",
+          "1200",
+          "9/16\""
+        ],
+        [
+          "ERCE21500",
+          "12.7",
+          "1500",
+          "9/16\""
+        ],
+        [
+          "ERCE21800",
+          "12.7",
+          "1800",
+          "9/16\""
+        ],
+        [
+          "ERCE22400",
+          "12.7",
+          "2400",
+          "9/16\""
+        ],
+        [
+          "ERCE23000",
+          "12.7",
+          "3000",
+          "9/16\""
+        ],
+        [
+          "ERCE31200",
+          "14.2",
+          "1200",
+          "5/8\""
+        ],
+        [
+          "ERCE31500",
+          "14.2",
+          "1500",
+          "5/8\""
+        ],
+        [
+          "ERCE31800",
+          "14.2",
+          "1800",
+          "5/8\""
+        ],
+        [
+          "ERCE32400",
+          "14.2",
+          "2400",
+          "5/8\""
+        ],
+        [
+          "ERCE33000",
+          "14.2",
+          "3000",
+          "5/8\""
+        ],
+        [
+          "ERCE41200",
+          "17.2",
+          "1200",
+          "3/4\""
+        ],
+        [
+          "ERCE41500",
+          "17.2",
+          "1500",
+          "3/4\""
+        ],
+        [
+          "ERCE41800",
+          "17.2",
+          "1800",
+          "3/4\""
+        ],
+        [
+          "ERCE42400",
+          "17.2",
+          "2400",
+          "3/4\""
+        ],
+        [
+          "ERCE43000",
+          "17.2",
+          "3000",
+          "3/4\""
+        ]
+      ],
+      "title": "Solid copper earth rods, externally threaded (ERCE)",
+      "id": "erce"
+    },
+    {
+      "columns": [
+        "Code no.",
+        "Rod dia (mm)",
+        "Total length (mm)",
+        "Thread dia"
+      ],
+      "rows": [
+        [
+          "ERCI11200",
+          "14",
+          "1200",
+          "M10"
+        ],
+        [
+          "ERCI11500",
+          "14",
+          "1500",
+          "M10"
+        ],
+        [
+          "ERCI21200",
+          "15",
+          "1200",
+          "M10"
+        ],
+        [
+          "ERCI21500",
+          "15",
+          "1500",
+          "M10"
+        ],
+        [
+          "ERCI31200",
+          "16",
+          "1200",
+          "M10"
+        ],
+        [
+          "ERCI31500",
+          "16",
+          "1500",
+          "M10"
+        ],
+        [
+          "ERCI41200",
+          "20",
+          "1200",
+          "M12"
+        ],
+        [
+          "ERCI41500",
+          "20",
+          "1500",
+          "M12"
+        ]
+      ],
+      "title": "Solid copper earth rods, internally threaded (ERCI)",
+      "id": "erci"
+    },
+    {
+      "columns": [
+        "Code no.",
+        "Rod dia (mm)",
+        "Total length (mm)",
+        "Thread dia"
+      ],
+      "rows": [
+        [
+          "HD-12-1.2",
+          "12",
+          "1200",
+          "Unthreaded"
+        ],
+        [
+          "HD-12-1.5",
+          "12",
+          "1500",
+          "Unthreaded"
+        ],
+        [
+          "HD-12-1.8",
+          "12",
+          "1800",
+          "Unthreaded"
+        ],
+        [
+          "HD-12-2.4",
+          "12",
+          "2400",
+          "Unthreaded"
+        ],
+        [
+          "HD-12-3.0",
+          "12",
+          "3000",
+          "Unthreaded"
+        ],
+        [
+          "HD-14-1.2",
+          "14",
+          "1200",
+          "Unthreaded"
+        ],
+        [
+          "HD-14-1.5",
+          "14",
+          "1500",
+          "Unthreaded"
+        ],
+        [
+          "HD-14-1.8",
+          "14",
+          "1800",
+          "Unthreaded"
+        ],
+        [
+          "HD-14-2.4",
+          "14",
+          "2400",
+          "Unthreaded"
+        ],
+        [
+          "HD-14-3.0",
+          "14",
+          "3000",
+          "Unthreaded"
+        ],
+        [
+          "HD-16-1.2",
+          "16",
+          "1200",
+          "Unthreaded"
+        ],
+        [
+          "HD-16-1.5",
+          "16",
+          "1500",
+          "Unthreaded"
+        ],
+        [
+          "HD-16-1.8",
+          "16",
+          "1800",
+          "Unthreaded"
+        ],
+        [
+          "HD-16-2.4",
+          "16",
+          "2400",
+          "Unthreaded"
+        ],
+        [
+          "HD-16-3.0",
+          "16",
+          "3000",
+          "Unthreaded"
+        ],
+        [
+          "HD-20-1.2",
+          "20",
+          "1200",
+          "Unthreaded"
+        ],
+        [
+          "HD-20-1.5",
+          "20",
+          "1500",
+          "Unthreaded"
+        ],
+        [
+          "HD-20-1.8",
+          "20",
+          "1800",
+          "Unthreaded"
+        ],
+        [
+          "HD-20-2.4",
+          "20",
+          "2400",
+          "Unthreaded"
+        ],
+        [
+          "HD-20-3.0",
+          "20",
+          "3000",
+          "Unthreaded"
+        ]
+      ],
+      "title": "Hot dip galvanized steel earth rods (HD)",
+      "id": "hdg"
+    }
+  ],
+  "seo": {
+    "description": "Copper bonded, solid copper and hot dip galvanized earth rods, 9.5 to 25 mm diameter, 1.2 to 3 m. Item code tables and datasheet.",
+    "title": "Earth Rods | Akcelport Industries"
+  },
+  "downloads": [
+    "earthing-lightning-catalogue",
+    "earth-rods-legacy"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "insulators-supports",
+  "name": "Insulators and Busbar Supports",
+  "shortName": "Insulators",
+  "order": 2,
+  "icon": "insulator",
+  "summary": "Moulded standoff insulators, busbar supports and epoxy insulators that hold live conductors in place.",
+  "image": {
+    "src": "/img/products/busbar-supports-standoff-insulators/busbar-supports-standoff-insulators-jpg.webp",
+    "w": 870,
+    "h": 340,
+    "alt": "Standoff insulators and busbar supports"
+  },
+  "products": [
+    "busbar-supports-standoff-insulators",
+    "epoxy-insulators"
+  ]
+}

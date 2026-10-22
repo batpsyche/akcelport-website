@@ -1,0 +1,236 @@
+{
+  "title": "Electrical components for control panels and switchgear",
+  "hero": {
+    "scrollHeightVh": 600,
+    "cue": "Scroll",
+    "bands": [
+      {
+        "id": "open",
+        "range": [
+          0,
+          0.24
+        ],
+        "fx": "rise",
+        "kicker": "Akcelport Industries, Mumbai",
+        "headline": "Quality, built in.",
+        "text": "Electrical components for the panels that keep power moving."
+      },
+      {
+        "id": "copper",
+        "range": [
+          0.26,
+          0.5
+        ],
+        "fx": "snap",
+        "kicker": "Busbars, lugs, earthing",
+        "headline": "Copper that carries the load.",
+        "text": "Busbars, flexibars, lugs and earth rods, cut and finished in our own plant."
+      },
+      {
+        "id": "hold",
+        "range": [
+          0.52,
+          0.76
+        ],
+        "fx": "punch",
+        "kicker": "Insulators and supports",
+        "headline": "Held in place, kept apart.",
+        "text": "Moulded insulators and supports hold every conductor exactly where it belongs."
+      },
+      {
+        "id": "settle",
+        "range": [
+          0.78,
+          1.0
+        ],
+        "fx": "rise",
+        "kicker": "Made in Mumbai",
+        "headline": "Trusted in {{markets}} export markets.",
+        "text": "Browse the full range, download a datasheet, or tell us what you need.",
+        "cta": true
+      }
+    ],
+    "static": {
+      "kicker": "Akcelport Industries, Mumbai",
+      "headline": "Quality, built in.",
+      "text": "Electrical components for control panels and switchgear, made in Mumbai and supplied to {{markets}} export markets."
+    },
+    "primaryCta": {
+      "label": "Explore the range",
+      "href": "/products/"
+    },
+    "secondaryCta": {
+      "label": "Request a quote",
+      "href": "/contact/"
+    }
+  },
+  "families": {
+    "kicker": "The range",
+    "title": "Six product families, {{products}} datasheets",
+    "lede": "Everything inside a panel, from the busbar to the screw that holds the rail. Every range has a datasheet you can download."
+  },
+  "process": {
+    "kicker": "Built in, step by step",
+    "title": "Every product starts in our own plant",
+    "lede": "Casting, extrusion, pressing, moulding and machining are done in house, so quality is part of the process, not an inspection at the end.",
+    "steps": [
+      {
+        "title": "Material",
+        "text": "Brass, copper, steel, SS304 and SS316, aluminium, polyamide, PVC, DMC, SMC and epoxy."
+      },
+      {
+        "title": "Form",
+        "text": "Power presses, rolling and shearing, compression and injection moulding, PVC extrusion."
+      },
+      {
+        "title": "Machine",
+        "text": "CNC milling, drilling and turning to drawing, plus conventional machines."
+      },
+      {
+        "title": "Finish",
+        "text": "Tin electroplating, nickel chrome and zinc plating, natural or coloured finishes."
+      },
+      {
+        "title": "Check",
+        "text": "A documented quality policy under ISO 9001 and ISO 45001, RoHS compliant ranges."
+      },
+      {
+        "title": "Ship",
+        "text": "Packed and dispatched to export markets on five continents."
+      }
+    ],
+    "circuit": {
+      "title": "Close the circuit",
+      "hint": "Press and hold the button",
+      "done": "Circuit closed. Three things we promise on every order:",
+      "button": "Hold to close",
+      "items": [
+        "Quality product",
+        "Competitive pricing",
+        "Timely delivery"
+      ]
+    }
+  },
+  "featured": {
+    "kicker": "Popular ranges",
+    "title": "Start with what panel builders ask for",
+    "slugs": [
+      "copper-busbars",
+      "flexibars",
+      "busbar-supports-standoff-insulators",
+      "cable-lugs",
+      "test-terminal-blocks",
+      "earth-rods",
+      "din-mounting-channels",
+      "cable-ducts"
+    ]
+  },
+  "industries": {
+    "kicker": "Where it is used",
+    "title": "Industries we supply",
+    "items": [
+      {
+        "id": "panels",
+        "name": "Switchgear and control panels",
+        "headline": "Everything inside the enclosure",
+        "text": "Busbars, flexibars, insulators, DIN rails, ducts, hinges and handles from one supplier, with datasheets for each.",
+        "areas": [
+          "Switchboard and panel",
+          "Motor control centre",
+          "UPS systems",
+          "Motor starters and controllers",
+          "Control AC/DC driven units"
+        ],
+        "products": [
+          "copper-busbars",
+          "flexibars",
+          "busbar-supports-standoff-insulators",
+          "din-mounting-channels"
+        ]
+      },
+      {
+        "id": "power",
+        "name": "Power generation and storage",
+        "headline": "High current, small footprint",
+        "text": "Flexible busbars and copper connections for generators, wind power units, battery storage, transformers and power converters.",
+        "areas": [
+          "DG sets",
+          "Wind power generation units",
+          "Battery storage and supply",
+          "Transformers",
+          "Power converters"
+        ],
+        "products": [
+          "flexibars",
+          "cable-lugs",
+          "pvc-heat-shrink-tubes"
+        ]
+      },
+      {
+        "id": "metering",
+        "name": "Metering and protection",
+        "headline": "Test without breaking the circuit",
+        "text": "Test terminal blocks let engineers test meters, relays and instrument transformers on site without disconnecting the load.",
+        "areas": [
+          "Ammeters and kWh meters",
+          "Maximum demand indicators",
+          "Relays",
+          "Instrument transformers"
+        ],
+        "products": [
+          "test-terminal-blocks"
+        ]
+      },
+      {
+        "id": "rail",
+        "name": "Rail and transport",
+        "headline": "Compact, flexible connections",
+        "text": "Flexibars and wire protection for railway coach and power supply systems, and tubing for automobile harness.",
+        "areas": [
+          "Railway coach power supply",
+          "Automobile wiring harness",
+          "Abrasion protection of cables and tubing"
+        ],
+        "products": [
+          "flexibars",
+          "pvc-ferruling-tubes",
+          "spiral-wrapping-bands"
+        ]
+      },
+      {
+        "id": "infrastructure",
+        "name": "Buildings and infrastructure",
+        "headline": "Earthing and lightning protection",
+        "text": "Earth rods, clamps and air terminals complete an earthing or lightning system, with cable glands and ducts for the wiring.",
+        "areas": [
+          "Earthing systems",
+          "Lightning protection",
+          "Cable entry and glands",
+          "Wire management"
+        ],
+        "products": [
+          "earth-rods",
+          "earthing-lightning-accessories",
+          "cable-glands",
+          "cable-ducts"
+        ]
+      }
+    ]
+  },
+  "global": {
+    "kicker": "Global presence",
+    "title": "Exporting for more than 35 years"
+  },
+  "downloads": {
+    "kicker": "Company brochure",
+    "title": "Everything in one PDF",
+    "text": "Our manufacturing expertise, materials, quality marks, export markets and the full product list, in a five page brochure.",
+    "docId": "company-introduction"
+  },
+  "cta": {
+    "title": "Tell us what you need",
+    "text": "Send a drawing, a code from a datasheet, or just a description. We reply by email.",
+    "label": "Request a quote",
+    "href": "/contact/"
+  }
+}

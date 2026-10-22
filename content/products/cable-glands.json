@@ -1,0 +1,262 @@
+{
+  "slug": "cable-glands",
+  "name": "Cable Glands",
+  "family": "connection-terminals",
+  "order": 3,
+  "legacyUrl": "cable-glands.php",
+  "source": "existing",
+  "summary": "Brass cable glands in five types, from IP 54 indoor to IP 66 weather proof and marine, in brass, nickel or chrome finish.",
+  "facts": [
+    {
+      "label": "Material",
+      "value": "Brass"
+    },
+    {
+      "label": "Range",
+      "value": "10 to 75 mm"
+    },
+    {
+      "label": "Seal rating",
+      "value": "IP 54 to IP 66"
+    },
+    {
+      "label": "Finish",
+      "value": "Brass, nickel, chrome"
+    }
+  ],
+  "intro": [
+    "Brass cable glands for armoured and unarmoured cables, in five types: BW, CW, E1W, A1/A2 and Marine. Pick the type by cable construction and the environment."
+  ],
+  "features": [
+    "Brass construction",
+    "Cable ranges from 10 mm to 75 mm",
+    "Seal ratings IP 54 and IP 66",
+    "Brass, nickel or chrome finish, or as specified"
+  ],
+  "hero": {
+    "src": "/img/products/cable-glands/e1w-type-jpg.webp",
+    "w": 218,
+    "h": 340,
+    "alt": "E1W type brass cable gland"
+  },
+  "variants": [
+    {
+      "id": "bw",
+      "name": "BW type",
+      "summary": "Single armour clamping. No loose parts and easy to install. Most suitable for SWA, plastic or rubber sheathed cables. Used in dry indoor conditions.",
+      "images": [
+        {
+          "src": "/img/products/cable-glands/bw-type-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "BW type cable gland"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass"
+        },
+        {
+          "label": "Range",
+          "value": "20 mm to 75 mm"
+        },
+        {
+          "label": "Seal rating",
+          "value": "IP 54"
+        },
+        {
+          "label": "Finish",
+          "value": "Brass, nickel, chrome or as specified"
+        }
+      ]
+    },
+    {
+      "id": "cw",
+      "name": "CW type",
+      "summary": "Provides cable retention and a seal onto the cable outer sheath. Outdoor or indoor use. For non-armoured elastomer and plastic insulated cables; may be used on cables with inner and outer sheaths.",
+      "images": [
+        {
+          "src": "/img/products/cable-glands/cw-type-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "CW type cable gland"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass"
+        },
+        {
+          "label": "Range",
+          "value": "20 mm to 75 mm"
+        },
+        {
+          "label": "Seal rating",
+          "value": "IP 66"
+        },
+        {
+          "label": "Finish",
+          "value": "Brass, nickel, chrome or as specified"
+        }
+      ]
+    },
+    {
+      "id": "e1w",
+      "name": "E1W type",
+      "summary": "Separate armour lock rings and a seal on the cable inner sheath. Suitable for SWA or rubber sheathed cables. Outer seal grips the bedding layer for use in most climatic conditions. Weather proof and water proof.",
+      "images": [
+        {
+          "src": "/img/products/cable-glands/e1w-type-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "E1W type cable gland"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass"
+        },
+        {
+          "label": "Range",
+          "value": "20 mm to 75 mm"
+        },
+        {
+          "label": "Seal rating",
+          "value": "Inner and outer seal IP 66"
+        },
+        {
+          "label": "Finish",
+          "value": "Brass, nickel, chrome or as specified"
+        }
+      ]
+    },
+    {
+      "id": "a1-a2",
+      "name": "A1/A2 type",
+      "summary": "Provides a cable retention seal onto the cable outer sheath. Suitable for unarmoured or rubber sheathed cables, indoors and outdoors.",
+      "images": [
+        {
+          "src": "/img/products/cable-glands/a1-a2-type-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "A1/A2 type cable gland"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass"
+        },
+        {
+          "label": "Range",
+          "value": "16 mm to 75 mm"
+        },
+        {
+          "label": "Seal rating",
+          "value": "IP 66"
+        },
+        {
+          "label": "Finish",
+          "value": "Brass, nickel, chrome or as specified"
+        }
+      ]
+    },
+    {
+      "id": "marine",
+      "name": "Marine type",
+      "summary": "Used for various marine applications.",
+      "images": [
+        {
+          "src": "/img/products/cable-glands/marine-type-jpg.webp",
+          "w": 218,
+          "h": 340,
+          "alt": "Marine type cable gland"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass"
+        },
+        {
+          "label": "Range",
+          "value": "10 mm to 70 mm"
+        },
+        {
+          "label": "Seal rating",
+          "value": "-"
+        },
+        {
+          "label": "Finish",
+          "value": "Brass, nickel, chrome or as specified"
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Type",
+        "Material",
+        "Range",
+        "Application",
+        "Seal rating",
+        "Finish"
+      ],
+      "rows": [
+        [
+          "BW",
+          "Brass",
+          "20 mm to 75 mm",
+          "Single armour clamping. No loose parts and easy to install. Most suitable for SWA, plastic or rubber sheathed cables. Used in dry indoor conditions.",
+          "IP 54",
+          "Brass, nickel, chrome or as specified"
+        ],
+        [
+          "CW",
+          "Brass",
+          "20 mm to 75 mm",
+          "Provides cable retention and a seal onto the cable outer sheath. Outdoor or indoor use. For non-armoured elastomer and plastic insulated cables; may be used on cables with inner and outer sheaths.",
+          "IP 66",
+          "Brass, nickel, chrome or as specified"
+        ],
+        [
+          "E1W",
+          "Brass",
+          "20 mm to 75 mm",
+          "Separate armour lock rings and a seal on the cable inner sheath. Suitable for SWA or rubber sheathed cables. Outer seal grips the bedding layer for use in most climatic conditions. Weather proof and water proof.",
+          "Inner and outer seal IP 66",
+          "Brass, nickel, chrome or as specified"
+        ],
+        [
+          "A1/A2",
+          "Brass",
+          "16 mm to 75 mm",
+          "Provides a cable retention seal onto the cable outer sheath. Suitable for unarmoured or rubber sheathed cables, indoors and outdoors.",
+          "IP 66",
+          "Brass, nickel, chrome or as specified"
+        ],
+        [
+          "Marine",
+          "Brass",
+          "10 mm to 70 mm",
+          "Used for various marine applications.",
+          "-",
+          "Brass, nickel, chrome or as specified"
+        ]
+      ],
+      "title": "Cable gland types at a glance",
+      "id": "types"
+    }
+  ],
+  "seo": {
+    "description": "Brass cable glands: BW, CW, E1W, A1/A2 and marine types, 10 to 75 mm, IP 54 to IP 66. Datasheet download.",
+    "title": "Cable Glands | Akcelport Industries"
+  },
+  "downloads": [
+    "cable-glands-legacy"
+  ]
+}

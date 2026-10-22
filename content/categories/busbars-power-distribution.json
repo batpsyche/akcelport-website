@@ -1,0 +1,20 @@
+{
+  "slug": "busbars-power-distribution",
+  "name": "Busbars and Power Distribution",
+  "shortName": "Busbars",
+  "order": 1,
+  "icon": "busbar",
+  "summary": "Copper busbars, flexibars, grounding bars and neutral bars that carry and distribute current inside panels and switchgear.",
+  "image": {
+    "src": "/img/products/copper-busbars/copper-busbars-jpg.webp",
+    "w": 870,
+    "h": 420,
+    "alt": "Copper busbars with punched holes"
+  },
+  "products": [
+    "copper-busbars",
+    "flexibars",
+    "copper-grounding-bars",
+    "neutral-earth-bars"
+  ]
+}

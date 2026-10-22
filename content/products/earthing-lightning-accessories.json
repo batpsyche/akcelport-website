@@ -1,0 +1,1584 @@
+{
+  "slug": "earthing-lightning-accessories",
+  "name": "Earthing and Lightning Accessories",
+  "family": "earthing-lightning",
+  "order": 2,
+  "legacyUrl": null,
+  "source": "new",
+  "summary": "Driving accessories, couplers, air terminals, saddles, rod brackets, tape clips and earthing clamps in brass, gunmetal and copper.",
+  "facts": [
+    {
+      "label": "Materials",
+      "value": "Brass, gunmetal, copper, high tensile steel"
+    },
+    {
+      "label": "Rod sizes",
+      "value": "9.5 to 25 mm"
+    },
+    {
+      "label": "Tape sizes",
+      "value": "20 x 3 to 50 x 6 mm"
+    },
+    {
+      "label": "Catalogue",
+      "value": "Earthing and lightning, pages 48 to 52"
+    }
+  ],
+  "intro": [
+    "Everything that goes with an earth rod: driving bolts, spikes and heads that protect the rod, couplers to join rods, air terminals and rods for lightning protection, saddles and brackets, tape clips, and a full range of clamps for rod to cable, rod to tape, cable to cable and tower earthing.",
+    "Item codes, sizes and materials are listed below as printed in the catalogue; other sizes are available on request."
+  ],
+  "features": [
+    "Driving bolt, spike and head to protect rods and threads",
+    "Threaded couplers in gunmetal, brass and aluminium bronze",
+    "Air terminals (multiple point), air terminal base and taper pointed air rods",
+    "Saddles, rod brackets, tape clips and one hole clips",
+    "Clamps for rod to cable, rod to tape, cable to cable and rebar",
+    "Tower earth clamps, single and double plate"
+  ],
+  "hero": {
+    "src": "/img/products/earthing-lightning-accessories/banner-1.webp",
+    "w": 1367,
+    "h": 255,
+    "alt": "Assorted brass and copper earthing and lightning components"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/earthing-lightning-accessories/banner-2.webp",
+      "w": 1367,
+      "h": 255,
+      "alt": "Earthing and lightning components"
+    }
+  ],
+  "variants": [
+    {
+      "id": "driving-bolt",
+      "name": "Driving bolt",
+      "summary": "The driving head screws into the coupling to allow deep driving of the earth rods and protect the threads. Material: high tensile steel.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "High tensile steel"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia (mm)",
+          "Rod diameter"
+        ],
+        "rows": [
+          [
+            "DB16",
+            "5/8\" or 16 mm",
+            "14.2 mm"
+          ],
+          [
+            "DB20",
+            "3/4\" or 20 mm",
+            "17.2 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/driving-bolt.webp",
+          "w": 255,
+          "h": 341,
+          "alt": "Driving bolt"
+        }
+      ]
+    },
+    {
+      "id": "couplers",
+      "name": "Couplers",
+      "summary": "Used for joining copper bonded threaded earth rods together. Made from a high copper content alloy for excellent corrosion resistance, protect threads during installation, keep continual contact between rods, ease deep driving, and are available in hexagonal and round designs.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Gunmetal, brass, aluminium bronze"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia",
+          "Length (mm)"
+        ],
+        "rows": [
+          [
+            "CP14",
+            "1/2\"",
+            "70"
+          ],
+          [
+            "CP16",
+            "5/8\"",
+            "70"
+          ],
+          [
+            "CP20",
+            "1/4\"",
+            "80"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/coupler-short.webp",
+          "w": 122,
+          "h": 323,
+          "alt": "Couplers"
+        }
+      ]
+    },
+    {
+      "id": "driving-spike",
+      "name": "Driving spike",
+      "summary": "The steel spike enables the rod to be driven easily and stops the copper rod getting damaged.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "High tensile steel and stainless steel"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia (mm)",
+          "Rod diameter"
+        ],
+        "rows": [
+          [
+            "DS08",
+            "M8",
+            "9/16\""
+          ],
+          [
+            "DS10",
+            "M10",
+            "5/8\""
+          ],
+          [
+            "DS12",
+            "M12",
+            "3/4\""
+          ]
+        ]
+      }
+    },
+    {
+      "id": "driving-head",
+      "name": "Driving head",
+      "summary": "The driving head protects the thread and the top of the rod from damage when driving.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "High tensile steel"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia (mm)",
+          "Rod diameter"
+        ],
+        "rows": [
+          [
+            "DH08",
+            "M8",
+            "9/16\""
+          ],
+          [
+            "DH10",
+            "M10",
+            "5/8\""
+          ],
+          [
+            "DH12",
+            "M12",
+            "3/4\""
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/driving-head.webp",
+          "w": 209,
+          "h": 409,
+          "alt": "Driving head"
+        }
+      ]
+    },
+    {
+      "id": "air-terminal-multi",
+      "name": "Air terminal multiple point",
+      "summary": "Material: Copper, brass base with copper spikes, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Copper, brass base with copper spikes, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia"
+        ],
+        "rows": [
+          [
+            "ATMP16",
+            "5/8\" or 16 mm"
+          ],
+          [
+            "ATMP20",
+            "3/4\" or 20 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/air-terminal-multi-point.webp",
+          "w": 284,
+          "h": 275,
+          "alt": "Air terminal multiple point"
+        }
+      ]
+    },
+    {
+      "id": "air-terminal-base",
+      "name": "Air terminal base",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia",
+          "Max conductor tape"
+        ],
+        "rows": [
+          [
+            "ATB16",
+            "5/8\" or 16 mm",
+            "30 x 6 mm"
+          ],
+          [
+            "ATB20",
+            "3/4\" or 20 mm",
+            "30 x 6 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/air-terminal-base.webp",
+          "w": 222,
+          "h": 137,
+          "alt": "Air terminal base"
+        }
+      ]
+    },
+    {
+      "id": "taper-air-rods",
+      "name": "Taper pointed air rods",
+      "summary": "Material: Copper, copper alloy",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Copper, copper alloy"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Thread dia",
+          "Length (mm)"
+        ],
+        "rows": [
+          [
+            "ATR16-500",
+            "5/8\" or 16 mm",
+            "500"
+          ],
+          [
+            "ATR16-1000",
+            "5/8\" or 16 mm",
+            "1000"
+          ],
+          [
+            "ATR16-1500",
+            "5/8\" or 16 mm",
+            "1500"
+          ],
+          [
+            "ATR16-2000",
+            "5/8\" or 16 mm",
+            "2000"
+          ],
+          [
+            "ATR20-500",
+            "3/4\" or 20 mm",
+            "500"
+          ],
+          [
+            "ATR20-1000",
+            "3/4\" or 20 mm",
+            "1000"
+          ],
+          [
+            "ATR20-1500",
+            "3/4\" or 20 mm",
+            "1500"
+          ],
+          [
+            "ATR20-2000",
+            "3/4\" or 20 mm",
+            "2000"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "flat-saddle",
+      "name": "Flat saddle (type C)",
+      "summary": "Material: Gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size",
+          "Rod dia",
+          "Thread dia"
+        ],
+        "rows": [
+          [
+            "FSC5070",
+            "50-70 mm",
+            "15 mm",
+            "16 mm"
+          ],
+          [
+            "FSC95",
+            "95 mm",
+            "15 mm",
+            "16 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/flat-saddle.webp",
+          "w": 188,
+          "h": 182,
+          "alt": "Flat saddle (type C)"
+        }
+      ]
+    },
+    {
+      "id": "rigid-saddle",
+      "name": "Rigid saddle",
+      "summary": "Material: Gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Rod dia",
+          "Thread dia",
+          "Max tape size"
+        ],
+        "rows": [
+          [
+            "RS16",
+            "15 mm",
+            "M16",
+            "30 x 6 mm"
+          ],
+          [
+            "RS58",
+            "14.2 mm",
+            "5/8\"",
+            "30 x 6 mm"
+          ],
+          [
+            "RS34",
+            "17.2 mm",
+            "3/4\"",
+            "30 x 6 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rigid-saddle.webp",
+          "w": 195,
+          "h": 160,
+          "alt": "Rigid saddle"
+        }
+      ]
+    },
+    {
+      "id": "rod-to-tape",
+      "name": "Air rod to tape and cable coupling",
+      "summary": "Rod to tape coupling (RTC) and rod to cable coupling (RCC).",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Gunmetal, brass"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Rod dia",
+          "Thread dia",
+          "Conductor / tape"
+        ],
+        "rows": [
+          [
+            "RTC1625",
+            "15 mm",
+            "M16",
+            "25 x 3 mm"
+          ],
+          [
+            "RTC5825",
+            "14.2 mm",
+            "5/8\"",
+            "25 x 3 mm"
+          ],
+          [
+            "RTC3425",
+            "17.2 mm",
+            "3/4\"",
+            "25 x 3 mm"
+          ],
+          [
+            "RCC1670",
+            "15 mm",
+            "M16",
+            "50-70 mm2"
+          ],
+          [
+            "RCC1695",
+            "15 mm",
+            "M16",
+            "95 mm2"
+          ],
+          [
+            "RCC5870",
+            "14.2 mm",
+            "5/8\"",
+            "50-70 mm2"
+          ],
+          [
+            "RCC5895",
+            "14.2 mm",
+            "5/8\"",
+            "95 mm2"
+          ],
+          [
+            "RCC3470",
+            "17.2 mm",
+            "3/4\"",
+            "50-70 mm2"
+          ],
+          [
+            "RCC3495",
+            "17.2 mm",
+            "3/4\"",
+            "95 mm2"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "rod-brackets",
+      "name": "Rod brackets, side mounting / open type",
+      "summary": "Material: Gunmetal, brass",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Gunmetal, brass"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Rod dia (mm)"
+        ],
+        "rows": [
+          [
+            "RB16",
+            "16"
+          ],
+          [
+            "RB20",
+            "20"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-brackets.webp",
+          "w": 351,
+          "h": 159,
+          "alt": "Rod brackets, side mounting / open type"
+        }
+      ]
+    },
+    {
+      "id": "dc-tape-clip",
+      "name": "DC tape clip",
+      "summary": "Body made of gunmetal; screws are naval brass. Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Gunmetal body, naval brass screws"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size"
+        ],
+        "rows": [
+          [
+            "DCTC203",
+            "20 x 3 mm"
+          ],
+          [
+            "DCTC253",
+            "25 x 3 mm"
+          ],
+          [
+            "DCTC256",
+            "25 x 6 mm"
+          ],
+          [
+            "DCTC303",
+            "30 x 3 mm"
+          ],
+          [
+            "DCTC306",
+            "30 x 6 mm"
+          ],
+          [
+            "DCTC313",
+            "31 x 3 mm"
+          ],
+          [
+            "DCTC316",
+            "31 x 6 mm"
+          ],
+          [
+            "DCTC383",
+            "38 x 3 mm"
+          ],
+          [
+            "DCTC386",
+            "38 x 6 mm"
+          ],
+          [
+            "DCTC406",
+            "40 x 6 mm"
+          ],
+          [
+            "DCTC503",
+            "50 x 3 mm"
+          ],
+          [
+            "DCTC506",
+            "50 x 6 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/dc-tape-clip.webp",
+          "w": 683,
+          "h": 465,
+          "alt": "DC tape clip"
+        }
+      ]
+    },
+    {
+      "id": "bare-tape-clip",
+      "name": "Bare tape clip, with or without base plate",
+      "summary": "Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Copper, brass"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size"
+        ],
+        "rows": [
+          [
+            "TC203",
+            "20 x 3 mm"
+          ],
+          [
+            "TC253",
+            "25 x 3 mm"
+          ],
+          [
+            "TC383",
+            "38 x 3 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/tape-clip-a.webp",
+          "w": 206,
+          "h": 110,
+          "alt": "Bare tape clip, with or without base plate"
+        }
+      ]
+    },
+    {
+      "id": "one-hole-clip",
+      "name": "One hole clip",
+      "summary": "Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Copper, brass"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size (mm2)"
+        ],
+        "rows": [
+          [
+            "HC25",
+            "25-70"
+          ],
+          [
+            "HC95",
+            "95-120"
+          ],
+          [
+            "HC150",
+            "150-185"
+          ],
+          [
+            "HC240",
+            "240-300"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/one-hole-clip.webp",
+          "w": 323,
+          "h": 180,
+          "alt": "One hole clip"
+        }
+      ]
+    },
+    {
+      "id": "square-tape-clamp",
+      "name": "Square tape clamps",
+      "summary": "Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size"
+        ],
+        "rows": [
+          [
+            "STC253",
+            "25 x 3 mm"
+          ],
+          [
+            "STC256",
+            "25 x 6 mm"
+          ],
+          [
+            "STC313",
+            "31 x 3 mm"
+          ],
+          [
+            "STC386",
+            "38 x 6 mm"
+          ],
+          [
+            "STC503",
+            "50 x 3 mm"
+          ],
+          [
+            "STC506",
+            "50 x 6 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/square-tape-clamp.webp",
+          "w": 196,
+          "h": 161,
+          "alt": "Square tape clamps"
+        }
+      ]
+    },
+    {
+      "id": "plate-test-clamp",
+      "name": "Plate test clamp",
+      "summary": "Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size"
+        ],
+        "rows": [
+          [
+            "PTC253",
+            "25 x 3 mm"
+          ],
+          [
+            "PTC506",
+            "50 x 6 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/plate-test-clamp.webp",
+          "w": 208,
+          "h": 197,
+          "alt": "Plate test clamp"
+        }
+      ]
+    },
+    {
+      "id": "oblong-test-clamp",
+      "name": "Oblong test clamp",
+      "summary": "Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size"
+        ],
+        "rows": [
+          [
+            "OTC268",
+            "26 x 8 mm"
+          ],
+          [
+            "OTC5110",
+            "51 x 10 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/oblong-test-clamp.webp",
+          "w": 269,
+          "h": 281,
+          "alt": "Oblong test clamp"
+        }
+      ]
+    },
+    {
+      "id": "tower-single",
+      "name": "Tower earth clamp, single plate",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Channel thickness",
+          "Conductor size",
+          "Bolt size"
+        ],
+        "rows": [
+          [
+            "TECS16",
+            "10 mm",
+            "16-70 sq mm",
+            "M10"
+          ],
+          [
+            "TECS70",
+            "10 mm",
+            "70-120 sq mm",
+            "M12"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/tower-clamp-single.webp",
+          "w": 320,
+          "h": 273,
+          "alt": "Tower earth clamp, single plate"
+        }
+      ]
+    },
+    {
+      "id": "tower-double",
+      "name": "Tower earth clamp, double plate",
+      "summary": "Other sizes available on request.",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Item code",
+          "Conductor size"
+        ],
+        "rows": [
+          [
+            "TEC16",
+            "16-70 sq mm"
+          ],
+          [
+            "TEC70",
+            "70-120 sq mm"
+          ],
+          [
+            "TEC120",
+            "120-185 sq mm"
+          ],
+          [
+            "TEC185",
+            "185-240 sq mm"
+          ],
+          [
+            "TEC240",
+            "240-300 sq mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/tower-clamp-double.webp",
+          "w": 214,
+          "h": 242,
+          "alt": "Tower earth clamp, double plate"
+        }
+      ]
+    },
+    {
+      "id": "u-bolt-e",
+      "name": "U bolt rod clamps, type E",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "UE9.5",
+            "9.5",
+            "6-35"
+          ],
+          [
+            "UE14",
+            "14.0",
+            "16-70"
+          ],
+          [
+            "UE16",
+            "16.0",
+            "16-95"
+          ],
+          [
+            "UE20",
+            "20.0",
+            "70-120"
+          ],
+          [
+            "UE25",
+            "25.0",
+            "70-185"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/u-bolt-clamp-e.webp",
+          "w": 224,
+          "h": 201,
+          "alt": "U bolt rod clamps, type E"
+        }
+      ]
+    },
+    {
+      "id": "lug-clamp-b",
+      "name": "Rod to cable lug clamps B",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod size"
+        ],
+        "rows": [
+          [
+            "UB-9.5",
+            "9.5"
+          ],
+          [
+            "UB14",
+            "14.0"
+          ],
+          [
+            "UB16",
+            "16.0"
+          ],
+          [
+            "UB20",
+            "20.0"
+          ],
+          [
+            "UB25",
+            "25.0"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-lug-clamp-b.webp",
+          "w": 275,
+          "h": 264,
+          "alt": "Rod to cable lug clamps B"
+        }
+      ]
+    },
+    {
+      "id": "guv",
+      "name": "Rod to cable clamps, type GUV",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "GUV9.5",
+            "9.5",
+            "6-35"
+          ],
+          [
+            "GUV14",
+            "14.0",
+            "16-70"
+          ],
+          [
+            "GUV16",
+            "16.0",
+            "16-95"
+          ],
+          [
+            "GUV20",
+            "20.0",
+            "70-120"
+          ],
+          [
+            "GUV25",
+            "25.0",
+            "70-185"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-clamp-guv.webp",
+          "w": 235,
+          "h": 232,
+          "alt": "Rod to cable clamps, type GUV"
+        }
+      ]
+    },
+    {
+      "id": "pub",
+      "name": "U bolt for rigid pipe and cable, type PUB",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "PUB9.5",
+            "9.5",
+            "6-35"
+          ],
+          [
+            "PUB14",
+            "14.0",
+            "16-70"
+          ],
+          [
+            "PUB16",
+            "16.0",
+            "16-95"
+          ],
+          [
+            "PUB20",
+            "20.0",
+            "70-120"
+          ],
+          [
+            "PUB25",
+            "25.0",
+            "70-185"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/u-bolt-pub.webp",
+          "w": 244,
+          "h": 205,
+          "alt": "U bolt for rigid pipe and cable, type PUB"
+        }
+      ]
+    },
+    {
+      "id": "kuv",
+      "name": "Rod to cable clamps, type KUV",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "KUV9.5",
+            "9.5",
+            "6-35"
+          ],
+          [
+            "KUV14",
+            "14.0",
+            "16-70"
+          ],
+          [
+            "KUV16",
+            "16.0",
+            "16-95"
+          ],
+          [
+            "KUV20",
+            "20.0",
+            "70-120"
+          ],
+          [
+            "KUV25",
+            "25.0",
+            "70-185"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-clamp-kuv.webp",
+          "w": 211,
+          "h": 212,
+          "alt": "Rod to cable clamps, type KUV"
+        }
+      ]
+    },
+    {
+      "id": "sce",
+      "name": "Rod to cable clamps, type SCE",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "SCE9.5",
+            "9.5",
+            "6-35"
+          ],
+          [
+            "SCE14",
+            "14.0",
+            "16-70"
+          ],
+          [
+            "SCE16",
+            "16.0",
+            "16-95"
+          ],
+          [
+            "SCE20",
+            "20.0",
+            "70-120"
+          ],
+          [
+            "SCE25",
+            "25.0",
+            "70-185"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-clamp-sce.webp",
+          "w": 239,
+          "h": 222,
+          "alt": "Rod to cable clamps, type SCE"
+        }
+      ]
+    },
+    {
+      "id": "cpa",
+      "name": "Rod to cable clamps, type A",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Screws (mm)"
+        ],
+        "rows": [
+          [
+            "CPA9.5",
+            "9.5",
+            "M10x25"
+          ],
+          [
+            "CPA14",
+            "14.0",
+            "M10x25"
+          ],
+          [
+            "CPA16",
+            "16.0",
+            "M10x25"
+          ],
+          [
+            "CPA20",
+            "20.0",
+            "M10x50"
+          ],
+          [
+            "CPA25",
+            "25.0",
+            "M10x50"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-clamp-a.webp",
+          "w": 220,
+          "h": 217,
+          "alt": "Rod to cable clamps, type A"
+        }
+      ]
+    },
+    {
+      "id": "cpo",
+      "name": "Rod to cable clamps, type O",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "CPO14.2",
+            "14.2",
+            "06-16"
+          ],
+          [
+            "CPO14.2",
+            "14.2",
+            "16-70"
+          ],
+          [
+            "CPO17.2",
+            "17.2",
+            "16-95"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-clamp-o.webp",
+          "w": 190,
+          "h": 192,
+          "alt": "Rod to cable clamps, type O"
+        }
+      ]
+    },
+    {
+      "id": "cpg",
+      "name": "Rod to cable clamps, type G",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code",
+          "Rod dia (mm)",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "CPG9.5",
+            "14.2",
+            "06-16"
+          ],
+          [
+            "CPG14",
+            "14.2",
+            "16-70"
+          ],
+          [
+            "CPG16",
+            "14.2",
+            "16-95"
+          ],
+          [
+            "CPG20",
+            "17.2",
+            "16-95"
+          ],
+          [
+            "CPG25",
+            "17.2",
+            "70-185"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rod-cable-clamp-g.webp",
+          "w": 198,
+          "h": 187,
+          "alt": "Rod to cable clamps, type G"
+        }
+      ]
+    },
+    {
+      "id": "ssc",
+      "name": "Split connector clamps",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Rod dia (mm)"
+        ],
+        "rows": [
+          [
+            "SSC9.5",
+            "9.5"
+          ],
+          [
+            "SSC14",
+            "14.0"
+          ],
+          [
+            "SSC16",
+            "16.0"
+          ],
+          [
+            "SSC20",
+            "20.0"
+          ],
+          [
+            "SSC25",
+            "25.0"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/split-connector.webp",
+          "w": 246,
+          "h": 248,
+          "alt": "Split connector clamps"
+        }
+      ]
+    },
+    {
+      "id": "rebar",
+      "name": "Re-bar clamp",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Conductor dia",
+          "Pipe dia"
+        ],
+        "rows": [
+          [
+            "RCP18",
+            "8 mm",
+            "8-18 mm"
+          ],
+          [
+            "RCP38",
+            "8 mm",
+            "8-38 mm"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/rebar-clamp.webp",
+          "w": 276,
+          "h": 264,
+          "alt": "Re-bar clamp"
+        }
+      ]
+    },
+    {
+      "id": "cfb",
+      "name": "Clamping two cables to flat bar",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "CFB25",
+            "25-50"
+          ],
+          [
+            "CFB70",
+            "70-120"
+          ],
+          [
+            "CFB150",
+            "150-240"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/two-cable-flat-bar.webp",
+          "w": 222,
+          "h": 251,
+          "alt": "Clamping two cables to flat bar"
+        }
+      ]
+    },
+    {
+      "id": "csj",
+      "name": "Cable to square joint",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "CSJ50",
+            "50"
+          ],
+          [
+            "CSJ70",
+            "70"
+          ],
+          [
+            "CSJ95",
+            "95"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/cable-square-joint.webp",
+          "w": 258,
+          "h": 232,
+          "alt": "Cable to square joint"
+        }
+      ]
+    },
+    {
+      "id": "ctc",
+      "name": "Cable tee clamps",
+      "summary": "Material: Brass, gunmetal",
+      "facts": [
+        {
+          "label": "Material",
+          "value": "Brass, gunmetal"
+        }
+      ],
+      "table": {
+        "columns": [
+          "Code no.",
+          "Conductor range (mm2)"
+        ],
+        "rows": [
+          [
+            "CTC50",
+            "50"
+          ],
+          [
+            "CTC70",
+            "70"
+          ],
+          [
+            "CTC95",
+            "95"
+          ]
+        ]
+      },
+      "images": [
+        {
+          "src": "/img/products/earthing-lightning-accessories/cable-tee.webp",
+          "w": 257,
+          "h": 203,
+          "alt": "Cable tee clamps"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Item codes and sizes are transcribed from the Earthing and Lightning catalogue (pages 48 to 52). Please check dimensions against the downloadable datasheet before ordering."
+  ],
+  "seo": {
+    "description": "Earthing and lightning accessories: driving bolts, couplers, air terminals, saddles, tape clips and earth clamps in brass, gunmetal and copper.",
+    "title": "Earthing and Lightning Accessories | Akcelport Industries"
+  },
+  "downloads": [
+    "earthing-lightning-catalogue"
+  ]
+}

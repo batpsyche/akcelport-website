@@ -1,0 +1,23 @@
+{
+  "title": "Contact us",
+  "lede": "Tell us what you need and we will reply by email.",
+  "office": { "heading": "Head office" },
+  "form": {
+    "heading": "Request a quote or ask a question",
+    "intro": "Please fill in the following details.",
+    "fields": [
+      { "name": "organisation", "label": "Name of the organisation", "type": "text", "required": true, "autocomplete": "organization" },
+      { "name": "contact_person", "label": "Contact person", "type": "text", "required": true, "autocomplete": "name" },
+      { "name": "designation", "label": "Title / designation", "type": "text", "required": true, "autocomplete": "organization-title" },
+      { "name": "address", "label": "Company address", "type": "textarea", "required": true, "rows": 3, "autocomplete": "street-address" },
+      { "name": "country", "label": "Country", "type": "country", "required": false, "autocomplete": "country-name" },
+      { "name": "phone_office", "label": "Contact number (office)", "type": "tel", "required": true, "autocomplete": "tel" },
+      { "name": "email", "label": "Email address", "type": "email", "required": true, "autocomplete": "email" },
+      { "name": "phone_mobile", "label": "Cell number", "type": "tel", "required": true, "autocomplete": "tel-national" },
+      { "name": "requirement", "label": "Requirement in brief", "type": "textarea", "required": true, "rows": 5 }
+    ],
+    "submit": "Send enquiry",
+    "sending": "Sending...",
+    "privacy": "We use these details only to reply to your enquiry."
+  }
+}

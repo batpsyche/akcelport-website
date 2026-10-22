@@ -1,0 +1,146 @@
+{
+  "slug": "pvc-heat-shrink-tubes",
+  "name": "PVC Heat Shrink Tubes / Busbar Insulation",
+  "family": "wire-management-insulation",
+  "order": 2,
+  "legacyUrl": null,
+  "source": "new",
+  "summary": "Lay-flat PVC heat shrink sleeves that insulate low tension busbars in control panels and switchgear, from 17 mm to 300 mm wide.",
+  "facts": [
+    {
+      "label": "Width",
+      "value": "17 to 300 mm"
+    },
+    {
+      "label": "Thickness",
+      "value": "80 to 400 microns"
+    },
+    {
+      "label": "Working temperature",
+      "value": "90 deg C"
+    },
+    {
+      "label": "Dielectric strength",
+      "value": "20 kV/mm"
+    }
+  ],
+  "intro": [
+    "PVC heat shrinkable lay-flat tubing from Akcelport Industries gives clean insulation for busbars of low tension systems in control panels and switchgear. Busbar sleeves are a modern alternative to the age-old method of taping and painting.",
+    "They are available from 17 mm up to 300 mm in width, and in thickness from 80 microns to 400 microns, for the complete range of busbars. Please ask us for any customisation."
+  ],
+  "features": [
+    "Widths from 17 mm to 300 mm",
+    "Thickness from 80 to 400 microns",
+    "Colours: red, yellow, blue, black, green, brown, grey, white",
+    "Standard roll size 100 metres",
+    "Self extinguishing with no dripping (UL94-V)",
+    "Excellent mechanical strength and heat dissipation"
+  ],
+  "hero": {
+    "src": "/img/products/pvc-heat-shrink-tubes/hero.webp",
+    "w": 1075,
+    "h": 746,
+    "alt": "Coloured heat shrink rolls and sleeved busbars"
+  },
+  "gallery": [
+    {
+      "src": "/img/products/pvc-heat-shrink-tubes/installed-panel.webp",
+      "w": 1229,
+      "h": 717,
+      "alt": "Insulated busbars in a panel"
+    },
+    {
+      "src": "/img/products/pvc-heat-shrink-tubes/colour-bars.webp",
+      "w": 1238,
+      "h": 502,
+      "alt": "Colour coded insulated busbars"
+    },
+    {
+      "src": "/img/products/pvc-heat-shrink-tubes/switchgear.webp",
+      "w": 1135,
+      "h": 791,
+      "alt": "Insulated busbars in switchgear"
+    }
+  ],
+  "tables": [
+    {
+      "columns": [
+        "Property",
+        "Value"
+      ],
+      "rows": [
+        [
+          "Working temperature",
+          "90 deg C"
+        ],
+        [
+          "Dielectric strength",
+          "20 kV/mm"
+        ],
+        [
+          "Insulation resistance",
+          "20 x 10^10 ohms at 500 VDC"
+        ],
+        [
+          "Tensile strength",
+          "Min 400 kg/cm"
+        ],
+        [
+          "Ultimate elongation",
+          "Min 11%"
+        ],
+        [
+          "Chemical resistance",
+          "Good"
+        ],
+        [
+          "Fire resistance (UL94-V)",
+          "Self extinguishing with no dripping of materials"
+        ],
+        [
+          "Shrinking temperature",
+          "150 - 170 deg C for 4-5 minutes"
+        ],
+        [
+          "Mechanical strength",
+          "Excellent"
+        ],
+        [
+          "Heat dissipation",
+          "Excellent"
+        ]
+      ],
+      "title": "Properties",
+      "id": "properties"
+    },
+    {
+      "columns": [
+        "Detail",
+        "Information"
+      ],
+      "rows": [
+        [
+          "Available colours",
+          "Red, yellow, blue, black, green, brown, grey, white"
+        ],
+        [
+          "Standard roll size",
+          "100 metres"
+        ],
+        [
+          "Ordering details",
+          "Required width of the tube, thickness in microns, colour, total length (multiple of 100 metres)"
+        ]
+      ],
+      "title": "Ordering",
+      "id": "ordering"
+    }
+  ],
+  "seo": {
+    "description": "PVC heat shrink lay-flat tubing for busbar insulation: 17 to 300 mm wide, 80 to 400 micron, 8 colours, 100 m rolls. Properties and ordering.",
+    "title": "PVC Heat Shrink Tubes / Busbar Insulation | Akcelport Industries"
+  },
+  "downloads": [
+    "pvc-heat-shrink-catalogue"
+  ]
+}
