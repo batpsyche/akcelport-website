@@ -1,7 +1,10 @@
 // Static site generator: reads content/*.json, renders src/templates, writes dist/.
-// Zero dependencies. Usage: node scripts/build.mjs [--check]
+// Zero dependencies. Usage: node scripts/build.mjs [--check] [--content <dir>] [--out <dir>] [--assets <dir>]...
+//   --content  read JSON from this directory instead of content/ (the CMS exports here)
+//   --out      write the site here instead of dist/
+//   --assets   extra asset directories copied over public/ (later ones win); repeatable
 import { cpSync, mkdirSync, rmSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { loadContent, validate } from '../src/lib/content.mjs';
@@ -11,13 +14,17 @@ import { homePage } from '../src/templates/home.mjs';
 import { productPage, categoryPage, productsPage, downloadsPage, aboutPage, contactPage, sitemapPage, notFoundPage } from '../src/templates/pages.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const dist = join(root, 'dist');
+const argValue = (name) => { const i = process.argv.indexOf(name); return i > -1 && process.argv[i + 1] ? resolve(process.argv[i + 1]) : undefined; };
+const argValues = (name) => process.argv.flatMap((a, i) => (a === name && process.argv[i + 1] ? [resolve(process.argv[i + 1])] : []));
+const contentDir = argValue('--content') || join(root, 'content');
+const dist = argValue('--out') || join(root, 'dist');
+const assetDirs = [join(root, 'public'), ...argValues('--assets')];
 const checkOnly = process.argv.includes('--check');
 
-const data = loadContent(root);
+const data = loadContent(root, { contentDir });
 // Absolute URLs (canonical, OG, JSON-LD, sitemap) are built from siteUrl; SITE_URL overrides the origin for previews.
 data.site.siteUrl = (process.env.SITE_URL || data.site.siteUrl).replace(/\/$/, '') + BASE;
-const problems = validate(data, root);
+const problems = validate(data, root, { assetDirs });
 if (problems.length) {
   console.error(`Content problems (${problems.length}):\n - ` + problems.join('\n - '));
   process.exit(1);
@@ -27,7 +34,7 @@ if (checkOnly) { console.log(`Content OK: ${data.products.length} products, ${da
 // ---- assets
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(join(dist, 'assets'), { recursive: true });
-cpSync(join(root, 'public'), dist, { recursive: true });
+for (const d of assetDirs) cpSync(d, dist, { recursive: true });
 const cssOrder = ['fonts.css', 'base.css', 'components.css', 'home.css', 'pages.css'];
 const css = cssOrder.map((f) => readFileSync(join(root, 'src/styles', f), 'utf8')).join('\n').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n\s*\n+/g, '\n');
 writeFileSync(join(dist, 'assets/site.css'), rebaseCss(css));

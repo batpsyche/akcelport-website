@@ -11,8 +11,9 @@ function deepReplace(v, tokens) {
   return v;
 }
 
-export function loadContent(root) {
-  const c = (p) => join(root, 'content', p);
+// Options: contentDir (default root/content) lets the CMS build from an exported copy of the content.
+export function loadContent(root, { contentDir = join(root, 'content') } = {}) {
+  const c = (p) => join(contentDir, p);
   const dir = (p) => readdirSync(c(p)).filter((f) => f.endsWith('.json')).map((f) => readJson(c(join(p, f))));
   const categories = dir('categories').sort((a, b) => a.order - b.order);
   const famOrder = new Map(categories.map((x) => [x.slug, x.order]));
@@ -34,10 +35,11 @@ export function loadContent(root) {
 }
 
 // Returns a list of human-readable problems; the build fails if any exist.
-export function validate(data, root) {
+// Options: assetDirs (default [root/public]) are the directories a referenced file may live in.
+export function validate(data, root, { assetDirs = [join(root, 'public')] } = {}) {
   const problems = [];
-  const pub = (p) => join(root, 'public', p);
-  const need = (p, where) => { if (p && !existsSync(pub(p))) problems.push(`missing file ${p} (${where})`); };
+  const exists = (p) => assetDirs.some((d) => existsSync(join(d, p)));
+  const need = (p, where) => { if (p && !exists(p)) problems.push(`missing file ${p} (${where})`); };
   for (const p of data.products) {
     if (!data.catBySlug.has(p.family)) problems.push(`${p.slug}: unknown family ${p.family}`);
     if (!p.downloads?.length) problems.push(`${p.slug}: no downloads`);
@@ -50,6 +52,9 @@ export function validate(data, root) {
   }
   for (const d of data.downloads) { need(d.file, d.id); need(d.thumb, d.id); }
   for (const cat of data.categories) for (const s of cat.products) if (!data.bySlug.has(s)) problems.push(`category ${cat.slug}: unknown product ${s}`);
+  for (const s of data.home.featured?.slugs || []) if (!data.bySlug.has(s)) problems.push(`home featured: unknown product ${s}`);
+  for (const t of data.home.industries?.items || []) for (const s of t.products || []) if (!data.bySlug.has(s)) problems.push(`home industry ${t.id}: unknown product ${s}`);
+  if (data.home.downloads?.docId && !data.docById.has(data.home.downloads.docId)) problems.push(`home downloads: unknown download ${data.home.downloads.docId}`);
   for (const r of [...data.redirects.pages, ...data.redirects.downloads]) {
     if (r.to.startsWith('/downloads/')) need(r.to, 'redirect ' + r.from);
     else if (r.to.startsWith('/products/') && !data.bySlug.has(r.to.split('/')[2])) problems.push(`redirect ${r.from} -> ${r.to}`);
