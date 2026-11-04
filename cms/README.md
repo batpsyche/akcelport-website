@@ -72,7 +72,7 @@ No secrets are committed: `.env` is git-ignored and `.env.example` holds placeho
 - Saving an item stores a **draft**; the live site is unchanged until someone presses **Publish**. The Publish page lists every pending change (edits, new items, hidden/shown, deletions) with checkboxes.
 - **Preview changes** builds the drafts into `/preview/` (signed-in users only) without touching the published site.
 - **Hidden** items stay in the CMS but are left out of the site at the next publish. Deleting a published item marks it for deletion until the next publish (restore is possible until then); never-published items are removed immediately.
-- Every save is a **version**; "Restore this version" copies it back as the draft. **Discard draft** returns to the live body.
+- Every save is a **version**; **Restore** next to an earlier version copies it back as the draft. **Discard draft** returns to the live body.
 - **Rollback** (admin) re-points the site at an earlier release without changing the database.
 - Editors can publish by default; an administrator can reserve publishing to admins in **Site settings**.
 
