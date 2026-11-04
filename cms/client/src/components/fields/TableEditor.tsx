@@ -10,10 +10,10 @@ import { FieldWrap } from './Field';
 
 export interface TableValue { columns: string[]; rows: string[][] }
 
+/** Spreadsheet clipboard text: tabs separate columns, lines separate rows. A value with commas or semicolons stays one cell. */
 export function parseClipboard(text: string): string[][] {
   const lines = text.replace(/\r/g, '').split('\n').filter((l) => l.trim() !== '');
-  const delim = lines.some((l) => l.includes('\t')) ? '\t' : lines.some((l) => l.includes(';')) ? ';' : ',';
-  return lines.map((l) => l.split(delim).map((c) => c.trim()));
+  return lines.map((l) => l.split('\t').map((c) => c.trim()));
 }
 
 const normalise = (v: TableValue): TableValue => ({ columns: v.columns, rows: v.rows.map((r) => Array.from({ length: v.columns.length }, (_, i) => r[i] ?? '')) });

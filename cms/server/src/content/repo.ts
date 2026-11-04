@@ -13,7 +13,7 @@ export const TABLES: Record<ItemType, string> = { family: 'families', product: '
 const SCHEMAS: Record<ItemType, ZodType> = { family: familyBodySchema, product: productBodySchema, download: downloadBodySchema };
 
 export interface ItemRow {
-  id: number; slug: string; family_id?: number; sort_order: number; status: 'hidden' | 'live'; published_status: 'hidden' | 'live';
+  id: number; slug: string; published_slug: string | null; family_id?: number; published_family_id?: number | null; sort_order: number; status: 'hidden' | 'live'; published_status: 'hidden' | 'live';
   live: Record<string, unknown> | null; draft: Record<string, unknown> | null; deleted_at: Date | null; created_at: Date; updated_at: Date; updated_by: number | null;
 }
 
@@ -25,7 +25,7 @@ export interface ItemSummary {
 export function summarize(row: ItemRow): ItemSummary {
   const body = row.draft ?? row.live ?? {};
   const name = String((body as { name?: string; title?: string }).name ?? (body as { title?: string }).title ?? row.slug);
-  const hasDraft = row.draft !== null;
+  const hasDraft = row.draft !== null || (row.live !== null && (row.slug !== row.published_slug || (row.family_id ?? null) !== (row.published_family_id ?? null)));
   const pendingDeletion = row.deleted_at !== null;
   return {
     id: row.id, slug: row.slug, name, familyId: row.family_id, sortOrder: row.sort_order, status: row.status, publishedStatus: row.published_status,
@@ -66,9 +66,9 @@ async function nextVersion(db: Queryable, entityType: string, entityId: string):
   return Number(r.rows[0].n);
 }
 
-export async function writeVersion(db: Queryable, entityType: string, entityId: string, body: unknown, userId: number | null, note?: string): Promise<number> {
+export async function writeVersion(db: Queryable, entityType: string, entityId: string, body: unknown, userId: number | null, note?: string, meta: { slug?: string; familyId?: number | null } = {}): Promise<number> {
   const n = await nextVersion(db, entityType, entityId);
-  await db.query('INSERT INTO content_versions (entity_type, entity_id, version_no, body, note, created_by) VALUES ($1,$2,$3,$4,$5,$6)', [entityType, entityId, n, JSON.stringify(body), note ?? null, userId]);
+  await db.query('INSERT INTO content_versions (entity_type, entity_id, version_no, body, slug, family_id, note, created_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', [entityType, entityId, n, JSON.stringify(body), meta.slug ?? null, meta.familyId ?? null, note ?? null, userId]);
   return n;
 }
 
@@ -89,11 +89,17 @@ const sameJson = (a: unknown, b: unknown) => canonical(a) === canonical(b);
 
 export interface SaveOptions { slug?: string; familyId?: number }
 
+/** Slugs of the products whose current body links the given download. */
+async function linkedProducts(db: Queryable, downloadSlug: string): Promise<string[]> {
+  const used = await db.query<{ slug: string }>(`SELECT slug FROM products WHERE deleted_at IS NULL AND (COALESCE(draft, live)->'downloads') ? $1 ORDER BY slug LIMIT 5`, [downloadSlug]);
+  return used.rows.map((r) => r.slug);
+}
+
 export async function createItem(db: Queryable, req: FastifyRequest, type: ItemType, input: { slug: string; familyId?: number; body: unknown }): Promise<ItemRow> {
   const slug = slugSchema.parse(input.slug);
   const body = parseBody(type, input.body);
   await validateItem(db, type, body);
-  const exists = await db.query(`SELECT 1 FROM ${TABLES[type]} WHERE slug = $1`, [slug]);
+  const exists = await db.query(`SELECT 1 FROM ${TABLES[type]} WHERE slug = $1 OR published_slug = $1`, [slug]);
   if (exists.rowCount) throw new ValidationError([{ path: 'slug', message: 'This slug is already used' }]);
   let familyCols = '', familyVals = '';
   const params: unknown[] = [slug, JSON.stringify(body)];
@@ -109,7 +115,7 @@ export async function createItem(db: Queryable, req: FastifyRequest, type: ItemT
     type === 'product' ? [...params, req.user!.id] : [...params, req.user!.id],
   );
   const row = r.rows[0];
-  await writeVersion(db, type, String(row.id), body, req.user!.id, 'Created');
+  await writeVersion(db, type, String(row.id), body, req.user!.id, 'Created', { slug, familyId: row.family_id ?? null });
   await audit(db, req, { action: `${type}.create`, entityType: type, entityId: row.id, label: `${slug}` });
   return row;
 }
@@ -121,8 +127,12 @@ export async function saveDraft(db: Queryable, req: FastifyRequest, type: ItemTy
   let slug = current.slug;
   if (input.slug !== undefined && input.slug !== current.slug) {
     slug = slugSchema.parse(input.slug);
-    const exists = await db.query(`SELECT 1 FROM ${TABLES[type]} WHERE slug = $1 AND id <> $2`, [slug, id]);
+    const exists = await db.query(`SELECT 1 FROM ${TABLES[type]} WHERE (slug = $1 OR published_slug = $1) AND id <> $2`, [slug, id]);
     if (exists.rowCount) throw new ValidationError([{ path: 'slug', message: 'This slug is already used' }]);
+    if (type === 'download') {
+      const used = await linkedProducts(db, current.slug);
+      if (used.length) throw new ValidationError([{ path: 'slug', message: `Still linked from: ${used.join(', ')}; unlink it from these products before renaming` }]);
+    }
   }
   let familyId = current.family_id ?? null;
   if (type === 'product' && input.familyId !== undefined && input.familyId !== current.family_id) {
@@ -137,7 +147,7 @@ export async function saveDraft(db: Queryable, req: FastifyRequest, type: ItemTy
   );
   const previous = current.draft ?? current.live;
   if (!sameJson(previous, body) || slug !== current.slug || familyId !== (current.family_id ?? null)) {
-    await writeVersion(db, type, String(id), body, req.user!.id);
+    await writeVersion(db, type, String(id), body, req.user!.id, undefined, { slug, familyId });
     await audit(db, req, { action: `${type}.save`, entityType: type, entityId: id, label: slug, changes: { ...diffDocuments(previous as Record<string, unknown>, body), ...(slug !== current.slug ? { slug: { from: current.slug, to: slug } } : {}), ...(familyId !== (current.family_id ?? null) ? { familyId: { from: current.family_id, to: familyId } } : {}) } });
   }
   return r.rows[0];
@@ -146,7 +156,10 @@ export async function saveDraft(db: Queryable, req: FastifyRequest, type: ItemTy
 export async function discardDraft(db: Queryable, req: FastifyRequest, type: ItemType, id: number): Promise<ItemRow> {
   const current = await getItem(db, type, id);
   if (current.live === null) throw new HttpError(400, 'This item has never been published; delete it instead');
-  const r = await db.query<ItemRow>(`UPDATE ${TABLES[type]} SET draft = NULL, updated_at = now(), updated_by = $2 WHERE id = $1 RETURNING *`, [id, req.user!.id]);
+  const r = await db.query<ItemRow>(
+    `UPDATE ${TABLES[type]} SET draft = NULL, slug = published_slug, ${type === 'product' ? 'family_id = published_family_id,' : ''} updated_at = now(), updated_by = $2 WHERE id = $1 RETURNING *`,
+    [id, req.user!.id],
+  );
   await audit(db, req, { action: `${type}.discard-draft`, entityType: type, entityId: id, label: current.slug });
   return r.rows[0];
 }
@@ -165,8 +178,8 @@ export async function deleteItem(db: Queryable, req: FastifyRequest, type: ItemT
     if (n.rows[0].n > 0) throw new HttpError(400, 'Move or delete the products in this family first');
   }
   if (type === 'download') {
-    const used = await db.query<{ slug: string }>(`SELECT slug FROM products WHERE deleted_at IS NULL AND (COALESCE(draft, live)->'downloads') ? $1 LIMIT 5`, [current.slug]);
-    if (used.rowCount) throw new HttpError(400, `Still linked from: ${used.rows.map((r) => r.slug).join(', ')}`);
+    const used = await linkedProducts(db, current.slug);
+    if (used.length) throw new HttpError(400, `Still linked from: ${used.join(', ')}`);
   }
   if (current.live === null) {
     await db.query(`DELETE FROM ${TABLES[type]} WHERE id = $1`, [id]);
@@ -200,9 +213,9 @@ export async function reorderItems(db: Queryable, req: FastifyRequest, type: Ite
 }
 
 export async function revertItem(db: Queryable, req: FastifyRequest, type: ItemType, id: number, versionId: number): Promise<ItemRow> {
-  const v = await db.query<{ body: Record<string, unknown>; version_no: number }>('SELECT body, version_no FROM content_versions WHERE id = $1 AND entity_type = $2 AND entity_id = $3', [versionId, type, String(id)]);
+  const v = await db.query<{ body: Record<string, unknown>; version_no: number; slug: string | null; family_id: number | null }>('SELECT body, version_no, slug, family_id FROM content_versions WHERE id = $1 AND entity_type = $2 AND entity_id = $3', [versionId, type, String(id)]);
   if (!v.rows[0]) throw new HttpError(404, 'Version not found');
-  const row = await saveDraft(db, req, type, id, { body: v.rows[0].body });
+  const row = await saveDraft(db, req, type, id, { body: v.rows[0].body, slug: v.rows[0].slug ?? undefined, familyId: v.rows[0].family_id ?? undefined });
   await audit(db, req, { action: `${type}.revert`, entityType: type, entityId: id, label: row.slug, changes: { toVersion: v.rows[0].version_no } });
   return row;
 }

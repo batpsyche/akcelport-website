@@ -112,100 +112,115 @@ export class PublishService {
     await this.pool.query(`UPDATE publishes SET status = $2, log = $3, error = $4, release_id = COALESCE($5, release_id), finished_at = now() WHERE id = $1`, [id, status, log, error, releaseId ?? null]);
   }
 
-  /** Promotes the selected pending changes inside the given transaction. Returns what was promoted. */
+  /** Runs one publish or preview at a time. */
+  private async exclusive<T>(work: () => Promise<T>): Promise<T> {
+    if (this.busy) throw new HttpError(409, 'A publish is already running');
+    this.busy = true;
+    try { return await work(); } finally { this.busy = false; }
+  }
+
+  /** Promotes the selected pending changes inside the given transaction (deletions last) and returns what was promoted. A selection that would leave a live product without a live family is refused. */
   private async promote(db: Queryable, selection: Selection | 'all') {
     const pending = await pendingChanges(db);
-    const pick = (type: ItemType, key: keyof Selection) => pending.items.filter((i) => i.type === type && (selection === 'all' || ((selection[key] ?? []) as Array<number | string>).includes(i.id)));
+    const picked = ([['family', 'families'], ['product', 'products'], ['download', 'downloads']] as Array<[ItemType, keyof Selection]>)
+      .flatMap(([type, key]) => pending.items.filter((i) => i.type === type && (selection === 'all' || ((selection[key] ?? []) as Array<number | string>).includes(i.id))).map((item) => ({ type, item })));
     const promoted: Array<{ type: string; id: number | string; slug: string; change: string }> = [];
-    for (const [type, key] of [['family', 'families'], ['product', 'products'], ['download', 'downloads']] as Array<[ItemType, keyof Selection]>) {
-      for (const item of pick(type, key)) {
-        if (item.pendingDeletion) {
-          await db.query(`DELETE FROM ${TABLES[type]} WHERE id = $1`, [item.id]);
-          await db.query('DELETE FROM content_versions WHERE entity_type = $1 AND entity_id = $2', [type, String(item.id)]);
-        } else {
-          await db.query(`UPDATE ${TABLES[type]} SET live = COALESCE(draft, live), draft = NULL, published_status = status, updated_at = now() WHERE id = $1`, [item.id]);
-        }
-        promoted.push({ type, id: item.id, slug: item.slug, change: item.change });
-      }
+    for (const { type, item } of picked.filter((p) => !p.item.pendingDeletion)) {
+      await db.query(`UPDATE ${TABLES[type]} SET live = COALESCE(draft, live), draft = NULL, published_status = status, published_slug = slug, ${type === 'product' ? 'published_family_id = family_id,' : ''} updated_at = now() WHERE id = $1`, [item.id]);
+      promoted.push({ type, id: item.id, slug: item.slug, change: item.change });
     }
+    const orphan = await db.query<{ slug: string; family: string }>(
+      `SELECT p.published_slug AS slug, f.slug AS family FROM products p JOIN families f ON f.id = p.published_family_id
+       WHERE p.id = ANY($1) AND p.published_status = 'live' AND f.live IS NULL ORDER BY p.id LIMIT 1`,
+      [picked.filter((p) => p.type === 'product' && !p.item.pendingDeletion).map((p) => p.item.id)],
+    );
+    if (orphan.rowCount) throw new HttpError(422, `Product "${orphan.rows[0].slug}" cannot go live before its family "${orphan.rows[0].family}": publish them together`);
     for (const page of pending.pages) {
       if (selection !== 'all' && !(selection.pages ?? []).includes(page.key)) continue;
       await db.query('UPDATE pages SET live = draft, draft = NULL, updated_at = now() WHERE key = $1', [page.key]);
       promoted.push({ type: 'page', id: page.key, slug: page.key, change: 'edit' });
     }
+    for (const { type, item } of picked.filter((p) => p.item.pendingDeletion)) {
+      if (type === 'family') {
+        const left = await db.query<{ slug: string }>('SELECT slug FROM products WHERE family_id = $1 OR published_family_id = $1 ORDER BY slug', [item.id]);
+        if (left.rowCount) throw new HttpError(422, `Family "${item.slug}" still has products on the site (${left.rows.map((r) => r.slug).join(', ')}): publish their move or deletion together with it`);
+      }
+      await db.query(`DELETE FROM ${TABLES[type]} WHERE id = $1`, [item.id]);
+      await db.query('DELETE FROM content_versions WHERE entity_type = $1 AND entity_id = $2', [type, String(item.id)]);
+      promoted.push({ type, id: item.id, slug: item.slug, change: item.change });
+    }
     return promoted;
   }
 
-  async publish(actor: Actor, selection: Selection | 'all' = 'all'): Promise<{ id: number; releaseId: string; promoted: unknown[]; log: string }> {
-    if (this.busy) throw new HttpError(409, 'A publish is already running');
-    this.busy = true;
-    const id = releaseId();
-    const tmpContent = join(this.config.publishDir, 'tmp', `${id}-content`);
-    const outDir = join(this.releasesDir, id);
-    const recordId = await this.record('publish', actor, id, null);
-    const client = await this.pool.connect();
-    let log = '';
-    try {
-      await client.query('BEGIN');
-      const locked = await client.query<{ ok: boolean }>('SELECT pg_try_advisory_xact_lock($1) AS ok', [LOCK_KEY]);
-      if (!locked.rows[0].ok) throw new HttpError(409, 'A publish is already running');
-      const promoted = await this.promote(client, selection);
-      await this.pool.query('UPDATE publishes SET items = $2 WHERE id = $1', [recordId, JSON.stringify(promoted)]);
-      const counts = await exportContent(client, 'live', tmpContent);
-      log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads, ${counts.redirects} redirects.\n`;
-      const built = await this.build(tmpContent, outDir);
-      log += built.log;
-      if (!built.ok) throw new HttpError(422, 'The site build failed; nothing was published', { log });
+  publish(actor: Actor, selection: Selection | 'all' = 'all'): Promise<{ id: number; releaseId: string; promoted: unknown[]; log: string }> {
+    return this.exclusive(async () => {
+      const id = releaseId();
+      const tmpContent = join(this.config.publishDir, 'tmp', `${id}-content`);
+      const outDir = join(this.releasesDir, id);
+      const recordId = await this.record('publish', actor, id, null);
+      const client = await this.pool.connect();
+      let log = '';
+      let promoted: unknown[];
+      try {
+        await client.query('BEGIN');
+        const locked = await client.query<{ ok: boolean }>('SELECT pg_try_advisory_xact_lock($1) AS ok', [LOCK_KEY]);
+        if (!locked.rows[0].ok) throw new HttpError(409, 'A publish is already running');
+        promoted = await this.promote(client, selection);
+        await this.pool.query('UPDATE publishes SET items = $2 WHERE id = $1', [recordId, JSON.stringify(promoted)]);
+        const counts = await exportContent(client, 'live', tmpContent);
+        log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads, ${counts.redirects} redirects.\n`;
+        const built = await this.build(tmpContent, outDir);
+        log += built.log;
+        if (!built.ok) throw new HttpError(422, 'The site build failed; nothing was published', { log });
+        await client.query('COMMIT');
+      } catch (err) {
+        try { await client.query('ROLLBACK'); } catch { /* ignore */ }
+        rmSync(outDir, { recursive: true, force: true });
+        const message = err instanceof Error ? err.message : String(err);
+        await this.finish(recordId, 'failed', log, message);
+        if (err instanceof HttpError) { err.details = { ...(err.details as object ?? {}), log, publishId: recordId }; throw err; }
+        throw new HttpError(500, `Publish failed: ${message}`, { log, publishId: recordId });
+      } finally {
+        client.release();
+        rmSync(tmpContent, { recursive: true, force: true });
+      }
       this.swapCurrent(id);
       const pruned = this.prune();
       if (pruned.length) log += `\nRemoved old releases: ${pruned.join(', ')}`;
-      await client.query('COMMIT');
       await this.finish(recordId, 'success', log, null);
       return { id: recordId, releaseId: id, promoted, log };
-    } catch (err) {
-      try { await client.query('ROLLBACK'); } catch { /* ignore */ }
-      rmSync(outDir, { recursive: true, force: true });
-      const message = err instanceof Error ? err.message : String(err);
-      await this.finish(recordId, 'failed', log, message);
-      if (err instanceof HttpError) { err.details = { ...(err.details as object ?? {}), log, publishId: recordId }; throw err; }
-      throw new HttpError(500, `Publish failed: ${message}`, { log, publishId: recordId });
-    } finally {
-      client.release();
-      rmSync(tmpContent, { recursive: true, force: true });
-      this.busy = false;
-    }
+    });
   }
 
-  async preview(actor: Actor): Promise<{ id: number; log: string }> {
-    if (this.busy) throw new HttpError(409, 'A publish is already running');
-    this.busy = true;
-    const stamp = releaseId();
-    const tmpContent = join(this.config.publishDir, 'tmp', `${stamp}-preview-content`);
-    const tmpOut = join(this.config.publishDir, `preview.${stamp}.tmp`);
-    const recordId = await this.record('preview', actor, null, null);
-    let log = '';
-    try {
-      const counts = await exportContent(this.pool, 'preview', tmpContent);
-      log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads (drafts included).\n`;
-      const built = await this.build(tmpContent, tmpOut, { SITE_BASE: '/preview/' });
-      log += built.log;
-      if (!built.ok) throw new HttpError(422, 'The preview build failed', { log });
-      const old = join(this.config.publishDir, `preview.${stamp}.old`);
-      if (existsSync(this.previewDir)) renameSync(this.previewDir, old);
-      renameSync(tmpOut, this.previewDir);
-      rmSync(old, { recursive: true, force: true });
-      await this.finish(recordId, 'success', log, null);
-      return { id: recordId, log };
-    } catch (err) {
-      rmSync(tmpOut, { recursive: true, force: true });
-      const message = err instanceof Error ? err.message : String(err);
-      await this.finish(recordId, 'failed', log, message);
-      if (err instanceof HttpError) { err.details = { ...(err.details as object ?? {}), log, publishId: recordId }; throw err; }
-      throw new HttpError(500, `Preview failed: ${message}`, { log, publishId: recordId });
-    } finally {
-      rmSync(tmpContent, { recursive: true, force: true });
-      this.busy = false;
-    }
+  preview(actor: Actor): Promise<{ id: number; log: string }> {
+    return this.exclusive(async () => {
+      const stamp = releaseId();
+      const tmpContent = join(this.config.publishDir, 'tmp', `${stamp}-preview-content`);
+      const tmpOut = join(this.config.publishDir, `preview.${stamp}.tmp`);
+      const recordId = await this.record('preview', actor, null, null);
+      let log = '';
+      try {
+        const counts = await exportContent(this.pool, 'preview', tmpContent);
+        log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads (drafts included).\n`;
+        const built = await this.build(tmpContent, tmpOut, { SITE_BASE: '/preview/' });
+        log += built.log;
+        if (!built.ok) throw new HttpError(422, 'The preview build failed', { log });
+        const old = join(this.config.publishDir, `preview.${stamp}.old`);
+        if (existsSync(this.previewDir)) renameSync(this.previewDir, old);
+        renameSync(tmpOut, this.previewDir);
+        rmSync(old, { recursive: true, force: true });
+        await this.finish(recordId, 'success', log, null);
+        return { id: recordId, log };
+      } catch (err) {
+        rmSync(tmpOut, { recursive: true, force: true });
+        const message = err instanceof Error ? err.message : String(err);
+        await this.finish(recordId, 'failed', log, message);
+        if (err instanceof HttpError) { err.details = { ...(err.details as object ?? {}), log, publishId: recordId }; throw err; }
+        throw new HttpError(500, `Preview failed: ${message}`, { log, publishId: recordId });
+      } finally {
+        rmSync(tmpContent, { recursive: true, force: true });
+      }
+    });
   }
 
   async rollback(actor: Actor, id: string): Promise<{ id: number; releaseId: string }> {

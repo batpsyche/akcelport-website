@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
@@ -99,20 +99,29 @@ export function FactsField({ label = 'Key facts', help, error, className, value,
   );
 }
 
-export function JsonField({ label, help, error, className, value, onChange, rows = 24 }: Base & { value: unknown; onChange: (v: unknown) => void; rows?: number }) {
-  const [text, setText] = [value === undefined ? '' : JSON.stringify(value, null, 2), undefined] as const;
-  return <JsonEditor label={label} help={help} error={error} className={className} initial={text} onChange={onChange} rows={rows} key={text.length} />;
-}
+const serialize = (v: unknown) => (v === undefined ? '' : JSON.stringify(v, null, 2));
 
-import { useState } from 'react';
-function JsonEditor({ label, help, error, className, initial, onChange, rows }: Base & { initial: string; onChange: (v: unknown) => void; rows: number }) {
-  const [text, setText] = useState(initial);
+/** A JSON textarea; `value` is re-read only when it changes from outside the editor. */
+export function JsonField({ label, help, error, className, value, onChange, rows = 24 }: Base & { value: unknown; onChange: (v: unknown) => void; rows?: number }) {
+  const [text, setText] = useState(() => serialize(value));
   const [problem, setProblem] = useState<string | undefined>();
+  const emitted = useRef(value);
+  useEffect(() => {
+    if (value === emitted.current) return;
+    emitted.current = value;
+    setText(serialize(value));
+    setProblem(undefined);
+  }, [value]);
   return (
     <FieldWrap label={label} help={help} error={error ?? problem} className={className}>
       <Textarea value={text} rows={rows} spellCheck={false} className="font-mono text-xs" onChange={(e) => {
         setText(e.target.value);
-        try { onChange(JSON.parse(e.target.value)); setProblem(undefined); } catch (err) { setProblem((err as Error).message); }
+        try {
+          const parsed: unknown = JSON.parse(e.target.value);
+          emitted.current = parsed;
+          onChange(parsed);
+          setProblem(undefined);
+        } catch (err) { setProblem((err as Error).message); }
       }} />
     </FieldWrap>
   );

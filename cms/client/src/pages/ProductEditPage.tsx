@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { useItem, useItems, useItemMutations, errorsFrom, reportError } from '@/lib/items';
 import { useDocument } from '@/lib/doc';
-import type { ProductBody, Image } from '@/lib/types';
+import type { ProductBody, Image, ItemFull } from '@/lib/types';
 import { slugify } from '@/lib/format';
 import { EditorFrame, Section, StatusCard, VersionsCard } from '@/components/EditorFrame';
 import { TextField, TextAreaField, SelectField, StringListField, FactsField } from '@/components/fields/Primitives';
@@ -28,7 +28,9 @@ export function ProductEditPage() {
   const [familyId, setFamilyId] = useState<number | undefined>(params.get('family') ? Number(params.get('family')) : undefined);
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  useEffect(() => { if (item.data) { replace(item.data.body); setSlug(item.data.item.slug); setFamilyId(item.data.item.familyId); } }, [item.data, replace]);
+  const edited = doc !== undefined && (dirty || (!isNew && !!item.data && (slug !== item.data.item.slug || familyId !== item.data.item.familyId)));
+  const sync = (r: ItemFull<ProductBody>) => { replace(r.body); setSlug(r.item.slug); setFamilyId(r.item.familyId); };
+  useEffect(() => { if (item.data && !edited) sync(item.data); }, [item.data, edited]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (isNew && !slugTouched && doc?.name) setSlug(slugify(doc.name)); }, [doc?.name, isNew, slugTouched]);
   const folder = useMemo(() => (slug ? `img/products/${slug}` : undefined), [slug]);
   const familyOptions = (families.data ?? []).filter((f) => !f.pendingDeletion).map((f) => ({ value: String(f.id), label: f.name }));
@@ -40,10 +42,10 @@ export function ProductEditPage() {
     try {
       if (isNew) {
         const created = await m.create.mutateAsync({ slug, familyId, body: doc });
+        sync(created);
         navigate(`/products/${created.item.id}`, { replace: true });
       } else {
-        const saved = await m.save.mutateAsync({ slug, familyId, body: doc });
-        replace(saved.body);
+        sync(await m.save.mutateAsync({ slug, familyId, body: doc }));
       }
     } catch (e) { setErrors(errorsFrom(e)); reportError(e); }
   };
@@ -53,17 +55,17 @@ export function ProductEditPage() {
   if (!doc) return null;
   const d = doc;
   return (
-    <EditorFrame kicker={isNew ? 'New product' : 'Product'} title={d.name || 'Untitled product'} backTo="/products" backLabel="Products" dirty={dirty || isNew} saving={m.save.isPending || m.create.isPending} onSave={save} errorSummary={errorSummary}
+    <EditorFrame kicker={isNew ? 'New product' : 'Product'} title={d.name || 'Untitled product'} backTo="/products" backLabel="Products" dirty={edited || isNew} saving={m.save.isPending || m.create.isPending} onSave={save} errorSummary={errorSummary}
       sidebar={!isNew && item.data ? <>
-        <StatusCard item={item.data.item} onStatus={(s) => m.setStatus.mutate(s)} onDiscard={() => m.discard.mutate()} onRestore={() => m.restore.mutate()}
+        <StatusCard item={item.data.item} onStatus={(s) => m.setStatus.mutate(s)} onDiscard={() => m.discard.mutate(undefined, { onSuccess: sync })} onRestore={() => m.restore.mutate()}
           onDelete={() => m.remove.mutateAsync().then((r) => { if (r.hard) navigate('/products'); })}
           extra={<a className="text-xs underline text-muted-foreground" href={`/preview/products/${item.data.item.slug}/`} target="_blank" rel="noreferrer">Open in the last preview build</a>} />
-        <VersionsCard versions={item.data.versions} onRevert={(v) => m.revert.mutate(v)} />
+        <VersionsCard versions={item.data.versions} onRevert={(v) => m.revert.mutate(v, { onSuccess: sync })} />
       </> : undefined}>
       <Section title="Basics">
         <div className="grid md:grid-cols-2 gap-4">
           <TextField label="Name" value={d.name} onChange={(v) => set('name', v)} error={errorAt(errors, 'name')} />
-          <TextField label="Slug (page address)" mono value={slug} onChange={(v) => { setSlug(v); setSlugTouched(true); }} error={errorAt(errors, 'slug')} help={isNew ? 'Lowercase letters, digits and hyphens. Becomes /products/<slug>/.' : 'Changing it changes the page address; add a redirect from the old one.'} />
+          <TextField label="Slug (page address)" mono value={slug} onChange={(v) => { setSlug(v); setSlugTouched(true); }} error={errorAt(errors, 'slug')} help={isNew ? 'Lowercase letters, digits and hyphens. Becomes /products/<slug>/.' : 'Changing it changes the page address at the next publish; add a redirect from the old one.'} />
           <SelectField label="Family" value={familyId ? String(familyId) : undefined} onChange={(v) => setFamilyId(Number(v))} options={familyOptions} error={errorAt(errors, 'familyId')} />
           <SelectField label="Source" value={d.source} onChange={(v) => set('source', v)} options={[{ value: 'existing', label: 'Existing (was on the old site)' }, { value: 'new', label: 'New range' }]} />
           <TextField label="Old site page (optional)" mono value={d.legacyUrl ?? ''} onChange={(v) => set('legacyUrl', v || null)} placeholder="cable-lugs.php" />

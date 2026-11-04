@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import { FileText, Replace } from 'lucide-react';
 import { useItem, useItemMutations, errorsFrom, reportError } from '@/lib/items';
 import { useDocument } from '@/lib/doc';
-import type { DownloadBody, Image } from '@/lib/types';
+import type { DownloadBody, Image, ItemFull } from '@/lib/types';
 import { slugify, formatBytes } from '@/lib/format';
 import { EditorFrame, Section, StatusCard, VersionsCard } from '@/components/EditorFrame';
 import { TextField, TextAreaField, SelectField, NumberField } from '@/components/fields/Primitives';
@@ -26,29 +26,31 @@ export function DownloadEditPage() {
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pickPdf, setPickPdf] = useState(false);
-  useEffect(() => { if (item.data) { replace(item.data.body); setSlug(item.data.item.slug); } }, [item.data, replace]);
+  const edited = doc !== undefined && (dirty || (!isNew && !!item.data && slug !== item.data.item.slug));
+  const sync = (r: ItemFull<DownloadBody>) => { replace(r.body); setSlug(r.item.slug); };
+  useEffect(() => { if (item.data && !edited) sync(item.data); }, [item.data, edited]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (isNew && !slugTouched && doc?.title) setSlug(slugify(doc.title)); }, [doc?.title, isNew, slugTouched]);
   const save = async () => {
     if (!doc) return;
     setErrors({});
     try {
-      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); navigate(`/downloads/${c.item.id}`, { replace: true }); }
-      else { const s = await m.save.mutateAsync({ slug, body: doc }); replace(s.body); }
+      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); sync(c); navigate(`/downloads/${c.item.id}`, { replace: true }); }
+      else sync(await m.save.mutateAsync({ slug, body: doc }));
     } catch (e) { setErrors(errorsFrom(e)); reportError(e); }
   };
   if (!isNew && item.isLoading) return <p className="text-muted-foreground">Loading…</p>;
   if (!doc) return null;
   const thumb: Image | undefined = doc.thumb ? { src: doc.thumb, w: 1, h: 1, alt: '' } : undefined;
   return (
-    <EditorFrame kicker={isNew ? 'New download' : 'Download'} title={doc.title || 'Untitled download'} backTo="/downloads" backLabel="Downloads" dirty={dirty || isNew} saving={m.save.isPending || m.create.isPending} onSave={save} errorSummary={Object.entries(errors).map(([p, e]) => `${p}: ${e}`)}
+    <EditorFrame kicker={isNew ? 'New download' : 'Download'} title={doc.title || 'Untitled download'} backTo="/downloads" backLabel="Downloads" dirty={edited || isNew} saving={m.save.isPending || m.create.isPending} onSave={save} errorSummary={Object.entries(errors).map(([p, e]) => `${p}: ${e}`)}
       sidebar={!isNew && item.data ? <>
-        <StatusCard item={item.data.item} onStatus={(s) => m.setStatus.mutate(s)} onDiscard={() => m.discard.mutate()} onRestore={() => m.restore.mutate()} onDelete={() => m.remove.mutateAsync().then((r) => { if (r.hard) navigate('/downloads'); })} />
-        <VersionsCard versions={item.data.versions} onRevert={(v) => m.revert.mutate(v)} />
+        <StatusCard item={item.data.item} onStatus={(s) => m.setStatus.mutate(s)} onDiscard={() => m.discard.mutate(undefined, { onSuccess: sync })} onRestore={() => m.restore.mutate()} onDelete={() => m.remove.mutateAsync().then((r) => { if (r.hard) navigate('/downloads'); })} />
+        <VersionsCard versions={item.data.versions} onRevert={(v) => m.revert.mutate(v, { onSuccess: sync })} />
       </> : undefined}>
       <Section title="Document">
         <div className="grid md:grid-cols-2 gap-4">
           <TextField label="Title" value={doc.title} onChange={(v) => set('title', v)} error={errorAt(errors, 'title')} />
-          <TextField label="Id" mono value={slug} onChange={(v) => { setSlug(v); setSlugTouched(true); }} error={errorAt(errors, 'slug')} help="Used to link the document from products." />
+          <TextField label="Id" mono value={slug} onChange={(v) => { setSlug(v); setSlugTouched(true); }} error={errorAt(errors, 'slug')} help="Used to link the document from products; it can only be renamed while no product links it." />
           <SelectField label="Kind" value={doc.kind} onChange={(v) => set('kind', v)} options={[{ value: 'catalogue', label: 'Current datasheet (catalogue)' }, { value: 'legacy', label: 'Old-site PDF (legacy)' }]} />
         </div>
         <TextAreaField label="Description" rows={2} value={doc.description} onChange={(v) => set('description', v)} error={errorAt(errors, 'description')} />

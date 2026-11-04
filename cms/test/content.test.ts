@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { FastifyInstance } from 'fastify';
-import { setupTestEnv, makeUser, login, api, multipart, TINY_PNG, TINY_PDF, type TestEnv, type Session } from './helpers.ts';
+import { setupTestEnv, makeUser, login, api, multipart, pngOf, TINY_PNG, TINY_PDF, type TestEnv, type Session } from './helpers.ts';
 import { buildApp } from '../server/src/app.ts';
 import { seedFromSite } from '../server/src/seed.ts';
+import { loadExportData } from '../server/src/publish/export.ts';
 
 let env: TestEnv;
 let app: FastifyInstance;
@@ -58,9 +59,13 @@ test('validation rejects bad bodies, unknown media and unknown datasheets', asyn
   const badImage = await api(app, 'PUT', `/api/products/${p.id}`, { session: editor, payload: { body: { ...body, hero: { ...(body.hero as object), src: '/img/products/flexibars/missing.webp' } } } });
   assert.equal(badImage.status, 400);
   assert.match(badImage.text, /not in the media library/);
+  assert.ok(((badImage.body.details as { issues: Array<{ path: string }> }).issues).some((i) => i.path === 'hero.src'), 'media issues use the same dot paths as schema issues');
+  const badVariant = await api(app, 'PUT', `/api/products/${p.id}`, { session: editor, payload: { body: { ...body, variants: [{ id: 'v1', name: 'V1', images: [{ src: '/img/products/flexibars/missing.webp', w: 1, h: 1 }] }] } } });
+  assert.ok(((badVariant.body.details as { issues: Array<{ path: string }> }).issues).some((i) => i.path === 'variants.0.images.0.src'), badVariant.text);
   const badDownload = await api(app, 'PUT', `/api/products/${p.id}`, { session: editor, payload: { body: { ...body, downloads: ['nope'] } } });
   assert.equal(badDownload.status, 400);
   assert.match(badDownload.text, /Unknown datasheet/);
+  assert.ok(((badDownload.body.details as { issues: Array<{ path: string }> }).issues).some((i) => i.path === 'downloads.0'));
   assert.equal((await api(app, 'PUT', `/api/products/${p.id}`, { session: editor, payload: { body: { ...body, downloads: [] } } })).status, 400);
 });
 
@@ -97,6 +102,48 @@ test('create, hide, reorder, delete and restore products; family and download gu
   const downloads = (await api(app, 'GET', '/api/downloads', { session: editor })).body.items as Array<{ id: number; slug: string }>;
   const linked = downloads.find((d) => d.slug === 'cable-lugs-legacy')!;
   assert.equal((await api(app, 'DELETE', `/api/downloads/${linked.id}`, { session: editor })).status, 400, 'download linked from a product');
+});
+
+test('a slug or family change is a pending draft: not live until published, discardable and revertible', async () => {
+  const p = await productBySlug('cable-lugs');
+  const full = await api(app, 'GET', `/api/products/${p.id}`, { session: editor });
+  const body = full.body.body as Record<string, unknown>;
+  const familyId = (full.body.item as { familyId: number }).familyId;
+  const other = ((await api(app, 'GET', '/api/families', { session: editor })).body.items as Array<{ id: number }>).find((f) => f.id !== familyId)!;
+  // Rename with an unchanged body: the item is pending, keeps its published slug for the live export, and has a version to go back to.
+  const renamed = await api(app, 'PUT', `/api/products/${p.id}`, { session: editor, payload: { slug: 'copper-cable-lugs', familyId: other.id, body } });
+  assert.equal(renamed.status, 200, renamed.text);
+  const item = renamed.body.item as { slug: string; familyId: number; hasDraft: boolean; pending: boolean };
+  assert.equal(item.slug, 'copper-cable-lugs');
+  assert.equal(item.familyId, other.id);
+  assert.equal(item.pending, true);
+  assert.equal(item.hasDraft, true);
+  assert.ok((await loadExportData(env.pool, 'live')).products.some((x) => x.slug === 'cable-lugs' && x.family_id === familyId), 'live export keeps the published slug and family');
+  assert.ok(((await api(app, 'GET', '/api/pending', { session: editor })).body.items as Array<{ slug: string; change: string }>).some((i) => i.slug === 'copper-cable-lugs' && i.change === 'edit'));
+  // The published slug stays reserved while the rename is pending.
+  const taken = await api(app, 'POST', '/api/products', { session: editor, payload: { slug: 'cable-lugs', familyId, body: { ...body, name: 'Impostor' } } });
+  assert.equal(taken.status, 400);
+  assert.match(taken.text, /already used/);
+  // Discard puts the published slug and family back.
+  const discarded = await api(app, 'POST', `/api/products/${p.id}/discard`, { session: editor });
+  assert.equal((discarded.body.item as { slug: string; familyId: number; pending: boolean }).slug, 'cable-lugs');
+  assert.equal((discarded.body.item as { familyId: number }).familyId, familyId);
+  assert.equal((discarded.body.item as { pending: boolean }).pending, false);
+  // Reverting to the renamed version brings the rename back as a draft; discarding again clears it.
+  const versions = discarded.body.versions as Array<{ id: number; versionNo: number }>;
+  const reverted = await api(app, 'POST', `/api/products/${p.id}/revert`, { session: editor, payload: { versionId: versions[0].id } });
+  assert.equal((reverted.body.item as { slug: string; familyId: number }).slug, 'copper-cable-lugs');
+  assert.equal((reverted.body.item as { familyId: number }).familyId, other.id);
+  await api(app, 'POST', `/api/products/${p.id}/discard`, { session: editor });
+  assert.equal((await productBySlug('cable-lugs')).pending, false);
+  // A download linked from a product cannot be renamed from under it.
+  const downloads = (await api(app, 'GET', '/api/downloads', { session: editor })).body.items as Array<{ id: number; slug: string }>;
+  const linked = downloads.find((d) => d.slug === 'cable-lugs-legacy')!;
+  const dBody = (await api(app, 'GET', `/api/downloads/${linked.id}`, { session: editor })).body.body as Record<string, unknown>;
+  const refused = await api(app, 'PUT', `/api/downloads/${linked.id}`, { session: editor, payload: { slug: 'cable-lugs-old', body: dBody } });
+  assert.equal(refused.status, 400);
+  assert.match(refused.text, /Still linked from: cable-lugs/);
+  assert.equal(((await api(app, 'GET', `/api/downloads/${linked.id}`, { session: editor })).body.item as { slug: string }).slug, 'cable-lugs-legacy');
 });
 
 test('pages: editors edit about, only admins edit site settings; versions and revert work', async () => {
@@ -155,9 +202,22 @@ test('media: upload with type, size and folder checks; replace; delete only when
   assert.equal((pdfUp.body.media as { path: string; pages: number }).path, 'downloads/catalogue/test-sheet.pdf');
   assert.equal((pdfUp.body.media as { pages: number }).pages, 2);
 
-  // Replace keeps the path; kind mismatch is refused.
+  // Replace keeps the path; kind mismatch is refused. A different size warns about the items that still store the old one.
   const rep = multipart({}, { name: 'file', filename: 'other.png', type: 'image/png', data: TINY_PNG });
-  assert.equal((await api(app, 'POST', `/api/media/${media.id}/replace`, { session: editor, rawPayload: rep.payload, headers: rep.headers })).status, 200);
+  const same = await api(app, 'POST', `/api/media/${media.id}/replace`, { session: editor, rawPayload: rep.payload, headers: rep.headers });
+  assert.equal(same.status, 200, same.text);
+  assert.equal(same.body.warning, null);
+  const lugs = ((await api(app, 'GET', '/api/products', { session: editor })).body.items as Array<{ id: number; slug: string }>).find((p) => p.slug === 'cable-lugs')!;
+  const lugsBody = (await api(app, 'GET', `/api/products/${lugs.id}`, { session: editor })).body.body as Record<string, unknown>;
+  assert.equal((await api(app, 'PUT', `/api/products/${lugs.id}`, { session: editor, payload: { body: { ...lugsBody, gallery: [{ src: `/${media.path}`, w: 1, h: 1, alt: '' }] } } })).status, 200);
+  const bigger = multipart({}, { name: 'file', filename: 'other.png', type: 'image/png', data: pngOf(4, 3) });
+  const resized = await api(app, 'POST', `/api/media/${media.id}/replace`, { session: editor, rawPayload: bigger.payload, headers: bigger.headers });
+  assert.equal(resized.status, 200, resized.text);
+  assert.equal((resized.body.media as { width: number; height: number }).width, 4);
+  assert.match(String(resized.body.warning), /4×3/);
+  assert.match(String(resized.body.warning), /product cable-lugs/);
+  assert.equal(((await api(app, 'GET', `/api/products/${lugs.id}`, { session: editor })).body.body as { gallery: Array<{ w: number }> }).gallery[0].w, 1, 'bodies are not rewritten');
+  await api(app, 'POST', `/api/products/${lugs.id}/discard`, { session: editor });
   const repPdf = multipart({}, { name: 'file', filename: 'x.pdf', type: 'application/pdf', data: TINY_PDF });
   assert.equal((await api(app, 'POST', `/api/media/${media.id}/replace`, { session: editor, rawPayload: repPdf.payload, headers: repPdf.headers })).status, 400);
 

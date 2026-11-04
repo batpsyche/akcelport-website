@@ -27,6 +27,20 @@ export async function isMediaReferenced(pool: pg.Pool, path: string): Promise<st
   return hits;
 }
 
+/** Items whose bodies reference the image at `path` with a width or height other than the given one. */
+export async function staleImageRefs(pool: pg.Pool, path: string, width: number, height: number): Promise<string[]> {
+  const vars = JSON.stringify({ src: `/${path}`, w: width, h: height });
+  const stale = (col: string) => `jsonb_path_exists(${col}, '$.** ? (@.src == $src && (@.w != $w || @.h != $h))', $1::jsonb)`;
+  const hits: string[] = [];
+  for (const [table, label] of [['products', 'product'], ['families', 'family'], ['downloads', 'download']]) {
+    const r = await pool.query<{ slug: string }>(`SELECT slug FROM ${table} WHERE ${stale('live')} OR ${stale('draft')} ORDER BY slug`, [vars]);
+    hits.push(...r.rows.map((x) => `${label} ${x.slug}`));
+  }
+  const p = await pool.query<{ key: string }>(`SELECT key FROM pages WHERE ${stale('live')} OR ${stale('draft')} ORDER BY key`, [vars]);
+  hits.push(...p.rows.map((x) => `document ${x.key}`));
+  return hits;
+}
+
 export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; config: Config }) {
   const { pool, config } = opts;
   app.addHook('preHandler', requireAuth);
@@ -104,7 +118,9 @@ export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; c
       [id, info.mime, buf.length, info.width ?? null, info.height ?? null, info.pages ?? null, sha, req.user!.id],
     )).rows[0];
     await audit(pool, req, { action: 'media.replace', entityType: 'media', entityId: id, label: current.path, changes: { bytes: buf.length } });
-    return { media: row };
+    const stale = info.width && info.height ? await staleImageRefs(pool, current.path, info.width, info.height) : [];
+    const warning = stale.length ? `The new file is ${info.width}×${info.height} but ${stale.join(', ')} still store another size for it; open them and pick the image again to update the size.` : null;
+    return { media: row, warning };
   });
 
   app.delete('/api/media/:id', async (req) => {

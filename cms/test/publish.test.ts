@@ -126,6 +126,44 @@ test('selective publish promotes only the chosen items', async () => {
   await api(app, 'POST', `/api/products/${b}/discard`, { session: editor });
 });
 
+test('a renamed product keeps its published address until the rename itself is published', async () => {
+  const id = await productId('cable-glands');
+  const full = await api(app, 'GET', `/api/products/${id}`, { session: editor });
+  const saved = await api(app, 'PUT', `/api/products/${id}`, { session: editor, payload: { slug: 'cable-glands-renamed', body: full.body.body } });
+  assert.equal(saved.status, 200, saved.text);
+  const about = (await api(app, 'GET', '/api/pages/about', { session: editor })).body.body as Record<string, unknown>;
+  await api(app, 'PUT', '/api/pages/about', { session: editor, payload: { body: { ...about, title: 'About, republished' } } });
+  const r = await api(app, 'POST', '/api/publish', { session: editor, payload: { selection: { pages: ['about'] } } });
+  assert.equal(r.status, 200, r.text);
+  assert.equal((await site.inject({ method: 'GET', url: '/products/cable-glands/' })).statusCode, 200, 'old address still served');
+  assert.equal((await site.inject({ method: 'GET', url: '/products/cable-glands-renamed/' })).statusCode, 404);
+  const pending = (await api(app, 'GET', '/api/pending', { session: editor })).body.items as Array<{ slug: string }>;
+  assert.deepEqual(pending.map((p) => p.slug), ['cable-glands-renamed']);
+  await api(app, 'POST', `/api/products/${id}/discard`, { session: editor });
+  assert.deepEqual(((await api(app, 'GET', '/api/pending', { session: editor })).body.items as unknown[]), []);
+});
+
+test('a selection that would publish a product without its family is refused with a clear message', async () => {
+  const families = (await api(app, 'GET', '/api/families', { session: editor })).body.items as Array<{ id: number; slug: string }>;
+  const template = (await api(app, 'GET', `/api/families/${families[0].id}`, { session: editor })).body.body as Record<string, unknown>;
+  const fam = await api(app, 'POST', '/api/families', { session: editor, payload: { slug: 'test-family', body: { ...template, name: 'Test Family', shortName: 'Test' } } });
+  assert.equal(fam.status, 201, fam.text);
+  const famId = (fam.body.item as { id: number }).id;
+  const pBody = (await api(app, 'GET', `/api/products/${await productId('cable-lugs')}`, { session: editor })).body.body as Record<string, unknown>;
+  const prod = await api(app, 'POST', '/api/products', { session: editor, payload: { slug: 'test-family-product', familyId: famId, body: { ...pBody, name: 'Test Family Product' } } });
+  assert.equal(prod.status, 201, prod.text);
+  const prodId = (prod.body.item as { id: number }).id;
+  const before = current();
+  const refused = await api(app, 'POST', '/api/publish', { session: editor, payload: { selection: { products: [prodId] } } });
+  assert.equal(refused.status, 422, refused.text);
+  assert.equal(refused.body.error, 'Product "test-family-product" cannot go live before its family "test-family": publish them together');
+  assert.equal(current(), before, 'nothing published');
+  assert.ok(((await api(app, 'GET', '/api/pending', { session: editor })).body.items as Array<{ slug: string }>).some((i) => i.slug === 'test-family-product'), 'product still pending');
+  const ok = await api(app, 'POST', '/api/publish', { session: editor, payload: { selection: { families: [famId], products: [prodId] } } });
+  assert.equal(ok.status, 200, ok.text);
+  assert.match(await page('/products/test-family-product/'), /Test Family Product/);
+});
+
 test('hidden items disappear at publish, deletions apply, old releases are pruned, rollback restores a release', async () => {
   const id = await productId('spiral-wrapping-bands');
   await api(app, 'POST', `/api/products/${id}/status`, { session: editor, payload: { status: 'hidden' } });

@@ -1,6 +1,7 @@
 // Shared test setup: a real PostgreSQL database (TEST_DATABASE_URL, or DATABASE_URL with "_test" appended to the
 // database name), migrated and truncated before each test file; temp media and publish directories.
 import { mkdtempSync, rmSync } from 'node:fs';
+import { crc32, deflateSync } from 'node:zlib';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import pg from 'pg';
@@ -111,6 +112,21 @@ export function multipart(fields: Record<string, string>, file: { name: string; 
   parts.push(file.data, Buffer.from(`\r\n--${boundary}--\r\n`));
   const payload = Buffer.concat(parts);
   return { payload, headers: { 'content-type': `multipart/form-data; boundary=${boundary}`, 'content-length': String(payload.length) } };
+}
+
+/** A valid grey PNG of the given size (for dimension checks). */
+export function pngOf(width: number, height: number): Buffer {
+  const chunk = (type: string, data: Buffer) => {
+    const body = Buffer.concat([Buffer.from(type, 'ascii'), data]);
+    const len = Buffer.alloc(4); len.writeUInt32BE(data.length);
+    const crc = Buffer.alloc(4); crc.writeUInt32BE(crc32(body));
+    return Buffer.concat([len, body, crc]);
+  };
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0); ihdr.writeUInt32BE(height, 4); ihdr[8] = 8; ihdr[9] = 0; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+  const raw = Buffer.alloc((width + 1) * height, 0x80);
+  for (let y = 0; y < height; y++) raw[y * (width + 1)] = 0;
+  return Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), chunk('IHDR', ihdr), chunk('IDAT', deflateSync(raw)), chunk('IEND', Buffer.alloc(0))]);
 }
 
 export const TINY_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');

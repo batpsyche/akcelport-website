@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useItem, useItems, useItemMutations, errorsFrom, reportError } from '@/lib/items';
 import { useDocument } from '@/lib/doc';
-import type { FamilyBody, Image } from '@/lib/types';
+import type { FamilyBody, Image, ItemFull } from '@/lib/types';
 import { slugify } from '@/lib/format';
 import { EditorFrame, Section, StatusCard, VersionsCard } from '@/components/EditorFrame';
 import { TextField, TextAreaField, SelectField } from '@/components/fields/Primitives';
@@ -25,25 +25,27 @@ export function FamilyEditPage() {
   const [slug, setSlug] = useState('');
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  useEffect(() => { if (item.data) { replace(item.data.body); setSlug(item.data.item.slug); } }, [item.data, replace]);
+  const edited = doc !== undefined && (dirty || (!isNew && !!item.data && slug !== item.data.item.slug));
+  const sync = (r: ItemFull<FamilyBody>) => { replace(r.body); setSlug(r.item.slug); };
+  useEffect(() => { if (item.data && !edited) sync(item.data); }, [item.data, edited]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (isNew && !slugTouched && doc?.name) setSlug(slugify(doc.name)); }, [doc?.name, isNew, slugTouched]);
   const save = async () => {
     if (!doc) return;
     setErrors({});
     try {
-      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); navigate(`/families/${c.item.id}`, { replace: true }); }
-      else { const s = await m.save.mutateAsync({ slug, body: doc }); replace(s.body); }
+      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); sync(c); navigate(`/families/${c.item.id}`, { replace: true }); }
+      else sync(await m.save.mutateAsync({ slug, body: doc }));
     } catch (e) { setErrors(errorsFrom(e)); reportError(e); }
   };
   if (!isNew && item.isLoading) return <p className="text-muted-foreground">Loading…</p>;
   if (!doc) return null;
   const members = (products.data ?? []).filter((p) => p.familyId === id);
   return (
-    <EditorFrame kicker={isNew ? 'New family' : 'Family'} title={doc.name || 'Untitled family'} backTo="/families" backLabel="Families" dirty={dirty || isNew} saving={m.save.isPending || m.create.isPending} onSave={save} errorSummary={Object.entries(errors).map(([p, e]) => `${p}: ${e}`)}
+    <EditorFrame kicker={isNew ? 'New family' : 'Family'} title={doc.name || 'Untitled family'} backTo="/families" backLabel="Families" dirty={edited || isNew} saving={m.save.isPending || m.create.isPending} onSave={save} errorSummary={Object.entries(errors).map(([p, e]) => `${p}: ${e}`)}
       sidebar={!isNew && item.data ? <>
-        <StatusCard item={item.data.item} onStatus={(s) => m.setStatus.mutate(s)} onDiscard={() => m.discard.mutate()} onRestore={() => m.restore.mutate()} onDelete={() => m.remove.mutateAsync().then((r) => { if (r.hard) navigate('/families'); })} />
+        <StatusCard item={item.data.item} onStatus={(s) => m.setStatus.mutate(s)} onDiscard={() => m.discard.mutate(undefined, { onSuccess: sync })} onRestore={() => m.restore.mutate()} onDelete={() => m.remove.mutateAsync().then((r) => { if (r.hard) navigate('/families'); })} />
         <Card className="chamfer"><CardHeader className="pb-2"><CardTitle className="text-sm">Products in this family</CardTitle></CardHeader><CardContent className="text-sm grid gap-1">{members.map((p) => <Link key={p.id} to={`/products/${p.id}`} className="hover:underline truncate">{p.name}</Link>)}{!members.length && <span className="text-muted-foreground text-xs">None yet.</span>}</CardContent></Card>
-        <VersionsCard versions={item.data.versions} onRevert={(v) => m.revert.mutate(v)} />
+        <VersionsCard versions={item.data.versions} onRevert={(v) => m.revert.mutate(v, { onSuccess: sync })} />
       </> : undefined}>
       <Section title="Basics">
         <div className="grid md:grid-cols-2 gap-4">

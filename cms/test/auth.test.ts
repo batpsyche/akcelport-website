@@ -122,6 +122,31 @@ test('change password and logout', async () => {
   assert.equal((await login(app, 'changer@example.com', 'brand new password')).user.email, 'changer@example.com');
 });
 
+test('a temporary password locks the API down to me, change-password and logout until it is changed', async () => {
+  const admin = await login(app, 'admin@example.com');
+  const created = await api(app, 'POST', '/api/users', { session: admin, payload: { email: 'temp@example.com', name: 'Temp', role: 'editor', password: 'temporary password 1' } });
+  assert.equal(created.status, 201, created.text);
+  const s = await login(app, 'temp@example.com', 'temporary password 1');
+  assert.equal(s.user.email, 'temp@example.com');
+  const blocked = await api(app, 'GET', '/api/products', { session: s });
+  assert.equal(blocked.status, 403);
+  assert.equal((blocked.body.details as { code: string }).code, 'password_change_required');
+  assert.equal((await api(app, 'POST', '/api/publish/preview', { session: s })).status, 403);
+  assert.equal((await api(app, 'GET', '/api/pending', { session: s })).status, 403);
+  const me = await api(app, 'GET', '/api/auth/me', { session: s });
+  assert.equal(me.status, 200);
+  assert.equal((me.body.user as { mustChangePassword: boolean }).mustChangePassword, true);
+  assert.equal((await api(app, 'POST', '/api/auth/change-password', { session: s, payload: { currentPassword: 'temporary password 1', newPassword: 'my very own password' } })).status, 200);
+  assert.equal((await api(app, 'GET', '/api/products', { session: s })).status, 200, 'unlocked after the change');
+  assert.equal(((await api(app, 'GET', '/api/auth/me', { session: s })).body.user as { mustChangePassword: boolean }).mustChangePassword, false);
+  // Logout stays available while locked.
+  const s2 = await login(app, 'editor@example.com');
+  await env.pool.query('UPDATE users SET must_change_password = true WHERE email = $1', ['editor@example.com']);
+  assert.equal((await api(app, 'GET', '/api/products', { session: s2 })).status, 403);
+  assert.equal((await api(app, 'POST', '/api/auth/logout', { session: s2 })).status, 200);
+  await env.pool.query('UPDATE users SET must_change_password = false WHERE email = $1', ['editor@example.com']);
+});
+
 test('audit log records who did what', async () => {
   const admin = await login(app, 'admin@example.com');
   const r = await api(app, 'GET', '/api/audit?limit=20', { session: admin });

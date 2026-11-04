@@ -45,7 +45,12 @@ export function MediaPage() {
     if (!replacing) return;
     const fd = new FormData(); fd.append('file', file);
     setBusy(true);
-    try { await api.post(`/api/media/${replacing.id}/replace`, fd); await refresh(); toast.success(`Replaced ${replacing.path}. Publish to update the site.`); }
+    try {
+      const r = await api.post<{ warning: string | null }>(`/api/media/${replacing.id}/replace`, fd);
+      await refresh();
+      if (r.warning) toast.warning(`Replaced ${replacing.path}. ${r.warning}`, { duration: 15_000 });
+      else toast.success(`Replaced ${replacing.path}. Publish to update the site.`);
+    }
     catch (e) { reportError(e); }
     finally { setBusy(false); setReplacing(null); if (replaceRef.current) replaceRef.current.value = ''; }
   };

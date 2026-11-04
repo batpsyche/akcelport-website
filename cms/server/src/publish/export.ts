@@ -9,19 +9,19 @@ export type ExportMode = 'live' | 'preview';
 
 interface ContentRow { id: number; slug: string; sort_order: number; body: Record<string, unknown>; family_id?: number }
 
-function selection(mode: ExportMode): { where: string; body: string } {
+function selection(mode: ExportMode): { where: string; body: string; slug: string; family: string } {
   return mode === 'live'
-    ? { where: `published_status = 'live' AND live IS NOT NULL`, body: 'live' }
-    : { where: `status = 'live' AND deleted_at IS NULL AND COALESCE(draft, live) IS NOT NULL`, body: 'COALESCE(draft, live)' };
+    ? { where: `published_status = 'live' AND live IS NOT NULL`, body: 'live', slug: 'published_slug', family: 'published_family_id' }
+    : { where: `status = 'live' AND deleted_at IS NULL AND COALESCE(draft, live) IS NOT NULL`, body: 'COALESCE(draft, live)', slug: 'slug', family: 'family_id' };
 }
 
 export async function loadExportData(db: Queryable, mode: ExportMode) {
   const s = selection(mode);
-  const families = (await db.query<ContentRow>(`SELECT id, slug, sort_order, ${s.body} AS body FROM families WHERE ${s.where} ORDER BY sort_order, id`)).rows;
+  const families = (await db.query<ContentRow>(`SELECT id, ${s.slug} AS slug, sort_order, ${s.body} AS body FROM families WHERE ${s.where} ORDER BY sort_order, id`)).rows;
   const familyIds = new Set(families.map((f) => f.id));
-  const products = (await db.query<ContentRow>(`SELECT id, slug, family_id, sort_order, ${s.body} AS body FROM products WHERE ${s.where} ORDER BY sort_order, id`)).rows
+  const products = (await db.query<ContentRow>(`SELECT id, ${s.slug} AS slug, ${s.family} AS family_id, sort_order, ${s.body} AS body FROM products WHERE ${s.where} ORDER BY sort_order, id`)).rows
     .filter((p) => familyIds.has(p.family_id!));
-  const downloads = (await db.query<ContentRow>(`SELECT id, slug, sort_order, ${s.body} AS body FROM downloads WHERE ${s.where} ORDER BY sort_order, id`)).rows;
+  const downloads = (await db.query<ContentRow>(`SELECT id, ${s.slug} AS slug, sort_order, ${s.body} AS body FROM downloads WHERE ${s.where} ORDER BY sort_order, id`)).rows;
   const pageRows = (await db.query<{ key: string; body: Record<string, unknown> }>(`SELECT key, ${mode === 'live' ? 'live' : 'COALESCE(draft, live)'} AS body FROM pages`)).rows;
   const pages = new Map(pageRows.map((r) => [r.key, r.body]));
   const redirects = (await db.query<{ kind: string; from_path: string; to_path: string }>(`SELECT kind, from_path, to_path FROM redirects ORDER BY sort_order, id`)).rows;

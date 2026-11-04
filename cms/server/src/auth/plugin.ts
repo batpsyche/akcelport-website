@@ -1,7 +1,7 @@
 // Session cookie authentication, CSRF protection and role guards.
 // - The cookie is HttpOnly, SameSite=Strict, Secure (when configured), signed; its value is a random token whose hash is the session id.
 // - Every state-changing /api request must carry an Origin (or Sec-Fetch-Site) that matches the host, and an x-csrf-token header
-//   equal to the session's token. Roles are enforced here, on the server, never only in the UI.
+//   equal to the session's token. Roles and the temporary-password state are enforced here, on the server, never only in the UI.
 import type { FastifyInstance, FastifyRequest, FastifyReply, preHandlerHookHandler } from 'fastify';
 import fp from 'fastify-plugin';
 import type pg from 'pg';
@@ -21,6 +21,8 @@ export class HttpError extends Error {
 }
 
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
+// A user signed in with a temporary password may only look themselves up, change the password or sign out.
+const PASSWORD_CHANGE_EXEMPT = new Set(['/api/auth/me', '/api/auth/change-password', '/api/auth/logout']);
 
 export function originAllowed(req: FastifyRequest): boolean {
   const origin = req.headers.origin;
@@ -51,13 +53,18 @@ export const authPlugin = fp(async function authPlugin(app: FastifyInstance, opt
   });
 
   app.addHook('preHandler', async (req) => {
-    if (SAFE_METHODS.has(req.method) || !req.url.startsWith('/api/')) return;
-    if (!originAllowed(req)) throw new HttpError(403, 'Cross-site request refused');
-    if (req.session) {
-      const header = req.headers['x-csrf-token'];
-      if (typeof header !== 'string' || header.length !== req.session.csrfToken.length || !safeEqual(header, req.session.csrfToken)) {
-        throw new HttpError(403, 'Missing or invalid CSRF token');
+    if (!req.url.startsWith('/api/')) return;
+    if (!SAFE_METHODS.has(req.method)) {
+      if (!originAllowed(req)) throw new HttpError(403, 'Cross-site request refused');
+      if (req.session) {
+        const header = req.headers['x-csrf-token'];
+        if (typeof header !== 'string' || header.length !== req.session.csrfToken.length || !safeEqual(header, req.session.csrfToken)) {
+          throw new HttpError(403, 'Missing or invalid CSRF token');
+        }
       }
+    }
+    if (req.user?.mustChangePassword && !PASSWORD_CHANGE_EXEMPT.has(req.url.split('?')[0])) {
+      throw new HttpError(403, 'Choose your own password before continuing', { code: 'password_change_required' });
     }
   });
 });

@@ -71,7 +71,7 @@ export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<Se
     for (const c of categories) {
       const { slug, order, products: _products, ...body } = c as { slug: string; order: number; products: string[] } & Record<string, unknown>;
       const r = await db.query<{ id: number }>(
-        `INSERT INTO families (slug, sort_order, status, published_status, live) VALUES ($1,$2,'live','live',$3) RETURNING id`,
+        `INSERT INTO families (slug, published_slug, sort_order, status, published_status, live) VALUES ($1,$1,$2,'live','live',$3) RETURNING id`,
         [slug, order, JSON.stringify(body)],
       );
       familyIds.set(slug, r.rows[0].id);
@@ -83,7 +83,7 @@ export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<Se
       const familyId = familyIds.get(family);
       if (!familyId) throw new Error(`product ${slug}: unknown family ${family}`);
       await db.query(
-        `INSERT INTO products (slug, family_id, sort_order, status, published_status, live) VALUES ($1,$2,$3,'live','live',$4)`,
+        `INSERT INTO products (slug, published_slug, family_id, published_family_id, sort_order, status, published_status, live) VALUES ($1,$1,$2,$2,$3,'live','live',$4)`,
         [slug, familyId, order, JSON.stringify(body)],
       );
     }
@@ -93,7 +93,7 @@ export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<Se
     for (const d of downloads) {
       const { id, products: _products, ...body } = d as { id: string; products: string[] } & Record<string, unknown>;
       await db.query(
-        `INSERT INTO downloads (slug, sort_order, status, published_status, live) VALUES ($1,$2,'live','live',$3)`,
+        `INSERT INTO downloads (slug, published_slug, sort_order, status, published_status, live) VALUES ($1,$1,$2,'live','live',$3)`,
         [id, ++di, JSON.stringify(body)],
       );
     }

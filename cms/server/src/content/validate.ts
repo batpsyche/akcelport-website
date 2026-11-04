@@ -8,7 +8,7 @@ export interface Issue { path: string; message: string }
 export function collectMediaRefs(value: unknown, path = ''): Array<{ path: string; ref: string }> {
   const out: Array<{ path: string; ref: string }> = [];
   const walk = (v: unknown, p: string) => {
-    if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${p}[${i}]`));
+    if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${p}.${i}`));
     else if (v && typeof v === 'object') {
       for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
         const cp = p ? `${p}.${k}` : k;
@@ -32,5 +32,5 @@ export async function checkMediaRefs(db: Queryable, body: unknown): Promise<Issu
 export async function checkDownloadRefs(db: Queryable, keys: string[]): Promise<Issue[]> {
   if (!keys.length) return [];
   const found = new Set((await db.query<{ slug: string }>('SELECT slug FROM downloads WHERE slug = ANY($1) AND deleted_at IS NULL', [keys])).rows.map((r) => r.slug));
-  return keys.filter((k) => !found.has(k)).map((k, i) => ({ path: `downloads[${keys.indexOf(k)}]`, message: `Unknown datasheet: ${k}` })).filter((x, i, a) => a.findIndex((y) => y.path === x.path) === i);
+  return keys.flatMap((k, i) => (found.has(k) ? [] : [{ path: `downloads.${i}`, message: `Unknown datasheet: ${k}` }]));
 }

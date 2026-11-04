@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -36,7 +36,7 @@ export function PageEditor({ pageKey, kicker, backTo, backLabel, extraSidebar }:
   const { doc, set, replace, dirty } = useDocument<Record<string, unknown>>(undefined);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [advanced, setAdvanced] = useState(false);
-  useEffect(() => { if (query.data) replace(query.data.body); }, [query.data, replace]);
+  useEffect(() => { if (query.data && !dirty) replace(query.data.body); }, [query.data, dirty, replace]);
   const spec = pageFieldSpecs[pageKey];
   const onSave = async () => {
     if (!doc) return;
@@ -53,12 +53,12 @@ export function PageEditor({ pageKey, kicker, backTo, backLabel, extraSidebar }:
           <CardContent className="grid gap-3 text-sm">
             {data.hasDraft ? <Badge className="bg-primary text-white w-fit">Draft changes</Badge> : <span className="text-xs text-muted-foreground">Published and up to date.</span>}
             <div className="text-xs text-muted-foreground">Last change {formatDate(data.updatedAt)}</div>
-            {data.hasDraft && <ConfirmDialog trigger={<Button variant="outline" size="sm"><RotateCcw className="size-4" /> Discard draft</Button>} title="Discard the draft?" description="The unpublished changes are dropped." confirmLabel="Discard" onConfirm={() => discard.mutate()} />}
+            {data.hasDraft && <ConfirmDialog trigger={<Button variant="outline" size="sm"><RotateCcw className="size-4" /> Discard draft</Button>} title="Discard the draft?" description="The unpublished changes are dropped." confirmLabel="Discard" onConfirm={() => discard.mutate(undefined, { onSuccess: (r) => replace(r.body) })} />}
             {me?.user.role === 'admin' && <Button variant="ghost" size="sm" onClick={() => setAdvanced((a) => !a)}><Code2 className="size-4" /> {advanced ? 'Back to the form' : 'Edit as JSON'}</Button>}
           </CardContent>
         </Card>
         {extraSidebar}
-        <VersionsCard versions={data.versions} onRevert={(v) => revert.mutate(v)} />
+        <VersionsCard versions={data.versions} onRevert={(v) => revert.mutate(v, { onSuccess: (r) => replace(r.body) })} />
       </>}>
       {spec && <p className="text-sm text-muted-foreground -mt-2">{spec.description}</p>}
       {advanced
@@ -70,9 +70,26 @@ export function PageEditor({ pageKey, kicker, backTo, backLabel, extraSidebar }:
   );
 }
 
+type ImageEntry = [string, Image];
+
+/** Edits the keyed images as an ordered list; the document is updated whenever every key is unique. */
 function CompanyImagesEditor({ doc, onChange }: { doc: Record<string, Image>; onChange: (v: Record<string, Image>) => void }) {
-  const entries = Object.entries(doc);
-  const rebuild = (list: Array<[string, Image]>) => onChange(Object.fromEntries(list));
+  const [entries, setEntries] = useState<ImageEntry[]>(() => Object.entries(doc));
+  const emitted = useRef(doc);
+  useEffect(() => {
+    if (doc === emitted.current) return;
+    emitted.current = doc;
+    setEntries(Object.entries(doc));
+  }, [doc]);
+  const duplicates = new Set(entries.map(([k]) => k).filter((k, i, all) => all.indexOf(k) !== i));
+  const rebuild = (list: ImageEntry[]) => {
+    setEntries(list);
+    if (new Set(list.map(([k]) => k)).size !== list.length) return;
+    const next = Object.fromEntries(list);
+    emitted.current = next;
+    onChange(next);
+  };
+  const freshKey = () => { let n = entries.length + 1; while (entries.some(([k]) => k === `image-${n}`)) n++; return `image-${n}`; };
   return (
     <Section title="Company images" description="Brochure imagery referenced by key from the About page. Keys must stay unique.">
       <SortableList items={entries.map(([k, im], i) => ({ id: `${i}`, k, im }))} getId={(e) => e.id} onReorder={(next) => rebuild(next.map((e) => [e.k, e.im]))} className="grid gap-3"
@@ -80,13 +97,13 @@ function CompanyImagesEditor({ doc, onChange }: { doc: Record<string, Image>; on
           <div className="flex items-start gap-2">
             {row.handle}
             <div className="grid gap-2 flex-1">
-              <TextField label="Key" mono value={e.k} onChange={(v) => rebuild(entries.map(([k, im], j) => (j === row.index ? [v, im] : [k, im])))} />
+              <TextField label="Key" mono value={e.k} onChange={(v) => rebuild(entries.map(([k, im], j) => (j === row.index ? [v, im] : [k, im])))} error={duplicates.has(e.k) ? 'This key is already used; changes are kept once every key is unique' : undefined} />
               <ImageField compact value={e.im} onChange={(v) => rebuild(entries.map(([k, im], j) => (j === row.index ? [k, v as Image] : [k, im])))} folder="img/company" />
             </div>
             <Button type="button" variant="ghost" size="sm" onClick={() => rebuild(entries.filter((_, j) => j !== row.index))}>Remove</Button>
           </div>
         )} />
-      <div><Button type="button" variant="outline" size="sm" onClick={() => rebuild([...entries, [`image-${entries.length + 1}`, { src: '', w: 1, h: 1 }]])}>Add image</Button></div>
+      <div><Button type="button" variant="outline" size="sm" onClick={() => rebuild([...entries, [freshKey(), { src: '', w: 1, h: 1 }]])}>Add image</Button></div>
     </Section>
   );
 }

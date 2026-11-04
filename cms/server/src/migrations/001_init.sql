@@ -1,5 +1,5 @@
 -- Akcelport CMS schema. Content tables keep a live body (what the published site uses) and a draft body
--- (pending edits); status is the desired visibility, published_status the visibility at the last publish.
+-- (pending edits); status, slug and family_id are the desired values, published_* the values at the last publish.
 CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TABLE users (
@@ -67,6 +67,7 @@ CREATE TABLE media (
 CREATE TABLE families (
   id serial PRIMARY KEY,
   slug text UNIQUE NOT NULL,
+  published_slug text,
   sort_order int NOT NULL DEFAULT 0,
   status text NOT NULL DEFAULT 'live' CHECK (status IN ('hidden', 'live')),
   published_status text NOT NULL DEFAULT 'hidden' CHECK (published_status IN ('hidden', 'live')),
@@ -81,7 +82,9 @@ CREATE TABLE families (
 CREATE TABLE products (
   id serial PRIMARY KEY,
   slug text UNIQUE NOT NULL,
+  published_slug text,
   family_id int NOT NULL REFERENCES families(id),
+  published_family_id int REFERENCES families(id),
   sort_order int NOT NULL DEFAULT 0,
   status text NOT NULL DEFAULT 'live' CHECK (status IN ('hidden', 'live')),
   published_status text NOT NULL DEFAULT 'hidden' CHECK (published_status IN ('hidden', 'live')),
@@ -97,6 +100,7 @@ CREATE INDEX products_family_idx ON products (family_id, sort_order);
 CREATE TABLE downloads (
   id serial PRIMARY KEY,
   slug text UNIQUE NOT NULL,
+  published_slug text,
   sort_order int NOT NULL DEFAULT 0,
   status text NOT NULL DEFAULT 'live' CHECK (status IN ('hidden', 'live')),
   published_status text NOT NULL DEFAULT 'hidden' CHECK (published_status IN ('hidden', 'live')),
@@ -139,6 +143,8 @@ CREATE TABLE content_versions (
   entity_id text NOT NULL,
   version_no int NOT NULL,
   body jsonb NOT NULL,
+  slug text,
+  family_id int,
   note text,
   created_by int REFERENCES users(id) ON DELETE SET NULL,
   created_at timestamptz NOT NULL DEFAULT now(),

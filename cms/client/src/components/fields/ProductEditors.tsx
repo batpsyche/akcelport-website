@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { Plus, X, Copy, Trash2 } from 'lucide-react';
 import type { SpecTable, Variant, ItemSummary } from '@/lib/types';
-import { slugify } from '@/lib/format';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
@@ -68,7 +67,7 @@ export function VariantsField({ value, onChange, errors, folder, prefix = 'varia
                 </div>
                 <AccordionContent className="px-3 pb-4 grid gap-4 border-t pt-3">
                   <div className="grid sm:grid-cols-[1fr_2fr] gap-3">
-                    <TextField label="Id" mono value={it.v.id} onChange={(v) => update(row.index, { id: slugify(v) || v })} error={errorAt(errors, `${p}.id`)} help="Short, unique within the product" />
+                    <TextField label="Id" mono value={it.v.id} onChange={(v) => update(row.index, { id: v.toLowerCase().replace(/[^a-z0-9-]+/g, '-') })} error={errorAt(errors, `${p}.id`)} help="Short, unique within the product" />
                     <TextField label="Name" value={it.v.name} onChange={(v) => update(row.index, { name: v })} error={errorAt(errors, `${p}.name`)} />
                   </div>
                   <TextAreaField label="Summary" rows={2} value={it.v.summary ?? ''} onChange={(v) => update(row.index, { summary: v || undefined })} />
