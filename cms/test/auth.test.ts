@@ -1,5 +1,7 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { FastifyInstance } from 'fastify';
 import { setupTestEnv, makeUser, login, api, cookieFrom, type TestEnv } from './helpers.ts';
 import { buildApp } from '../server/src/app.ts';
@@ -154,4 +156,35 @@ test('audit log records who did what', async () => {
   const entries = r.body.entries as Array<{ action: string; userEmail: string }>;
   assert.ok(entries.some((e) => e.action === 'user.create' && e.userEmail === 'admin@example.com'));
   assert.ok(entries.some((e) => e.action === 'settings.update'));
+});
+
+test('the audit log shows sign-in IP addresses to administrators only', async () => {
+  const admin = await login(app, 'admin@example.com');
+  const editor = await login(app, 'editor@example.com');
+  const forAdmin = (await api(app, 'GET', '/api/audit?limit=20', { session: admin })).body.entries as Array<Record<string, unknown>>;
+  const forEditor = (await api(app, 'GET', '/api/audit?limit=20', { session: editor })).body.entries as Array<Record<string, unknown>>;
+  assert.ok(forAdmin.length > 0 && forEditor.length > 0);
+  assert.ok(forAdmin.every((e) => 'ip' in e), 'admin entries carry the ip field');
+  assert.ok(forAdmin.some((e) => e.action === 'auth.login' && typeof e.ip === 'string'), 'login entries record the client address');
+  assert.ok(forEditor.every((e) => !('ip' in e)), 'editor entries omit the ip field');
+  assert.ok(forEditor.some((e) => e.action === 'auth.login' && e.userEmail === 'admin@example.com'), 'who, what and when stay visible to editors');
+});
+
+test('static assets do not count against the per-IP API rate limit', async () => {
+  const s = await login(app, 'editor@example.com');
+  const media = (await api(app, 'GET', '/api/media', { session: s })).body.media as Array<{ path: string }>;
+  const remainingBefore = Number((await api(app, 'GET', '/api/auth/me', { session: s })).headers['x-ratelimit-remaining']);
+  assert.ok(Number.isInteger(remainingBefore), 'API responses carry the rate-limit headers');
+  mkdirSync(app.publishService.previewDir, { recursive: true });
+  writeFileSync(join(app.publishService.previewDir, 'index.html'), '<!doctype html><title>preview</title>');
+  const statics = ['/index.html', '/favicon.png', '/fonts/archivo-100-900.woff2', `/media/${media[0].path}`, '/preview/index.html'];
+  for (let i = 0; i < 20; i++) {
+    for (const url of statics) {
+      const res = await api(app, 'GET', url, { session: s });
+      assert.notEqual(res.status, 429, url);
+      assert.equal(res.headers['x-ratelimit-remaining'], undefined, `${url} is not rate limited`);
+    }
+  }
+  const remainingAfter = Number((await api(app, 'GET', '/api/auth/me', { session: s })).headers['x-ratelimit-remaining']);
+  assert.equal(remainingAfter, remainingBefore - 1, 'only the API calls were counted');
 });

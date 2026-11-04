@@ -157,8 +157,9 @@ export async function contentRoutes(app: FastifyInstance, opts: { pool: pg.Pool;
   // ---- audit log
   app.get('/api/audit', async (req) => {
     const q = z.object({ before: z.coerce.number().int().optional(), limit: z.coerce.number().int().min(1).max(200).default(50), entityType: z.string().optional(), entityId: z.string().optional(), q: z.string().optional() }).parse(req.query);
+    const ipColumn = req.user!.role === 'admin' ? 'ip, ' : '';
     const rows = (await pool.query(
-      `SELECT id, user_email AS "userEmail", action, entity_type AS "entityType", entity_id AS "entityId", label, changes, ip, created_at AS "createdAt"
+      `SELECT id, user_email AS "userEmail", action, entity_type AS "entityType", entity_id AS "entityId", label, changes, ${ipColumn}created_at AS "createdAt"
        FROM audit_log WHERE ($1::bigint IS NULL OR id < $1) AND ($2::text IS NULL OR entity_type = $2) AND ($3::text IS NULL OR entity_id = $3)
          AND ($4::text IS NULL OR label ILIKE '%' || $4 || '%' OR user_email ILIKE '%' || $4 || '%' OR action ILIKE '%' || $4 || '%')
        ORDER BY id DESC LIMIT $5`,

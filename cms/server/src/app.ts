@@ -27,7 +27,7 @@ export async function buildApp(config: Config, pool: pg.Pool): Promise<FastifyIn
   app.decorate('publishService', service);
 
   await app.register(fastifyCookie, { secret: config.sessionSecret });
-  await app.register(fastifyRateLimit, { global: true, max: 600, timeWindow: '1 minute' });
+  await app.register(fastifyRateLimit, { global: true, max: 600, timeWindow: '1 minute', allowList: (req) => !req.url.startsWith('/api/') });
   await app.register(fastifyMultipart, { limits: { fileSize: Math.max(config.uploadImageMaxBytes, config.uploadPdfMaxBytes) + 1, files: 1, fields: 10 } });
   await app.register(authPlugin, { pool, config });
 

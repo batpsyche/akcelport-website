@@ -31,5 +31,5 @@ export interface PublishRecord { id: number; kind: 'publish' | 'preview' | 'roll
 export interface PublishState { current: string | null; releases: Array<{ id: string; createdAt: string; current: boolean }>; publishes: PublishRecord[]; busy: boolean; previewBuiltAt: string | null; pending: Pending; canPublish: boolean; sitePort: number }
 
 export interface Redirect { id: number; kind: 'page' | 'download'; fromPath: string; toPath: string; sortOrder: number; updatedAt: string }
-export interface AuditEntry { id: number; userEmail: string | null; action: string; entityType: string | null; entityId: string | null; label: string | null; changes: Record<string, { from: unknown; to: unknown }> | null; ip: string | null; createdAt: string }
+export interface AuditEntry { id: number; userEmail: string | null; action: string; entityType: string | null; entityId: string | null; label: string | null; changes: Record<string, { from: unknown; to: unknown }> | null; ip?: string | null; createdAt: string }
 export interface UserRow { id: number; email: string; name: string; role: 'admin' | 'editor'; is_active: boolean; must_change_password: boolean; created_at: string; last_login_at: string | null }
