@@ -1,0 +1,54 @@
+# Self-hosted Akcelport CMS: PostgreSQL + the backoffice app.
+# Copy .env.example to .env and set POSTGRES_PASSWORD and SESSION_SECRET before `docker compose up`.
+name: akcelport-cms
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: akcelport
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in cms/.env}
+      POSTGRES_DB: akcelport_cms
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U akcelport -d akcelport_cms"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  cms:
+    build:
+      context: ..
+      dockerfile: cms/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://akcelport:${POSTGRES_PASSWORD}@db:5432/akcelport_cms
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET in cms/.env}
+      PORT: 3000
+      SITE_PORT: 4174
+      MEDIA_DIR: /data/media
+      PUBLISH_DIR: /data/publish
+      SITE_ROOT: /app
+      PUBLISH_KEEP: ${PUBLISH_KEEP:-5}
+      SITE_URL: ${SITE_URL:-}
+      SESSION_SECURE: ${SESSION_SECURE:-0}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    volumes:
+      - media:/data/media
+      - publish:/data/publish
+    ports:
+      - "127.0.0.1:${CMS_PORT:-3000}:3000"
+      - "127.0.0.1:${CMS_SITE_PORT:-4174}:4174"
+
+volumes:
+  pgdata:
+  media:
+  publish:

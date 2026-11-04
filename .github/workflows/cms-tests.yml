@@ -1,0 +1,40 @@
+name: CMS tests
+
+on:
+  push:
+    branches: ['**']
+    paths: ['cms/**', 'scripts/**', 'src/lib/**', 'content/**', '.github/workflows/cms-tests.yml']
+  pull_request:
+    paths: ['cms/**', 'scripts/**', 'src/lib/**', 'content/**', '.github/workflows/cms-tests.yml']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: akcelport
+          POSTGRES_PASSWORD: akcelport-ci
+          POSTGRES_DB: akcelport_cms_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U akcelport -d akcelport_cms_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgres://akcelport:akcelport-ci@localhost:5432/akcelport_cms_test
+      DATABASE_URL: postgres://akcelport:akcelport-ci@localhost:5432/akcelport_cms_test
+      SESSION_SECRET: ci-only-session-secret-0123456789-0123456789
+    defaults:
+      run:
+        working-directory: cms
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm test

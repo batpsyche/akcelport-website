@@ -1,6 +1,6 @@
 # Akcelport Industries website (design phase)
 
-Public website for Akcelport Industries, redesigned from the 2016 PHP site. It is a static site generated from JSON files, so a CMS can edit `content/` later and trigger a rebuild. No dependencies, no `npm install`.
+Public website for Akcelport Industries, redesigned from the 2016 PHP site. It is a static site generated from JSON files; the backoffice CMS under `cms/` edits that content and publishes rebuilt releases (see [cms/README.md](cms/README.md)). The site itself has no dependencies, no `npm install`.
 
 ## Run it locally
 
@@ -14,6 +14,8 @@ npm run check     # validate content only (missing files, unknown families, brok
 ```
 
 `PORT=8080 npm start` changes the port. `dist/` is generated and git-ignored; deploy its contents to any static host (Apache, Nginx, Netlify...). Deployment is not part of this phase.
+
+`node scripts/build.mjs --content <dir> --out <dir> --assets <dir>` builds from another content directory into another output directory, overlaying extra asset directories on `public/`; the CMS in `cms/` uses this to publish. Without those flags the build behaves exactly as above.
 
 `SITE_BASE` (default `/`) builds the site for a sub-folder, e.g. `SITE_BASE=/akcelport-website/ npm run build`; `SITE_URL` optionally overrides the origin used for canonical, sitemap and OG URLs. `.github/workflows/pages.yml` uses both to publish a client preview to GitHub Pages.
 

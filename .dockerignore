@@ -1,0 +1,9 @@
+# Build context for cms/Dockerfile is the repository root. Keep host artefacts and secrets out of the image.
+.git
+.github
+**/node_modules
+**/dist
+**/.DS_Store
+**/*.local
+cms/.env
+cms/data
