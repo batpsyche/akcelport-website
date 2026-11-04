@@ -1,6 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readlinkSync, readdirSync } from 'node:fs';
+import { existsSync, readlinkSync, readdirSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { FastifyInstance } from 'fastify';
 import { setupTestEnv, makeUser, login, api, type TestEnv, type Session } from './helpers.ts';
@@ -245,3 +245,40 @@ test('a failure before the build starts does not leave publish or preview locked
   const r = await service.preview(editor.user);
   assert.ok(r.id > 0, 'preview runs again on the same service');
 });
+
+test('a failed symlink swap after commit is recorded, reported, and the built release stays available for rollback', async () => {
+  const id = await productId('earth-rods');
+  const body = (await api(app, 'GET', `/api/products/${id}`, { session: editor })).body.body as Record<string, unknown>;
+  await api(app, 'PUT', `/api/products/${id}`, { session: editor, payload: { body: { ...body, summary: 'Committed but not yet switched.' } } });
+  const link = join(env.config.publishDir, 'current');
+  const previous = current();
+  // A directory sitting where the symlink belongs cannot be replaced by the atomic rename.
+  rmSync(link);
+  mkdirSync(link);
+  writeFileSync(join(link, 'index.html'), 'blocker');
+  try {
+    const r = await api(app, 'POST', '/api/publish', { session: admin, payload: {} });
+    assert.equal(r.status, 500, r.text);
+    assert.match(String(r.body.error), /switching the site to release .* failed/);
+    const details = r.body.details as { publishId: number; releaseId: string; log: string };
+    assert.ok(details.publishId > 0);
+    assert.ok(existsSync(join(env.config.publishDir, 'releases', details.releaseId, 'products/earth-rods/index.html')), 'the built release is kept');
+    const publishes = (await api(app, 'GET', '/api/publish', { session: admin })).body.publishes as Array<{ id: number; status: string; error: string; releaseId: string }>;
+    assert.equal(publishes[0].id, details.publishId);
+    assert.equal(publishes[0].status, 'failed');
+    assert.match(publishes[0].error, /switching the site to release/);
+    assert.equal(publishes[0].releaseId, details.releaseId);
+    assert.equal(((await api(app, 'GET', `/api/products/${id}`, { session: editor })).body.item as { hasDraft: boolean }).hasDraft, false, 'the promotion was committed');
+    assert.equal((await api(app, 'GET', '/api/publish', { session: admin })).body.busy, false);
+    // Once the obstacle is gone an administrator restores the built release.
+    rmSync(link, { recursive: true });
+    assert.equal((await api(app, 'POST', '/api/publish/rollback', { session: admin, payload: { releaseId: details.releaseId } })).status, 200);
+    assert.equal(current(), details.releaseId);
+    assert.match(await page('/products/earth-rods/'), /Committed but not yet switched\./);
+    assert.ok(existsSync(join(env.config.publishDir, 'releases', previous)), 'the previous release was not removed');
+  } finally {
+    if (existsSync(link) && !readlinkSafe(link)) rmSync(link, { recursive: true, force: true });
+  }
+});
+
+function readlinkSafe(p: string): string | null { try { return readlinkSync(p); } catch { return null; } }

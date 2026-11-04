@@ -184,9 +184,15 @@ export class PublishService {
         client.release();
         rmSync(tmpContent, { recursive: true, force: true });
       }
-      this.swapCurrent(id);
-      const pruned = this.prune();
-      if (pruned.length) log += `\nRemoved old releases: ${pruned.join(', ')}`;
+      try {
+        this.swapCurrent(id);
+        const pruned = this.prune();
+        if (pruned.length) log += `\nRemoved old releases: ${pruned.join(', ')}`;
+      } catch (err) {
+        const message = `The content is published in the database, but switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}. Restore release ${id} from the Publish page once the cause is fixed.`;
+        await this.finish(recordId, 'failed', log, message);
+        throw new HttpError(500, message, { log, publishId: recordId, releaseId: id });
+      }
       await this.finish(recordId, 'success', log, null);
       return { id: recordId, releaseId: id, promoted, log };
     });
