@@ -303,6 +303,7 @@ test('a failed symlink swap after commit is recorded, reported, and the built re
 function readlinkSafe(p: string): string | null { try { return readlinkSync(p); } catch { return null; } }
 
 test('an old release that cannot be removed is reported in the log of a successful publish', async () => {
+  const service = new PublishService(env.pool, env.config);
   const stuck = join(env.config.publishDir, 'releases', '20000101-000000-aaaa');
   mkdirSync(join(stuck, 'locked'), { recursive: true });
   writeFileSync(join(stuck, 'index.html'), 'old');
@@ -319,6 +320,17 @@ test('an old release that cannot be removed is reported in the log of a successf
     assert.equal(publishes[0].error, null);
     assert.match(publishes[0].log, /Could not remove old release 20000101-000000-aaaa/);
     assert.ok(existsSync(stuck));
+    // The failed removal touches the stuck directory; that must not make it count as the newest release and crowd real releases out of the keep window.
+    const previous = r.body.releaseId as string;
+    const again = await api(app, 'POST', '/api/publish', { session: admin, payload: {} });
+    assert.equal(again.status, 200, again.text);
+    assert.match(String(again.body.log), /Warning: Could not remove old release 20000101-000000-aaaa/);
+    assert.ok(existsSync(join(env.config.publishDir, 'releases', previous)), 'release replaced by the next publish is kept for rollback');
+    const third = await api(app, 'POST', '/api/publish', { session: admin, payload: {} });
+    assert.equal(third.status, 200, third.text);
+    assert.match(String(third.body.log), /Warning: Could not remove old release 20000101-000000-aaaa/);
+    assert.ok(existsSync(join(env.config.publishDir, 'releases', again.body.releaseId as string)), 'release replaced by the third publish is kept for rollback');
+    assert.equal(service.listReleases().at(-1)?.id, '20000101-000000-aaaa', 'the stuck release is listed last, after every real release');
   } finally {
     chmodSync(join(stuck, 'locked'), 0o755);
     rmSync(stuck, { recursive: true, force: true });

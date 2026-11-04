@@ -65,14 +65,16 @@ export class PublishService {
     renameSync(tmp, this.currentLink);
   }
 
-  /** Newest first by creation time (a release id has one-second resolution, so same-second releases cannot be ordered by name). */
+  /** Newest first: by the id's timestamp (one-second resolution), then by directory mtime to order releases built in the same second.
+   *  The mtime alone is not enough: a failed removal of an old release touches its directory, which must not make it look newest. */
   listReleases(): Array<{ id: string; createdAt: Date; current: boolean }> {
     if (!existsSync(this.releasesDir)) return [];
     const current = this.currentRelease();
+    const second = (id: string) => id.slice(0, 15);
     return readdirSync(this.releasesDir)
       .filter((n) => RELEASE_RE.test(n))
       .map((id) => ({ id, createdAt: statSync(join(this.releasesDir, id)).mtime, current: id === current }))
-      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime() || b.id.localeCompare(a.id));
+      .sort((a, b) => second(b.id).localeCompare(second(a.id)) || b.createdAt.getTime() - a.createdAt.getTime() || b.id.localeCompare(a.id));
   }
 
   /** Removes releases beyond PUBLISH_KEEP (never the current one). A release that cannot be removed is reported, not fatal. */
