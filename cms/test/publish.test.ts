@@ -1,6 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readlinkSync, readdirSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readlinkSync, readdirSync, rmSync, mkdirSync, writeFileSync, chmodSync } from 'node:fs';
 import { join } from 'node:path';
 import type { FastifyInstance } from 'fastify';
 import { setupTestEnv, makeUser, login, api, type TestEnv, type Session } from './helpers.ts';
@@ -10,13 +10,15 @@ import { seedFromSite } from '../server/src/seed.ts';
 import { PublishService } from '../server/src/publish/service.ts';
 import type pg from 'pg';
 
-/** A pool whose transaction clients fail at COMMIT when `failCommit` is set, and whose publish records fail when `failRecord` is set. */
-function faultyPool(pool: pg.Pool, faults: { failCommit?: boolean; failRecord?: boolean }): pg.Pool {
+/** A pool with switchable faults: at COMMIT, at the publish record insert, at connect, or at the success update of the publish row. */
+function faultyPool(pool: pg.Pool, faults: { failCommit?: boolean; failRecord?: boolean; failConnect?: boolean; failSuccessFinish?: boolean }): pg.Pool {
   const query = (text: string, ...rest: unknown[]) => {
     if (faults.failRecord && text.startsWith('INSERT INTO publishes')) return Promise.reject(new Error('database unavailable'));
+    if (faults.failSuccessFinish && text.startsWith('UPDATE publishes SET status') && (rest[0] as unknown[])[1] === 'success') return Promise.reject(new Error('connection reset'));
     return (pool.query as (...a: unknown[]) => Promise<unknown>)(text, ...rest);
   };
   const connect = async () => {
+    if (faults.failConnect) throw new Error('no connection available');
     const client = await pool.connect();
     return new Proxy(client, {
       get(target, prop) {
@@ -282,3 +284,67 @@ test('a failed symlink swap after commit is recorded, reported, and the built re
 });
 
 function readlinkSafe(p: string): string | null { try { return readlinkSync(p); } catch { return null; } }
+
+test('an old release that cannot be removed is reported in the log of a successful publish', async () => {
+  const stuck = join(env.config.publishDir, 'releases', '20000101-000000-aaaa');
+  mkdirSync(join(stuck, 'locked'), { recursive: true });
+  writeFileSync(join(stuck, 'index.html'), 'old');
+  writeFileSync(join(stuck, 'locked', 'file.txt'), 'cannot be unlinked while the folder is read-only');
+  chmodSync(join(stuck, 'locked'), 0o555);
+  try {
+    const r = await api(app, 'POST', '/api/publish', { session: admin, payload: {} });
+    assert.equal(r.status, 200, r.text);
+    assert.equal(current(), r.body.releaseId);
+    assert.match(String(r.body.log), /Warning: Could not remove old release 20000101-000000-aaaa/);
+    const publishes = (await api(app, 'GET', '/api/publish', { session: admin })).body.publishes as Array<{ status: string; log: string; error: string | null }>;
+    assert.equal(publishes[0].status, 'success');
+    assert.equal(publishes[0].error, null);
+    assert.match(publishes[0].log, /Could not remove old release 20000101-000000-aaaa/);
+    assert.ok(existsSync(stuck));
+  } finally {
+    chmodSync(join(stuck, 'locked'), 0o755);
+    rmSync(stuck, { recursive: true, force: true });
+  }
+});
+
+test('a rollback whose symlink swap fails is recorded as failed and answers a clear error', async () => {
+  const target = (await api(app, 'GET', '/api/publish', { session: admin })).body.releases as Array<{ id: string; current: boolean }>;
+  const other = target.find((r) => !r.current)!;
+  const link = join(env.config.publishDir, 'current');
+  rmSync(link);
+  mkdirSync(link);
+  try {
+    const r = await api(app, 'POST', '/api/publish/rollback', { session: admin, payload: { releaseId: other.id } });
+    assert.equal(r.status, 500, r.text);
+    assert.match(String(r.body.error), new RegExp(`Switching the site to release ${other.id} failed`));
+    const details = r.body.details as { publishId: number };
+    const publishes = (await api(app, 'GET', '/api/publish', { session: admin })).body.publishes as Array<{ id: number; kind: string; status: string; error: string }>;
+    assert.equal(publishes[0].id, details.publishId);
+    assert.equal(publishes[0].kind, 'rollback');
+    assert.equal(publishes[0].status, 'failed');
+    assert.match(publishes[0].error, /Switching the site to release/);
+  } finally {
+    if (!readlinkSafe(link)) rmSync(link, { recursive: true, force: true });
+  }
+  assert.equal((await api(app, 'POST', '/api/publish/rollback', { session: admin, payload: { releaseId: other.id } })).status, 200);
+  assert.equal(current(), other.id);
+});
+
+test('database failures around the transaction still leave the publish row in a terminal state', async () => {
+  const faults = { failConnect: true, failSuccessFinish: false };
+  const service = new PublishService(faultyPool(env.pool, faults), env.config);
+  await assert.rejects(service.publish(editor.user), /no connection available/);
+  let publishes = (await api(app, 'GET', '/api/publish', { session: admin })).body.publishes as Array<{ status: string; error: string; releaseId: string }>;
+  assert.equal(publishes[0].status, 'failed');
+  assert.match(publishes[0].error, /no connection available/);
+  faults.failConnect = false;
+  faults.failSuccessFinish = true;
+  const before = current();
+  await assert.rejects(service.publish(editor.user), /is live, but recording the publish failed: connection reset/);
+  publishes = (await api(app, 'GET', '/api/publish', { session: admin })).body.publishes as Array<{ status: string; error: string; releaseId: string }>;
+  assert.equal(publishes[0].status, 'failed');
+  assert.match(publishes[0].error, /recording the publish failed/);
+  assert.notEqual(current(), before, 'the release went live before the row could be recorded');
+  assert.equal(current(), publishes[0].releaseId);
+  assert.equal((await service.history()).busy, false);
+});

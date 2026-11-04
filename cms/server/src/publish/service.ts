@@ -75,17 +75,23 @@ export class PublishService {
       .map((id) => ({ id, createdAt: statSync(join(this.releasesDir, id)).mtime, current: id === current }));
   }
 
-  private prune(): string[] {
+  /** Removes releases beyond PUBLISH_KEEP (never the current one). A release that cannot be removed is reported, not fatal. */
+  private prune(): { removed: string[]; warnings: string[] } {
     const keep = this.config.publishKeep;
     const current = this.currentRelease();
     const removed: string[] = [];
-    for (const r of this.listReleases().slice(keep)) {
-      if (r.id === current) continue;
-      rmSync(join(this.releasesDir, r.id), { recursive: true, force: true });
-      removed.push(r.id);
+    const warnings: string[] = [];
+    const stale = this.listReleases().slice(keep).map((r) => r.id).filter((id) => id !== current);
+    if (current && current !== EMPTY_RELEASE && existsSync(join(this.releasesDir, EMPTY_RELEASE))) stale.push(EMPTY_RELEASE);
+    for (const id of stale) {
+      try {
+        rmSync(join(this.releasesDir, id), { recursive: true, force: true });
+        removed.push(id);
+      } catch (err) {
+        warnings.push(`Could not remove old release ${id}: ${err instanceof Error ? err.message : String(err)}`);
+      }
     }
-    if (current && current !== EMPTY_RELEASE && existsSync(join(this.releasesDir, EMPTY_RELEASE))) rmSync(join(this.releasesDir, EMPTY_RELEASE), { recursive: true, force: true });
-    return removed;
+    return { removed, warnings };
   }
 
   private build(contentDir: string, outDir: string, env: Record<string, string> = {}): Promise<{ ok: boolean; log: string }> {
@@ -158,10 +164,11 @@ export class PublishService {
       const tmpContent = join(this.config.publishDir, 'tmp', `${id}-content`);
       const outDir = join(this.releasesDir, id);
       const recordId = await this.record('publish', actor, id, null);
-      const client = await this.pool.connect();
+      let client: pg.PoolClient | undefined;
       let log = '';
       let promoted: unknown[];
       try {
+        client = await this.pool.connect();
         await client.query('BEGIN');
         const locked = await client.query<{ ok: boolean }>('SELECT pg_try_advisory_xact_lock($1) AS ok', [LOCK_KEY]);
         if (!locked.rows[0].ok) throw new HttpError(409, 'A publish is already running');
@@ -174,26 +181,33 @@ export class PublishService {
         if (!built.ok) throw new HttpError(422, 'The site build failed; nothing was published', { log });
         await client.query('COMMIT');
       } catch (err) {
-        try { await client.query('ROLLBACK'); } catch { /* ignore */ }
+        if (client) { try { await client.query('ROLLBACK'); } catch { /* ignore */ } }
         rmSync(outDir, { recursive: true, force: true });
         const message = err instanceof Error ? err.message : String(err);
         await this.finish(recordId, 'failed', log, message);
         if (err instanceof HttpError) { err.details = { ...(err.details as object ?? {}), log, publishId: recordId }; throw err; }
         throw new HttpError(500, `Publish failed: ${message}`, { log, publishId: recordId });
       } finally {
-        client.release();
+        client?.release();
         rmSync(tmpContent, { recursive: true, force: true });
       }
       try {
         this.swapCurrent(id);
-        const pruned = this.prune();
-        if (pruned.length) log += `\nRemoved old releases: ${pruned.join(', ')}`;
       } catch (err) {
         const message = `The content is published in the database, but switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}. Restore release ${id} from the Publish page once the cause is fixed.`;
         await this.finish(recordId, 'failed', log, message);
         throw new HttpError(500, message, { log, publishId: recordId, releaseId: id });
       }
-      await this.finish(recordId, 'success', log, null);
+      const pruned = this.prune();
+      if (pruned.removed.length) log += `\nRemoved old releases: ${pruned.removed.join(', ')}`;
+      for (const w of pruned.warnings) log += `\nWarning: ${w}`;
+      try {
+        await this.finish(recordId, 'success', log, null);
+      } catch (err) {
+        const message = `Release ${id} is live, but recording the publish failed: ${err instanceof Error ? err.message : String(err)}`;
+        try { await this.finish(recordId, 'failed', log, message); } catch { /* the database is unreachable; the row stays as it is */ }
+        throw new HttpError(500, message, { log, publishId: recordId, releaseId: id });
+      }
       return { id: recordId, releaseId: id, promoted, log };
     });
   }
@@ -233,8 +247,14 @@ export class PublishService {
     if (!RELEASE_RE.test(id) || !existsSync(join(this.releasesDir, id, 'index.html'))) throw new HttpError(404, 'Release not found');
     if (this.busy) throw new HttpError(409, 'A publish is already running');
     const recordId = await this.record('rollback', actor, id, null);
-    this.swapCurrent(id);
-    await this.finish(recordId, 'success', `Current release set to ${id}`, null);
+    try {
+      this.swapCurrent(id);
+      await this.finish(recordId, 'success', `Current release set to ${id}`, null);
+    } catch (err) {
+      const message = `Switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}`;
+      try { await this.finish(recordId, 'failed', '', message); } catch { /* the database is unreachable; the row stays as it is */ }
+      throw new HttpError(500, message, { publishId: recordId, releaseId: id });
+    }
     return { id: recordId, releaseId: id };
   }
 
