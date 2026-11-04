@@ -53,6 +53,8 @@ export const authPlugin = fp(async function authPlugin(app: FastifyInstance, opt
   });
 
   app.addHook('preHandler', async (req) => {
+    // Matched route, not req.url: the router percent-decodes before matching, so an encoded /api/ spelling
+    // must still get the CSRF and password-change checks.
     const route = req.routeOptions.url ?? '';
     if (!route.startsWith('/api/')) return;
     if (!SAFE_METHODS.has(req.method)) {

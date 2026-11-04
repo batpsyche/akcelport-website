@@ -27,6 +27,8 @@ export async function buildApp(config: Config, pool: pg.Pool): Promise<FastifyIn
   app.decorate('publishService', service);
 
   await app.register(fastifyCookie, { secret: config.sessionSecret });
+  // Limit the API only; static assets (admin bundle, fonts, media, preview) are free. Decide on the matched
+  // route, never req.url: the router percent-decodes before matching, so /%61pi/... reaches the /api/ handlers.
   await app.register(fastifyRateLimit, { global: true, max: 600, timeWindow: '1 minute', allowList: (req) => !req.routeOptions.url?.startsWith('/api/') });
   await app.register(fastifyMultipart, { limits: { fileSize: Math.max(config.uploadImageMaxBytes, config.uploadPdfMaxBytes) + 1, files: 1, fields: 10 } });
   await app.register(authPlugin, { pool, config });

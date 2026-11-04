@@ -66,6 +66,7 @@ No secrets are committed: `.env` is git-ignored and `.env.example` holds placeho
 - `npm run create-admin -- --email you@example.com [--name "Name"] [--password "..."]` creates an administrator. Without `--password` it prompts, or reads `ADMIN_PASSWORD`.
 - Administrators add users on the **Users** page. A new user gets a one-time setup link (valid 48 hours) to copy and hand over, or a temporary password they must change at first sign-in. **Reset password** works the same way and signs the user out everywhere. The CMS sends no email.
 - Sign-in is limited to 5 failed attempts per account (20 per IP) in 15 minutes.
+- The audit log shows who did what and when to every signed-in user; the sign-in IP address of each entry is returned to administrators only.
 
 ## Editing and publishing
 
