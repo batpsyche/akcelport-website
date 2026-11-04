@@ -1,6 +1,7 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readlinkSync, readdirSync, rmSync, mkdirSync, writeFileSync, chmodSync } from 'node:fs';
+import { existsSync, readlinkSync, readdirSync, rmSync, mkdirSync, mkdtempSync, writeFileSync, chmodSync, utimesSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import type { FastifyInstance } from 'fastify';
 import { setupTestEnv, makeUser, login, api, type TestEnv, type Session } from './helpers.ts';
@@ -187,6 +188,22 @@ test('a selection that would publish a product without its family is refused wit
   assert.match(await page('/products/test-family-product/'), /Test Family Product/);
 });
 
+test('releases are ordered by creation time, so a newer release built in the same second is never pruned before an older one', () => {
+  // Release ids have one-second resolution plus a random suffix: the newer of two releases built in the same second may sort lower by name.
+  const dir = mkdtempSync(join(tmpdir(), 'akcelport-releases-'));
+  const service = new PublishService(env.pool, { ...env.config, publishDir: dir });
+  const older = '20260104-120000-ffff';
+  const newer = '20260104-120000-0000';
+  const at = (id: string, seconds: number) => { mkdirSync(join(dir, 'releases', id), { recursive: true }); utimesSync(join(dir, 'releases', id), seconds, seconds); };
+  at(older, 1_700_000_000);
+  at(newer, 1_700_000_000.5);
+  try {
+    assert.deepEqual(service.listReleases().map((r) => r.id), [newer, older]);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('hidden items disappear at publish, deletions apply, old releases are pruned, rollback restores a release', async () => {
   const id = await productId('spiral-wrapping-bands');
   await api(app, 'POST', `/api/products/${id}/status`, { session: editor, payload: { status: 'hidden' } });
@@ -291,6 +308,7 @@ test('an old release that cannot be removed is reported in the log of a successf
   writeFileSync(join(stuck, 'index.html'), 'old');
   writeFileSync(join(stuck, 'locked', 'file.txt'), 'cannot be unlinked while the folder is read-only');
   chmodSync(join(stuck, 'locked'), 0o555);
+  utimesSync(stuck, 946684800, 946684800); // created 2000-01-01, like its id says
   try {
     const r = await api(app, 'POST', '/api/publish', { session: admin, payload: {} });
     assert.equal(r.status, 200, r.text);

@@ -65,14 +65,14 @@ export class PublishService {
     renameSync(tmp, this.currentLink);
   }
 
+  /** Newest first by creation time (a release id has one-second resolution, so same-second releases cannot be ordered by name). */
   listReleases(): Array<{ id: string; createdAt: Date; current: boolean }> {
     if (!existsSync(this.releasesDir)) return [];
     const current = this.currentRelease();
     return readdirSync(this.releasesDir)
       .filter((n) => RELEASE_RE.test(n))
-      .sort()
-      .reverse()
-      .map((id) => ({ id, createdAt: statSync(join(this.releasesDir, id)).mtime, current: id === current }));
+      .map((id) => ({ id, createdAt: statSync(join(this.releasesDir, id)).mtime, current: id === current }))
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime() || b.id.localeCompare(a.id));
   }
 
   /** Removes releases beyond PUBLISH_KEEP (never the current one). A release that cannot be removed is reported, not fatal. */
