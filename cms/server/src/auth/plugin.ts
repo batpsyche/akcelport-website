@@ -53,7 +53,8 @@ export const authPlugin = fp(async function authPlugin(app: FastifyInstance, opt
   });
 
   app.addHook('preHandler', async (req) => {
-    if (!req.url.startsWith('/api/')) return;
+    const route = req.routeOptions.url ?? '';
+    if (!route.startsWith('/api/')) return;
     if (!SAFE_METHODS.has(req.method)) {
       if (!originAllowed(req)) throw new HttpError(403, 'Cross-site request refused');
       if (req.session) {
@@ -63,7 +64,7 @@ export const authPlugin = fp(async function authPlugin(app: FastifyInstance, opt
         }
       }
     }
-    if (req.user?.mustChangePassword && !PASSWORD_CHANGE_EXEMPT.has(req.url.split('?')[0])) {
+    if (req.user?.mustChangePassword && !PASSWORD_CHANGE_EXEMPT.has(route)) {
       throw new HttpError(403, 'Choose your own password before continuing', { code: 'password_change_required' });
     }
   });

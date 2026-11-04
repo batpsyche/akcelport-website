@@ -188,3 +188,20 @@ test('static assets do not count against the per-IP API rate limit', async () =>
   const remainingAfter = Number((await api(app, 'GET', '/api/auth/me', { session: s })).headers['x-ratelimit-remaining']);
   assert.equal(remainingAfter, remainingBefore - 1, 'only the API calls were counted');
 });
+
+test('a percent-encoded spelling of /api/ is still rate limited and CSRF checked', async () => {
+  const s = await login(app, 'editor@example.com');
+  const before = Number((await api(app, 'GET', '/api/auth/me', { session: s })).headers['x-ratelimit-remaining']);
+  const encoded = await api(app, 'GET', '/%61pi/auth/me', { session: s });
+  assert.equal(encoded.status, 200, 'the router matches the decoded path');
+  assert.equal(Number(encoded.headers['x-ratelimit-remaining']), before - 1, 'the encoded path consumed the API budget');
+  const products = (await api(app, 'GET', '/api/products', { session: s })).body.items as Array<{ id: number }>;
+  assert.equal((await api(app, 'POST', `/%61pi/products/${products[0].id}/status`, { session: s, csrf: null, payload: { status: 'live' } })).status, 403, 'missing CSRF header');
+  await env.pool.query('UPDATE users SET must_change_password = true WHERE email = $1', ['editor@example.com']);
+  try {
+    assert.equal((await api(app, 'GET', '/%61pi/products', { session: s })).status, 403, 'password change still required');
+    assert.equal((await api(app, 'GET', '/%61pi/auth/me', { session: s })).status, 200, 'the exempt route is exempt however it is spelled');
+  } finally {
+    await env.pool.query('UPDATE users SET must_change_password = false WHERE email = $1', ['editor@example.com']);
+  }
+});
