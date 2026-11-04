@@ -1,6 +1,6 @@
 # Akcelport Industries website (design phase)
 
-Public website for Akcelport Industries, redesigned from the 2016 PHP site. It is a static site generated from JSON files, so a CMS can edit `content/` later and trigger a rebuild. No dependencies, no `npm install`.
+Public website for Akcelport Industries, redesigned from the 2016 PHP site. It is a static site generated from JSON files; the backoffice CMS under `cms/` edits that content and publishes rebuilt releases (see [cms/README.md](cms/README.md)). The site itself has no dependencies, no `npm install`.
 
 ## Run it locally
 
