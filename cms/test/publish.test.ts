@@ -7,6 +7,27 @@ import { setupTestEnv, makeUser, login, api, type TestEnv, type Session } from '
 import { buildApp } from '../server/src/app.ts';
 import { buildSiteServer } from '../server/src/site-server.ts';
 import { seedFromSite } from '../server/src/seed.ts';
+import { PublishService } from '../server/src/publish/service.ts';
+import type pg from 'pg';
+
+/** A pool whose transaction clients fail at COMMIT when `failCommit` is set, and whose publish records fail when `failRecord` is set. */
+function faultyPool(pool: pg.Pool, faults: { failCommit?: boolean; failRecord?: boolean }): pg.Pool {
+  const query = (text: string, ...rest: unknown[]) => {
+    if (faults.failRecord && text.startsWith('INSERT INTO publishes')) return Promise.reject(new Error('database unavailable'));
+    return (pool.query as (...a: unknown[]) => Promise<unknown>)(text, ...rest);
+  };
+  const connect = async () => {
+    const client = await pool.connect();
+    return new Proxy(client, {
+      get(target, prop) {
+        if (prop === 'query') return (text: string, ...rest: unknown[]) => (faults.failCommit && text === 'COMMIT' ? Promise.reject(new Error('connection lost')) : (target.query as (...a: unknown[]) => Promise<unknown>)(text, ...rest));
+        const v = (target as unknown as Record<PropertyKey, unknown>)[prop];
+        return typeof v === 'function' ? (v as (...a: unknown[]) => unknown).bind(target) : v;
+      },
+    });
+  };
+  return { query, connect } as unknown as pg.Pool;
+}
 
 let env: TestEnv;
 let app: FastifyInstance;
@@ -189,4 +210,38 @@ test('hidden items disappear at publish, deletions apply, old releases are prune
   assert.equal((await site.inject({ method: 'GET', url: '/products/spiral-wrapping-bands/' })).statusCode, 200, 'rolled back release shows the product again');
   assert.equal((await api(app, 'POST', '/api/publish/rollback', { session: admin, payload: { releaseId: '20000101-000000-zzzz' } })).status, 404);
   await api(app, 'POST', `/api/products/${id}/status`, { session: editor, payload: { status: 'live' } });
+});
+
+test('a commit failure after the build leaves the current release and the drafts untouched', async () => {
+  const faults = { failCommit: true };
+  const service = new PublishService(faultyPool(env.pool, faults), env.config);
+  const id = await productId('flexibars');
+  const body = (await api(app, 'GET', `/api/products/${id}`, { session: editor })).body.body as Record<string, unknown>;
+  await api(app, 'PUT', `/api/products/${id}`, { session: editor, payload: { body: { ...body, summary: 'Lost in a commit failure.' } } });
+  const before = current();
+  const releasesBefore = readdirSync(join(env.config.publishDir, 'releases')).sort();
+  await assert.rejects(service.publish(editor.user), /connection lost/);
+  assert.equal(current(), before, 'current still points at the previous release');
+  assert.ok(existsSync(join(env.config.publishDir, 'releases', before, 'index.html')), 'the current release is intact');
+  assert.deepEqual(readdirSync(join(env.config.publishDir, 'releases')).sort(), releasesBefore, 'the half-published release is removed');
+  assert.doesNotMatch(await page('/products/flexibars/'), /Lost in a commit failure/);
+  assert.equal(((await api(app, 'GET', `/api/products/${id}`, { session: editor })).body.item as { hasDraft: boolean }).hasDraft, true, 'promotion rolled back');
+  const publishes = (await api(app, 'GET', '/api/publish', { session: admin })).body.publishes as Array<{ status: string; error: string }>;
+  assert.equal(publishes[0].status, 'failed');
+  assert.match(publishes[0].error, /connection lost/);
+  faults.failCommit = false;
+  assert.ok(((await service.publish(editor.user)).promoted as Array<{ slug: string }>).some((p) => p.slug === 'flexibars'), 'the same service publishes once the database is back');
+  assert.match(await page('/products/flexibars/'), /Lost in a commit failure\./);
+});
+
+test('a failure before the build starts does not leave publish or preview locked as busy', async () => {
+  const faults = { failRecord: true };
+  const service = new PublishService(faultyPool(env.pool, faults), env.config);
+  await assert.rejects(service.publish(editor.user), /database unavailable/);
+  assert.equal((await service.history()).busy, false);
+  await assert.rejects(service.preview(editor.user), /database unavailable/);
+  assert.equal((await service.history()).busy, false);
+  faults.failRecord = false;
+  const r = await service.preview(editor.user);
+  assert.ok(r.id > 0, 'preview runs again on the same service');
 });

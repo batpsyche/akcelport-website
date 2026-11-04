@@ -14,8 +14,11 @@ const ICONS = ['busbar', 'insulator', 'lug', 'rail', 'duct', 'earth'];
 const blank = (): FamilyBody => ({ name: '', shortName: '', icon: 'busbar', summary: '', image: undefined as unknown as Image });
 
 export function FamilyEditPage() {
-  const { id: idParam } = useParams();
-  const id = idParam ? Number(idParam) : undefined;
+  const { id } = useParams();
+  return <FamilyEditor key={id ?? 'new'} id={id ? Number(id) : undefined} />;
+}
+
+function FamilyEditor({ id }: { id: number | undefined }) {
   const isNew = id === undefined;
   const navigate = useNavigate();
   const item = useItem<FamilyBody>('family', id);
@@ -33,7 +36,7 @@ export function FamilyEditPage() {
     if (!doc) return;
     setErrors({});
     try {
-      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); sync(c); navigate(`/families/${c.item.id}`, { replace: true }); }
+      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); navigate(`/families/${c.item.id}`, { replace: true }); }
       else sync(await m.save.mutateAsync({ slug, body: doc }));
     } catch (e) { setErrors(errorsFrom(e)); reportError(e); }
   };

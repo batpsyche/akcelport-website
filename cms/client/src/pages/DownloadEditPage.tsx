@@ -15,8 +15,11 @@ import { Button } from '@/components/ui/button';
 const blank = (): DownloadBody => ({ title: '', kind: 'catalogue', file: '', description: '', pages: 0, sizeBytes: 0, thumb: '' });
 
 export function DownloadEditPage() {
-  const { id: idParam } = useParams();
-  const id = idParam ? Number(idParam) : undefined;
+  const { id } = useParams();
+  return <DownloadEditor key={id ?? 'new'} id={id ? Number(id) : undefined} />;
+}
+
+function DownloadEditor({ id }: { id: number | undefined }) {
   const isNew = id === undefined;
   const navigate = useNavigate();
   const item = useItem<DownloadBody>('download', id);
@@ -34,7 +37,7 @@ export function DownloadEditPage() {
     if (!doc) return;
     setErrors({});
     try {
-      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); sync(c); navigate(`/downloads/${c.item.id}`, { replace: true }); }
+      if (isNew) { const c = await m.create.mutateAsync({ slug, body: doc }); navigate(`/downloads/${c.item.id}`, { replace: true }); }
       else sync(await m.save.mutateAsync({ slug, body: doc }));
     } catch (e) { setErrors(errorsFrom(e)); reportError(e); }
   };

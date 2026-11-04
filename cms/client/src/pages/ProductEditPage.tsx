@@ -13,9 +13,13 @@ import { Button } from '@/components/ui/button';
 
 const blank = (): ProductBody => ({ name: '', legacyUrl: null, source: 'new', summary: '', facts: [], intro: [''], features: [], hero: undefined as unknown as Image, seo: { title: '', description: '' }, downloads: [] });
 
+/** One editor instance per item: the route id is the key, so switching items always starts from that item's data. */
 export function ProductEditPage() {
-  const { id: idParam } = useParams();
-  const id = idParam ? Number(idParam) : undefined;
+  const { id } = useParams();
+  return <ProductEditor key={id ?? 'new'} id={id ? Number(id) : undefined} />;
+}
+
+function ProductEditor({ id }: { id: number | undefined }) {
   const isNew = id === undefined;
   const [params] = useSearchParams();
   const navigate = useNavigate();
@@ -42,7 +46,6 @@ export function ProductEditPage() {
     try {
       if (isNew) {
         const created = await m.create.mutateAsync({ slug, familyId, body: doc });
-        sync(created);
         navigate(`/products/${created.item.id}`, { replace: true });
       } else {
         sync(await m.save.mutateAsync({ slug, familyId, body: doc }));

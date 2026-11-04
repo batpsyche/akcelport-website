@@ -111,5 +111,5 @@ function CompanyImagesEditor({ doc, onChange }: { doc: Record<string, Image>; on
 export function PageEditPage() {
   const { key } = useParams();
   if (!key || key === 'site') return <p className="text-destructive">Unknown page.</p>;
-  return <PageEditor pageKey={key} kicker="Site text" backTo="/pages" backLabel="Pages" />;
+  return <PageEditor key={key} pageKey={key} kicker="Site text" backTo="/pages" backLabel="Pages" />;
 }
