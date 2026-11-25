@@ -3,8 +3,15 @@ import pg from 'pg';
 export type Db = pg.Pool;
 export type Queryable = pg.Pool | pg.PoolClient;
 
-export function createPool(connectionString: string): pg.Pool {
-  return new pg.Pool({ connectionString, max: 10 });
+/** With a schema, every connection gets `search_path = <schema>, public, extensions` so the CMS tables stay in their own
+ *  schema of a shared database (use a session-mode pooler: transaction mode drops session settings). */
+export function createPool(connectionString: string, opts: { schema?: string; max?: number } = {}): pg.Pool {
+  const pool = new pg.Pool({ connectionString, max: opts.max ?? 10 });
+  if (opts.schema) {
+    const ident = `"${opts.schema.replace(/"/g, '""')}"`;
+    pool.on('connect', (client) => { client.query(`CREATE SCHEMA IF NOT EXISTS ${ident}; SET search_path TO ${ident}, public, extensions`).catch(() => { /* surfaces on the first query */ }); });
+  }
+  return pool;
 }
 
 export async function withTransaction<T>(pool: pg.Pool, fn: (client: pg.PoolClient) => Promise<T>): Promise<T> {

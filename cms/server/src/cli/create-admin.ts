@@ -24,7 +24,7 @@ const problem = passwordProblem(password);
 if (problem) { console.error(problem); process.exit(2); }
 
 const config = loadConfig();
-const pool = createPool(config.databaseUrl);
+const pool = createPool(config.databaseUrl, { schema: config.dbSchema });
 try {
   await migrate(pool);
   const exists = await pool.query('SELECT id FROM users WHERE email = $1', [email]);

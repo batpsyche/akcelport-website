@@ -2,6 +2,8 @@
 //   PUBLISH_DIR/releases/<id>/   one built site per publish
 //   PUBLISH_DIR/current          symlink to the live release (swapped atomically; rollback re-points it)
 //   PUBLISH_DIR/preview/         a build of the drafts, served behind login at /preview/
+// With Supabase Storage configured (serverless staging) releases, the live pointer and the preview live in the bucket
+// instead (publish/remote.ts); PUBLISH_DIR only holds the temporary build.
 import { mkdirSync, existsSync, readdirSync, rmSync, symlinkSync, renameSync, readlinkSync, writeFileSync, statSync, realpathSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { spawn } from 'node:child_process';
@@ -12,6 +14,8 @@ import type { Queryable } from '../db.ts';
 import { HttpError } from '../auth/plugin.ts';
 import { exportContent } from './export.ts';
 import { pendingChanges, TABLES, type ItemType } from '../content/repo.ts';
+import { Storage } from '../storage.ts';
+import { RemoteReleases, syncMediaForBuild } from './remote.ts';
 
 export const RELEASE_RE = /^\d{8}-\d{6}-[a-z0-9]{4}$/;
 const EMPTY_RELEASE = '00000000-000000-none';
@@ -31,7 +35,14 @@ function releaseId(): string {
 
 export class PublishService {
   private busy = false;
-  constructor(private pool: pg.Pool, private config: Config) {}
+  readonly storage: Storage | undefined;
+  private remote: RemoteReleases | undefined;
+  constructor(private pool: pg.Pool, private config: Config) {
+    if (config.storage) {
+      this.storage = new Storage(config.storage);
+      this.remote = new RemoteReleases(this.storage, config.publishKeep);
+    }
+  }
 
   get publishDir() { return this.config.publishDir; }
   get releasesDir() { return join(this.config.publishDir, 'releases'); }
@@ -41,6 +52,7 @@ export class PublishService {
   /** Makes sure current/ and preview/ exist so the static servers have something to serve. */
   ensureDirs(): void {
     mkdirSync(this.releasesDir, { recursive: true });
+    if (this.remote) return;
     if (!existsSync(this.currentLink)) {
       const empty = join(this.releasesDir, EMPTY_RELEASE);
       mkdirSync(empty, { recursive: true });
@@ -96,15 +108,20 @@ export class PublishService {
     return { removed, warnings };
   }
 
-  private build(contentDir: string, outDir: string, env: Record<string, string> = {}): Promise<{ ok: boolean; log: string }> {
+  private async build(contentDir: string, outDir: string, env: Record<string, string> = {}): Promise<{ ok: boolean; log: string }> {
+    let synced = '';
+    if (this.storage) {
+      const n = await syncMediaForBuild(this.pool, this.storage, this.config.siteRoot, this.config.mediaDir);
+      if (n) synced = `Fetched ${n} media files from Storage.\n`;
+    }
     return new Promise((resolve) => {
       const args = [join(this.config.siteRoot, 'scripts/build.mjs'), '--content', contentDir, '--out', outDir, '--assets', this.config.mediaDir];
       const child = spawn(process.execPath, args, { cwd: this.config.siteRoot, env: { ...process.env, SITE_BASE: '', SITE_URL: this.config.siteUrl ?? '', ...env } });
       let log = '';
       child.stdout.on('data', (d) => (log += d));
       child.stderr.on('data', (d) => (log += d));
-      child.on('error', (err) => resolve({ ok: false, log: log + `\n${err.message}` }));
-      child.on('close', (code) => resolve({ ok: code === 0, log: log.trim() }));
+      child.on('error', (err) => resolve({ ok: false, log: synced + log + `\n${err.message}` }));
+      child.on('close', (code) => resolve({ ok: code === 0, log: synced + log.trim() }));
     });
   }
 
@@ -194,13 +211,15 @@ export class PublishService {
         rmSync(tmpContent, { recursive: true, force: true });
       }
       try {
-        this.swapCurrent(id);
+        if (this.remote) {
+          try { log += `\n${await this.remote.publish(id, outDir)}`; } finally { rmSync(outDir, { recursive: true, force: true }); }
+        } else this.swapCurrent(id);
       } catch (err) {
         const message = `The content is published in the database, but switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}. Restore release ${id} from the Publish page once the cause is fixed.`;
         await this.finish(recordId, 'failed', log, message);
         throw new HttpError(500, message, { log, publishId: recordId, releaseId: id });
       }
-      const pruned = this.prune();
+      const pruned = this.remote ? { removed: [], warnings: [] } : this.prune();
       if (pruned.removed.length) log += `\nRemoved old releases: ${pruned.removed.join(', ')}`;
       for (const w of pruned.warnings) log += `\nWarning: ${w}`;
       try {
@@ -227,10 +246,15 @@ export class PublishService {
         const built = await this.build(tmpContent, tmpOut, { SITE_BASE: '/preview/' });
         log += built.log;
         if (!built.ok) throw new HttpError(422, 'The preview build failed', { log });
-        const old = join(this.config.publishDir, `preview.${stamp}.old`);
-        if (existsSync(this.previewDir)) renameSync(this.previewDir, old);
-        renameSync(tmpOut, this.previewDir);
-        rmSync(old, { recursive: true, force: true });
+        if (this.remote) {
+          log += `\n${await this.remote.preview(stamp, tmpOut)}`;
+          rmSync(tmpOut, { recursive: true, force: true });
+        } else {
+          const old = join(this.config.publishDir, `preview.${stamp}.old`);
+          if (existsSync(this.previewDir)) renameSync(this.previewDir, old);
+          renameSync(tmpOut, this.previewDir);
+          rmSync(old, { recursive: true, force: true });
+        }
         await this.finish(recordId, 'success', log, null);
         return { id: recordId, log };
       } catch (err) {
@@ -246,11 +270,11 @@ export class PublishService {
   }
 
   async rollback(actor: Actor, id: string): Promise<{ id: number; releaseId: string }> {
-    if (!RELEASE_RE.test(id) || !existsSync(join(this.releasesDir, id, 'index.html'))) throw new HttpError(404, 'Release not found');
+    if (!RELEASE_RE.test(id) || (this.remote ? !(await this.remote.state()).releases.some((r) => r.id === id) : !existsSync(join(this.releasesDir, id, 'index.html')))) throw new HttpError(404, 'Release not found');
     if (this.busy) throw new HttpError(409, 'A publish is already running');
     const recordId = await this.record('rollback', actor, id, null);
     try {
-      this.swapCurrent(id);
+      if (this.remote) { if (!(await this.remote.rollback(id))) throw new Error('the release is no longer kept'); } else this.swapCurrent(id);
       await this.finish(recordId, 'success', `Current release set to ${id}`, null);
     } catch (err) {
       const message = `Switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}`;
@@ -264,6 +288,11 @@ export class PublishService {
     const publishes = (await this.pool.query(
       `SELECT id, kind, status, started_by_email AS "startedBy", release_id AS "releaseId", items, log, error, started_at AS "startedAt", finished_at AS "finishedAt" FROM publishes ORDER BY id DESC LIMIT 50`,
     )).rows;
+    if (this.remote) {
+      const state = await this.remote.state();
+      const releases = state.releases.map((r) => ({ id: r.id, createdAt: new Date(r.createdAt), current: r.id === state.current }));
+      return { current: state.current, releases, publishes, busy: this.busy, previewBuiltAt: await this.remote.previewBuiltAt() };
+    }
     return { current: this.currentRelease(), releases: this.listReleases(), publishes, busy: this.busy, previewBuiltAt: existsSync(this.previewDir) ? statSync(this.previewDir).mtime : null };
   }
 

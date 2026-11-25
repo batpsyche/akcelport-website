@@ -47,7 +47,7 @@ export function PublishPage() {
   const rollback = useMutation({ mutationFn: (releaseId: string) => api.post('/api/publish/rollback', { releaseId }), onSuccess: async () => { await refresh(); toast.success('Release restored'); }, onError: reportError });
 
   const d = state.data;
-  const siteUrl = `${window.location.protocol}//${window.location.hostname}:${d?.sitePort ?? 4174}/`;
+  const siteUrl = d?.siteUrl ?? `${window.location.protocol}//${window.location.hostname}:${d?.sitePort ?? 4174}/`;
   const toggle = (k: string) => setSelected((s) => { const n = new Set(s); if (n.has(k)) n.delete(k); else n.add(k); return n; });
   const count = keys.length;
   return (
