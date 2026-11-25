@@ -241,12 +241,15 @@ test('news posts: validated, sanitized rich text, media in img/news and download
   const pdf = multipart({ folder: 'downloads/news' }, { name: 'file', filename: 'Notice.pdf', type: 'application/pdf', data: TINY_PDF });
   const pdfUp = await api(app, 'POST', '/api/media', { session: editor, rawPayload: pdf.payload, headers: pdf.headers });
   assert.equal(pdfUp.status, 201, pdfUp.text);
+  // The editor fills pdf.sizeBytes straight from the media row the picker lists, so it must be a number.
+  const pdfRow = ((await api(app, 'GET', '/api/media?kind=pdf&q=downloads/news', { session: editor })).body.media as Array<{ path: string; bytes: unknown }>)[0];
+  assert.equal(pdfRow.bytes, TINY_PDF.length);
 
-  const doc = (text: string, marks?: unknown[]) => ({ type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text, ...(marks ? { marks } : {}) }] }] });
+  const doc =(text: string, marks?: unknown[]) => ({ type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text, ...(marks ? { marks } : {}) }] }] });
   const body = {
     title: 'Trade fair', date: '2026-12-01', category: 'Events', summary: 'Meet us at the fair.',
     cover: { src: '/img/news/cover.png', w: 4, h: 3, alt: 'Our stand' },
-    pdf: { file: '/downloads/news/notice.pdf', title: 'Floor plan', pages: 2, sizeBytes: TINY_PDF.length },
+    pdf: { file: `/${pdfRow.path}`, title: 'Floor plan', pages: 2, sizeBytes: pdfRow.bytes },
     body: { type: 'doc', content: [
       { type: 'heading', attrs: { level: 2, id: 'x' }, content: [{ type: 'text', text: 'Hall 3' }] },
       { type: 'orderedList', attrs: { start: 1, type: null }, content: [{ type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Stand B12', marks: [{ type: 'link', attrs: { href: ' https://example.com/fair ', target: '_blank', rel: 'noopener', class: null } }] }] }] }] },

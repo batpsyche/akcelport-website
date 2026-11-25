@@ -13,7 +13,7 @@ import { inspectBuffer } from './inspect.ts';
 import { Storage } from '../storage.ts';
 
 export const FOLDER_RE = /^(img\/(products\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/originals)?|company|downloads|news)|downloads\/(catalogue|legacy|news))$/;
-const MEDIA_COLS = 'id, path, kind, mime, bytes, width, height, pages, sha256, original_filename AS "originalFilename", created_at AS "createdAt", updated_at AS "updatedAt"';
+const MEDIA_COLS = 'id, path, kind, mime, bytes::int AS bytes, width, height, pages, sha256, original_filename AS "originalFilename", created_at AS "createdAt", updated_at AS "updatedAt"';
 
 export const slugifyName = (name: string) => basename(name, extname(name)).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'file';
 
