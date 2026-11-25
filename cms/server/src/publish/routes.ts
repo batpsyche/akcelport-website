@@ -16,7 +16,7 @@ export async function publishRoutes(app: FastifyInstance, opts: { pool: pg.Pool;
     if (!(await canPublish(pool, req.user!.role))) throw new HttpError(403, 'Publishing is reserved to administrators');
   };
 
-  app.get('/api/publish', async (req) => ({ ...(await service.history()), pending: await pendingChanges(pool), canPublish: await canPublish(pool, req.user!.role), sitePort: opts.config.sitePort }));
+  app.get('/api/publish', async (req) => ({ ...(await service.history()), pending: await pendingChanges(pool), canPublish: await canPublish(pool, req.user!.role), sitePort: opts.config.sitePort, siteUrl: opts.config.storage ? opts.config.siteUrl ?? null : null }));
 
   app.post('/api/publish', { preHandler: requirePublisher }, async (req) => {
     const body = z.object({

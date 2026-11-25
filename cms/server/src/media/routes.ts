@@ -1,4 +1,5 @@
-// Media library: photos and PDFs on disk under MEDIA_DIR, mirroring the website's public/ layout.
+// Media library: photos and PDFs on disk under MEDIA_DIR, mirroring the website's public/ layout
+// (or under media/ in the Supabase Storage bucket when SUPABASE_URL is set).
 import type { FastifyInstance } from 'fastify';
 import { mkdirSync, existsSync, writeFileSync, renameSync, unlinkSync, readFileSync } from 'node:fs';
 import { join, dirname, basename, extname } from 'node:path';
@@ -9,6 +10,7 @@ import type { Config } from '../config.ts';
 import { HttpError, requireAuth } from '../auth/plugin.ts';
 import { audit } from '../audit.ts';
 import { inspectBuffer } from './inspect.ts';
+import { Storage } from '../storage.ts';
 
 export const FOLDER_RE = /^(img\/(products\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/originals)?|company|downloads)|downloads\/(catalogue|legacy))$/;
 const MEDIA_COLS = 'id, path, kind, mime, bytes, width, height, pages, sha256, original_filename AS "originalFilename", created_at AS "createdAt", updated_at AS "updatedAt"';
@@ -43,6 +45,7 @@ export async function staleImageRefs(pool: pg.Pool, path: string, width: number,
 
 export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; config: Config }) {
   const { pool, config } = opts;
+  const storage = config.storage ? new Storage(config.storage) : undefined;
   app.addHook('preHandler', requireAuth);
 
   app.get('/api/media', async (req) => {
@@ -77,6 +80,11 @@ export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; c
     return { buf, info, fields, filename: part.filename };
   }
 
+  const save = async (path: string, buf: Buffer, mime: string) => {
+    if (storage) await storage.put(`media/${path}`, buf, mime, 0);
+    else writeAtomic(join(config.mediaDir, path), buf);
+  };
+
   const writeAtomic = (abs: string, buf: Buffer) => {
     mkdirSync(dirname(abs), { recursive: true });
     const tmp = `${abs}.upload-${process.pid}-${Date.now()}`;
@@ -92,7 +100,7 @@ export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; c
     const base = slugifyName(fields.name || filename);
     let path = `${folder}/${base}.${info.ext}`;
     for (let n = 2; existsSync(join(config.mediaDir, path)) || (await pool.query('SELECT 1 FROM media WHERE path = $1', [path])).rowCount; n++) path = `${folder}/${base}-${n}.${info.ext}`;
-    writeAtomic(join(config.mediaDir, path), buf);
+    await save(path, buf, info.mime);
     const sha = createHash('sha256').update(buf).digest('hex');
     const row = (await pool.query(
       `INSERT INTO media (path, kind, mime, bytes, width, height, pages, sha256, original_filename, uploaded_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING ${MEDIA_COLS}`,
@@ -111,7 +119,7 @@ export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; c
     if (info.kind !== current.kind) throw new HttpError(400, `Replace a ${current.kind} with a ${current.kind}`);
     const currentExt = extname(current.path).slice(1);
     if (info.ext !== currentExt && !(info.ext === 'jpg' && currentExt === 'jpeg')) throw new HttpError(400, `Upload a .${currentExt} file so links keep working`);
-    writeAtomic(join(config.mediaDir, current.path), buf);
+    await save(current.path, buf, info.mime);
     const sha = createHash('sha256').update(buf).digest('hex');
     const row = (await pool.query(
       `UPDATE media SET mime = $2, bytes = $3, width = $4, height = $5, pages = $6, sha256 = $7, uploaded_by = $8, updated_at = now() WHERE id = $1 RETURNING ${MEDIA_COLS}`,
@@ -131,7 +139,8 @@ export async function mediaRoutes(app: FastifyInstance, opts: { pool: pg.Pool; c
     if (used.length) throw new HttpError(400, `Still used by ${used.join(', ')}`);
     await pool.query('DELETE FROM media WHERE id = $1', [id]);
     const abs = join(config.mediaDir, current.path);
-    if (existsSync(abs)) unlinkSync(abs);
+    if (storage) await storage.remove([`media/${current.path}`]);
+    else if (existsSync(abs)) unlinkSync(abs);
     await audit(pool, req, { action: 'media.delete', entityType: 'media', entityId: id, label: current.path });
     return { ok: true };
   });

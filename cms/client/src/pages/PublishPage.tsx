@@ -47,14 +47,14 @@ export function PublishPage() {
   const rollback = useMutation({ mutationFn: (releaseId: string) => api.post('/api/publish/rollback', { releaseId }), onSuccess: async () => { await refresh(); toast.success('Release restored'); }, onError: reportError });
 
   const d = state.data;
-  const siteUrl = `${window.location.protocol}//${window.location.hostname}:${d?.sitePort ?? 4174}/`;
+  const siteUrl = d?.siteUrl ?? `${window.location.protocol}//${window.location.hostname}:${d?.sitePort ?? 4174}/`;
   const toggle = (k: string) => setSelected((s) => { const n = new Set(s); if (n.has(k)) n.delete(k); else n.add(k); return n; });
   const count = keys.length;
   return (
     <div>
       <PageHeader kicker="Go live" title="Publish" description="Publishing promotes the selected drafts, rebuilds the whole website from the database, checks it and swaps it in atomically. Nothing changes on the site if the build fails." actions={<>
         <Button variant="outline" onClick={() => preview.mutate()} disabled={preview.isPending || d?.busy}><Eye className="size-4" /> {preview.isPending ? 'Building preview…' : 'Preview changes'}</Button>
-        {d?.canPublish && <ConfirmDialog trigger={<Button disabled={publish.isPending || d?.busy || !count}><Rocket className="size-4" /> {publish.isPending ? 'Publishing…' : `Publish ${selected.size === count ? 'all' : selected.size} change${selected.size === 1 ? '' : 's'}`}</Button>} title="Publish to the website?" description={`${selected.size} change${selected.size === 1 ? '' : 's'} go live. The site is rebuilt and replaced in one step.`} confirmLabel="Publish" onConfirm={() => publish.mutate()} />}
+        {d?.canPublish && <ConfirmDialog trigger={<Button disabled={publish.isPending || d?.busy || (!count && !d?.siteUrl)}><Rocket className="size-4" /> {publish.isPending ? 'Publishing…' : count ? `Publish ${selected.size === count ? 'all' : selected.size} change${selected.size === 1 ? '' : 's'}` : 'Publish again'}</Button>} title="Publish to the website?" description={count ? `${selected.size} change${selected.size === 1 ? '' : 's'} go live. The site is rebuilt and replaced in one step.` : 'The site is rebuilt from the published content and replaced in one step.'} confirmLabel="Publish" onConfirm={() => publish.mutate()} />}
       </>} />
       <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-6 items-start">
         <div className="grid gap-6">

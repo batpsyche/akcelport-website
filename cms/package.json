@@ -16,7 +16,8 @@
     "migrate": "tsx server/src/cli/migrate.ts",
     "seed": "tsx server/src/cli/seed.ts",
     "create-admin": "tsx server/src/cli/create-admin.ts",
-    "test": "node --import tsx --test --test-concurrency=1 test/*.test.ts"
+    "test": "node --import tsx --test --test-concurrency=1 test/*.test.ts",
+    "vercel-build": "node scripts/vercel-build.mjs"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",

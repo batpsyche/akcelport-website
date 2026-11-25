@@ -15,6 +15,8 @@ import { contentRoutes } from './content/routes.ts';
 import { mediaRoutes } from './media/routes.ts';
 import { publishRoutes } from './publish/routes.ts';
 import { PublishService } from './publish/service.ts';
+// Plain JS module shared with the public site's Vercel function (types in serve.d.mts).
+import { createSiteHandler } from '../../site-host/serve.mjs';
 
 declare module 'fastify' {
   interface FastifyInstance { publishService: PublishService }
@@ -57,8 +59,23 @@ export async function buildApp(config: Config, pool: pg.Pool): Promise<FastifyIn
   // Media and preview are private to signed-in users.
   await app.register(async (priv) => {
     priv.addHook('onRequest', requireAuth);
-    await priv.register(fastifyStatic, { root: config.mediaDir, prefix: '/media/', decorateReply: false, maxAge: 0, cacheControl: true, acceptRanges: true });
-    await priv.register(fastifyStatic, { root: service.previewDir, prefix: '/preview/', decorateReply: false, index: ['index.html'], maxAge: 0, cacheControl: true, acceptRanges: true });
+    if (config.storage && service.storage) {
+      // Serverless staging: media and the preview build live in Supabase Storage.
+      const storage = service.storage;
+      const previewHandler = createSiteHandler({ url: config.storage.url, bucket: config.storage.bucket, manifest: 'preview', base: '/preview/', cacheMs: 0, cacheControl: () => 'private, no-store' });
+      priv.get('/media/*', async (req, reply) => {
+        const path = (req.params as { '*': string })['*'];
+        const row = (await pool.query<{ sha256: string }>('SELECT sha256 FROM media WHERE path = $1', [path])).rows[0];
+        if (!row) return reply.code(404).send('Not found');
+        return reply.redirect(`${storage.publicUrl(`media/${path}`)}?v=${row.sha256.slice(0, 12)}`, 302);
+      });
+      const preview = async (req: import('fastify').FastifyRequest, reply: import('fastify').FastifyReply) => { reply.hijack(); await previewHandler(req.raw, reply.raw); };
+      priv.get('/preview', preview);
+      priv.get('/preview/*', preview);
+    } else {
+      await priv.register(fastifyStatic, { root: config.mediaDir, prefix: '/media/', decorateReply: false, maxAge: 0, cacheControl: true, acceptRanges: true });
+      await priv.register(fastifyStatic, { root: service.previewDir, prefix: '/preview/', decorateReply: false, index: ['index.html'], maxAge: 0, cacheControl: true, acceptRanges: true });
+    }
   });
 
   // The built admin UI (cms/dist/client); any non-API path falls back to index.html for client-side routing.

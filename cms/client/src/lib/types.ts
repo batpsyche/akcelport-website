@@ -28,7 +28,7 @@ export interface PendingItem extends ItemSummary { type: ItemType; change: strin
 export interface Pending { items: PendingItem[]; pages: Array<{ key: string; updatedAt: string; change: string }> }
 
 export interface PublishRecord { id: number; kind: 'publish' | 'preview' | 'rollback'; status: 'running' | 'success' | 'failed'; startedBy: string | null; releaseId: string | null; items: Array<{ type: string; slug: string; change: string }> | null; log: string | null; error: string | null; startedAt: string; finishedAt: string | null }
-export interface PublishState { current: string | null; releases: Array<{ id: string; createdAt: string; current: boolean }>; publishes: PublishRecord[]; busy: boolean; previewBuiltAt: string | null; pending: Pending; canPublish: boolean; sitePort: number }
+export interface PublishState { current: string | null; releases: Array<{ id: string; createdAt: string; current: boolean }>; publishes: PublishRecord[]; busy: boolean; previewBuiltAt: string | null; pending: Pending; canPublish: boolean; sitePort: number; siteUrl: string | null }
 
 export interface Redirect { id: number; kind: 'page' | 'download'; fromPath: string; toPath: string; sortOrder: number; updatedAt: string }
 export interface AuditEntry { id: number; userEmail: string | null; action: string; entityType: string | null; entityId: string | null; label: string | null; changes: Record<string, { from: unknown; to: unknown }> | null; ip?: string | null; createdAt: string }

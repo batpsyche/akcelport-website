@@ -23,6 +23,7 @@ COPY --from=build /app/cms/dist ./cms/dist
 COPY cms/package.json cms/tsconfig.json cms/tsconfig.server.json ./cms/
 COPY cms/server ./cms/server
 COPY cms/shared ./cms/shared
+COPY cms/site-host ./cms/site-host
 RUN mkdir -p /data/media /data/publish && chown -R node:node /data /app
 USER node
 WORKDIR /app/cms

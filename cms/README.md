@@ -100,6 +100,20 @@ server {
 
 Because `current` is a symlink that is replaced atomically, visitors never see a half-written site, and rollback is instant. Apache can use the generated `current/.htaccess` for the old-URL redirects.
 
+## Staging on Vercel + Supabase (free tiers)
+
+An internal staging copy runs without a server: the CMS is one Vercel function, PostgreSQL is a Supabase project, and the published site lives in a Supabase Storage bucket served by a second, tiny Vercel function. It is **not** a production setup.
+
+- **Admin:** https://akcelport-cms.vercel.app (Vercel project `akcelport-cms`) · **Site:** https://akcelport-site.vercel.app (Vercel project `akcelport-site`, source in `site-host/`).
+- **Database:** Supabase project `sports-football`, schema `akcelport` only, through the pooler with a dedicated `akcelport` login role whose `search_path` is `akcelport, extensions`. Nothing else in that project is used.
+- **Storage:** public bucket `akcelport-site`: `media/<path>` is the media library; a publish uploads the build as content-addressed `objects/<sha256>/<name>` plus `releases/<id>.json` (a manifest) and points `state.json` at it. Only changed files are uploaded, so a publish takes a few seconds; the last `PUBLISH_KEEP` releases are kept for rollback and unreferenced objects are pruned. If an upload fails after the content was published in the database, use **Publish again** (enabled in this mode even with no pending changes). **Preview changes** uploads `preview.json`, shown at `/preview/` in the CMS behind login; the preview manifest and its files are still publicly readable by anyone who knows the Storage path, so draft previews are not private on staging.
+- **Mode switch:** setting `SUPABASE_URL` turns this on (`SUPABASE_SERVICE_ROLE_KEY`, `STORAGE_BUCKET` default `akcelport-site`); `MEDIA_DIR` and `PUBLISH_DIR` then only hold temporary build files (`/tmp/...` on Vercel). Without it the CMS works exactly as in the sections above (Docker or local).
+- **Deploy the CMS** from `cms/` (linked to `akcelport-cms`): `npm run vercel-build && vercel deploy --prebuilt --prod`. The script writes `.vercel/output` with the bundled server, the admin UI and the website sources the Publish build needs. **Deploy the site** from `cms/site-host/` (linked to `akcelport-site`, only `SUPABASE_URL` set): `vercel deploy --prod`.
+- **First load:** with the staging variables in the environment run `npm run migrate`, `npm run seed` (also uploads `public/img` and `public/downloads` to `media/`) and `npm run create-admin` from a workstation. Run the first publish from the CMS (about 60 MB to upload once; later publishes send only changed pages).
+- **Environment (Vercel production env of `akcelport-cms`):** `DATABASE_URL`, `SESSION_SECRET`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `STORAGE_BUCKET`, `SITE_URL=https://akcelport-site.vercel.app`, `MEDIA_DIR`/`PUBLISH_DIR` under `/tmp`, `SESSION_SECURE=1`, `TRUST_PROXY=1`, `NODE_ENV=production`. No secret is in git.
+- **Limits:** Vercel caps a function request body at 4.5 MB, so uploads larger than that fail on staging (larger PDFs can be added through the seed or a local run). Files above 4 MB on the public site are redirected to their Storage URL instead of streamed. Unpublished media in the bucket are reachable by anyone who knows the path. Login rate limiting per IP works, the global request limiter is per function instance.
+- **Cost:** everything fits the free plans (Vercel Hobby, Supabase Free: 500 MB database, 1 GB storage, 5 GB egress a month). Supabase pauses a free project after a week without activity; restore it from the dashboard. Nothing paid is enabled; adding a custom domain, more regions or Supabase add-ons would change that.
+
 ## Backups
 
 - **Database:** `docker compose exec db pg_dump -U akcelport akcelport_cms > backup.sql` (restore with `psql`). Contains all content, versions, users (hashed passwords), audit log and publish history.
@@ -118,5 +132,7 @@ cms/
   shared/            zod content schemas (mirror content/*.json) and page field specs
   client/            React admin (Vite): pages/, components/, lib/
   test/              node:test suites (real PostgreSQL)
+  site-host/         Vercel function serving the site published to Supabase Storage (staging)
+  scripts/           vercel-build.mjs: prebuilt Vercel output for the CMS (staging)
   Dockerfile, docker-compose.yml, .env.example
 ```

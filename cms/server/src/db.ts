@@ -3,8 +3,8 @@ import pg from 'pg';
 export type Db = pg.Pool;
 export type Queryable = pg.Pool | pg.PoolClient;
 
-export function createPool(connectionString: string): pg.Pool {
-  return new pg.Pool({ connectionString, max: 10 });
+export function createPool(connectionString: string, opts: { max?: number } = {}): pg.Pool {
+  return new pg.Pool({ connectionString, max: opts.max ?? 10 });
 }
 
 export async function withTransaction<T>(pool: pg.Pool, fn: (client: pg.PoolClient) => Promise<T>): Promise<T> {
