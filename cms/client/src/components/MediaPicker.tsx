@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
-export const FIXED_FOLDERS = ['img/company', 'img/downloads', 'downloads/catalogue', 'downloads/legacy'];
+export const FIXED_FOLDERS = ['img/company', 'img/downloads', 'img/news', 'downloads/catalogue', 'downloads/legacy', 'downloads/news'];
 
 export function useMedia(kind?: 'image' | 'pdf') {
   return useQuery({ queryKey: ['media', kind ?? 'all'], queryFn: () => api.get<{ media: MediaRow[] }>(`/api/media${kind ? `?kind=${kind}` : ''}`).then((r) => r.media), staleTime: 30_000 });

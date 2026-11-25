@@ -1,11 +1,11 @@
-// Queries and mutations for families, products and downloads (one API shape), with validation errors mapped to field paths.
+// Queries and mutations for families, products, downloads and news posts (one API shape), with validation errors mapped to field paths.
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { api, ApiError } from './api';
 import type { ItemFull, ItemSummary, ItemType } from './types';
 
-export const BASE: Record<ItemType, string> = { family: 'families', product: 'products', download: 'downloads' };
-export const LABEL: Record<ItemType, string> = { family: 'family', product: 'product', download: 'download' };
+export const BASE: Record<ItemType, string> = { family: 'families', product: 'products', download: 'downloads', news: 'news' };
+export const LABEL: Record<ItemType, string> = { family: 'family', product: 'product', download: 'download', news: 'news post' };
 
 export function useItems(type: ItemType) {
   return useQuery({ queryKey: ['items', type], queryFn: () => api.get<{ items: ItemSummary[] }>(`/api/${BASE[type]}`).then((r) => r.items), staleTime: 15_000 });

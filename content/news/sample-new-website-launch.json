@@ -1,0 +1,129 @@
+{
+  "slug": "sample-new-website-launch",
+  "title": "Sample post: our new website is live",
+  "date": "2026-11-20",
+  "category": "Company",
+  "summary": "Sample post: a placeholder to show how news appears on the site. Replace or delete it in the CMS.",
+  "cover": {
+    "src": "/img/company/global-presence-map.webp",
+    "w": 1000,
+    "h": 532,
+    "alt": "World map of Akcelport export markets"
+  },
+  "body": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This is a "
+          },
+          {
+            "type": "text",
+            "text": "sample post",
+            "marks": [
+              {
+                "type": "bold"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": " written to show the News pages. It is not a real announcement."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "What you can do on the new site"
+          }
+        ]
+      },
+      {
+        "type": "bulletList",
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Browse every product range by family."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Download the current datasheets as PDF."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Send an enquiry from the "
+                  },
+                  {
+                    "type": "text",
+                    "text": "contact page",
+                    "marks": [
+                      {
+                        "type": "link",
+                        "attrs": {
+                          "href": "/contact/"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "text",
+                    "text": "."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "Edit or delete this post in the CMS under News.",
+            "marks": [
+              {
+                "type": "italic"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 
-const typePath: Record<string, string> = { family: 'families', product: 'products', download: 'downloads' };
+const typePath: Record<string, string> = { family: 'families', product: 'products', download: 'downloads', news: 'news' };
 
 export function PublishPage() {
   const qc = useQueryClient();
@@ -33,7 +33,7 @@ export function PublishPage() {
     mutationFn: () => {
       const all = keys.every((k) => selected.has(k));
       const pick = (type: string) => (pending?.items ?? []).filter((i) => i.type === type && selected.has(`${i.type}:${i.id}`)).map((i) => i.id);
-      const selection = all ? 'all' : { families: pick('family'), products: pick('product'), downloads: pick('download'), pages: (pending?.pages ?? []).filter((p) => selected.has(`page:${p.key}`)).map((p) => p.key) };
+      const selection = all ? 'all' : { families: pick('family'), products: pick('product'), downloads: pick('download'), news: pick('news'), pages: (pending?.pages ?? []).filter((p) => selected.has(`page:${p.key}`)).map((p) => p.key) };
       return api.post<{ releaseId: string; log: string; promoted: unknown[] }>('/api/publish', { selection });
     },
     onSuccess: async (r) => { setLastResult({ ok: true, log: r.log }); await refresh(); toast.success(`Published release ${r.releaseId}`); },

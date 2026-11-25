@@ -54,7 +54,7 @@ export async function setupTestEnv(): Promise<TestEnv> {
   });
   const pool = new pg.Pool({ connectionString: url, max: 5 });
   await migrate(pool);
-  await pool.query('TRUNCATE products, families, downloads, pages, redirects, media, content_versions, audit_log, publishes, sessions, login_attempts, password_tokens, users, app_settings RESTART IDENTITY CASCADE');
+  await pool.query('TRUNCATE products, families, downloads, news_posts, pages, redirects, media, content_versions, audit_log, publishes, sessions, login_attempts, password_tokens, users, app_settings RESTART IDENTITY CASCADE');
   return {
     pool, config, tmp, siteRoot,
     cleanup: async () => { await pool.end(); rmSync(tmp, { recursive: true, force: true }); },

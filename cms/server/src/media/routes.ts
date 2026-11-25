@@ -12,7 +12,7 @@ import { audit } from '../audit.ts';
 import { inspectBuffer } from './inspect.ts';
 import { Storage } from '../storage.ts';
 
-export const FOLDER_RE = /^(img\/(products\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/originals)?|company|downloads)|downloads\/(catalogue|legacy))$/;
+export const FOLDER_RE = /^(img\/(products\/[a-z0-9]+(?:-[a-z0-9]+)*(?:\/originals)?|company|downloads|news)|downloads\/(catalogue|legacy|news))$/;
 const MEDIA_COLS = 'id, path, kind, mime, bytes, width, height, pages, sha256, original_filename AS "originalFilename", created_at AS "createdAt", updated_at AS "updatedAt"';
 
 export const slugifyName = (name: string) => basename(name, extname(name)).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'file';
@@ -20,7 +20,7 @@ export const slugifyName = (name: string) => basename(name, extname(name)).toLow
 export async function isMediaReferenced(pool: pg.Pool, path: string): Promise<string[]> {
   const needle = `%"/${path}"%`;
   const hits: string[] = [];
-  for (const [table, label] of [['products', 'product'], ['families', 'family'], ['downloads', 'download']]) {
+  for (const [table, label] of [['products', 'product'], ['families', 'family'], ['downloads', 'download'], ['news_posts', 'news post']]) {
     const r = await pool.query<{ slug: string }>(`SELECT slug FROM ${table} WHERE live::text LIKE $1 OR draft::text LIKE $1 LIMIT 3`, [needle]);
     hits.push(...r.rows.map((x) => `${label} ${x.slug}`));
   }
@@ -34,7 +34,7 @@ export async function staleImageRefs(pool: pg.Pool, path: string, width: number,
   const vars = JSON.stringify({ src: `/${path}`, w: width, h: height });
   const stale = (col: string) => `jsonb_path_exists(${col}, '$.** ? (@.src == $src && (@.w != $w || @.h != $h))', $1::jsonb)`;
   const hits: string[] = [];
-  for (const [table, label] of [['products', 'product'], ['families', 'family'], ['downloads', 'download']]) {
+  for (const [table, label] of [['products', 'product'], ['families', 'family'], ['downloads', 'download'], ['news_posts', 'news post']]) {
     const r = await pool.query<{ slug: string }>(`SELECT slug FROM ${table} WHERE ${stale('live')} OR ${stale('draft')} ORDER BY slug`, [vars]);
     hits.push(...r.rows.map((x) => `${label} ${x.slug}`));
   }

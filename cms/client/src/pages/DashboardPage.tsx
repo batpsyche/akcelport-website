@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
-import { Package, Layers, FileDown, Images, Rocket, ArrowRight } from 'lucide-react';
+import { Package, Layers, FileDown, Newspaper, Images, Rocket, ArrowRight } from 'lucide-react';
 import { api } from '@/lib/api';
 import { formatDate } from '@/lib/format';
 import { useAuth } from '@/lib/auth';
@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
-interface Dashboard { counts: { products: number; families: number; downloads: number; media: number; users: number }; pendingCount: number; lastPublish: { status: string; releaseId: string | null; startedBy: string | null; finishedAt: string | null; error: string | null; kind: string } | null; recent: Array<{ id: number; userEmail: string | null; action: string; label: string | null; createdAt: string }> }
+interface Dashboard { counts: { products: number; families: number; downloads: number; news: number; media: number; users: number }; pendingCount: number; lastPublish: { status: string; releaseId: string | null; startedBy: string | null; finishedAt: string | null; error: string | null; kind: string } | null; recent: Array<{ id: number; userEmail: string | null; action: string; label: string | null; createdAt: string }> }
 
 export function DashboardPage() {
   const { me } = useAuth();
@@ -19,12 +19,13 @@ export function DashboardPage() {
     { to: '/products', label: 'Products', value: d?.counts.products, icon: Package },
     { to: '/families', label: 'Families', value: d?.counts.families, icon: Layers },
     { to: '/downloads', label: 'Downloads', value: d?.counts.downloads, icon: FileDown },
+    { to: '/news', label: 'News posts', value: d?.counts.news, icon: Newspaper },
     { to: '/media', label: 'Media files', value: d?.counts.media, icon: Images },
   ];
   return (
     <div>
       <PageHeader kicker="Dashboard" title={`Hello${me?.user.name ? `, ${me.user.name.split(' ')[0]}` : ''}`} description="The website is a static site rebuilt from this content every time you publish." />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
         {tiles.map((t) => (
           <Link key={t.to} to={t.to} className="bg-white chamfer border p-4 hover:border-primary transition-colors">
             <div className="flex items-center justify-between text-muted-foreground"><span className="kicker">{t.label}</span><t.icon className="size-4" /></div>

@@ -3,7 +3,8 @@
 A self-hosted backoffice for the Akcelport Industries website. Content lives in PostgreSQL; a **Publish** button exports it to the `content/` JSON shape, runs the website's own build (`scripts/build.mjs`), validates it and swaps the result into place atomically. The public site stays a zero-dependency static site; everything in this folder is the CMS only.
 
 - **Stack:** Node 22, Fastify 5, PostgreSQL, TypeScript; React + Vite admin UI with shadcn/ui (Radix + Tailwind) and dnd-kit for drag ordering.
-- **Auth:** email and password inside the app (scrypt hashing), server-side sessions in PostgreSQL, HttpOnly `SameSite=Strict` cookie, CSRF token header on every state-changing call, login rate limiting. Roles: **admin** (users, site settings, form endpoint, redirects, rollback) and **editor** (products, families, downloads, pages, media, publish when allowed).
+- **Auth:** email and password inside the app (scrypt hashing), server-side sessions in PostgreSQL, HttpOnly `SameSite=Strict` cookie, CSRF token header on every state-changing call, login rate limiting. Roles: **admin** (users, site settings, form endpoint, redirects, rollback) and **editor** (products, families, downloads, news, pages, media, publish when allowed).
+- **News:** posts (title, date, category, summary, optional cover image and PDF) are written in a small TipTap editor offering paragraphs, two heading levels, lists, quotes, bold, italic and links. The body is stored as the editor's JSON limited to those node types (`shared/rich-text.ts`): other nodes are refused, attributes are dropped and links must be `https://`, `http://`, `mailto:`, `tel:` or site-relative. The site build renders only that subset with all text escaped (`src/lib/richtext.mjs`), so a published post cannot carry HTML or script. Cover images upload to `img/news`, PDFs to `downloads/news`.
 - **Content model:** every item has a *live* body (what the published site uses) and an optional *draft* (pending edits), a *visible/hidden* status, numbered versions you can revert to, and an audit log of who changed what.
 - **Publish:** `PUBLISH_DIR/releases/<id>/` per publish, `PUBLISH_DIR/current` symlink swapped atomically, the last `PUBLISH_KEEP` releases kept for one-click rollback, and `PUBLISH_DIR/preview/` for a build of the drafts (served behind login at `/preview/`). A failed build leaves the published site untouched and shows the build log.
 
@@ -122,7 +123,7 @@ An internal staging copy runs without a server: the CMS is one Vercel function, 
 
 ## Tests
 
-`npm test` covers authentication and roles (cookies, CSRF, rate limiting, admin-only routes, invitations and resets), the content round trip (seed → export → build is byte-identical to a build of the repository), content editing rules (validation, versions, revert, ordering, media uploads) and publishing (release swap, served site, failed build leaves the site and the drafts untouched, preview, selective publish, pruning, rollback). `.github/workflows/cms-tests.yml` runs them with a PostgreSQL service.
+`npm test` covers news posts (validation, rich-text sanitizing, publish to `/news/`, the home page and the sitemap, hiding), authentication and roles (cookies, CSRF, rate limiting, admin-only routes, invitations and resets), the content round trip (seed → export → build is byte-identical to a build of the repository), content editing rules (validation, versions, revert, ordering, media uploads) and publishing (release swap, served site, failed build leaves the site and the drafts untouched, preview, selective publish, pruning, rollback). `.github/workflows/cms-tests.yml` runs them with a PostgreSQL service.
 
 ## Layout
 

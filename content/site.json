@@ -38,6 +38,10 @@
       "href": "/downloads/"
     },
     {
+      "label": "News",
+      "href": "/news/"
+    },
+    {
       "label": "Contact",
       "href": "/contact/"
     }

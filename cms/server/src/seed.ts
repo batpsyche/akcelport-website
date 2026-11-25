@@ -9,7 +9,7 @@ import { inspectBuffer } from './media/inspect.ts';
 import { pageKeys } from '../../shared/content-schemas.ts';
 
 export interface SeedOptions { siteRoot: string; mediaDir: string; reset?: boolean }
-export interface SeedReport { families: number; products: number; downloads: number; pages: number; redirects: number; media: number }
+export interface SeedReport { families: number; products: number; downloads: number; news: number; pages: number; redirects: number; media: number }
 
 const readJson = (p: string) => JSON.parse(readFileSync(p, 'utf8'));
 const listJson = (dir: string) => readdirSync(dir).filter((f) => f.endsWith('.json')).sort().map((f) => readJson(join(dir, f)));
@@ -61,7 +61,7 @@ export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<Se
 
   return withTransaction(pool, async (db) => {
     if (opts.reset) {
-      await db.query('TRUNCATE products, families, downloads, pages, redirects, media, content_versions RESTART IDENTITY CASCADE');
+      await db.query('TRUNCATE products, families, downloads, news_posts, pages, redirects, media, content_versions RESTART IDENTITY CASCADE');
     }
     let media = 0;
     for (const p of mediaPaths) if (await registerMediaFile(db, opts.mediaDir, p)) media++;
@@ -98,6 +98,16 @@ export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<Se
       );
     }
 
+    const news = existsSync(join(content, 'news')) ? listJson(join(content, 'news')) as Array<Record<string, unknown>> : [];
+    let ni = 0;
+    for (const n of news) {
+      const { slug, ...body } = n as { slug: string } & Record<string, unknown>;
+      await db.query(
+        `INSERT INTO news_posts (slug, published_slug, sort_order, status, published_status, live) VALUES ($1,$1,$2,'live','live',$3)`,
+        [slug, ++ni, JSON.stringify(body)],
+      );
+    }
+
     let pages = 0;
     for (const key of pageKeys) {
       const file = key === 'countries' ? 'countries.json' : `${key}.json`;
@@ -117,6 +127,6 @@ export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<Se
 
     await db.query(`INSERT INTO app_settings (key, value) VALUES ('editors_can_publish', 'true') ON CONFLICT (key) DO NOTHING`);
 
-    return { families: categories.length, products: products.length, downloads: downloads.length, pages, redirects: ri, media };
+    return { families: categories.length, products: products.length, downloads: downloads.length, news: news.length, pages, redirects: ri, media };
   });
 }

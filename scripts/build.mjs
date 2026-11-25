@@ -12,6 +12,7 @@ import { BASE, rebaseHtml, rebaseCss, rebaseUrl } from '../src/lib/base.mjs';
 import { layout } from '../src/templates/layout.mjs';
 import { homePage } from '../src/templates/home.mjs';
 import { productPage, categoryPage, productsPage, downloadsPage, aboutPage, contactPage, sitemapPage, notFoundPage } from '../src/templates/pages.mjs';
+import { newsPage, newsPostPage } from '../src/templates/news.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argValue = (name) => { const i = process.argv.indexOf(name); return i > -1 && process.argv[i + 1] ? resolve(process.argv[i + 1]) : undefined; };
@@ -29,7 +30,7 @@ if (problems.length) {
   console.error(`Content problems (${problems.length}):\n - ` + problems.join('\n - '));
   process.exit(1);
 }
-if (checkOnly) { console.log(`Content OK: ${data.products.length} products, ${data.categories.length} families, ${data.downloads.length} downloads.`); process.exit(0); }
+if (checkOnly) { console.log(`Content OK: ${data.products.length} products, ${data.categories.length} families, ${data.downloads.length} downloads, ${data.news.length} news posts.`); process.exit(0); }
 
 // ---- assets
 rmSync(dist, { recursive: true, force: true });
@@ -42,8 +43,8 @@ for (const f of ['site.js', 'hero.js']) writeFileSync(join(dist, 'assets', f), r
 data.buildId = createHash('sha1').update(css).update(readFileSync(join(root, 'src/client/site.js'))).update(readFileSync(join(root, 'src/client/hero.js'))).digest('hex').slice(0, 8);
 
 // ---- pages
-const pages = [homePage(data), productsPage(data), downloadsPage(data), aboutPage(data), contactPage(data), sitemapPage(data), notFoundPage(data),
-  ...data.categories.map((c) => categoryPage(data, c)), ...data.products.map((p) => productPage(data, p))];
+const pages = [homePage(data), productsPage(data), downloadsPage(data), newsPage(data), aboutPage(data), contactPage(data), sitemapPage(data), notFoundPage(data),
+  ...data.categories.map((c) => categoryPage(data, c)), ...data.products.map((p) => productPage(data, p)), ...data.news.map((n) => newsPostPage(data, n))];
 for (const pg of pages) {
   const file = pg.path.endsWith('.html') ? pg.path : join(pg.path, 'index.html');
   mkdirSync(dirname(join(dist, file)), { recursive: true });
@@ -59,4 +60,4 @@ const reds = [...data.redirects.pages, ...data.redirects.downloads];
 writeFileSync(join(dist, '.htaccess'), `# Old akcelport.com URLs -> new locations\n${reds.map((r) => `Redirect 301 ${rebaseUrl(r.from)} ${rebaseUrl(r.to)}`).join('\n')}\nErrorDocument 404 ${rebaseUrl('/404.html')}\n`);
 writeFileSync(join(dist, '_redirects'), reds.map((r) => `${rebaseUrl(r.from)}  ${rebaseUrl(r.to)}  301`).join('\n') + '\n');
 
-console.log(`Built ${pages.length} pages (${data.products.length} products, ${data.categories.length} families, ${data.downloads.length} downloads) -> dist/  [build ${data.buildId}]`);
+console.log(`Built ${pages.length} pages (${data.products.length} products, ${data.categories.length} families, ${data.downloads.length} downloads, ${data.news.length} news posts) -> dist/  [build ${data.buildId}]`);

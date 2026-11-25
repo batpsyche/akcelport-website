@@ -21,7 +21,7 @@ export const RELEASE_RE = /^\d{8}-\d{6}-[a-z0-9]{4}$/;
 const EMPTY_RELEASE = '00000000-000000-none';
 const LOCK_KEY = 727401;
 
-export interface Selection { families?: number[]; products?: number[]; downloads?: number[]; pages?: string[] }
+export interface Selection { families?: number[]; products?: number[]; downloads?: number[]; news?: number[]; pages?: string[] }
 export interface Actor { id: number; email: string }
 
 const placeholder = (title: string, text: string) =>
@@ -147,7 +147,7 @@ export class PublishService {
   /** Promotes the selected pending changes inside the given transaction (deletions last) and returns what was promoted. A selection that would leave a live product without a live family is refused. */
   private async promote(db: Queryable, selection: Selection | 'all') {
     const pending = await pendingChanges(db);
-    const picked = ([['family', 'families'], ['product', 'products'], ['download', 'downloads']] as Array<[ItemType, keyof Selection]>)
+    const picked = ([['family', 'families'], ['product', 'products'], ['download', 'downloads'], ['news', 'news']] as Array<[ItemType, keyof Selection]>)
       .flatMap(([type, key]) => pending.items.filter((i) => i.type === type && (selection === 'all' || ((selection[key] ?? []) as Array<number | string>).includes(i.id))).map((item) => ({ type, item })));
     const promoted: Array<{ type: string; id: number | string; slug: string; change: string }> = [];
     for (const { type, item } of picked.filter((p) => !p.item.pendingDeletion)) {
@@ -194,7 +194,7 @@ export class PublishService {
         promoted = await this.promote(client, selection);
         await this.pool.query('UPDATE publishes SET items = $2 WHERE id = $1', [recordId, JSON.stringify(promoted)]);
         const counts = await exportContent(client, 'live', tmpContent);
-        log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads, ${counts.redirects} redirects.\n`;
+        log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads, ${counts.news} news posts, ${counts.redirects} redirects.\n`;
         const built = await this.build(tmpContent, outDir);
         log += built.log;
         if (!built.ok) throw new HttpError(422, 'The site build failed; nothing was published', { log });
@@ -243,7 +243,7 @@ export class PublishService {
       let log = '';
       try {
         const counts = await exportContent(this.pool, 'preview', tmpContent);
-        log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads (drafts included).\n`;
+        log += `Exported ${counts.products} products, ${counts.families} families, ${counts.downloads} downloads, ${counts.news} news posts (drafts included).\n`;
         const built = await this.build(tmpContent, tmpOut, { SITE_BASE: '/preview/' });
         log += built.log;
         if (!built.ok) throw new HttpError(422, 'The preview build failed', { log });

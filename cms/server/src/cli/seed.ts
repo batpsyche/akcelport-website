@@ -14,7 +14,7 @@ const pool = createPool(config.databaseUrl);
 try {
   await migrate(pool);
   const r = await seedFromSite(pool, { siteRoot: config.siteRoot, mediaDir: config.mediaDir, reset });
-  console.log(`Seeded from ${config.siteRoot}: ${r.families} families, ${r.products} products, ${r.downloads} downloads, ${r.pages} documents, ${r.redirects} redirects, ${r.media} media files -> ${config.mediaDir}`);
+  console.log(`Seeded from ${config.siteRoot}: ${r.families} families, ${r.products} products, ${r.downloads} downloads, ${r.news} news posts, ${r.pages} documents, ${r.redirects} redirects, ${r.media} media files -> ${config.mediaDir}`);
   if (config.storage) {
     // Serverless staging: the media library lives in the Storage bucket.
     const storage = new Storage(config.storage);

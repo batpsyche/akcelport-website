@@ -64,12 +64,12 @@
     e.preventDefault(); lightbox(z.dataset.zoom, z.dataset.zoomAlt);
   });
 
-  // ---- filter (products index, downloads)
+  // ---- filter (products index, downloads, news; news has category chips only, no search box)
   $$('[data-filter]').forEach((bar) => {
     const scope = bar.parentElement, items = $$('[data-search]', scope), input = $('[data-filter-input]', bar), count = $('[data-filter-count]', bar), empty = $('[data-filter-empty]', scope);
     const chips = $$('.chip', bar); let family = 'all';
     const run = () => {
-      const q = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean); let n = 0;
+      const q = (input ? input.value : '').trim().toLowerCase().split(/\s+/).filter(Boolean); let n = 0;
       items.forEach((it) => {
         const ok = (family === 'all' || it.dataset.family.split(' ').includes(family)) && q.every((w) => it.dataset.search.includes(w));
         it.classList.toggle('is-hidden', !ok); if (ok) n++;
@@ -78,11 +78,11 @@
       $$('.group-h', scope).forEach((h) => { const grid = h.nextElementSibling; h.classList.toggle('is-hidden', ![...grid.children].some((c) => !c.classList.contains('is-hidden'))); });
     };
     chips.forEach((c) => c.addEventListener('click', () => { family = c.dataset.family; chips.forEach((x) => { x.classList.toggle('is-on', x === c); x.setAttribute('aria-pressed', x === c); }); run(); }));
-    input.addEventListener('input', run);
+    if (input) input.addEventListener('input', run);
     const params = new URLSearchParams(location.search);
-    if (params.get('q')) input.value = params.get('q');
+    if (params.get('q') && input) input.value = params.get('q');
     if (params.get('family')) { const c = chips.find((x) => x.dataset.family === params.get('family')); if (c) c.click(); }
-    if (params.get('focus') === 'search') input.focus();
+    if (params.get('focus') === 'search' && input) input.focus();
     run();
   });
 

@@ -1,6 +1,6 @@
 import { NavLink, Outlet, Link, useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
-import { LayoutDashboard, Package, Layers, FileDown, FileText, Settings, ArrowRightLeft, Images, Users, Rocket, History, LogOut, UserCircle, ChevronDown } from 'lucide-react';
+import { LayoutDashboard, Package, Layers, FileDown, Newspaper, FileText, Settings, ArrowRightLeft, Images, Users, Rocket, History, LogOut, UserCircle, ChevronDown } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
 import { api } from '@/lib/api';
 import type { Pending } from '@/lib/types';
@@ -14,6 +14,7 @@ const nav = [
   { to: '/products', label: 'Products', icon: Package },
   { to: '/families', label: 'Families', icon: Layers },
   { to: '/downloads', label: 'Downloads', icon: FileDown },
+  { to: '/news', label: 'News', icon: Newspaper },
   { to: '/pages', label: 'Pages', icon: FileText },
   { to: '/media', label: 'Media', icon: Images },
   { to: '/redirects', label: 'Redirects', icon: ArrowRightLeft, admin: true },
