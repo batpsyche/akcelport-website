@@ -1,6 +1,7 @@
 import { html, raw, esc } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
 import { picture, zoomable, productCard, docCard, specTable, breadcrumbs, ctaBand, sectionHead, productUrl, categoryUrl, bytes } from './components.mjs';
+import { newsUrl } from './news.mjs';
 
 // ------------------------------------------------------------------ product
 function variantCard(v, p) {
@@ -228,7 +229,8 @@ export function sitemapPage(data) {
   const body = html`
   <section class="page-hero dark"><div class="container">${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Site map' }])}<div class="ph-grid"><div><h1>Site map</h1></div></div></div></section>
   <section class="sec sec-white"><div class="container smap">
-    <div><h2>Company</h2><ul><li><a href="/">Home</a></li><li><a href="/about/">About us</a></li><li><a href="/downloads/">Downloads</a></li><li><a href="/contact/">Contact us</a></li><li><a href="/products/">All products</a></li></ul></div>
+    <div><h2>Company</h2><ul><li><a href="/">Home</a></li><li><a href="/about/">About us</a></li><li><a href="/downloads/">Downloads</a></li><li><a href="/news/">News</a></li><li><a href="/contact/">Contact us</a></li><li><a href="/products/">All products</a></li></ul></div>
+    ${data.news.length ? html`<div><h2><a href="/news/">News</a></h2><ul>${data.news.map((n) => html`<li><a href="${newsUrl(n.slug)}">${n.title}</a></li>`)}</ul></div>` : ''}
     ${data.categories.map((c) => html`<div><h2><a href="${categoryUrl(c.slug)}">${c.name}</a></h2><ul>${c.products.map((s) => html`<li><a href="${productUrl(s)}">${data.bySlug.get(s).name}</a></li>`)}</ul></div>`)}
   </div></section>`;
   return { path: '/sitemap/', title: 'Site map', description: 'Every page on the Akcelport Industries website.', body };

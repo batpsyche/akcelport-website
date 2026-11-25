@@ -10,6 +10,8 @@ import { FamiliesPage } from '@/pages/FamiliesPage';
 import { FamilyEditPage } from '@/pages/FamilyEditPage';
 import { DownloadsPage } from '@/pages/DownloadsPage';
 import { DownloadEditPage } from '@/pages/DownloadEditPage';
+import { NewsPage } from '@/pages/NewsPage';
+import { NewsEditPage } from '@/pages/NewsEditPage';
 import { PagesPage } from '@/pages/PagesPage';
 import { PageEditPage } from '@/pages/PageEditPage';
 import { SettingsPage } from '@/pages/SettingsPage';
@@ -36,6 +38,9 @@ export function App() {
         <Route path="downloads" element={<DownloadsPage />} />
         <Route path="downloads/new" element={<DownloadEditPage />} />
         <Route path="downloads/:id" element={<DownloadEditPage />} />
+        <Route path="news" element={<NewsPage />} />
+        <Route path="news/new" element={<NewsEditPage />} />
+        <Route path="news/:id" element={<NewsEditPage />} />
         <Route path="pages" element={<PagesPage />} />
         <Route path="pages/:key" element={<PageEditPage />} />
         <Route path="settings" element={<RequireAuth admin><SettingsPage /></RequireAuth>} />

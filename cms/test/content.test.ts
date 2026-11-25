@@ -230,3 +230,72 @@ test('media: upload with type, size and folder checks; replace; delete only when
   assert.equal((await api(app, 'DELETE', `/api/media/${media.id}`, { session: editor })).status, 200);
   assert.ok(!existsSync(join(env.config.mediaDir, media.path)));
 });
+
+test('news posts: validated, sanitized rich text, media in img/news and downloads/news, listed newest first', async () => {
+  const listed = (await api(app, 'GET', '/api/news', { session: editor })).body.items as Array<{ slug: string; name: string }>;
+  assert.deepEqual(listed.map((n) => n.slug), ['sample-new-website-launch', 'sample-product-catalogue-update'], 'seeded sample posts, newest first');
+
+  const cover = multipart({ folder: 'img/news' }, { name: 'file', filename: 'Cover.png', type: 'image/png', data: pngOf(4, 3) });
+  const coverUp = await api(app, 'POST', '/api/media', { session: editor, rawPayload: cover.payload, headers: cover.headers });
+  assert.equal(coverUp.status, 201, coverUp.text);
+  const pdf = multipart({ folder: 'downloads/news' }, { name: 'file', filename: 'Notice.pdf', type: 'application/pdf', data: TINY_PDF });
+  const pdfUp = await api(app, 'POST', '/api/media', { session: editor, rawPayload: pdf.payload, headers: pdf.headers });
+  assert.equal(pdfUp.status, 201, pdfUp.text);
+  // The editor fills pdf.sizeBytes straight from the media row the picker lists, so it must be a number.
+  const pdfRow = ((await api(app, 'GET', '/api/media?kind=pdf&q=downloads/news', { session: editor })).body.media as Array<{ path: string; bytes: unknown }>)[0];
+  assert.equal(pdfRow.bytes, TINY_PDF.length);
+
+  const doc =(text: string, marks?: unknown[]) => ({ type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text, ...(marks ? { marks } : {}) }] }] });
+  const body = {
+    title: 'Trade fair', date: '2026-12-01', category: 'Events', summary: 'Meet us at the fair.',
+    cover: { src: '/img/news/cover.png', w: 4, h: 3, alt: 'Our stand' },
+    pdf: { file: `/${pdfRow.path}`, title: 'Floor plan', pages: 2, sizeBytes: pdfRow.bytes },
+    body: { type: 'doc', content: [
+      { type: 'heading', attrs: { level: 2, id: 'x' }, content: [{ type: 'text', text: 'Hall 3' }] },
+      { type: 'orderedList', attrs: { start: 1, type: null }, content: [{ type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Stand B12', marks: [{ type: 'link', attrs: { href: ' https://example.com/fair ', target: '_blank', rel: 'noopener', class: null } }] }] }] }] },
+    ] },
+    extra: 'dropped',
+  };
+  const created = await api(app, 'POST', '/api/news', { session: editor, payload: { slug: 'trade-fair', body } });
+  assert.equal(created.status, 201, created.text);
+  const saved = created.body.body as Record<string, any>;
+  assert.equal(saved.extra, undefined, 'unknown fields are not stored');
+  assert.deepEqual(saved.body.content[0], { type: 'heading', attrs: { level: 2 }, content: [{ type: 'text', text: 'Hall 3' }] });
+  assert.deepEqual(saved.body.content[1].content[0].content[0].content[0].marks, [{ type: 'link', attrs: { href: 'https://example.com/fair' } }], 'link attributes are reduced to a trimmed href');
+  const id = (created.body.item as { id: number }).id;
+  assert.equal((created.body.item as { neverPublished: boolean }).neverPublished, true);
+
+  const put = (b: unknown) => api(app, 'PUT', `/api/news/${id}`, { session: editor, payload: { body: b } });
+  const issuePaths = (r: { body: Record<string, unknown> }) => ((r.body.details as { issues: Array<{ path: string }> }).issues).map((i) => i.path);
+  const unsafe = await put({ ...body, body: doc('click', [{ type: 'link', attrs: { href: 'javascript:alert(1)' } }]) });
+  assert.equal(unsafe.status, 400);
+  assert.ok(issuePaths(unsafe).some((p) => p.startsWith('body.content.0')), JSON.stringify(unsafe.body));
+  const backslash = await put({ ...body, body: doc('click', [{ type: 'link', attrs: { href: '/\\evil.example' } }]) });
+  assert.equal(backslash.status, 400, 'a backslash after the leading slash is refused');
+  const html = await put({ ...body, body: { type: 'doc', content: [{ type: 'html', content: '<script>alert(1)</script>' }] } });
+  assert.equal(html.status, 400, 'unknown node types are refused');
+  const image = await put({ ...body, body: { type: 'doc', content: [{ type: 'image', attrs: { src: 'x' } }] } });
+  assert.equal(image.status, 400);
+  const empty = await put({ ...body, body: { type: 'doc', content: [{ type: 'paragraph' }] } });
+  assert.equal(empty.status, 400);
+  assert.ok(issuePaths(empty).includes('body'));
+  const missing = await put({ ...body, title: ' ', date: '01/12/2026', category: '' });
+  assert.equal(missing.status, 400);
+  assert.deepEqual(issuePaths(missing).sort(), ['category', 'date', 'title']);
+  const badMedia = await put({ ...body, pdf: { file: '/downloads/news/missing.pdf' } });
+  assert.equal(badMedia.status, 400);
+  assert.ok(issuePaths(badMedia).includes('pdf.file'));
+  const dup = await api(app, 'POST', '/api/news', { session: editor, payload: { slug: 'trade-fair', body } });
+  assert.equal(dup.status, 400, 'slugs are unique');
+
+  // Media used by a post cannot be deleted; the post is listed first (newest date) and is a pending "new" change.
+  const del = await api(app, 'DELETE', `/api/media/${(pdfUp.body.media as { id: number }).id}`, { session: editor });
+  assert.equal(del.status, 400);
+  assert.match(del.text, /news post trade-fair/);
+  assert.equal(((await api(app, 'GET', '/api/news', { session: editor })).body.items as Array<{ slug: string }>)[0].slug, 'trade-fair');
+  const pending = (await api(app, 'GET', '/api/pending', { session: editor })).body.items as Array<{ type: string; slug: string; change: string }>;
+  assert.ok(pending.some((i) => i.type === 'news' && i.slug === 'trade-fair' && i.change === 'new'));
+  const live = await loadExportData(env.pool, 'live');
+  assert.ok(!live.news.some((n) => n.slug === 'trade-fair'), 'not exported live before publish');
+  assert.equal((await api(app, 'DELETE', `/api/news/${id}`, { session: editor })).status, 200);
+});

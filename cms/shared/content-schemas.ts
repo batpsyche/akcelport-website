@@ -2,6 +2,7 @@
 // so an export of a valid body is a valid content file. Unknown keys are kept (loose objects) so nothing
 // the templates might read is lost.
 import { z } from 'zod';
+import { richTextDocSchema } from './rich-text.ts';
 
 export const subImageSchema = z.looseObject({
   src: z.string().min(1),
@@ -91,6 +92,23 @@ export const downloadBodySchema = z.looseObject({
   thumb: z.string().min(1, 'Choose a thumbnail image'),
 });
 export type DownloadBody = z.infer<typeof downloadBodySchema>;
+
+// A news post. Unlike the other bodies it is a strict object: only these fields are stored and exported.
+export const newsBodySchema = z.object({
+  title: z.string().trim().min(1, 'Title is required'),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Pick a date').refine((d) => !Number.isNaN(Date.parse(d)), 'Pick a valid date'),
+  category: z.string().trim().min(1, 'Choose a category'),
+  summary: z.string().trim().min(1, 'Summary is required'),
+  cover: imageSchema.optional(),
+  pdf: z.object({
+    file: z.string().min(1, 'Choose a PDF'),
+    title: z.string().trim().optional(),
+    pages: z.number().int().nonnegative().optional(),
+    sizeBytes: z.number().int().nonnegative().optional(),
+  }).optional(),
+  body: richTextDocSchema,
+});
+export type NewsBody = z.infer<typeof newsBodySchema>;
 
 // Site-wide documents. The forms edit the fields below; anything else in the document is preserved.
 export const siteBodySchema = z.looseObject({

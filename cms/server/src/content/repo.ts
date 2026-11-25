@@ -1,16 +1,16 @@
-// Content items (families, products, downloads) share one model: a live body, an optional draft body, a visibility
+// Content items (families, products, downloads, news posts) share one model: a live body, an optional draft body, a visibility
 // status, a pending-deletion flag, numbered versions and an audit trail. Pages (site-wide documents) have live/draft only.
 import type { FastifyRequest } from 'fastify';
 import type { ZodType } from 'zod';
 import type { Queryable } from '../db.ts';
 import { HttpError } from '../auth/plugin.ts';
 import { audit, diffDocuments } from '../audit.ts';
-import { productBodySchema, familyBodySchema, downloadBodySchema, pageSchemas, slugSchema, type PageKey } from '../../../shared/content-schemas.ts';
+import { productBodySchema, familyBodySchema, downloadBodySchema, newsBodySchema, pageSchemas, slugSchema, type PageKey } from '../../../shared/content-schemas.ts';
 import { checkMediaRefs, checkDownloadRefs, type Issue } from './validate.ts';
 
-export type ItemType = 'family' | 'product' | 'download';
-export const TABLES: Record<ItemType, string> = { family: 'families', product: 'products', download: 'downloads' };
-const SCHEMAS: Record<ItemType, ZodType> = { family: familyBodySchema, product: productBodySchema, download: downloadBodySchema };
+export type ItemType = 'family' | 'product' | 'download' | 'news';
+export const TABLES: Record<ItemType, string> = { family: 'families', product: 'products', download: 'downloads', news: 'news_posts' };
+const SCHEMAS: Record<ItemType, ZodType> = { family: familyBodySchema, product: productBodySchema, download: downloadBodySchema, news: newsBodySchema };
 
 export interface ItemRow {
   id: number; slug: string; published_slug: string | null; family_id?: number; published_family_id?: number | null; sort_order: number; status: 'hidden' | 'live'; published_status: 'hidden' | 'live';
@@ -51,7 +51,9 @@ export async function validateItem(db: Queryable, type: ItemType, body: Record<s
 }
 
 export async function listItems(db: Queryable, type: ItemType): Promise<ItemSummary[]> {
-  const rows = await db.query<ItemRow>(`SELECT * FROM ${TABLES[type]} ORDER BY ${type === 'product' ? 'family_id, ' : ''}sort_order, id`);
+  // News is listed newest first (by the post date), everything else in its site order.
+  const order = type === 'news' ? `COALESCE(draft, live)->>'date' DESC NULLS LAST, id DESC` : `${type === 'product' ? 'family_id, ' : ''}sort_order, id`;
+  const rows = await db.query<ItemRow>(`SELECT * FROM ${TABLES[type]} ORDER BY ${order}`);
   return rows.rows.map(summarize);
 }
 
@@ -264,7 +266,7 @@ export async function revertPage(db: Queryable, req: FastifyRequest, key: PageKe
 /** Everything that would change at the next publish. */
 export async function pendingChanges(db: Queryable) {
   const items: Array<ItemSummary & { type: ItemType; change: string }> = [];
-  for (const type of ['family', 'product', 'download'] as ItemType[]) {
+  for (const type of ['family', 'product', 'download', 'news'] as ItemType[]) {
     for (const s of await listItems(db, type)) {
       if (!s.pending) continue;
       const change = s.pendingDeletion ? 'delete' : s.neverPublished ? 'new' : s.hasDraft && s.status !== s.publishedStatus ? `edit, ${s.status === 'live' ? 'show' : 'hide'}` : s.hasDraft ? 'edit' : s.status === 'live' ? 'show' : 'hide';

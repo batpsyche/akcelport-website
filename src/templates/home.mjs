@@ -1,6 +1,7 @@
 import { html, raw } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
 import { picture, thumbOf, productCard, productUrl, categoryUrl, sectionHead, ctaBand } from './components.mjs';
+import { homeNews } from './news.mjs';
 
 function hero(data) {
   const { home } = data;
@@ -116,7 +117,7 @@ function brochure(data) {
 }
 
 export function homePage(data) {
-  const body = html`${hero(data)}${stats(data)}${families(data)}${process(data)}${featured(data)}${industries(data)}${globalPresence(data)}${brochure(data)}${ctaBand(data.home.cta)}`;
+  const body = html`${hero(data)}${stats(data)}${families(data)}${process(data)}${featured(data)}${industries(data)}${globalPresence(data)}${brochure(data)}${homeNews(data)}${ctaBand(data.home.cta)}`;
   const { site } = data;
   return {
     path: '/', title: `${site.name} | Electrical components for control panels and switchgear`, titleRaw: true, description: site.description,

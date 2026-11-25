@@ -93,6 +93,37 @@ test('an edited product goes live only after publish; the draft is promoted', as
   assert.deepEqual(((await api(app, 'GET', '/api/pending', { session: editor })).body.items as unknown[]), []);
 });
 
+test('a news post appears on /news/, its own page and the home page only after publish; hiding removes it', async () => {
+  const body = {
+    title: 'Plant expansion <script>alert(1)</script>', date: '2099-01-15', category: 'Company', summary: 'We doubled the press shop.',
+    body: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Read the ' }, { type: 'text', text: 'brochure', marks: [{ type: 'link', attrs: { href: '/downloads/', target: '_blank' } }] }, { type: 'text', text: ' <img src=x onerror=alert(1)>' }] }] },
+    pdf: { file: '/downloads/catalogue/company-introduction.pdf', title: 'Expansion brochure', pages: 5, sizeBytes: 889353 },
+  };
+  const created = await api(app, 'POST', '/api/news', { session: editor, payload: { slug: 'plant-expansion', body } });
+  assert.equal(created.status, 201, created.text);
+  const id = (created.body.item as { id: number }).id;
+  assert.equal((await site.inject({ method: 'GET', url: '/news/plant-expansion/' })).statusCode, 404);
+  const pending = (await api(app, 'GET', '/api/pending', { session: editor })).body.items as Array<{ type: string; slug: string; change: string }>;
+  assert.ok(pending.some((i) => i.type === 'news' && i.slug === 'plant-expansion' && i.change === 'new'));
+  const r = await api(app, 'POST', '/api/publish', { session: editor, payload: { selection: { news: [id] } } });
+  assert.equal(r.status, 200, r.text);
+  const post = await page('/news/plant-expansion/');
+  assert.match(post, /Plant expansion &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+  assert.match(post, /<a href="\/downloads\/">brochure<\/a> &lt;img src=x onerror=alert\(1\)&gt;/);
+  assert.doesNotMatch(post, /<script>alert|<img src=x|target="_blank"/);
+  assert.match(post, /href="\/downloads\/catalogue\/company-introduction\.pdf" download/);
+  assert.match(post, /Expansion brochure/);
+  assert.match(await page('/news/'), /href="\/news\/plant-expansion\/"/);
+  assert.match(await page('/'), /href="\/news\/plant-expansion\/"/);
+  assert.match(await page('/sitemap.xml'), /\/news\/plant-expansion\//);
+  // Hidden at the next publish: the post page and its cards are gone.
+  await api(app, 'POST', `/api/news/${id}/status`, { session: editor, payload: { status: 'hidden' } });
+  assert.equal((await api(app, 'POST', '/api/publish', { session: editor, payload: {} })).status, 200);
+  assert.equal((await site.inject({ method: 'GET', url: '/news/plant-expansion/' })).statusCode, 404);
+  assert.doesNotMatch(await page('/news/'), /plant-expansion/);
+  assert.doesNotMatch(await page('/'), /plant-expansion/);
+});
+
 test('a failed build leaves the published site and the drafts untouched', async () => {
   const before = current();
   const id = await productId('flexibars');

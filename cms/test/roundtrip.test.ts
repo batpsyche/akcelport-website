@@ -32,6 +32,7 @@ test('seed, export and build reproduce the current site exactly', async () => {
   assert.equal(report.families, 6);
   assert.equal(report.products, 18);
   assert.equal(report.downloads, 23);
+  assert.equal(report.news, 2);
   assert.equal(report.pages, 7);
   assert.equal(report.redirects, 30);
   assert.ok(report.media >= 360, `registered ${report.media} media files`);

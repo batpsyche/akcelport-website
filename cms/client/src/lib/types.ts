@@ -1,7 +1,9 @@
 export interface User { id: number; email: string; name: string; role: 'admin' | 'editor'; mustChangePassword: boolean }
 export interface Me { user: User; csrfToken: string; canPublish: boolean }
 
-export type ItemType = 'family' | 'product' | 'download';
+import type { RichDoc } from '@shared/rich-text';
+
+export type ItemType = 'family' | 'product' | 'download' | 'news';
 export interface ItemSummary {
   id: number; slug: string; name: string; familyId?: number; sortOrder: number; status: 'hidden' | 'live'; publishedStatus: 'hidden' | 'live';
   hasDraft: boolean; neverPublished: boolean; pendingDeletion: boolean; pending: boolean; updatedAt: string;
@@ -23,6 +25,8 @@ export interface ProductBody {
 }
 export interface FamilyBody { name: string; shortName: string; icon: string; summary: string; image: Image; [k: string]: unknown }
 export interface DownloadBody { title: string; kind: 'catalogue' | 'legacy'; file: string; description: string; pages: number; sizeBytes: number; thumb: string; [k: string]: unknown }
+
+export interface NewsBody { title: string; date: string; category: string; summary: string; cover?: Image; pdf?: { file: string; title?: string; pages?: number; sizeBytes?: number }; body: RichDoc }
 
 export interface PendingItem extends ItemSummary { type: ItemType; change: string }
 export interface Pending { items: PendingItem[]; pages: Array<{ key: string; updatedAt: string; change: string }> }

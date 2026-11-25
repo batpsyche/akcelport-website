@@ -31,6 +31,7 @@ Everything the site says lives in `content/`. Templates never contain copy.
 | `content/categories/<slug>.json` | The six product families (name, summary, icon, product order) |
 | `content/products/<slug>.json` | One file per product page (18). See below |
 | `content/downloads.json` | Every PDF (23): title, file, pages, size, thumbnail, which products it belongs to |
+| `content/news/<slug>.json` | News posts (optional folder): title, date (`YYYY-MM-DD`), category, summary, optional `cover` image and `pdf` attachment, and a rich-text `body`. They make `/news/`, one page per post and the latest-3 strip on the home page. The two `sample-*` posts are placeholders |
 | `content/markets.json` | Export markets by region (the "24" in the hero is counted from this) |
 | `content/redirects.json` | Old `akcelport.com` URLs mapped to new ones |
 | `content/countries.json`, `company-images.json` | Country list for the form; extra brochure imagery |

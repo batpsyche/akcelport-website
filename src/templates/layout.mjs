@@ -60,7 +60,7 @@ function footer(data) {
         <p class="marks">${site.qualityMarks.map((m) => html`<span class="mark">${m}</span>`)}</p>
       </div>
       <nav aria-label="Product families"><h2 class="foot-h">Products</h2><ul>${categories.map((c) => html`<li><a href="${categoryUrl(c.slug)}">${c.name}</a></li>`)}</ul></nav>
-      <nav aria-label="Company"><h2 class="foot-h">Company</h2><ul><li><a href="/about/">About us</a></li><li><a href="/downloads/">Downloads</a></li><li><a href="/contact/">Contact</a></li><li><a href="/sitemap/">Site map</a></li></ul></nav>
+      <nav aria-label="Company"><h2 class="foot-h">Company</h2><ul><li><a href="/about/">About us</a></li><li><a href="/downloads/">Downloads</a></li><li><a href="/news/">News</a></li><li><a href="/contact/">Contact</a></li><li><a href="/sitemap/">Site map</a></li></ul></nav>
       <div><h2 class="foot-h">Head office</h2>
         <address>${site.contact.address.map((l, i) => html`${i ? raw('<br>') : ''}${l}`)}</address>
         <p><a href="tel:${site.contact.phoneHref}">${site.contact.phone}</a><br><a href="mailto:${site.contact.email}">${site.contact.email}</a></p>

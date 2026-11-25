@@ -15,6 +15,8 @@ function deepReplace(v, tokens) {
 export function loadContent(root, { contentDir = join(root, 'content') } = {}) {
   const c = (p) => join(contentDir, p);
   const dir = (p) => readdirSync(c(p)).filter((f) => f.endsWith('.json')).map((f) => readJson(c(join(p, f))));
+  // News posts: newest first. The folder is optional so a site with no posts needs no empty directory.
+  const news = (existsSync(c('news')) ? dir('news') : []).sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(a.slug).localeCompare(String(b.slug)));
   const categories = dir('categories').sort((a, b) => a.order - b.order);
   const famOrder = new Map(categories.map((x) => [x.slug, x.order]));
   const products = dir('products').sort((a, b) => (famOrder.get(a.family) - famOrder.get(b.family)) || (a.order - b.order));
@@ -24,7 +26,7 @@ export function loadContent(root, { contentDir = join(root, 'content') } = {}) {
   const data = {
     site: readJson(c('site.json')), home: readJson(c('home.json')), about: readJson(c('about.json')), contact: readJson(c('contact.json')),
     markets, downloads: readJson(c('downloads.json')).documents, redirects: readJson(c('redirects.json')), countries: readJson(c('countries.json')),
-    companyImages: readJson(c('company-images.json')), categories, products,
+    companyImages: readJson(c('company-images.json')), categories, products, news,
   };
   const out = deepReplace(data, tokens);
   out.tokens = tokens;
@@ -55,6 +57,16 @@ export function validate(data, root, { assetDirs = [join(root, 'public')] } = {}
   for (const s of data.home.featured?.slugs || []) if (!data.bySlug.has(s)) problems.push(`home featured: unknown product ${s}`);
   for (const t of data.home.industries?.items || []) for (const s of t.products || []) if (!data.bySlug.has(s)) problems.push(`home industry ${t.id}: unknown product ${s}`);
   if (data.home.downloads?.docId && !data.docById.has(data.home.downloads.docId)) problems.push(`home downloads: unknown download ${data.home.downloads.docId}`);
+  const DATE = /^\d{4}-\d{2}-\d{2}$/;
+  for (const n of data.news) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(n.slug || '')) problems.push(`news ${n.slug}: bad slug`);
+    if (!n.title) problems.push(`news ${n.slug}: no title`);
+    if (!DATE.test(n.date || '') || Number.isNaN(Date.parse(n.date))) problems.push(`news ${n.slug}: date must be YYYY-MM-DD`);
+    if (!n.category) problems.push(`news ${n.slug}: no category`);
+    if (n.body?.type !== 'doc') problems.push(`news ${n.slug}: body is not a rich-text document`);
+    need(n.cover?.src, `news ${n.slug}`);
+    need(n.pdf?.file, `news ${n.slug}`);
+  }
   for (const r of [...data.redirects.pages, ...data.redirects.downloads]) {
     if (r.to.startsWith('/downloads/')) need(r.to, 'redirect ' + r.from);
     else if (r.to.startsWith('/products/') && !data.bySlug.has(r.to.split('/')[2])) problems.push(`redirect ${r.from} -> ${r.to}`);

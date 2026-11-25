@@ -20,7 +20,7 @@ export async function publishRoutes(app: FastifyInstance, opts: { pool: pg.Pool;
 
   app.post('/api/publish', { preHandler: requirePublisher }, async (req) => {
     const body = z.object({
-      selection: z.union([z.literal('all'), z.object({ families: z.array(z.number().int()).optional(), products: z.array(z.number().int()).optional(), downloads: z.array(z.number().int()).optional(), pages: z.array(z.string()).optional() })]).default('all'),
+      selection: z.union([z.literal('all'), z.object({ families: z.array(z.number().int()).optional(), products: z.array(z.number().int()).optional(), downloads: z.array(z.number().int()).optional(), news: z.array(z.number().int()).optional(), pages: z.array(z.string()).optional() })]).default('all'),
     }).parse(req.body ?? {});
     const result = await service.publish({ id: req.user!.id, email: req.user!.email }, body.selection);
     await audit(pool, req, { action: 'publish.run', entityType: 'publish', entityId: result.id, label: result.releaseId, changes: { items: result.promoted.length } });

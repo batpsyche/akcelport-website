@@ -22,10 +22,11 @@ export async function loadExportData(db: Queryable, mode: ExportMode) {
   const products = (await db.query<ContentRow>(`SELECT id, ${s.slug} AS slug, ${s.family} AS family_id, sort_order, ${s.body} AS body FROM products WHERE ${s.where} ORDER BY sort_order, id`)).rows
     .filter((p) => familyIds.has(p.family_id!));
   const downloads = (await db.query<ContentRow>(`SELECT id, ${s.slug} AS slug, sort_order, ${s.body} AS body FROM downloads WHERE ${s.where} ORDER BY sort_order, id`)).rows;
+  const news = (await db.query<ContentRow>(`SELECT id, ${s.slug} AS slug, sort_order, ${s.body} AS body FROM news_posts WHERE ${s.where} ORDER BY id`)).rows;
   const pageRows = (await db.query<{ key: string; body: Record<string, unknown> }>(`SELECT key, ${mode === 'live' ? 'live' : 'COALESCE(draft, live)'} AS body FROM pages`)).rows;
   const pages = new Map(pageRows.map((r) => [r.key, r.body]));
   const redirects = (await db.query<{ kind: string; from_path: string; to_path: string }>(`SELECT kind, from_path, to_path FROM redirects ORDER BY sort_order, id`)).rows;
-  return { families, products, downloads, pages, redirects };
+  return { families, products, downloads, news, pages, redirects };
 }
 
 const writeJson = (file: string, data: unknown) => writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
@@ -38,6 +39,7 @@ export async function exportContent(db: Queryable, mode: ExportMode, outDir: str
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(join(outDir, 'categories'), { recursive: true });
   mkdirSync(join(outDir, 'products'), { recursive: true });
+  mkdirSync(join(outDir, 'news'), { recursive: true });
 
   const familySlug = new Map(data.families.map((f) => [f.id, f.slug]));
   const byFamily = new Map<number, ContentRow[]>();
@@ -66,6 +68,8 @@ export async function exportContent(db: Queryable, mode: ExportMode, outDir: str
   }));
   writeJson(join(outDir, 'downloads.json'), { documents });
 
+  for (const n of data.news) writeJson(join(outDir, 'news', `${n.slug}.json`), { slug: n.slug, ...n.body });
+
   for (const key of pageKeys) {
     const body = data.pages.get(key)!;
     if (key === 'countries') writeJson(join(outDir, 'countries.json'), (body as { list: string[] }).list);
@@ -78,5 +82,5 @@ export async function exportContent(db: Queryable, mode: ExportMode, outDir: str
     downloads: data.redirects.filter((r) => r.kind === 'download').map((r) => ({ from: r.from_path, to: r.to_path })),
   });
 
-  return { families: data.families.length, products: orderedProducts.length, downloads: documents.length, redirects: data.redirects.length };
+  return { families: data.families.length, products: orderedProducts.length, downloads: documents.length, news: data.news.length, redirects: data.redirects.length };
 }

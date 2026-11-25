@@ -26,6 +26,7 @@ export async function contentRoutes(app: FastifyInstance, opts: { pool: pg.Pool;
       (SELECT count(*) FROM products WHERE deleted_at IS NULL)::int AS products,
       (SELECT count(*) FROM families WHERE deleted_at IS NULL)::int AS families,
       (SELECT count(*) FROM downloads WHERE deleted_at IS NULL)::int AS downloads,
+      (SELECT count(*) FROM news_posts WHERE deleted_at IS NULL)::int AS news,
       (SELECT count(*) FROM media)::int AS media,
       (SELECT count(*) FROM users WHERE is_active)::int AS users`)).rows[0];
     const pending = await pendingChanges(pool);
@@ -36,8 +37,8 @@ export async function contentRoutes(app: FastifyInstance, opts: { pool: pg.Pool;
 
   app.get('/api/pending', async () => pendingChanges(pool));
 
-  // ---- families, products, downloads: one route set each
-  for (const [type, base] of [['family', 'families'], ['product', 'products'], ['download', 'downloads']] as Array<[ItemType, string]>) {
+  // ---- families, products, downloads, news posts: one route set each
+  for (const [type, base] of [['family', 'families'], ['product', 'products'], ['download', 'downloads'], ['news', 'news']] as Array<[ItemType, string]>) {
     const full = async (id: number) => {
       const row = await getItem(pool, type, id);
       return { item: summarize(row), body: row.draft ?? row.live, live: row.live, versions: await listVersions(pool, type, String(id)) };
