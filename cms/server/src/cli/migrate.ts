@@ -4,7 +4,7 @@ import { migrate } from '../migrate.ts';
 
 loadDotEnv();
 const config = loadConfig();
-const pool = createPool(config.databaseUrl, { schema: config.dbSchema });
+const pool = createPool(config.databaseUrl);
 try {
   const applied = await migrate(pool);
   console.log(applied.length ? `Applied ${applied.length} migration(s): ${applied.join(', ')}` : 'Database is up to date.');

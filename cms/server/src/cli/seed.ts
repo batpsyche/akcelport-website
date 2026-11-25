@@ -10,7 +10,7 @@ import { inspectBuffer } from '../media/inspect.ts';
 loadDotEnv();
 const config = loadConfig();
 const reset = process.argv.includes('--reset');
-const pool = createPool(config.databaseUrl, { schema: config.dbSchema });
+const pool = createPool(config.databaseUrl);
 try {
   await migrate(pool);
   const r = await seedFromSite(pool, { siteRoot: config.siteRoot, mediaDir: config.mediaDir, reset });

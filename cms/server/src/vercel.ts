@@ -8,7 +8,7 @@ import { buildApp } from './app.ts';
 import { purgeExpiredSessions } from './auth/session.ts';
 
 const config = loadConfig();
-const pool = createPool(config.databaseUrl, { schema: config.dbSchema, max: 3 });
+const pool = createPool(config.databaseUrl, { max: 3 });
 const ready = (async () => {
   await migrate(pool);
   purgeExpiredSessions(pool).catch(() => { /* best effort on cold start */ });

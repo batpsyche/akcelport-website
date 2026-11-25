@@ -7,7 +7,7 @@ import { purgeExpiredSessions } from './auth/session.ts';
 
 loadDotEnv();
 const config = loadConfig();
-const pool = createPool(config.databaseUrl, { schema: config.dbSchema });
+const pool = createPool(config.databaseUrl);
 const applied = await migrate(pool);
 if (applied.length) console.log(`Applied migrations: ${applied.join(', ')}`);
 

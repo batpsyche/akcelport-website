@@ -37,8 +37,6 @@ export interface Config {
   sessionMaxMs: number;
   uploadImageMaxBytes: number;
   uploadPdfMaxBytes: number;
-  /** PostgreSQL schema for every CMS table (search_path); unset uses the database default. */
-  dbSchema: string | undefined;
   /** Supabase Storage (serverless staging): media and published releases live in this bucket instead of MEDIA_DIR/PUBLISH_DIR. */
   storage: { url: string; serviceKey: string; bucket: string } | undefined;
 }
@@ -72,7 +70,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     sessionMaxMs: num(env.SESSION_MAX_DAYS, 7) * 86400_000,
     uploadImageMaxBytes: num(env.UPLOAD_IMAGE_MAX_MB, 10) * 1024 * 1024,
     uploadPdfMaxBytes: num(env.UPLOAD_PDF_MAX_MB, 25) * 1024 * 1024,
-    dbSchema: env.DB_SCHEMA || undefined,
     storage: env.SUPABASE_URL
       ? { url: env.SUPABASE_URL.replace(/\/$/, ''), serviceKey: required(env, 'SUPABASE_SERVICE_ROLE_KEY'), bucket: env.STORAGE_BUCKET || 'akcelport-site' }
       : undefined,

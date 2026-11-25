@@ -215,7 +215,8 @@ export class PublishService {
           try { log += `\n${await this.remote.publish(id, outDir)}`; } finally { rmSync(outDir, { recursive: true, force: true }); }
         } else this.swapCurrent(id);
       } catch (err) {
-        const message = `The content is published in the database, but switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}. Restore release ${id} from the Publish page once the cause is fixed.`;
+        const remedy = this.remote ? 'Publish again once the cause is fixed.' : `Restore release ${id} from the Publish page once the cause is fixed.`;
+        const message = `The content is published in the database, but switching the site to release ${id} failed: ${err instanceof Error ? err.message : String(err)}. ${remedy}`;
         await this.finish(recordId, 'failed', log, message);
         throw new HttpError(500, message, { log, publishId: recordId, releaseId: id });
       }
