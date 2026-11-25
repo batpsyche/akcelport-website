@@ -12,7 +12,7 @@ import { FieldWrap } from './Field';
 import { cn } from '@/lib/utils';
 
 // Same rule as SAFE_HREF in shared/rich-text.ts (kept here so the admin bundle does not pull in zod).
-const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/(?!\/)|#)/i;
+const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/(?![\/\\])|#)/i;
 
 function ToolButton({ label, active, disabled, onClick, children }: { label: string; active?: boolean; disabled?: boolean; onClick: () => void; children: React.ReactNode }) {
   return (

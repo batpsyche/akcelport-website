@@ -267,6 +267,8 @@ test('news posts: validated, sanitized rich text, media in img/news and download
   const unsafe = await put({ ...body, body: doc('click', [{ type: 'link', attrs: { href: 'javascript:alert(1)' } }]) });
   assert.equal(unsafe.status, 400);
   assert.ok(issuePaths(unsafe).some((p) => p.startsWith('body.content.0')), JSON.stringify(unsafe.body));
+  const backslash = await put({ ...body, body: doc('click', [{ type: 'link', attrs: { href: '/\\evil.example' } }]) });
+  assert.equal(backslash.status, 400, 'a backslash after the leading slash is refused');
   const html = await put({ ...body, body: { type: 'doc', content: [{ type: 'html', content: '<script>alert(1)</script>' }] } });
   assert.equal(html.status, 400, 'unknown node types are refused');
   const image = await put({ ...body, body: { type: 'doc', content: [{ type: 'image', attrs: { src: 'x' } }] } });

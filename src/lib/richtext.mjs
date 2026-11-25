@@ -3,7 +3,7 @@
 // safe schemes, so a post body can never carry markup or script into the static site.
 import { esc } from './html.mjs';
 
-export const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/(?!\/)|#)/i;
+export const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/(?![\/\\])|#)/i;
 
 const BLOCKS = {
   paragraph: () => ['<p>', '</p>'],

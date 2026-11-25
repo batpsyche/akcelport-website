@@ -4,7 +4,7 @@
 // and escapes all text, so a published body cannot carry HTML or script.
 import { z } from 'zod';
 
-export const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/(?!\/)|#)/i;
+export const SAFE_HREF = /^(https?:\/\/|mailto:|tel:|\/(?![\/\\])|#)/i;
 
 const markSchema = z.union([
   z.object({ type: z.literal('bold') }),
@@ -44,5 +44,3 @@ const hasText = (v: unknown): boolean => {
 
 export const richTextDocSchema: z.ZodType<RichDoc> = z.object({ type: z.literal('doc'), content: z.array(blockSchema) })
   .refine(hasText, 'Write the post text');
-
-export const emptyRichDoc = (): RichDoc => ({ type: 'doc', content: [{ type: 'paragraph' }] });

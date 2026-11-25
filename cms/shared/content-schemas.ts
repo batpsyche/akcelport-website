@@ -110,9 +110,6 @@ export const newsBodySchema = z.object({
 });
 export type NewsBody = z.infer<typeof newsBodySchema>;
 
-/** Suggested categories in the editor; any other single word or phrase is allowed. */
-export const newsCategories = ['Company', 'Product', 'Events'];
-
 // Site-wide documents. The forms edit the fields below; anything else in the document is preserved.
 export const siteBodySchema = z.looseObject({
   name: z.string().min(1),
