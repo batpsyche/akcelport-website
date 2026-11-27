@@ -199,6 +199,7 @@
     let x0 = null;
     root.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') x0 = e.clientX; });
     root.addEventListener('pointerup', (e) => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1), true); });
+    root.addEventListener('pointercancel', () => { x0 = null; });
     document.addEventListener('visibilitychange', schedule);
     root.classList.add('is-ready');
     show(0);
