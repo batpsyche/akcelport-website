@@ -3,6 +3,7 @@
 // the templates might read is lost.
 import { z } from 'zod';
 import { richTextDocSchema } from './rich-text.ts';
+import { sectionProblems } from '../../src/lib/sections.mjs';
 
 export const subImageSchema = z.looseObject({
   src: z.string().min(1),
@@ -152,14 +153,19 @@ export const companyImagesBodySchema = z.record(z.string(), subImageSchema);
 
 const anyDocument = z.looseObject({});
 
+/** A page whose optional "sections" list (order and show/hide) must name each known section at most once. */
+const sectionedDocument = (page: 'home' | 'about' | 'contact') => anyDocument.superRefine((doc, ctx) => {
+  for (const message of sectionProblems(page, doc)) ctx.addIssue({ code: 'custom', path: ['sections'], message });
+});
+
 export const pageKeys = ['site', 'home', 'about', 'contact', 'markets', 'countries', 'company-images'] as const;
 export type PageKey = (typeof pageKeys)[number];
 
 export const pageSchemas: Record<PageKey, z.ZodType> = {
   site: siteBodySchema,
-  home: anyDocument,
-  about: anyDocument,
-  contact: anyDocument,
+  home: sectionedDocument('home'),
+  about: sectionedDocument('about'),
+  contact: sectionedDocument('contact'),
   markets: marketsBodySchema,
   countries: countriesBodySchema,
   'company-images': companyImagesBodySchema,

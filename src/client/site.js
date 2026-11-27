@@ -1,4 +1,4 @@
-// Site behaviour: menus, tabs, scroller, lightbox, filters, subnav, hold interaction, enquiry form.
+// Site behaviour: menus, tabs, scroller, lightbox, filters, subnav, hold interaction, enquiry form, hero slider.
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -160,6 +160,50 @@
       location.reload();
     });
   }
+
+  // ---- home hero slider: autoplay (off for reduced motion), pause button, arrows, dots, arrow keys and swipe.
+  // Autoplay waits while the pointer or keyboard focus is in the slider and while the tab is hidden.
+  $$('[data-slider]').forEach((root) => {
+    const slides = $$('[data-slide]', root), dots = $$('[data-slider-dot]', root), pause = $('[data-slider-pause]', root), track = $('.slides', root);
+    if (slides.length < 2) return;
+    const ms = (Number(root.dataset.interval) || 7) * 1000;
+    let at = 0, timer = 0, playing = !reduced(), hover = false, focus = false;
+    root.style.setProperty('--slide-ms', `${ms}ms`);
+    const schedule = () => {
+      clearTimeout(timer);
+      const run = playing && !hover && !focus && !document.hidden;
+      root.classList.toggle('is-playing', run);
+      root.classList.toggle('is-paused', !playing);
+      pause.setAttribute('aria-label', playing ? 'Pause the slides' : 'Play the slides');
+      if (run) timer = setTimeout(() => show(at + 1), ms);
+    };
+    const show = (n, byUser) => {
+      at = (n + slides.length) % slides.length;
+      slides.forEach((s, j) => { const on = j === at; s.toggleAttribute('data-active', on); s.toggleAttribute('inert', !on); s.setAttribute('aria-hidden', String(!on)); });
+      dots.forEach((d, j) => d.setAttribute('aria-current', String(j === at)));
+      if (byUser) track.setAttribute('aria-live', 'polite');
+      schedule();
+    };
+    $('[data-slider-prev]', root).addEventListener('click', () => show(at - 1, true));
+    $('[data-slider-next]', root).addEventListener('click', () => show(at + 1, true));
+    dots.forEach((d) => d.addEventListener('click', () => show(Number(d.dataset.sliderDot), true)));
+    pause.addEventListener('click', () => { playing = !playing; track.setAttribute('aria-live', playing ? 'off' : 'polite'); schedule(); });
+    root.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' || e.target.closest('input,textarea,select')) return;
+      e.preventDefault(); show(at + (e.key === 'ArrowRight' ? 1 : -1), true);
+    });
+    root.addEventListener('mouseenter', () => { hover = true; schedule(); });
+    root.addEventListener('mouseleave', () => { hover = false; schedule(); });
+    root.addEventListener('focusin', () => { focus = true; schedule(); });
+    root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) { focus = false; schedule(); } });
+    let x0 = null;
+    root.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') x0 = e.clientX; });
+    root.addEventListener('pointerup', (e) => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1), true); });
+    root.addEventListener('pointercancel', () => { x0 = null; });
+    document.addEventListener('visibilitychange', schedule);
+    root.classList.add('is-ready');
+    show(0);
+  });
 
   // ---- pause looping animation on hidden tabs
   document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));

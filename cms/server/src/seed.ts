@@ -51,6 +51,18 @@ export async function registerMediaFile(db: pg.PoolClient | pg.Pool, mediaDir: s
   return true;
 }
 
+/**
+ * Adds the site's media files that the library does not have yet (for example images shipped with a site update) to an
+ * already seeded database, leaving every existing media row and file untouched. Returns the added paths.
+ */
+export async function addNewSiteMedia(pool: pg.Pool, opts: Pick<SeedOptions, 'siteRoot' | 'mediaDir'>): Promise<string[]> {
+  const paths = syncMediaFromSite(opts.siteRoot, opts.mediaDir);
+  const known = new Set((await pool.query<{ path: string }>('SELECT path FROM media WHERE path = ANY($1)', [paths])).rows.map((r) => r.path));
+  const added: string[] = [];
+  for (const p of paths) if (!known.has(p) && (await registerMediaFile(pool, opts.mediaDir, p))) added.push(p);
+  return added;
+}
+
 export async function seedFromSite(pool: pg.Pool, opts: SeedOptions): Promise<SeedReport> {
   const content = join(opts.siteRoot, 'content');
   if (!existsSync(join(content, 'site.json'))) throw new Error(`No content/site.json under SITE_ROOT ${opts.siteRoot}`);

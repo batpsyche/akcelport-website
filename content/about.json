@@ -1,6 +1,15 @@
 {
   "title": "About Akcelport",
   "lede": "One of India's leading makers of electrical components and assemblies, exporting for more than 35 years.",
+  "sections": [
+    { "id": "story", "enabled": true },
+    { "id": "quality", "enabled": true },
+    { "id": "usp", "enabled": true },
+    { "id": "manufacturing", "enabled": true },
+    { "id": "global", "enabled": true },
+    { "id": "certificates", "enabled": true },
+    { "id": "cta", "enabled": true }
+  ],
   "story": [
     "Akcelport Industries is a manufacturer of electrical components and assemblies with expertise in control panel components, switchboard components, wires, cables and wire management, connection and grounding products, and industrial hardware.",
     "Our roots are in non-ferrous casting, extrusion and machining of ferrous and non-ferrous metals. That experience lets us design, develop and make components to customer requirements, from production planning right through to delivery.",

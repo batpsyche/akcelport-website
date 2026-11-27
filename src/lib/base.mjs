@@ -6,8 +6,9 @@ export const BASE = raw.replace(/^\/+|\/+$/g, '') ? '/' + raw.replace(/^\/+|\/+$
 const prefix = (u) => (BASE && /^\/(?!\/)/.test(u) ? BASE + u : u);
 export const rebaseUrl = prefix;
 
-// Root-absolute values of URL-carrying attributes (and data-zoom, used by the lightbox) and CSS url(...).
+// Root-absolute values of URL-carrying attributes (srcset with a single URL, as the hero slider emits; data-zoom, used
+// by the lightbox) and CSS url(...).
 export const rebaseHtml = (s) => !BASE ? s : s
-  .replace(/(\s(?:href|src|action|poster|data-zoom)=")(\/(?!\/)[^"]*)"/g, (_, a, u) => `${a}${BASE}${u}"`)
+  .replace(/(\s(?:href|src|srcset|action|poster|data-zoom)=")(\/(?!\/)[^"]*)"/g, (_, a, u) => `${a}${BASE}${u}"`)
   .replace(/url\((['"]?)\/(?!\/)/g, (_, q) => `url(${q}${BASE}/`);
 export const rebaseCss = (s) => !BASE ? s : s.replace(/url\((['"]?)\/(?!\/)/g, (_, q) => `url(${q}${BASE}/`);
