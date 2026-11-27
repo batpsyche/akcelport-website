@@ -8,7 +8,7 @@ import { useAuth } from '@/lib/auth';
 import { useDocument } from '@/lib/doc';
 import { errorsFrom, reportError } from '@/lib/items';
 import type { PageFull, Image } from '@/lib/types';
-import { pageFieldSpecs } from '@shared/page-fields';
+import { pageFieldSpecs, isSectionPage } from '@shared/page-fields';
 import { formatDate } from '@/lib/format';
 import { EditorFrame, Section, VersionsCard } from '@/components/EditorFrame';
 import { SpecForm } from '@/components/fields/SpecForm';
@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { SortableList } from '@/components/SortableList';
+import { SectionsCard } from '@/components/fields/SectionsEditor';
 
 export function usePageDoc(key: string) {
   const qc = useQueryClient();
@@ -65,7 +66,10 @@ export function PageEditor({ pageKey, kicker, backTo, backLabel, extraSidebar }:
         ? <Section title="Document JSON" description="The whole document as stored. Every key the templates read must stay present."><JsonField value={doc} onChange={(v) => replace(v as Record<string, unknown>, false)} /></Section>
         : pageKey === 'company-images'
           ? <CompanyImagesEditor doc={doc as Record<string, Image>} onChange={(v) => replace(v as Record<string, unknown>, false)} />
-          : spec ? <SpecForm fields={spec.fields} doc={doc} set={set} errors={errors} /> : null}
+          : spec ? <div className="grid gap-4">
+              {isSectionPage(pageKey) && <SectionsCard page={pageKey} doc={doc} set={set} />}
+              <SpecForm fields={spec.fields} doc={doc} set={set} errors={errors} sectionPage={isSectionPage(pageKey) ? pageKey : undefined} />
+            </div> : null}
     </EditorFrame>
   );
 }

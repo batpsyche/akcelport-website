@@ -18,6 +18,8 @@ export default defineConfig({
   build: { outDir: fileURLToPath(new URL('./dist/client', import.meta.url)), emptyOutDir: true },
   server: {
     port: 5173,
+    // The page editor imports the site's section rules from ../src/lib (shared with the site build).
+    fs: { allow: [fileURLToPath(new URL('..', import.meta.url))] },
     proxy: { '/api': api, '/media': api, '/preview': api, '/fonts': api },
   },
 });

@@ -1,7 +1,8 @@
 import { html, raw } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
-import { picture, thumbOf, productCard, productUrl, categoryUrl, sectionHead, ctaBand } from './components.mjs';
+import { picture, thumbOf, productCard, productFilterGrid, productUrl, categoryUrl, sectionHead, ctaBand } from './components.mjs';
 import { homeNews } from './news.mjs';
+import { visibleSections } from '../lib/sections.mjs';
 
 function hero(data) {
   const { home } = data;
@@ -26,6 +27,49 @@ function hero(data) {
       <div class="scroll-cue" aria-hidden="true"><span>${h.cue}</span><i></i></div>
     </div>
   </section>`;
+}
+
+// The hero slider: one slide per banner, a landscape image for wide screens and a portrait one for phones
+// (<picture> picks by orientation). site.js adds autoplay, pause, arrows and dots; without JavaScript the slides stack.
+function slider(data, { h1 }) {
+  const sl = data.home.slider;
+  const slides = (sl?.slides || []).filter((s) => s.image?.src);
+  if (!slides.length) return '';
+  const n = slides.length;
+  const slide = (s, i) => {
+    const port = s.imagePortrait?.src ? s.imagePortrait : s.image;
+    const Hl = i === 0 && h1 ? 'h1' : 'h2';
+    return html`<div class="slide tone-${s.tone === 'light' ? 'light' : 'dark'}" id="slide-${i + 1}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" data-slide ${i ? raw('aria-hidden="true" inert') : raw('data-active')}>
+      <picture class="slide-media">
+        <source media="(orientation: portrait) and (max-width: 900px)" srcset="${port.src}"${raw(port.w ? ` width="${port.w}" height="${port.h}"` : '')}>
+        ${picture(s.image, { cls: 'slide-img', eager: i === 0, alt: s.image.alt || '' })}
+      </picture>
+      <div class="slide-cap container">
+        ${s.kicker ? html`<p class="kicker">${s.kicker}</p>` : ''}
+        ${raw(`<${Hl} class="slide-hl">`)}${s.headline}${raw(`</${Hl}>`)}
+        ${s.text ? html`<p class="slide-sub">${s.text}</p>` : ''}
+        ${s.cta?.label && s.cta?.href ? html`<p class="slide-cta"><a class="btn btn-red" href="${s.cta.href}">${s.cta.label} ${icon('arrow')}</a></p>` : ''}
+      </div>
+    </div>`;
+  };
+  return html`<section class="slider" data-slider data-interval="${Math.max(3, Number(sl.intervalSeconds) || 7)}" aria-roledescription="carousel" aria-label="${sl.label || 'Akcelport Industries'}">
+    <div class="slides" aria-live="off">${slides.map(slide)}</div>
+    ${n > 1 ? html`<div class="slider-ui container">
+      <button type="button" class="slider-btn" data-slider-pause aria-label="Pause the slides">${icon('pause')}${icon('play')}</button>
+      <button type="button" class="slider-btn" data-slider-prev aria-label="Previous slide">${icon('arrowLeft')}</button>
+      <div class="slider-dots" role="group" aria-label="Choose a slide">${slides.map((s, i) => html`<button type="button" class="slider-dot" data-slider-dot="${i}" aria-controls="slide-${i + 1}" aria-label="Slide ${i + 1}: ${s.headline}" ${i ? '' : raw('aria-current="true"')}><i></i></button>`)}</div>
+      <button type="button" class="slider-btn" data-slider-next aria-label="Next slide">${icon('arrow')}</button>
+    </div>` : ''}
+  </section>`;
+}
+
+// The full product list with search and family filter chips, the same component as the products page.
+function products(data) {
+  const pg = data.home.productsGrid || {};
+  return html`<section class="sec sec-paper" id="products"><div class="container">
+    ${pg.title ? sectionHead(pg) : ''}
+    ${productFilterGrid(data)}
+  </div></section>`;
 }
 
 function stats(data) {
@@ -117,12 +161,23 @@ function brochure(data) {
 }
 
 export function homePage(data) {
-  const body = html`${hero(data)}${stats(data)}${families(data)}${process(data)}${featured(data)}${industries(data)}${globalPresence(data)}${brochure(data)}${homeNews(data)}${ctaBand(data.home.cta)}`;
+  const ids = visibleSections('home', data.home);
+  // The page's h1 is the first visible hero (the old one carries its own); a hidden heading keeps one when neither shows.
+  const hasHero = ids.includes('hero');
+  const sliderH1 = !hasHero || ids.indexOf('slider') < ids.indexOf('hero');
+  const sectionHtml = {
+    slider: () => slider(data, { h1: sliderH1 }), hero: () => hero(data), stats: () => stats(data), products: () => products(data),
+    families: () => families(data), process: () => process(data), featured: () => featured(data), industries: () => industries(data),
+    global: () => globalPresence(data), brochure: () => brochure(data), news: () => homeNews(data), cta: () => ctaBand(data.home.cta),
+  };
+  const rendered = ids.map((id) => [id, sectionHtml[id]()]);
+  const hasH1 = rendered.some(([id, out]) => out && (id === 'hero' || (id === 'slider' && sliderH1)));
+  const body = html`${hasH1 ? '' : html`<h1 class="sr">${data.home.title}</h1>`}${rendered.map(([, out]) => out)}`;
   const { site } = data;
   return {
     path: '/', title: `${site.name} | Electrical components for control panels and switchgear`, titleRaw: true, description: site.description,
-    bodyClass: 'home', scripts: ['/assets/hero.js'], body,
-    head: raw('<noscript><style>.hero{height:auto!important}.hero-stage{position:relative!important;height:auto!important;min-height:100svh}.bands{display:none!important}.hero-static{display:block!important}</style></noscript>'),
+    bodyClass: 'home', scripts: hasHero ? ['/assets/hero.js'] : [], body,
+    head: hasHero ? raw('<noscript><style>.hero{height:auto!important}.hero-stage{position:relative!important;height:auto!important;min-height:100svh}.bands{display:none!important}.hero-static{display:block!important}</style></noscript>') : '',
     jsonLd: { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, url: site.siteUrl, logo: site.siteUrl + site.logo.src, email: site.contact.email, telephone: site.contact.phone, address: { '@type': 'PostalAddress', streetAddress: site.contact.address.slice(0, 2).join(', '), addressLocality: 'Mumbai', postalCode: '400088', addressCountry: 'IN' } },
   };
 }

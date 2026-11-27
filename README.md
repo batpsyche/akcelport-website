@@ -26,8 +26,8 @@ Everything the site says lives in `content/`. Templates never contain copy.
 | File | What it holds |
 |---|---|
 | `content/site.json` | Company name, logo, contact details, navigation, quality marks, header stats, **enquiry form endpoint**, language menu on/off (`translate.enabled`) |
-| `content/home.json` | Hero bands and copy, section headings, process steps, industries, featured products |
-| `content/about.json`, `contact.json` | About page sections, certificates, contact form labels |
+| `content/home.json` | Section order and visibility (`sections`), hero slider slides, the old animated hero's bands and copy, section headings, process steps, industries, featured products |
+| `content/about.json`, `contact.json` | About page sections, certificates, contact form labels, each with its own `sections` list |
 | `content/categories/<slug>.json` | The six product families (name, summary, icon, product order) |
 | `content/products/<slug>.json` | One file per product page (18). See below |
 | `content/downloads.json` | Every PDF (23): title, file, pages, size, thumbnail, which products it belongs to |
@@ -37,6 +37,14 @@ Everything the site says lives in `content/`. Templates never contain copy.
 | `content/countries.json`, `company-images.json` | Country list for the form; extra brochure imagery |
 
 Tokens `{{markets}}` and `{{products}}` in any string are replaced with the counted values at build time.
+
+### Sections: order and show/hide
+
+`home.json`, `about.json` and `contact.json` carry `"sections": [{ "id": "stats", "enabled": true }, ...]`. The build renders the enabled sections in that order (`src/lib/sections.mjs` holds the ids per page; a section missing from the list is shown in its default place, an unknown id fails `npm run check`). The CMS edits this list with a switch per section (Home sections can also be dragged into a new order). Home sections: `slider`, `hero` (the old animated canvas hero, hidden by default), `stats`, `products` (the products page's search, family filter and grid, right after the statistics by default), `families`, `process`, `featured`, `industries`, `global`, `brochure`, `news`, `cta`. About: `story`, `quality`, `usp`, `manufacturing`, `global`, `certificates`, `cta`. Contact: `details` (office and enquiry form). The page heading of About and Contact always shows.
+
+### Hero slider
+
+`home.slider.slides[]`: `image` (landscape, about 16:9, for desktops and laptops), `imagePortrait` (about 9:16, for phones in portrait; a `<picture>` source picks it), `kicker`, `headline`, `text`, `cta` (`label`, `href`) and `tone`: `dark` (dark caption text, the default, for the white banners) or `light` (white text on a dark scrim, for darker images). `intervalSeconds` sets the autoplay pace. The slider is plain JavaScript in `src/client/site.js`: autoplay with a pause button, arrows, dots, arrow keys and swipe; autoplay stops while the pointer or keyboard focus is inside, and never starts for visitors who prefer reduced motion. The first slide's headline is the page's `h1`.
 
 ### A product file
 
@@ -62,6 +70,7 @@ Add a product by adding a JSON file, listing its slug in its family under `conte
 
 - `public/downloads/catalogue/`: the 10 current datasheet PDFs supplied by the company. `public/downloads/legacy/`: the 13 PDFs from the old site (kept so every old download still works).
 - `public/img/`: product and company images (WebP). Sources are the company's own: old-site photos and tables, and images extracted from the 10 PDFs.
+- `public/img/hero/`: the three hero slider banners (landscape 1920x1086 and portrait 1080x1920 WebP), generated with Higgsfield (GPT Image 2.5) as exploded technical views of Akcelport components on white with red callout lines. No text is baked in; captions are live text. Banner 3's portrait is, for now, a recomposition of its landscape image (the generation of its own portrait was blocked by a plan limit).
 - **AI-enhanced hero photos (8 products).** The main photo of the 8 products flagged below (and so their card and family thumbnails) was upscaled and cleaned with Higgsfield's Bytedance Image Upscale from the company's original image, with no change to the product. Those images are flagged `"aiEnhanced": true` in the product JSON, carry the untouched original in `public/img/products/<slug>/originals/` (linked from the product page as "View original"), and the footer discloses it (`aiNotice` in `content/site.json`). The 8 are Cable Lugs, Cable Ducts, Copper Busbars, Flexibars, Copper Grounding Bars, Neutral / Earth Bars, Test Terminal Blocks and Cable Glands; every other photo is the unmodified original (the client can supply HD photos later). Remove the flag and point `hero.src` at the original to revert one.
 - `public/fonts/`: self-hosted Archivo, IBM Plex Sans and IBM Plex Mono (latin subset).
 - Old URLs: the build writes `dist/.htaccess` (Apache) and `dist/_redirects` (Netlify style) from `content/redirects.json`, including the 13 old PDF paths.
@@ -75,7 +84,7 @@ A slim bar above the header on every page carries Google Translate's free "Selec
 ## Design notes
 
 - Theme: switchgear grey and signal red (tokens at the top of `src/styles/base.css`); red is the accent, used for calls to action, focus and the chamfered-corner device on cards.
-- The home hero is built in code (`src/client/hero.js`): a scroll-scrubbed canvas glide down three copper busbars on red standoff insulators, ending at a bolted splice joint. Phones, portrait tablets and reduced-motion visitors get the same scene as a still, with the copy laid out in the page. The five static-hero conditions are identical in `hero.js` and `src/styles/home.css`.
+- The home page opens with the white hero slider (see Hero slider above). The earlier hero, built in code (`src/client/hero.js`, a scroll-scrubbed canvas glide down three copper busbars), is kept and can be switched back on as the `hero` section; `hero.js` loads only while it is shown. Phones, portrait tablets and reduced-motion visitors get that scene as a still. The five static-hero conditions are identical in `hero.js` and `src/styles/home.css`.
 - Layout: `src/templates/` (plain JS template functions), `src/styles/`, `src/client/`. `scripts/build.mjs` and `scripts/serve.mjs` are the only scripts.
 
 ## Data caveats

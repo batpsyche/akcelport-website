@@ -1,6 +1,7 @@
 // Loads and validates everything under content/, then resolves {{tokens}}.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { sectionProblems } from './sections.mjs';
 
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
@@ -56,6 +57,15 @@ export function validate(data, root, { assetDirs = [join(root, 'public')] } = {}
   for (const cat of data.categories) for (const s of cat.products) if (!data.bySlug.has(s)) problems.push(`category ${cat.slug}: unknown product ${s}`);
   for (const s of data.home.featured?.slugs || []) if (!data.bySlug.has(s)) problems.push(`home featured: unknown product ${s}`);
   for (const t of data.home.industries?.items || []) for (const s of t.products || []) if (!data.bySlug.has(s)) problems.push(`home industry ${t.id}: unknown product ${s}`);
+  for (const page of ['home', 'about', 'contact']) problems.push(...sectionProblems(page, data[page]));
+  (data.home.slider?.slides || []).forEach((sl, i) => {
+    const where = `home slide ${i + 1}`;
+    if (!sl.image?.src) problems.push(`${where}: no landscape image`);
+    need(sl.image?.src, where);
+    need(sl.imagePortrait?.src, where);
+    if (!sl.headline) problems.push(`${where}: no headline`);
+    if (sl.tone !== undefined && !['dark', 'light'].includes(sl.tone)) problems.push(`${where}: caption colour must be dark or light`);
+  });
   if (data.home.downloads?.docId && !data.docById.has(data.home.downloads.docId)) problems.push(`home downloads: unknown download ${data.home.downloads.docId}`);
   const DATE = /^\d{4}-\d{2}-\d{2}$/;
   for (const n of data.news) {

@@ -1,23 +1,55 @@
 // Field specifications that drive the generic document forms (site-wide documents and site settings).
 // Paths are dot paths into the JSON document; inside an object-list they are relative to the item.
+import { PAGE_SECTIONS } from '../../src/lib/sections.mjs';
+
 export type FieldSpec =
   | { type: 'text' | 'textarea' | 'number' | 'boolean' | 'image' | 'image-list' | 'string-list'; path: string; label: string; help?: string; rows?: number; mono?: boolean; required?: boolean }
   | { type: 'select'; path: string; label: string; help?: string; options: Array<{ value: string; label: string }> }
   | { type: 'object-list'; path: string; label: string; help?: string; itemLabel: string; titleField?: string; fields: FieldSpec[] }
-  | { type: 'group'; path: string; label: string; help?: string; fields: FieldSpec[] }
+  // `section`: the page section this group edits; its card then carries that section's show/hide switch.
+  | { type: 'group'; path: string; label: string; help?: string; section?: string; fields: FieldSpec[] }
   | { type: 'json'; path: string; label: string; help?: string };
 
-const kickerTitle = (path: string, label: string, extra: FieldSpec[] = []): FieldSpec => ({
-  type: 'group', path, label, fields: [{ type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'title', label: 'Title' }, ...extra],
+export type SectionPage = keyof typeof PAGE_SECTIONS;
+
+/** Editor labels for every page section. The ids and their default order come from the site (src/lib/sections.mjs). */
+export const sectionLabels: Record<SectionPage, Record<string, string>> = {
+  home: {
+    slider: 'Hero slider', hero: 'Animated hero (scroll-driven canvas)', stats: 'Statistics strip (values are in Site settings)', products: 'All products with search and filters',
+    families: 'Product families', process: 'Process section', featured: 'Featured products', industries: 'Industries', global: 'Global presence',
+    brochure: 'Brochure section', news: 'Latest news (posts are under News)', cta: 'Closing call to action',
+  },
+  about: { story: 'Who we are', quality: 'Quality policy', usp: 'Three promises', manufacturing: 'Manufacturing expertise', global: 'Global presence', certificates: 'Certificates', cta: 'Closing call to action (text is on the Home page)' },
+  contact: { details: 'Office details and enquiry form' },
+};
+
+/** Pages whose sections can also be reordered (the others keep the design's order and only show or hide). */
+export const sortableSectionPages: SectionPage[] = ['home'];
+
+export const isSectionPage = (key: string): key is SectionPage => key in PAGE_SECTIONS;
+
+const kickerTitle = (path: string, label: string, extra: FieldSpec[] = [], section?: string): FieldSpec => ({
+  type: 'group', path, label, section, fields: [{ type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'title', label: 'Title' }, ...extra],
 });
 
 export const pageFieldSpecs: Record<string, { title: string; description: string; fields: FieldSpec[] }> = {
   home: {
     title: 'Home page',
-    description: 'Copy for the home page: hero, sections and calls to action. Section order and layout are fixed by the design.',
+    description: 'Copy for the home page: hero slider, sections and calls to action. Use Sections to show, hide and reorder them; the layout inside each section is fixed by the design. Changes go live on the next Publish.',
     fields: [
       { type: 'text', path: 'title', label: 'Browser title' },
-      { type: 'group', path: 'hero', label: 'Hero', fields: [
+      { type: 'group', path: 'slider', label: 'Hero slider', section: 'slider', help: 'Banners that change every few seconds at the top of the page. Each slide has a landscape image for desktops and laptops and a portrait image for phones; the caption sits on the calm side of the image.', fields: [
+        { type: 'text', path: 'label', label: 'Name for screen readers' },
+        { type: 'number', path: 'intervalSeconds', label: 'Seconds per slide (3 or more)' },
+        { type: 'object-list', path: 'slides', label: 'Slides', itemLabel: 'Slide', titleField: 'headline', fields: [
+          { type: 'image', path: 'image', label: 'Landscape image (desktops and laptops, about 16:9)' },
+          { type: 'image', path: 'imagePortrait', label: 'Portrait image (phones, about 9:16)' },
+          { type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'headline', label: 'Headline' }, { type: 'textarea', path: 'text', label: 'Sub-caption', rows: 2 },
+          { type: 'group', path: 'cta', label: 'Button', fields: [{ type: 'text', path: 'label', label: 'Label' }, { type: 'text', path: 'href', label: 'Link', mono: true }] },
+          { type: 'select', path: 'tone', label: 'Caption colour', options: [{ value: 'dark', label: 'Dark text (for light, white images)' }, { value: 'light', label: 'White text (for dark images)' }] },
+        ] },
+      ] },
+      { type: 'group', path: 'hero', label: 'Animated hero', section: 'hero', help: 'The earlier scroll-driven canvas hero, kept for later use. It is hidden while the hero slider is used.', fields: [
         { type: 'text', path: 'cue', label: 'Scroll cue' },
         { type: 'object-list', path: 'bands', label: 'Scroll bands', itemLabel: 'Band', titleField: 'headline', help: 'Four bands shown while scrolling the animated hero. Timing and effects are set by the design.', fields: [
           { type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'headline', label: 'Headline' }, { type: 'textarea', path: 'text', label: 'Text', rows: 2 },
@@ -28,7 +60,8 @@ export const pageFieldSpecs: Record<string, { title: string; description: string
         { type: 'group', path: 'primaryCta', label: 'Primary button', fields: [{ type: 'text', path: 'label', label: 'Label' }, { type: 'text', path: 'href', label: 'Link', mono: true }] },
         { type: 'group', path: 'secondaryCta', label: 'Secondary button', fields: [{ type: 'text', path: 'label', label: 'Label' }, { type: 'text', path: 'href', label: 'Link', mono: true }] },
       ] },
-      kickerTitle('families', 'Product families section', [{ type: 'textarea', path: 'lede', label: 'Lede', rows: 2 }]),
+      kickerTitle('productsGrid', 'All products section', [{ type: 'textarea', path: 'lede', label: 'Lede', rows: 2, help: 'The product list itself comes from Products.' }], 'products'),
+      kickerTitle('families', 'Product families section', [{ type: 'textarea', path: 'lede', label: 'Lede', rows: 2 }], 'families'),
       kickerTitle('process', 'Process section', [
         { type: 'textarea', path: 'lede', label: 'Lede', rows: 2 },
         { type: 'object-list', path: 'steps', label: 'Steps', itemLabel: 'Step', titleField: 'title', fields: [{ type: 'text', path: 'title', label: 'Title' }, { type: 'textarea', path: 'text', label: 'Text', rows: 2 }] },
@@ -36,37 +69,37 @@ export const pageFieldSpecs: Record<string, { title: string; description: string
           { type: 'text', path: 'title', label: 'Title' }, { type: 'text', path: 'hint', label: 'Hint' }, { type: 'text', path: 'done', label: 'Done message' }, { type: 'text', path: 'button', label: 'Button' },
           { type: 'string-list', path: 'items', label: 'Promises' },
         ] },
-      ]),
-      kickerTitle('featured', 'Featured products', [{ type: 'string-list', path: 'slugs', label: 'Product slugs, in order', help: 'Use the slug shown on each product page.' }]),
+      ], 'process'),
+      kickerTitle('featured', 'Featured products', [{ type: 'string-list', path: 'slugs', label: 'Product slugs, in order', help: 'Use the slug shown on each product page.' }], 'featured'),
       kickerTitle('industries', 'Industries', [
         { type: 'object-list', path: 'items', label: 'Industries', itemLabel: 'Industry', titleField: 'name', fields: [
           { type: 'text', path: 'id', label: 'Id', mono: true }, { type: 'text', path: 'name', label: 'Name' }, { type: 'text', path: 'headline', label: 'Headline' }, { type: 'textarea', path: 'text', label: 'Text', rows: 2 },
           { type: 'string-list', path: 'areas', label: 'Application areas' }, { type: 'string-list', path: 'products', label: 'Related product slugs' },
         ] },
-      ]),
-      kickerTitle('global', 'Global presence'),
-      kickerTitle('downloads', 'Brochure section', [{ type: 'textarea', path: 'text', label: 'Text', rows: 2 }, { type: 'text', path: 'docId', label: 'Download id', mono: true }]),
-      { type: 'group', path: 'cta', label: 'Closing call to action', fields: [{ type: 'text', path: 'title', label: 'Title' }, { type: 'textarea', path: 'text', label: 'Text', rows: 2 }, { type: 'text', path: 'label', label: 'Button' }, { type: 'text', path: 'href', label: 'Link', mono: true }] },
+      ], 'industries'),
+      kickerTitle('global', 'Global presence', [], 'global'),
+      kickerTitle('downloads', 'Brochure section', [{ type: 'textarea', path: 'text', label: 'Text', rows: 2 }, { type: 'text', path: 'docId', label: 'Download id', mono: true }], 'brochure'),
+      { type: 'group', path: 'cta', label: 'Closing call to action', section: 'cta', fields: [{ type: 'text', path: 'title', label: 'Title' }, { type: 'textarea', path: 'text', label: 'Text', rows: 2 }, { type: 'text', path: 'label', label: 'Button' }, { type: 'text', path: 'href', label: 'Link', mono: true }] },
     ],
   },
   about: {
     title: 'About page',
-    description: 'The company story, quality policy, manufacturing expertise, global presence and certificates.',
+    description: 'The company story, quality policy, manufacturing expertise, global presence and certificates. Use Sections to show or hide them; changes go live on the next Publish.',
     fields: [
       { type: 'text', path: 'title', label: 'Title' },
       { type: 'textarea', path: 'lede', label: 'Lede', rows: 2 },
       { type: 'string-list', path: 'story', label: 'Story paragraphs' },
-      { type: 'group', path: 'quality', label: 'Quality policy', fields: [
+      { type: 'group', path: 'quality', label: 'Quality policy', section: 'quality', fields: [
         { type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'quote', label: 'Quote' }, { type: 'string-list', path: 'body', label: 'Paragraphs' },
         { type: 'string-list', path: 'commitments', label: 'Commitments' }, { type: 'textarea', path: 'process', label: 'Process paragraph', rows: 3 }, { type: 'image', path: 'diagram', label: 'Diagram' },
       ] },
       { type: 'object-list', path: 'usp', label: 'Three promises', itemLabel: 'Promise', titleField: 'title', fields: [{ type: 'text', path: 'title', label: 'Title' }, { type: 'textarea', path: 'text', label: 'Text', rows: 2 }] },
-      { type: 'group', path: 'manufacturing', label: 'Manufacturing expertise', fields: [
+      { type: 'group', path: 'manufacturing', label: 'Manufacturing expertise', section: 'manufacturing', fields: [
         { type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'title', label: 'Title' }, { type: 'textarea', path: 'lede', label: 'Lede', rows: 2 },
         { type: 'string-list', path: 'capabilities', label: 'Capabilities' }, { type: 'string-list', path: 'metals', label: 'Metals' }, { type: 'string-list', path: 'plastics', label: 'Plastics' },
       ] },
-      { type: 'group', path: 'global', label: 'Global presence', fields: [{ type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'title', label: 'Title' }, { type: 'string-list', path: 'body', label: 'Paragraphs' }, { type: 'image', path: 'map', label: 'World map' }] },
-      { type: 'group', path: 'certificates', label: 'Certificates', fields: [
+      { type: 'group', path: 'global', label: 'Global presence', section: 'global', fields: [{ type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'title', label: 'Title' }, { type: 'string-list', path: 'body', label: 'Paragraphs' }, { type: 'image', path: 'map', label: 'World map' }] },
+      { type: 'group', path: 'certificates', label: 'Certificates', section: 'certificates', fields: [
         { type: 'text', path: 'kicker', label: 'Kicker' }, { type: 'text', path: 'title', label: 'Title' },
         { type: 'image-list', path: 'company', label: 'Company certificates' }, { type: 'image-list', path: 'products', label: 'Product certification marks' },
       ] },
@@ -75,7 +108,7 @@ export const pageFieldSpecs: Record<string, { title: string; description: string
   },
   contact: {
     title: 'Contact page',
-    description: 'Contact page copy and the enquiry form labels. The form endpoint itself is in Site settings.',
+    description: 'Contact page copy and the enquiry form labels. The form endpoint itself is in Site settings. Use Sections to show or hide the office details and form.',
     fields: [
       { type: 'text', path: 'title', label: 'Title' },
       { type: 'textarea', path: 'lede', label: 'Lede', rows: 2 },

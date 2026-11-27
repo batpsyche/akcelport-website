@@ -1,7 +1,8 @@
 import { html, raw, esc } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
-import { picture, zoomable, productCard, docCard, specTable, breadcrumbs, ctaBand, sectionHead, productUrl, categoryUrl, bytes } from './components.mjs';
+import { picture, zoomable, productCard, productFilterGrid, docCard, specTable, breadcrumbs, ctaBand, sectionHead, productUrl, categoryUrl, bytes } from './components.mjs';
 import { newsUrl } from './news.mjs';
+import { visibleSections } from '../lib/sections.mjs';
 
 // ------------------------------------------------------------------ product
 function variantCard(v, p) {
@@ -99,13 +100,7 @@ export function productsPage(data) {
     <div class="ph-grid"><div><h1>Products</h1><p class="lede">${data.products.length} product ranges in six families. Every range has a downloadable datasheet.</p></div></div>
   </div></section>
   <section class="sec sec-paper"><div class="container">
-    <div class="filter-bar" data-filter>
-      <label class="search"><span class="sr">Search products</span>${icon('search')}<input type="search" placeholder="Search by name, material or code" autocomplete="off" data-filter-input></label>
-      <div class="chips-filter" role="group" aria-label="Filter by family"><button type="button" class="chip is-on" data-family="all" aria-pressed="true">All</button>${data.categories.map((c) => html`<button type="button" class="chip" data-family="${c.slug}" aria-pressed="false">${c.shortName}</button>`)}</div>
-      <p class="filter-count" aria-live="polite" data-filter-count></p>
-    </div>
-    <div class="card-grid" data-filter-grid>${data.products.map((p) => productCard(p, data))}</div>
-    <p class="empty" data-filter-empty hidden>No product matches that search. Try a shorter word, or <a href="/contact/">ask us</a>.</p>
+    ${productFilterGrid(data)}
   </div></section>
   <section class="sec sec-white"><div class="container">${sectionHead({ title: data.about.alsoAvailable.title, lede: data.about.alsoAvailable.lede })}<ul class="chips big">${data.about.alsoAvailable.items.map((i) => html`<li>${i}</li>`)}</ul></div></section>
   ${ctaBand(data.home.cta)}`;
@@ -142,38 +137,41 @@ export function downloadsPage(data) {
 // ------------------------------------------------------------------ about
 export function aboutPage(data) {
   const a = data.about;
+  const sections = {
+    story: () => html`<section class="sec sec-white"><div class="container two-col">
+    <div><p class="kicker">Who we are</p><h2>Components made to your requirement</h2></div>
+    <div class="prose">${a.story.map((t) => html`<p>${t}</p>`)}</div>
+  </div></section>`,
+    quality: () => html`<section class="sec sec-ink quality"><div class="container q-grid">
+    <div><p class="kicker">${a.quality.kicker}</p><blockquote class="q-quote">${a.quality.quote}</blockquote>
+      <p>${a.quality.body[0]}</p><ul class="ticks on-dark">${a.quality.commitments.map((c) => html`<li>${icon('check')}${c}</li>`)}</ul><p>${a.quality.body[1]}</p><p>${a.quality.process}</p></div>
+    <div class="q-diagram">${picture(a.quality.diagram, { cls: 'invert-none' })}</div>
+  </div></section>`,
+    usp: () => html`<section class="sec sec-paper"><div class="container"><div class="usp-grid">${a.usp.map((u, i) => html`<div class="usp"><span class="usp-n">0${i + 1}</span><h3>${u.title}</h3><p>${u.text}</p></div>`)}</div></div></section>`,
+    manufacturing: () => html`<section class="sec sec-white"><div class="container">
+    ${sectionHead({ kicker: a.manufacturing.kicker, title: a.manufacturing.title, lede: a.manufacturing.lede })}
+    <ul class="cap-grid">${a.manufacturing.capabilities.map((c) => html`<li>${c}</li>`)}</ul>
+    <div class="mat-grid"><div><h3>Metals</h3><ul class="chips">${a.manufacturing.metals.map((m) => html`<li>${m}</li>`)}</ul></div><div><h3>Industrial plastics</h3><ul class="chips">${a.manufacturing.plastics.map((m) => html`<li>${m}</li>`)}</ul></div></div>
+  </div></section>`,
+    global: () => html`<section class="sec sec-paper"><div class="container two-col">
+    <div><p class="kicker">${a.global.kicker}</p><h2>${a.global.title}</h2><div class="prose">${a.global.body.map((t) => html`<p>${t}</p>`)}</div></div>
+    <div class="map-wrap chamfer">${picture(a.global.map)}</div>
+  </div>
+  <div class="container"><div class="region-grid">${data.markets.regions.map((r) => html`<div class="region"><h3>${r.name}</h3><p class="region-n">${r.countries.length} ${r.countries.length > 1 ? 'countries' : 'country'}</p><ul>${r.countries.map((c) => html`<li>${c}</li>`)}</ul></div>`)}</div></div></section>`,
+    certificates: () => html`<section class="sec sec-white"><div class="container">
+    ${sectionHead({ kicker: a.certificates.kicker, title: a.certificates.title })}
+    <ul class="cert-grid">${a.certificates.company.map((c) => html`<li>${zoomable(c)}</li>`)}</ul>
+    <ul class="cert-marks">${a.certificates.products.map((c) => html`<li>${picture(c)}</li>`)}</ul>
+    <ul class="marks-row">${data.site.qualityMarks.map((m) => html`<li class="mark">${m}</li>`)}</ul>
+  </div></section>`,
+    cta: () => ctaBand(data.home.cta),
+  };
   const body = html`
   <section class="page-hero dark about-hero"><div class="container">
     ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'About' }])}
     <div class="ph-grid"><div><h1>${a.title}</h1><p class="lede">${a.lede}</p></div></div>
   </div></section>
-  <section class="sec sec-white"><div class="container two-col">
-    <div><p class="kicker">Who we are</p><h2>Components made to your requirement</h2></div>
-    <div class="prose">${a.story.map((t) => html`<p>${t}</p>`)}</div>
-  </div></section>
-  <section class="sec sec-ink quality"><div class="container q-grid">
-    <div><p class="kicker">${a.quality.kicker}</p><blockquote class="q-quote">${a.quality.quote}</blockquote>
-      <p>${a.quality.body[0]}</p><ul class="ticks on-dark">${a.quality.commitments.map((c) => html`<li>${icon('check')}${c}</li>`)}</ul><p>${a.quality.body[1]}</p><p>${a.quality.process}</p></div>
-    <div class="q-diagram">${picture(a.quality.diagram, { cls: 'invert-none' })}</div>
-  </div></section>
-  <section class="sec sec-paper"><div class="container"><div class="usp-grid">${a.usp.map((u, i) => html`<div class="usp"><span class="usp-n">0${i + 1}</span><h3>${u.title}</h3><p>${u.text}</p></div>`)}</div></div></section>
-  <section class="sec sec-white"><div class="container">
-    ${sectionHead({ kicker: a.manufacturing.kicker, title: a.manufacturing.title, lede: a.manufacturing.lede })}
-    <ul class="cap-grid">${a.manufacturing.capabilities.map((c) => html`<li>${c}</li>`)}</ul>
-    <div class="mat-grid"><div><h3>Metals</h3><ul class="chips">${a.manufacturing.metals.map((m) => html`<li>${m}</li>`)}</ul></div><div><h3>Industrial plastics</h3><ul class="chips">${a.manufacturing.plastics.map((m) => html`<li>${m}</li>`)}</ul></div></div>
-  </div></section>
-  <section class="sec sec-paper"><div class="container two-col">
-    <div><p class="kicker">${a.global.kicker}</p><h2>${a.global.title}</h2><div class="prose">${a.global.body.map((t) => html`<p>${t}</p>`)}</div></div>
-    <div class="map-wrap chamfer">${picture(a.global.map)}</div>
-  </div>
-  <div class="container"><div class="region-grid">${data.markets.regions.map((r) => html`<div class="region"><h3>${r.name}</h3><p class="region-n">${r.countries.length} ${r.countries.length > 1 ? 'countries' : 'country'}</p><ul>${r.countries.map((c) => html`<li>${c}</li>`)}</ul></div>`)}</div></div></section>
-  <section class="sec sec-white"><div class="container">
-    ${sectionHead({ kicker: a.certificates.kicker, title: a.certificates.title })}
-    <ul class="cert-grid">${a.certificates.company.map((c) => html`<li>${zoomable(c)}</li>`)}</ul>
-    <ul class="cert-marks">${a.certificates.products.map((c) => html`<li>${picture(c)}</li>`)}</ul>
-    <ul class="marks-row">${data.site.qualityMarks.map((m) => html`<li class="mark">${m}</li>`)}</ul>
-  </div></section>
-  ${ctaBand(data.home.cta)}`;
+  ${visibleSections('about', a).map((id) => sections[id]())}`;
   return { path: '/about/', title: 'About us', description: 'Akcelport Industries: manufacturer of electrical components for control panels and switchgear, ISO 9001 and ISO 45001 certified, exporting for more than 35 years.', body };
 }
 
@@ -197,7 +195,7 @@ export function contactPage(data) {
     ${breadcrumbs([{ label: 'Home', href: '/' }, { label: 'Contact' }])}
     <div class="ph-grid"><div><h1>${contact.title}</h1><p class="lede">${contact.lede}</p></div></div>
   </div></section>
-  <section class="sec sec-paper"><div class="container contact-grid">
+  ${visibleSections('contact', contact).includes('details') ? html`<section class="sec sec-paper"><div class="container contact-grid">
     <aside class="office chamfer">
       <h2>${contact.office.heading}</h2>
       <p class="office-name">${site.name}</p>
@@ -220,7 +218,7 @@ export function contactPage(data) {
         <p class="form-status" role="status" aria-live="polite" data-form-status></p>
       </form>
     </div>
-  </div></section>`;
+  </div></section>` : ''}`;
   return { path: '/contact/', title: 'Contact us', description: 'Contact Akcelport Industries, Mumbai: request a quote or ask a question about busbars, insulators, lugs, DIN rails, ducts and earthing products.', body };
 }
 

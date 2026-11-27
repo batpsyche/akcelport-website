@@ -23,6 +23,8 @@ const P = {
   file: '<path d="M6 2.5h8.5L19 7v14.5H6z"/><path d="M14 2.5V7.5h5"/>',
   zoom: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5M10.5 8v5M8 10.5h5"/>',
   external: '<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5.5H5V6.5h5.5"/>',
+  pause: '<path d="M8.5 5v14M15.5 5v14"/>',
+  play: '<path d="M7 4.5v15l12.5-7.5z"/>',
   bolt: '<path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z"/>',
 };
 export function icon(name, cls = '') {

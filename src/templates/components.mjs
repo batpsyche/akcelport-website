@@ -37,6 +37,18 @@ export function productCard(p, data, { compact = false } = {}) {
   </a>`;
 }
 
+// The searchable product grid with family filter chips (products page and the home "products" section).
+// site.js wires every [data-filter] bar to the cards in the same parent element.
+export function productFilterGrid(data) {
+  return html`<div class="filter-bar" data-filter>
+      <label class="search"><span class="sr">Search products</span>${icon('search')}<input type="search" placeholder="Search by name, material or code" autocomplete="off" data-filter-input></label>
+      <div class="chips-filter" role="group" aria-label="Filter by family"><button type="button" class="chip is-on" data-family="all" aria-pressed="true">All</button>${data.categories.map((c) => html`<button type="button" class="chip" data-family="${c.slug}" aria-pressed="false">${c.shortName}</button>`)}</div>
+      <p class="filter-count" aria-live="polite" data-filter-count></p>
+    </div>
+    <div class="card-grid" data-filter-grid>${data.products.map((p) => productCard(p, data))}</div>
+    <p class="empty" data-filter-empty hidden>No product matches that search. Try a shorter word, or <a href="/contact/">ask us</a>.</p>`;
+}
+
 export function docCard(d, data, { showProducts = true } = {}) {
   const prods = d.products.map((s) => data.bySlug.get(s)).filter(Boolean);
   const fam = [...new Set(prods.map((p) => p.family))].join(' ');

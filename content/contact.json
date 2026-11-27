@@ -1,6 +1,9 @@
 {
   "title": "Contact us",
   "lede": "Tell us what you need and we will reply by email.",
+  "sections": [
+    { "id": "details", "enabled": true }
+  ],
   "office": { "heading": "Head office" },
   "form": {
     "heading": "Request a quote or ask a question",

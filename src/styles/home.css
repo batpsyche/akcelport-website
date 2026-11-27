@@ -37,6 +37,58 @@
 }
 @media (max-height:560px){.scroll-cue{display:none}}
 
+/* hero slider: white-dominant banners, a landscape image on wide screens and a portrait one on phones.
+   Captions are live text over the calm side of the image: dark ink by default, white on a "light" slide. */
+.slider{position:relative;background:var(--white);color:var(--text);overflow:hidden;border-bottom:1px solid var(--line)}
+.slides{display:grid}
+.slide{grid-area:1/1;position:relative;height:clamp(460px,56.5vw,calc(100svh - var(--header-h) - var(--bars-h)));opacity:0;visibility:hidden;transition:opacity .8s var(--ease),visibility 0s linear .8s}
+.slide[data-active]{opacity:1;visibility:visible;transition:opacity .8s var(--ease),visibility 0s}
+.slide-media,.slide-media img{position:absolute;inset:0;width:100%;height:100%}
+.slide-media img{object-fit:cover;object-position:78% 50%}
+.slide-media::after{content:'';position:absolute;inset:0;pointer-events:none}
+.tone-dark .slide-media::after{background:linear-gradient(90deg,rgba(255,255,255,.92) 0,rgba(255,255,255,.72) 32%,rgba(255,255,255,0) 58%)}
+.tone-light .slide-media::after{background:linear-gradient(90deg,rgba(10,12,15,.78) 0,rgba(10,12,15,.5) 34%,rgba(10,12,15,0) 60%)}
+.slide-cap{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px;padding-block:40px 92px}
+.slide-cap>*{max-width:34rem}
+.slide-hl{font-size:clamp(2.4rem,5.4vw,4.6rem);font-stretch:112%;line-height:1;letter-spacing:-.025em;margin:0}
+.slide-sub{font-size:clamp(1.05rem,1.45vw,1.25rem);line-height:1.5;max-width:30rem}
+.slide-cta{margin-top:10px}
+.tone-dark .slide-hl{color:var(--ink)}
+.tone-dark .slide-sub{color:var(--muted)}
+.tone-light{color:#fff}
+.tone-light .slide-sub{color:#e9edf1}
+.tone-light .kicker{color:var(--red-d)}
+.tone-light .slide-hl,.tone-light .slide-sub{text-shadow:0 2px 14px rgba(5,5,10,.6)}
+.slider-ui{position:absolute;z-index:2;left:0;right:0;bottom:28px;display:none;align-items:center;gap:10px}
+.slider.is-ready .slider-ui{display:flex}
+.slider-btn{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);background:rgba(255,255,255,.92);color:var(--ink);transition:border-color .2s var(--ease),background .2s var(--ease)}
+.slider-btn:hover{border-color:var(--ink)}
+.slider-btn .icon{width:18px;height:18px}
+.slider [data-slider-pause] .icon:last-child{display:none}
+.slider.is-paused [data-slider-pause] .icon:first-child{display:none}
+.slider.is-paused [data-slider-pause] .icon:last-child{display:block}
+.slider-dots{display:flex;gap:6px;margin-inline:4px}
+.slider-dot{display:grid;align-items:center;width:44px;height:42px}
+.slider-dot i{display:block;height:3px;background:var(--line-strong);position:relative;overflow:hidden}
+.slider-dot i::after{content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left}
+.slider-dot[aria-current=true] i::after{transform:scaleX(1)}
+.slider.is-playing .slider-dot[aria-current=true] i::after{animation:slide-progress var(--slide-ms,7s) linear both}
+@keyframes slide-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (orientation:portrait) and (max-width:900px){
+  /* phones: the portrait image on top (its calm lower part trimmed), the caption on white below it */
+  .slide{height:auto;display:flex;flex-direction:column}
+  .slide-media{position:relative;inset:auto;aspect-ratio:4/5;height:auto;flex:none}
+  .slide-media img{object-position:50% 35%}
+  .tone-dark .slide-media::after{background:linear-gradient(0deg,#fff 0,rgba(255,255,255,0) 18%)}
+  .tone-light .slide-media::after{background:none}
+  .tone-light .slide-cap{background:var(--ink)}
+  .slide-cap{height:auto;justify-content:flex-start;padding-block:4px 92px;gap:10px}
+  .tone-light .slide-cap{padding-top:24px}
+  .slide-hl{font-size:clamp(2rem,8.6vw,3.2rem)}
+}
+@media (max-width:720px){.slider-ui{bottom:20px}.slider-dot{width:34px}}
+@media (prefers-reduced-motion:reduce){.slide,.slide[data-active]{transition:none}}
+
 /* stats */
 .stats{background:var(--ink-2);color:#fff;border-top:1px solid var(--ink-line)}
 .stats-in{display:grid;grid-template-columns:repeat(4,1fr)}

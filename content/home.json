@@ -1,5 +1,91 @@
 {
   "title": "Electrical components for control panels and switchgear",
+  "sections": [
+    { "id": "slider", "enabled": true },
+    { "id": "hero", "enabled": false },
+    { "id": "stats", "enabled": true },
+    { "id": "products", "enabled": true },
+    { "id": "families", "enabled": true },
+    { "id": "process", "enabled": true },
+    { "id": "featured", "enabled": true },
+    { "id": "industries", "enabled": true },
+    { "id": "global", "enabled": true },
+    { "id": "brochure", "enabled": true },
+    { "id": "news", "enabled": true },
+    { "id": "cta", "enabled": true }
+  ],
+  "slider": {
+    "label": "Akcelport Industries",
+    "intervalSeconds": 7,
+    "slides": [
+      {
+        "kicker": "Akcelport Industries, Mumbai",
+        "headline": "Quality, built in.",
+        "text": "Busbars, flexibars and grounding bars, cut, drilled and finished in our own plant and supplied to {{markets}} export markets.",
+        "cta": {
+          "label": "Explore the range",
+          "href": "/products/"
+        },
+        "tone": "dark",
+        "image": {
+          "src": "/img/hero/banner-1-landscape.webp",
+          "w": 1920,
+          "h": 1086,
+          "alt": "Exploded view of a copper busbar, a laminated flexibar and a copper grounding bar with their bolts and terminal screws"
+        },
+        "imagePortrait": {
+          "src": "/img/hero/banner-1-portrait.webp",
+          "w": 1080,
+          "h": 1920,
+          "alt": "Exploded view of a copper busbar, a laminated flexibar and a copper grounding bar with their bolts and terminal screws"
+        }
+      },
+      {
+        "kicker": "Lugs, glands, test terminals",
+        "headline": "Every connection, made to last.",
+        "text": "Cable lugs, cable glands and test terminal blocks for panels, meters and protection circuits.",
+        "cta": {
+          "label": "See connection terminals",
+          "href": "/categories/connection-terminals/"
+        },
+        "tone": "dark",
+        "image": {
+          "src": "/img/hero/banner-2-landscape.webp",
+          "w": 1920,
+          "h": 1086,
+          "alt": "Exploded view of a cable lug on a copper cable, a brass cable gland and a test terminal block"
+        },
+        "imagePortrait": {
+          "src": "/img/hero/banner-2-portrait.webp",
+          "w": 1080,
+          "h": 1920,
+          "alt": "Exploded view of a cable lug on a copper cable, a brass cable gland and a test terminal block"
+        }
+      },
+      {
+        "kicker": "Insulators, hinges, ducts",
+        "headline": "Held in place, kept apart.",
+        "text": "Moulded insulators, panel hinges and cable ducts: the parts that hold every panel together.",
+        "cta": {
+          "label": "Request a quote",
+          "href": "/contact/"
+        },
+        "tone": "dark",
+        "image": {
+          "src": "/img/hero/banner-3-landscape.webp",
+          "w": 1920,
+          "h": 1086,
+          "alt": "Exploded view of a slotted cable duct, two red busbar support insulators and a stainless steel panel hinge"
+        },
+        "imagePortrait": {
+          "src": "/img/hero/banner-3-portrait.webp",
+          "w": 1080,
+          "h": 1920,
+          "alt": "Exploded view of a slotted cable duct, two red busbar support insulators and a stainless steel panel hinge"
+        }
+      }
+    ]
+  },
   "hero": {
     "scrollHeightVh": 600,
     "cue": "Scroll",
@@ -63,6 +149,11 @@
       "label": "Request a quote",
       "href": "/contact/"
     }
+  },
+  "productsGrid": {
+    "kicker": "Find a product",
+    "title": "All {{products}} ranges, one search away",
+    "lede": "Filter by family or search by name, material or code. Every range has a datasheet you can download."
   },
   "families": {
     "kicker": "The range",
