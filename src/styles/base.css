@@ -62,6 +62,9 @@ p{text-wrap:pretty}
 .lang-bar .goog-te-gadget-simple a{display:inline-flex;align-items:center;gap:6px}
 .lang-bar .goog-te-gadget-simple a,.lang-bar .goog-te-gadget-simple span{color:#e4e8ec!important;text-decoration:none;border:0!important}
 .lang-bar .goog-te-gadget-icon{background-color:#fff;border-radius:2px}
+.lang-reset{display:none;margin-left:10px;padding:2px 8px;background:transparent;border:1px solid var(--ink-line);color:#e4e8ec;font:inherit;font-size:.78rem;line-height:1.4;cursor:pointer}
+.lang-reset:hover,.lang-reset:focus-visible{border-color:var(--red-d)}
+html.translated-ltr .lang-reset,html.translated-rtl .lang-reset{display:inline-block}
 /* Keep Google's top banner from pushing the page down, and its hover tooltip and highlight off the content. */
 .goog-te-banner-frame,iframe.VIpgJd-ZVi9od-ORHb-OEVmcd,#goog-gt-tt,.VIpgJd-ZVi9od-aZ2wEe-wOHMyf{display:none!important}
 body{top:0!important}

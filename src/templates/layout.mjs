@@ -13,7 +13,7 @@ function header(data, path) {
       <ul>${c.products.map((s) => html`<li><a href="${productUrl(s)}">${bySlug.get(s).name}</a></li>`)}</ul>
     </div>`);
   return html`<a class="skip" href="#main">Skip to content</a>
-  ${translateOn(site) ? raw('<div class="lang-bar notranslate" translate="no" data-translate><div class="container lang-bar-in"><div id="google_translate_element"></div></div></div>') : ''}
+  ${translateOn(site) ? raw('<div class="lang-bar notranslate" translate="no" data-translate><div class="container lang-bar-in"><div id="google_translate_element"></div><button type="button" class="lang-reset" data-translate-reset>Show original</button></div></div>') : ''}
   <div class="utility"><div class="container utility-in">
     <span class="utility-cert">${icon('check')} ISO 9001 &amp; ISO 45001 certified</span>
     <span class="utility-links"><a href="tel:${site.contact.phoneHref}">${icon('phone')}${site.contact.phone}</a><a href="mailto:${site.contact.email}">${icon('mail')}${site.contact.email}</a></span>

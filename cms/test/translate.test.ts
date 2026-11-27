@@ -34,6 +34,7 @@ test('the language bar is on every page when enabled, and when the setting is mi
     const { home, product } = buildWith(setting);
     assert.ok(home.includes(BAR) && product.includes(BAR), `bar rendered for ${JSON.stringify(setting)}`);
     assert.ok(home.indexOf(BAR) < home.indexOf('class="site-header"'), 'the bar sits above the header');
+    assert.ok(home.includes('data-translate-reset'), 'the bar carries the Show original control');
   }
 });
 

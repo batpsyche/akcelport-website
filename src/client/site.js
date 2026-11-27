@@ -154,6 +154,11 @@
       document.head.appendChild(s);
     };
     if (document.readyState === 'complete') load(); else addEventListener('load', load, { once: true });
+    $('[data-translate-reset]', langBar).addEventListener('click', () => {
+      const host = location.hostname;
+      for (const d of ['', host, host.replace(/^[^.]+\./, '')]) document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? `; domain=${d}` : ''}`;
+      location.reload();
+    });
   }
 
   // ---- pause looping animation on hidden tabs
