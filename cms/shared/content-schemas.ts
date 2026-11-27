@@ -138,6 +138,7 @@ export const siteBodySchema = z.looseObject({
     success: z.string(),
     error: z.string(),
   }),
+  translate: z.looseObject({ enabled: z.boolean() }).optional(),
 });
 
 export const marketsBodySchema = z.looseObject({

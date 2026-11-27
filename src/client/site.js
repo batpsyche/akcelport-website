@@ -138,6 +138,29 @@
     });
   }
 
+  // ---- Google Translate "Select Language" menu: the free website widget, loaded after the page so it never delays it.
+  // The bar is only rendered when enabled in the CMS; if Google's script is blocked or fails, the empty bar is removed.
+  const langBar = $('[data-translate]');
+  if (langBar) {
+    window.akTranslateInit = () => {
+      try { new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element'); }
+      catch { langBar.remove(); }
+    };
+    const load = () => {
+      const s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=akTranslateInit';
+      s.async = true;
+      s.onerror = () => langBar.remove();
+      document.head.appendChild(s);
+    };
+    if (document.readyState === 'complete') load(); else addEventListener('load', load, { once: true });
+    $('[data-translate-reset]', langBar).addEventListener('click', () => {
+      const host = location.hostname;
+      for (const d of ['', host, host.replace(/^[^.]+\./, '')]) document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? `; domain=${d}` : ''}`;
+      location.reload();
+    });
+  }
+
   // ---- pause looping animation on hidden tabs
   document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));
 })();

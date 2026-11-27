@@ -12,7 +12,9 @@
   --ease:cubic-bezier(.22,.61,.36,1); --ease-io:cubic-bezier(.65,0,.35,1);
   --container:1240px; --gutter:clamp(16px,4vw,40px); --chamfer:26px;
   --header-h:72px;
+  --bars-h:36px; /* height of the slim bars above the header: the utility bar, plus the language bar when shown */
 }
+:root:has([data-translate]){--bars-h:68px}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;overflow-x:hidden;overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 56px)}
 body{margin:0;overflow-x:hidden;overflow-x:clip;background:var(--paper);color:var(--text);font:400 1rem/1.65 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -50,6 +52,24 @@ p{text-wrap:pretty}
 .utility-cert{display:inline-flex;align-items:center;gap:7px}
 .utility-cert .icon{width:14px;height:14px;color:var(--red-d)}
 
+/* ---------- language bar (Google Translate "Select Language") ---------- */
+.lang-bar{background:var(--ink-2);border-bottom:1px solid var(--ink-line);color:var(--muted-d);font:400 .8rem/1 var(--font-body)}
+.lang-bar-in{display:flex;justify-content:flex-start;align-items:center;height:31px;overflow:hidden}
+.lang-bar .goog-te-gadget{font-family:var(--font-body)!important;color:var(--muted-d)}
+.lang-bar .goog-te-gadget-simple{display:inline-flex;align-items:center;gap:4px;max-width:100%;background:transparent;border:1px solid var(--ink-line);border-radius:0;padding:2px 8px;font-size:.78rem;line-height:1.4;white-space:nowrap}
+.lang-bar .goog-te-gadget-simple:hover,.lang-bar .goog-te-gadget-simple:focus-within{border-color:var(--red-d)}
+.lang-bar .goog-te-gadget img{display:inline-block;vertical-align:middle} /* the site resets img to block; Google's spacers need inline */
+.lang-bar .goog-te-gadget-simple a{display:inline-flex;align-items:center;gap:6px}
+.lang-bar .goog-te-gadget-simple a,.lang-bar .goog-te-gadget-simple span{color:#e4e8ec!important;text-decoration:none;border:0!important}
+.lang-bar .goog-te-gadget-icon{background-color:#fff;border-radius:2px}
+.lang-reset{display:none;margin-left:10px;padding:2px 8px;background:transparent;border:1px solid var(--ink-line);color:#e4e8ec;font:inherit;font-size:.78rem;line-height:1.4;cursor:pointer}
+.lang-reset:hover,.lang-reset:focus-visible{border-color:var(--red-d)}
+html.translated-ltr .lang-reset,html.translated-rtl .lang-reset{display:inline-block}
+/* Keep Google's top banner from pushing the page down, and its hover tooltip and highlight off the content. */
+.goog-te-banner-frame,iframe.VIpgJd-ZVi9od-ORHb-OEVmcd,#goog-gt-tt,.VIpgJd-ZVi9od-aZ2wEe-wOHMyf{display:none!important}
+body{top:0!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
+
 /* ---------- header ---------- */
 .site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);backdrop-filter:saturate(1.4) blur(8px)}
 .hdr{display:flex;align-items:center;gap:28px;min-height:var(--header-h)}
@@ -82,7 +102,7 @@ p{text-wrap:pretty}
 .mega-all .icon{width:16px;height:16px}
 
 /* ---------- mobile drawer ---------- */
-.drawer{position:fixed;inset:0;top:calc(var(--header-h) + 36px);z-index:99;background:var(--white);overflow:auto;padding:12px var(--gutter) 40px}
+.drawer{position:fixed;inset:0;top:calc(var(--header-h) + var(--bars-h));z-index:99;background:var(--white);overflow:auto;padding:12px var(--gutter) 40px}
 .drawer[hidden]{display:none}
 .drawer-in{max-width:560px;margin-inline:auto;display:grid;gap:22px}
 .drawer-list>li{border-bottom:1px solid var(--line)}
@@ -122,5 +142,5 @@ address{font-style:normal;margin-bottom:12px}
   .utility-links{gap:16px;font-size:.78rem}
   .brand img{height:34px}
   .foot-grid{grid-template-columns:1fr}
-  .drawer{top:calc(var(--header-h) + 36px)}
+  .drawer{top:calc(var(--header-h) + var(--bars-h))}
 }

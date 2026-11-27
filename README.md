@@ -25,7 +25,7 @@ Everything the site says lives in `content/`. Templates never contain copy.
 
 | File | What it holds |
 |---|---|
-| `content/site.json` | Company name, logo, contact details, navigation, quality marks, header stats, **enquiry form endpoint** |
+| `content/site.json` | Company name, logo, contact details, navigation, quality marks, header stats, **enquiry form endpoint**, language menu on/off (`translate.enabled`) |
 | `content/home.json` | Hero bands and copy, section headings, process steps, industries, featured products |
 | `content/about.json`, `contact.json` | About page sections, certificates, contact form labels |
 | `content/categories/<slug>.json` | The six product families (name, summary, icon, product order) |
@@ -69,6 +69,8 @@ Add a product by adding a JSON file, listing its slug in its family under `conte
 ## Enquiry form
 
 The contact form posts to one configurable endpoint, `form.endpoint` in `content/site.json` (a Formspree-style URL that accepts a POST and returns JSON). It is **empty on purpose**: until a value is set, the form shows a "Form endpoint not configured" notice and the submit button is disabled. No account has been created anywhere.
+
+A slim bar above the header on every page carries Google Translate's free "Select Language" menu (every language Google offers; no key or account). It is on while `translate.enabled` in `content/site.json` is not `false` (the CMS switch is under Settings → Language menu and takes effect on the next Publish). `src/client/site.js` loads Google's script only after the page has loaded, and removes the bar if the script is blocked or fails. Google's top banner is hidden so the page does not jump; while a page is translated, a "Show original" button beside the menu clears the `googtrans` cookie and reloads in English. The logo is marked `notranslate`.
 
 ## Design notes
 
