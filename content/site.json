@@ -82,5 +82,8 @@
     "notConfigured": "The enquiry form is not connected yet. Set form.endpoint in content/site.json to a Formspree-style URL. Until then, please email or call us.",
     "success": "Thank you. Your enquiry has been sent and we will reply by email.",
     "error": "Sorry, the enquiry could not be sent. Please try again, or email us directly."
+  },
+  "translate": {
+    "enabled": true
   }
 }

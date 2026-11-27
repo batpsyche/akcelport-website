@@ -37,3 +37,24 @@ test('003_news_nav adds the News header link to an already seeded site document 
   await rerunNewsNav();
   assert.equal((await env.pool.query(`SELECT draft FROM pages WHERE key = 'site'`)).rows[0].draft, null, 'a missing draft stays missing');
 });
+
+test('004_translate turns the language menu on in a seeded site document once, keeping an explicit choice', async () => {
+  await env.pool.query('DELETE FROM pages');
+  await env.pool.query(`INSERT INTO pages (key, live, draft) VALUES ('site', $1, $2), ('home', $3, NULL)`,
+    [JSON.stringify({ name: 'Site' }), JSON.stringify({ name: 'Draft', translate: { enabled: false } }), JSON.stringify({ title: 'Home' })]);
+  const rerun = async () => {
+    await env.pool.query(`DELETE FROM schema_migrations WHERE name = '004_translate.sql'`);
+    assert.deepEqual(await migrate(env.pool), ['004_translate.sql']);
+  };
+  const row = async (key: string) => (await env.pool.query(`SELECT live, draft FROM pages WHERE key = $1`, [key])).rows[0];
+
+  await rerun();
+  assert.deepEqual((await row('site')).live, { name: 'Site', translate: { enabled: true } }, 'added with the default, rest kept');
+  assert.deepEqual((await row('site')).draft, { name: 'Draft', translate: { enabled: false } }, 'an explicit off is kept');
+  assert.deepEqual((await row('home')).live, { title: 'Home' }, 'other pages are untouched');
+
+  await env.pool.query(`UPDATE pages SET live = jsonb_set(live, '{translate,enabled}', 'false'), draft = NULL WHERE key = 'site'`);
+  await rerun();
+  assert.deepEqual((await row('site')).live, { name: 'Site', translate: { enabled: false } }, 'running again keeps a later off');
+  assert.equal((await row('site')).draft, null, 'a missing draft stays missing');
+});

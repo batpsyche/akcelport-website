@@ -106,7 +106,7 @@ export const pageFieldSpecs: Record<string, { title: string; description: string
   },
   site: {
     title: 'Site settings',
-    description: 'Company identity, contact details, navigation, quality marks, header statistics and the enquiry form endpoint.',
+    description: 'Company identity, contact details, navigation, quality marks, header statistics, the enquiry form endpoint and the language menu.',
     fields: [
       { type: 'text', path: 'name', label: 'Company name' }, { type: 'text', path: 'shortName', label: 'Short name' }, { type: 'text', path: 'tagline', label: 'Tagline' },
       { type: 'textarea', path: 'description', label: 'Site description (search engines)', rows: 3 },
@@ -124,6 +124,9 @@ export const pageFieldSpecs: Record<string, { title: string; description: string
       { type: 'group', path: 'form', label: 'Enquiry form', help: 'The endpoint is a Formspree-style URL that accepts a POST. Leave it empty to show the "not configured" notice.', fields: [
         { type: 'text', path: 'endpoint', label: 'Form endpoint URL', mono: true }, { type: 'text', path: 'subject', label: 'Email subject' },
         { type: 'textarea', path: 'notConfigured', label: 'Not configured notice', rows: 2 }, { type: 'textarea', path: 'success', label: 'Success message', rows: 2 }, { type: 'textarea', path: 'error', label: 'Error message', rows: 2 },
+      ] },
+      { type: 'group', path: 'translate', label: 'Language menu', help: 'Google Translate\'s free "Select Language" menu in a slim bar above the header, offering every language Google supports. No key or account is needed. Takes effect on the next Publish.', fields: [
+        { type: 'boolean', path: 'enabled', label: 'Show the language menu' },
       ] },
     ],
   },

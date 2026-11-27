@@ -2,6 +2,9 @@ import { html, raw, esc } from '../lib/html.mjs';
 import { icon } from './icons.mjs';
 import { productUrl, categoryUrl } from './components.mjs';
 
+/** The Google Translate "Select Language" bar is on unless the site document turns it off (site.translate.enabled: false). */
+export const translateOn = (site) => site.translate?.enabled !== false;
+
 function header(data, path) {
   const { site, categories, bySlug } = data;
   const cur = (href) => (href === '/' ? path === '/' : path.startsWith(href) || (href === '/products/' && path.startsWith('/categories/'))) ? ' aria-current="page"' : '';
@@ -10,13 +13,14 @@ function header(data, path) {
       <ul>${c.products.map((s) => html`<li><a href="${productUrl(s)}">${bySlug.get(s).name}</a></li>`)}</ul>
     </div>`);
   return html`<a class="skip" href="#main">Skip to content</a>
+  ${translateOn(site) ? raw('<div class="lang-bar notranslate" translate="no" data-translate><div class="container lang-bar-in"><div id="google_translate_element"></div></div></div>') : ''}
   <div class="utility"><div class="container utility-in">
     <span class="utility-cert">${icon('check')} ISO 9001 &amp; ISO 45001 certified</span>
     <span class="utility-links"><a href="tel:${site.contact.phoneHref}">${icon('phone')}${site.contact.phone}</a><a href="mailto:${site.contact.email}">${icon('mail')}${site.contact.email}</a></span>
   </div></div>
   <header class="site-header" data-header>
     <div class="container hdr">
-      <a class="brand" href="/" aria-label="${site.name}, home"><img src="${site.logo.src}" width="${site.logo.w}" height="${site.logo.h}" alt="${site.logo.alt}"></a>
+      <a class="brand notranslate" translate="no" href="/" aria-label="${site.name}, home"><img src="${site.logo.src}" width="${site.logo.w}" height="${site.logo.h}" alt="${site.logo.alt}"></a>
       <nav class="primary" aria-label="Primary">
         <ul>
           ${site.nav.map((n) => (n.mega
@@ -55,7 +59,7 @@ function footer(data) {
   return html`<footer class="site-footer">
     <div class="container foot-grid">
       <div class="foot-brand">
-        <a class="foot-logo" href="/" aria-label="${site.name}, home"><img src="${site.logo.src}" width="${site.logo.w}" height="${site.logo.h}" alt="${site.logo.alt}" loading="lazy"></a>
+        <a class="foot-logo notranslate" translate="no" href="/" aria-label="${site.name}, home"><img src="${site.logo.src}" width="${site.logo.w}" height="${site.logo.h}" alt="${site.logo.alt}" loading="lazy"></a>
         <p>${site.description.split('. ')[0]}.</p>
         <p class="marks">${site.qualityMarks.map((m) => html`<span class="mark">${m}</span>`)}</p>
       </div>
